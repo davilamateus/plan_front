@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import Store from '../store';
 import Message from '../components/messages';
 import ConfirmEmail from '../pages/confirmEmail';
+import ForgetPassword from '../pages/forgetPassword';
 
 
 
@@ -26,6 +27,7 @@ function AppRouter() {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/confirmemail/:token' element={<ConfirmEmail />} />
+                    <Route path='/newpassword/:token' element={<ForgetPassword />} />
                 </Routes>
             </Provider>
         </BrowserRouter>
