@@ -1,0 +1,29 @@
+@import './color';
+
+label{
+    font-weight: 900;
+    margin: 0 auto;
+    width: 100%;
+    h4{
+        margin: 0;
+        margin-bottom: 8px;
+    }
+    div{
+        display: flex;
+        width: 100%;
+    }
+}
+input{
+    border-radius: 8px;
+    border:2px solid $input-border-color;
+    padding: 12px;
+    width: 100%;
+    margin: 0;
+}
+input::placeholder{
+    opacity: 0.6;
+}
+input:focus{
+        outline: none !important;
+
+}

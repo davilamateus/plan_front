@@ -1,0 +1,17 @@
+@import './../../../../styles/color';
+
+.login-menu{
+    display: flex;
+    gap: 32px;
+    button{
+        background: none;
+        border: none;
+        font-size: 22pt;
+        opacity: 0.3;
+        padding-bottom: 8px;
+    }
+    .selection{
+        opacity: 1;
+        border-bottom: 4px solid $primary-color;
+    }
+}

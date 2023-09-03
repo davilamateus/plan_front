@@ -1,0 +1,39 @@
+@import './../../../styles/color';
+
+.slogan-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+}
+.slogan-component{
+    display: flex;
+    align-items: center;
+    .slogan-text{
+            h1{
+                margin-bottom: -12px;
+            }
+        .slogan-text-green{
+            color: $primary-color;
+            font-family: 'Helvetica';
+        }
+        .slogan-text-handwriting{
+            font-size: 28pt;
+            font-family: 'Alessandria', sans-serif;
+            margin-top: -86px;
+        }
+    }
+        @keyframes slogan-img {
+            0% { transform: translateX(0%) translateY(0%)  }
+            50% { transform: translateX(-10%)  translateY(-5%); }
+            0% { transform: translateX(0%) translateY(0%)  }
+    }
+    .slogan-img{
+        margin-left: -258px;
+        margin-bottom: 48px;
+        animation: slogan-img 10s  ease-in-out infinite;
+    }
+ 
+
+
+}

@@ -1,0 +1,16 @@
+@import './color';
+
+.box{
+    background-color: $box-background;
+    border-radius: 8px;
+    box-shadow: 3px 8px 22px $box-shadow;
+    width: 85%;
+    padding: 16px;
+    max-width: 360px;
+}
+
+.padding-box{
+    
+}
+
+

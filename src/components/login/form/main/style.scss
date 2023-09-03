@@ -1,0 +1,18 @@
+.login-form-main{
+    padding-top: 48px!important;
+    padding-bottom: 48px!important;
+    max-width: 460px!important;
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .login-form-content{
+        display: flex;
+        gap: 32px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 360px!important;
+    }
+}
