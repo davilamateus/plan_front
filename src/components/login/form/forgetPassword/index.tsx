@@ -4,6 +4,7 @@ import ButtonSimple from '../../../communs/buttons/simple/simple';
 import './style.scss';
 import useForgetPasswordCreate from '../../../../hooks/user/useForgetPasswordCreate';
 import isEmail from '../../../../functions/isEmail';
+import useSetMessage from '../../../../hooks/messages/useSetMessage';
 
 
 
@@ -14,6 +15,7 @@ const ForgetPassword = () => {
     const [btnLoading, setBtnLoading] = useState<boolean>(false);
 
     const UseForgetPasswordCreate = useForgetPasswordCreate();
+    const setMessage = useSetMessage();
 
     useEffect(() => {
         if (isEmail(email)) {
@@ -25,9 +27,20 @@ const ForgetPassword = () => {
 
     function passwordNew() {
         setBtnLoading(true);
-        UseForgetPasswordCreate(email).then((data) => {
-            console.log(data)
-        })
+        UseForgetPasswordCreate(email)
+            .then((data: any) => {
+                setEmail('');
+                setBtnLoading(false)
+                if (data.status === 200) {
+                    setMessage('New email required!', 'We emailed instructions for creating a new password, please check your box and span emails.', 'success');
+                } else {
+                    setMessage('An error occurred!', 'Unable to request a new password. Please try again later.', 'error');
+                }
+            }).catch((error) => {
+                setBtnLoading(false)
+                setMessage('An error occurred!', 'Unable to request a new password. Please try again later.', 'error');
+                console.log(error);
+            })
     };
 
     return (
