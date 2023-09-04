@@ -39,6 +39,7 @@ const LoginFormLogin = () => {
 
                 } else {
                     sessionStorage.setItem('token', data.data.token);
+                    localStorage.clear();
                     //set();
                     navegation('/');
                 }
