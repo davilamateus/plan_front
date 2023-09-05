@@ -17,8 +17,8 @@ input{
     border-radius: 8px;
     border:2px solid $input-border-color;
     padding: 12px;
-    width: 100%;
     margin: 0;
+    width: -webkit-fill-available;
 }
 input::placeholder{
     opacity: 0.6;

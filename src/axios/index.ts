@@ -7,5 +7,5 @@ const Api = axios.create({
 })
 
 
-
+export { BASE_URL }
 export default Api;

@@ -16,7 +16,7 @@ const IsLogged = () => {
         if (data.status === 401) {
           nav('/login');
         } else if (data.status === 204) {
-          nav('/createuserdetails');
+          nav('/login');
         }
       }).catch(() => {
         nav('/login')

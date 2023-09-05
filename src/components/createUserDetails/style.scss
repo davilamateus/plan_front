@@ -1,0 +1,26 @@
+.create-user-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    .create-user-details-content{
+        width: 460px!important;
+        max-width: calc(85vw );
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        p{
+            text-align: center;
+            margin: 0;
+            margin-bottom: 32px;
+        }
+        form{
+            width: 100%;
+            button{
+                margin-top: 32px;
+            }
+        }
+    }
+}

@@ -7,7 +7,6 @@ const useGetUserDetails = () => {
         };
         const res = await Api.get('/userdetails', config)
             .then((data) => {
-                console.log(data)
                 return data
             })
             .catch((error) => {

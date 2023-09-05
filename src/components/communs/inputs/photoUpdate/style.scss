@@ -1,0 +1,28 @@
+.photo-update-component{
+    width: 128px;
+    height: 128px;
+    display: flex;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
+    transition: 0.4s;
+    margin: 0 auto;
+
+    &:hover{
+        opacity: 1;
+    }
+    img{
+        position: absolute;
+        margin: 0 auto;
+        margin-top: 32px;
+        margin-left: 26px;
+    }
+    input{
+        border-radius: 128px;
+        width: 128px;
+        width: 128px;
+        background-color: aqua;
+        opacity: 0;
+    }
+}

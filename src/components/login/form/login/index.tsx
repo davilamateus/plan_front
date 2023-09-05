@@ -32,21 +32,42 @@ const LoginFormLogin = () => {
         UseLoginHook(email, password, remember).then((data) => {
             if (data.status === 200) {
                 if (remember) {
+                    sessionStorage.clear();
+                    localStorage.clear();
                     localStorage.setItem('token', data.data.token);
                     sessionStorage.setItem('token', data.data.token);
                     //set();
                     navegation('/');
 
                 } else {
-                    sessionStorage.setItem('token', data.data.token);
                     localStorage.clear();
+                    sessionStorage.setItem('token', data.data.token);
                     //set();
                     navegation('/');
                 }
                 setMessage('', '', '');
 
 
-            } else if (data.status === 203) {
+            } else if (data.status === 201) {
+                if (remember) {
+                    sessionStorage.clear();
+                    localStorage.clear();
+                    localStorage.setItem('token', data.data.token);
+                    sessionStorage.setItem('token', data.data.token);
+                    //set();
+                    navegation('/');
+
+                } else {
+                    localStorage.clear();
+                    sessionStorage.setItem('token', data.data.token);
+                    //set();
+                    navegation('/');
+                }
+                console.log('aqui')
+                navegation('/createuserdetails');
+            }
+
+            else if (data.status === 203) {
                 setMessage('Email not confirmed!', 'You don’t confirmed your email, we emailagain, please check your box and span emails.', 'atention');
             } else {
                 setMessage('Email or password incorrect!', 'You type your email or your password incorrectly.Please check your informations and try again.', 'error');
