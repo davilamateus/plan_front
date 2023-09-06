@@ -7,6 +7,9 @@ import Message from '../components/messages';
 import ConfirmEmail from '../pages/confirmEmail';
 import ForgetPassword from '../pages/forgetPassword';
 import CreateUserDetails from '../pages/createUserDetails';
+import Menu from '../components/menu';
+import HeaderMain from '../components/header/main';
+import PageFinances from '../pages/finances';
 
 
 
@@ -14,17 +17,19 @@ import CreateUserDetails from '../pages/createUserDetails';
 
 function AppRouter() {
 
-
     return (
         <BrowserRouter>
             <Provider store={Store} >
                 <Message />
                 <Routes>
-                    <Route path='/' element={<HomePage />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/confirmemail/:token' element={<ConfirmEmail />} />
-                    <Route path='/newpassword/:token' element={<ForgetPassword />} />
+                    <Route path='/forgetpassword/:token' element={<ForgetPassword />} />
                     <Route path='/createuserdetails' element={<CreateUserDetails />} />
+                    <Route path='/' element={<><HeaderMain /> <Menu /> </>}>
+                        <Route path='/' element={<HomePage />} />
+                        <Route path='/finances' element={<PageFinances />} />
+                    </Route>
                 </Routes>
             </Provider>
         </BrowserRouter>

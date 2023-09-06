@@ -5,7 +5,7 @@ import ButtonSimple from "../../communs/buttons/simple/simple";
 import { useEffect, useState } from "react";
 import InputPassword from "../../communs/inputs/password";
 import useForgetPasswordNewPassword from "../../../hooks/user/useForgetPasswordNewPassword";
-import useSetMessage from "../../../hooks/messages/useSetMessage";
+import useSetMessage from "../../../store/hooks/messages/useSetMessage";
 
 
 const ForgetPasswordComponent = () => {
@@ -65,7 +65,6 @@ const ForgetPasswordComponent = () => {
                     }
                 }).catch((error) => {
                     setMessage('An error occurred!', 'Unable to request a new password. Please try again later.', 'error');
-                    console.log(error)
                 })
         }
     }

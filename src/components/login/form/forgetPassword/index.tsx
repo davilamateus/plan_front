@@ -4,7 +4,7 @@ import ButtonSimple from '../../../communs/buttons/simple/simple';
 import './style.scss';
 import useForgetPasswordCreate from '../../../../hooks/user/useForgetPasswordCreate';
 import isEmail from '../../../../functions/isEmail';
-import useSetMessage from '../../../../hooks/messages/useSetMessage';
+import useSetMessage from '../../../../store/hooks/messages/useSetMessage';
 
 
 

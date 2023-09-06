@@ -34,7 +34,9 @@ const BoxFullpage = ({ setOpened, content }: type) => {
                     onClick={() => { setOpened(false) }}>
                     <img src="./../../../../icons/btn-close.svg" alt="close" />
                 </button>
-                {content}
+                <div className="box-fullpage-content">
+                    {content}
+                </div>
             </div>
         </div>
     )

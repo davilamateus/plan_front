@@ -9,8 +9,22 @@
     max-width: 360px;
 }
 
-.padding-box{
-    
+.page-container{
+    padding: 0;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding-left: 128px;
+    padding-right: 32px;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 720px) {
+    .page-container{
+        padding: 0;
+        width: 95vw;
+    }
+
 }
 
 

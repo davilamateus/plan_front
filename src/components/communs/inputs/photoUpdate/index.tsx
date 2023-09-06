@@ -1,10 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import './style.scss';
 import Api from '../../../../axios';
 import { BASE_URL } from '../../../../axios';
 
 interface type {
-    setPhoto: Dispatch<SetStateAction<string | undefined>>
+    setPhoto: Dispatch<SetStateAction<string | undefined>>;
     photo: string | undefined;
 }
 
@@ -16,20 +16,13 @@ const PhotoUpdate = ({ photo, setPhoto }: type) => {
     const [fileName, setFileName] = useState<string | undefined>(undefined);
 
 
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        setSelectedFile(file || null);
-        handleUpload()
-    };
+        if (file) {
+            console.log('mudouuuuu')
 
-    const handleUpload = async () => {
-        if (!selectedFile) {
-            return;
-        }
-
-        try {
             const formData = new FormData();
-            formData.append('file', selectedFile);
+            formData.append('file', file);
 
             const response = await Api.post<{ fileName: string }>(
                 '/user/photo',
@@ -39,14 +32,27 @@ const PhotoUpdate = ({ photo, setPhoto }: type) => {
                         'Content-Type': 'multipart/form-data',
                     },
                 }
-            )
+            ).then((data: any) => {
+                setPhoto(data.data.fileName);
+                setFileName(data.data.fileName);
+            })
+        }
+        setSelectedFile(file || null);
 
-            setFileName(response.data.fileName);
-        } catch (error) {
-            console.error('Error sending the file', error);
-            alert('Error sending the file. Check console for details.');
+    };
+
+    const handleUpload = async () => {
+        if (selectedFile) {
+
         }
     };
+
+    useEffect(() => {
+        if (fileName) {
+            setPhoto(fileName);
+            console.log('mudou')
+        }
+    }, [fileName])
 
     return (
         <div

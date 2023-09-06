@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import IsLogged from '../../functions/isLogged'
+import useSetPageTitle from '../../store/hooks/pageTitle/useSetPageTitle';
 
 const HomePage = () => {
-    IsLogged()
+    IsLogged();
+
+    const setPageTitle = useSetPageTitle();
+
+    setPageTitle('Dashboard');
+
 
 
     return (

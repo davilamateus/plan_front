@@ -5,7 +5,7 @@ import './style.scss';
 import ButtonSimple from "../../../communs/buttons/simple/simple";
 import SocialLogin from "../social";
 import isEmail from "../../../../functions/isEmail";
-import useSetMessage from "../../../../hooks/messages/useSetMessage";
+import useSetMessage from "../../../../store/hooks/messages/useSetMessage";
 import InputSimple from "../../../communs/inputs/simples";
 import useCreateUser from "../../../../hooks/user/useCreateUser";
 

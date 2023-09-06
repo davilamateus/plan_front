@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './style.scss';
-import GetMessage from '../../hooks/messages/useGetMessage';
-import SetMessage from '../../hooks/messages/useSetMessage';
+import GetMessage from '../../store/hooks/messages/useGetMessage';
+import SetMessage from '../../store/hooks/messages/useSetMessage';
 
 
 const Message = () => {
