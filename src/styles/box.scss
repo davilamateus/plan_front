@@ -11,11 +11,11 @@
 
 .page-container{
     padding: 0;
-    max-width: 1250px;
+    max-width: 1550px;
     margin: 0 auto;
     padding-left: 128px;
     padding-right: 32px;
-    width: 100%;
+    width: calc(100% - 16px);
 }
 
 

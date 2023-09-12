@@ -1,0 +1,40 @@
+.entrace-main{
+    width: 100%;
+    .entraces-divs{
+        display: grid;
+        width: auto;
+        grid-template-columns: 20% 45% calc(35% - 32px);
+        gap: 16px;
+        height: 360px;
+        overflow: hidden;
+
+        .entrace-main-simple-result{
+            h3{
+                padding: 0;
+                margin: 0;
+            }
+            .entrace-main-simple-result-box{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                justify-content: space-between;
+            }
+            flex-wrap: wrap;
+        }
+  
+
+        
+
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+        .entraces-divs{
+             display: contents!important;
+             .entrace-main-grafic{
+                margin: 64px 0;
+             }
+        }
+
+
+}

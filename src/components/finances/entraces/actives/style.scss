@@ -1,0 +1,11 @@
+@import './../../../../styles/color';
+
+.finances-entraces-actives{
+    height: 280px;
+    overflow: scroll;
+        box-shadow: 3px 3px 22px $box-shadow;
+    background-color:$box-background;
+    border-radius: 8px;
+    cursor: pointer;
+
+}

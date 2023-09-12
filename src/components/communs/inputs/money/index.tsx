@@ -1,29 +1,31 @@
 import { Dispatch, SetStateAction } from "react";
 import CurrencyFormat from 'react-currency-format';
+import './style.scss';
 
 
 interface type {
     title: string;
-    setInput: Dispatch<SetStateAction<string | undefined>>;
-    input: string | undefined;
-    placeholder: string;
+    setInput: Dispatch<SetStateAction<number>>;
+    input: number | undefined;
 }
 
-const InputMoney = ({ title, setInput, input, placeholder }: type) => {
-    function currencyFormat(num: number) {
-        return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-    }
+const InputMoney = ({ title, setInput, input }: type) => {
+
     return (
         <label>
             <h4>{title}</h4>
-            <div>
-                <input
-                    type="text"
-                    placeholder={placeholder}
-                    value={input}
-                    onChange={(e) => {
-                        console.log(currencyFormat(+(e.target.value)))
-                        setInput((e.target.value))
+            <div className="input-money">
+                <span>$</span>
+                <CurrencyFormat
+                    isNumericString={true}
+                    thousandSeparator={false}
+                    decimalSeparator='.'
+                    value={input || 0}
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    displayType={'input'}
+                    onValueChange={(e: any) => {
+                        setInput(e.value)
                     }}
                 />
             </div>

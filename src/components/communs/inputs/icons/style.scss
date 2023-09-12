@@ -1,0 +1,28 @@
+
+@import './../../../../styles/color';
+.input-icon{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    div{
+        margin-bottom: 12px;
+        width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    }
+    .icon-selected{
+        opacity: 1!important;
+    }
+    img{
+        width: 16px;
+        filter: contrast(0);
+        opacity: 0.3;
+        transition: 0.2s;
+        &:hover{
+            opacity: 1;
+        }
+    }
+
+}

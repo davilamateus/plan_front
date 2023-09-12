@@ -27,3 +27,36 @@ input:focus{
         outline: none !important;
 
 }
+
+table{
+    width: 100%;
+    text-align: left;
+    font-size: 11pt;
+    .bord{
+        font-weight: 600;
+        color: $title-color;
+    }
+    .options{
+        width: 10px;
+        display: flex;
+        
+    }
+    tr{
+        gap: 0;
+        &:hover{
+            background-color: $input-border-color;
+            
+        }
+        
+        vertical-align: middle;
+ 
+    }
+    }
+    th{
+        color: $title-color;
+        padding: 8px 16px;
+    }
+    td{
+        padding: 8px 16px;
+        border-top: 1px solid $input-border-color;
+    }

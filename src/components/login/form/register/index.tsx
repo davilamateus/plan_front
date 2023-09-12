@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import InputEmail from "../../../communs/inputs/email";
 import InputPassword from "../../../communs/inputs/password";
 import './style.scss';
@@ -9,7 +9,11 @@ import useSetMessage from "../../../../store/hooks/messages/useSetMessage";
 import InputSimple from "../../../communs/inputs/simples";
 import useCreateUser from "../../../../hooks/user/useCreateUser";
 
-const RegisterFormLogin = () => {
+interface type {
+    setMenuSelect: Dispatch<SetStateAction<string>>;
+}
+
+const RegisterFormLogin = ({ setMenuSelect }: type) => {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -40,7 +44,6 @@ const RegisterFormLogin = () => {
 
     useEffect(() => {
         if (name !== '' && isEmail(email) && upper && lower && min && number && password == confirmPassword) {
-            console.log('TUDO CERTo')
             setBtnStatus(true);
         } else {
             setBtnStatus(false);
@@ -58,9 +61,11 @@ const RegisterFormLogin = () => {
             setBtnLoading(false);
 
             if (data.status === 203) {
+                setMenuSelect('login')
                 setMessage('Email already used!', 'That email already used before. Please to choose other email and try again.', 'atention');
 
             } else if (data.status === 200) {
+                setMenuSelect('login')
                 setMessage('User registered with success!', 'All right here. Now please check your box email and your span for confirming your account.', 'success');
             } else {
                 setMessage('Error!', 'Please to try again.', 'error');

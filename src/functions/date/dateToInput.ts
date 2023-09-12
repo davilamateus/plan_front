@@ -15,6 +15,5 @@ export default function DateToInput(date: number) {
     }
 
 
-    console.log(month)
     return `${year}-${month}-${day}`
 }

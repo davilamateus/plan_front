@@ -4,8 +4,8 @@ import './style.scss';
 
 interface type {
     title: string;
-    options: { title: string, value: number | string }[];
-    setSelectOptions: Dispatch<SetStateAction<number | string>>;
+    options: { title: string, value: number }[];
+    setSelectOptions: Dispatch<SetStateAction<number>>;
 }
 
 const InputSelect = ({ title, options, setSelectOptions }: type) => {
@@ -13,7 +13,7 @@ const InputSelect = ({ title, options, setSelectOptions }: type) => {
         <label className="select-input">
             <h4>{title}</h4>
             <div>
-                <select onChange={(e) => { setSelectOptions(e.target.value) }}>
+                <select onChange={(e) => { setSelectOptions(+(e.target.value)) }}>
                     {options.map((item) => (
                         <option value={item.value}>{item.title}</option>
                     ))}

@@ -69,7 +69,7 @@ const InputCity = ({ setCity, setState, setCountry, title }: Types) => {
     return (
         <div>
             <label >
-                <h3>{title}</h3>
+                <h4>{title}</h4>
                 <input
                     type="text"
                     placeholder="Type a city..."

@@ -20,6 +20,19 @@
     box-shadow: 8px 8px 22px $box-shadow-green;
 
 }
+
+.button-delete{
+    box-shadow: none;
+    padding: 6px;
+    border: 1px solid $terciary-color;
+    color: $terciary-color;
+    background-color: #ff00;
+    &:hover{
+            background-color: $terciary-color;
+            color: $title-color;
+    }
+
+}
 .btn-loading{
     width: 32px;
 

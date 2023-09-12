@@ -21,12 +21,18 @@ html {
 /**
  * Remove the margin in all browsers.
  */
+*{
+      box-sizing: border-box;
+     & ::-webkit-scrollbar{
+            display: none;}
 
+}
 body {
   margin: 0;
   background-color: $background;
   font-family: 'Lato';
   color: $paragraph-color;
+
 }
 
 a{

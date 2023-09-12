@@ -1,0 +1,23 @@
+@import './../../../../styles/color';
+
+.input-money{
+    align-items: center;
+    border: 2px solid $input-border-color;
+    gap: 8px;
+    padding: 8px;
+    width: max-content;
+    width: auto;
+    font-weight: 400;
+    color: $paragraph-dark-color;
+    span{
+        font-size: 16pt;
+    }
+    input{
+        color: $paragraph-dark-color;
+        font-size: 38pt;
+        border: none;
+        padding: 0;
+        width: 320px;
+        
+    }
+}

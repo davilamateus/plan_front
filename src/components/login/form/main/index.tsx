@@ -12,7 +12,7 @@ const FormLoginComponent = () => {
         <div className='login-form-main box'>
             <div className="login-form-content">
                 <LoginMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} />
-                {menuSelect === 'login' ? <LoginFormLogin /> : <RegisterFormLogin />}
+                {menuSelect === 'login' ? <LoginFormLogin /> : <RegisterFormLogin setMenuSelect={setMenuSelect} />}
             </div>
         </div>
     )
