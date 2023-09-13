@@ -1,0 +1,75 @@
+@import './../../../styles/color';
+
+.button-add-finance{
+    position: fixed;
+    bottom:0;
+    display: flex;
+    justify-content: end!important;
+    width: 100%;
+    left: 0px;
+    align-items: end;
+    background-color: rgba(255, 255, 255, 0);
+    height: 100vw;
+    padding-bottom: 32px;
+    z-index: 3;
+
+
+    .page-container{
+        flex-direction: row;
+        display: flex;
+        justify-content: end;
+        align-items: end;
+        gap: 32px;
+        .option-animation{
+            opacity: 1!important;
+        
+        }
+        .options{
+            div{
+                background-color: $box-background;
+                box-shadow: 3px 3px 10px $box-shadow;
+                padding: 16px;
+                width: max-content;
+                border-radius: 16px;
+                opacity: 0;
+                transition: 0.4s;
+                cursor: pointer;
+            }
+            justify-content: end;
+            align-items: end;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+    }
+    
+    
+
+    .button-add{
+        background-color: $primary-color;
+        width: 48px;
+        height: 48px;
+        border-radius: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 3px 3px 20px $box-shadow-green;
+        opacity: 0.8;
+        transition: 0.4s;
+        padding: 0;
+        cursor: pointer;
+        float: right;
+        .button-add-close{
+            height: 3px;
+            width: 16px;
+            background-color: $title-color;
+            border-radius: 8px;
+        }
+        &:hover{
+            opacity: 1;
+        }
+        img{
+            width: 18px;
+        }
+    }
+}

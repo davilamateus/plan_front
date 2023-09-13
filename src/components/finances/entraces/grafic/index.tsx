@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
-import IFinancesExpense from '../../../../types/finances/IExpense';
 import GetFirstAndLastDayTimestamps from '../../../../functions/date/firstAndLastDayOfTheMonth';
 import GraficOfBar from './grafic';
+import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 
 
 
 
 const FinancesEntracesGrafic = () => {
-    const [entraces, setEntraces] = useState<IFinancesExpense[]>([])
+    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([])
     const UseGetEntraces = useGetEntraces();
     const [thatMonth, setThatMonth] = useState<number>(0)
     const [thatMonth_1, setThatMonth_1] = useState<number>(0)

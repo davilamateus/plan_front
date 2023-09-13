@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import IFinancesExpense from '../../../../types/finances/IExpense'
 import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
 import TimestampToDate from '../../../../functions/date/timestampToDate';
 import './style.scss';
 import BoxFullpage from '../../../communs/boxFullpage';
 import ModalEditEntrances from '../../modalEdit/entraces';
+import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 
 const EntracesActives = () => {
-    const [entraces, setEntraces] = useState<IFinancesExpense[]>([]);
+    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
     const [opened, setOpened] = useState(false);
     const [index, setIndex] = useState<number>(0);
     const UseGetEntraces = useGetEntraces();

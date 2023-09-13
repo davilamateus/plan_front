@@ -1,6 +1,6 @@
 import Api from "../../axios";
 import useSetEntraces from "../../store/hooks/finances/useSetEntraces";
-import IFinancesExpense from "../../types/finances/IExpense";
+import { IFinancesExpenseList } from "../../types/finances/IExpense";
 import useGetExpenseApi from "./useGetExpenses";
 
 
@@ -9,7 +9,7 @@ const useEditExpense = () => {
     const UseGetExpenseAPI = useGetExpenseApi();
     const UseSetEntraces = useSetEntraces();
 
-    return async (finances: IFinancesExpense) => {
+    return async (finances: IFinancesExpenseList) => {
         const config = {
             headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
         };

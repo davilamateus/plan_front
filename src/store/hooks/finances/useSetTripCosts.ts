@@ -1,10 +1,10 @@
 
 import { useDispatch } from 'react-redux';
-import IFinancesExpense from '../../../types/finances/IExpense';
+import { IFinancesExpenseList } from '../../../types/finances/IExpense';
 
 function useSetTripCosts() {
     const dispatch = useDispatch();
-    return (tripCosts: IFinancesExpense[]) => {
+    return (tripCosts: IFinancesExpenseList[]) => {
         dispatch({
             type: '@tripCosts/SET_TRIP_COSTS', tripCosts
         });

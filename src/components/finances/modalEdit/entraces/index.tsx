@@ -2,14 +2,14 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import InputSimple from "../../../communs/inputs/simples";
 import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
-import IFinancesExpense from "../../../../types/finances/IExpense";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
 import useEditExpense from "../../../../hooks/finances/useEditExpense";
 import './style.scss';
 import useDeleteExpense from "../../../../hooks/finances/useDeleteExpense";
+import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
 
 interface type {
-    entrace: IFinancesExpense;
+    entrace: IFinancesExpenseList;
     setOpened: Dispatch<SetStateAction<boolean>>;
 
 }

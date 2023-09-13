@@ -1,4 +1,4 @@
-import IFinancesExpense from "./IExpense";
+import { IFinancesExpenseList } from "./IExpense";
 
 export interface IFinancesGoalsList {
     id: number;
@@ -7,7 +7,7 @@ export interface IFinancesGoalsList {
     value: number;
     icon: number;
     color: string;
-    itens: IFinancesExpense[]
+    itens: IFinancesExpenseList[]
 }
 
 export interface IFinancesGoalsAdd {

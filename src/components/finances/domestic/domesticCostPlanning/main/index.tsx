@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals'
-import useGetGoalsApi from '../../../../hooks/finances/useGetGoals';
-import GetFirstAndLastDayTimestamps from '../../../../functions/date/firstAndLastDayOfTheMonth';
-import DomesticGoalsCard from './card';
-import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
-
+import useGetDomesticGoals from '../../../../../store/hooks/finances/useGetDomesticGoals'
+import useGetGoalsApi from '../../../../../hooks/finances/useGetGoals';
+import GetFirstAndLastDayTimestamps from '../../../../../functions/date/firstAndLastDayOfTheMonth';
+import DomesticGoalsCard from '../card/main';
+import { IFinancesGoalsList } from '../../../../../types/finances/IGoals';
+import './style.scss'
 const DomesticCostPlanning = () => {
 
     const UseGetDomesticGoals = useGetDomesticGoals();
@@ -23,7 +23,7 @@ const DomesticCostPlanning = () => {
 
     console.log(goals)
     return (
-        <div>
+        <div className='finances-domestic-goals-main'>
             {goals.length > 0 ?
                 <>
                     {goals.map((item: IFinancesGoalsList) => (

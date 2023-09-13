@@ -19,6 +19,11 @@
 }
 
 
+hr{
+    border: 1px solid $input-border-color;
+    margin: 32px 0;
+}
+
 @media only screen and (max-width: 720px) {
     .page-container{
         padding: 0;

@@ -50,6 +50,14 @@
 }
         .box-fullpage-content{
             width: 100%;
+            .modal-box-opened{
+                h3{
+                    text-align: center;
+                }
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
         }
         .btn-close{
             background: none;

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { IFinancesGoalsList } from '../../../../../types/finances/IGoals'
+import { IFinancesGoalsList } from '../../../../../../types/finances/IGoals'
+import DomesticCostPlanningCircle from '../circle';
+import './style.scss'
 
 
 interface type {
@@ -24,21 +26,29 @@ const DomesticGoalsCard = ({ goal }: type) => {
     }, [goal])
     return (
         <div className='domestic-goals-box'>
-            <div className="domestic-goals-icon">
-                <div className="domestic-goal-circle"></div>
+            <div className="domestic-goals-left">
+                <div className="domestic-goal-circle">
+                    <DomesticCostPlanningCircle
+                        value={porcent}
+                        color={goal.color}
+                        icon={goal.icon}
+                    />
+                </div>
                 <div className="domestic-goal-porcent">{porcent}%</div>
             </div>
             <div className="domestic-goals-content">
-                <div>
+                <div className='bolder'>
                     {goal.title}
                 </div>
                 <div>
-                    <span>{calc}</span>
-                    <span>of</span>
-                    <span>{goal.value}</span>
+                    <span
+                        className='bolder'
+                        style={{ color: `${goal.color}` }}
+                    >{calc}</span>
+                    <span> of </span>
+                    <span >{goal.value}</span>
                 </div>
             </div>
-            <div className="domestic-goals-options">a</div>
         </div>)
 }
 

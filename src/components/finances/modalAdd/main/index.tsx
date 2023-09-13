@@ -83,17 +83,7 @@ const ModalAddFinances = ({ setOpened }: type) => {
                     options={options}
                     setSelectOptions={setSelectType}
                 />
-                {selectType == 1 ?
-                    <ModalAddEntrances
-                        setTitle={setTitle}
-                        title={title}
-                        setValue={setValue}
-                        value={value}
-                        date={date}
-                        setDate={setDate}
-                        setBtnStatus={setBtnStatus}
-                    />
-                    : ''}
+
                 {selectType == 2 || selectType == 4 ?
                     <ModalAddGoals
                         setTitle={setTitle}

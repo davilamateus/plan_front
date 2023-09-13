@@ -1,19 +1,24 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
 import InputSimple from "../../../communs/inputs/simples";
 import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
+import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import ButtonSimple from "../../../communs/buttons/simple/simple";
+import useAddGoals from "../../../../hooks/finances/useAddGoals";
+import useAddExpense from "../../../../hooks/finances/useAddExpense";
 
 interface type {
-    setDate: Dispatch<SetStateAction<number>>;
-    setTitle: Dispatch<SetStateAction<string>>;
-    setBtnStatus: Dispatch<SetStateAction<boolean>>;
-    setValue: Dispatch<SetStateAction<number>>;
-    date: number;
-    title: string;
-    value: number | undefined;
+    setOpened: Dispatch<SetStateAction<boolean>>;
 }
 
-const ModalAddEntrances = ({ setBtnStatus, setTitle, title, setValue, value, date, setDate }: type) => {
+const ModalAddEntrances = ({ setOpened }: type) => {
+
+    const [title, setTitle] = useState<string>('');
+    const [date, setDate] = useState(new Date().getTime());
+    const [value, setValue] = useState(0);
+    const [btnLoading, setBtnLoading] = useState(false);
+    const [btnStatus, setBtnStatus] = useState(false);
+
+    const UseAddFinancesExpense = useAddExpense();
 
     useEffect(() => {
         if (title && date && value) {
@@ -23,8 +28,27 @@ const ModalAddEntrances = ({ setBtnStatus, setTitle, title, setValue, value, dat
         }
     }, [title, date, value])
 
+
+    function addEntrace() {
+        setBtnLoading(true);
+
+        const entrace = {
+            type: 1,
+            title,
+            value,
+            date
+        }
+        UseAddFinancesExpense(entrace);
+
+        setTitle('')
+        setValue(0)
+        setDate(new Date().getTime());
+        setBtnLoading(false)
+    }
+
     return (
-        <>
+        <div className="modal-box-opened">
+            <h3>Add Entrace</h3>
             <InputSimple
                 title='Title:'
                 setInput={setTitle}
@@ -41,7 +65,14 @@ const ModalAddEntrances = ({ setBtnStatus, setTitle, title, setValue, value, dat
                 setInput={setValue}
                 input={value}
             />
-        </>
+            <ButtonSimple
+                title='Add'
+                type='success'
+                status={btnStatus}
+                loading={btnLoading}
+                action={() => { addEntrace() }}
+            />
+        </div>
     )
 }
 

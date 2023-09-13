@@ -1,4 +1,4 @@
-import IFinancesExpense from '../../../../types/finances/IExpense';
+import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 import FinanceSimpleResult from '../../comuns/FinanceSimpleResult'
 import EntracesActives from '../actives';
 import FinancesEntracesGrafic from '../grafic';
@@ -11,7 +11,7 @@ interface type {
     domesticTotalThatMonth: number;
     tripTotalThatMonth: number;
     totalCostsThatMonth: number;
-    entraces: IFinancesExpense[];
+    entraces: IFinancesExpenseList[];
 
 }
 

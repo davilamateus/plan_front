@@ -17,7 +17,7 @@ const InputDate = ({ title, date, setDate }: type) => {
             </label>
             <input
                 type="date"
-                defaultValue={DateToInput(date)}
+                defaultValue={DateToInput(date + 31557600000)}
                 onChange={(e) => { setDate(new Date(e.target.value).getTime()) }}
             />
         </div>

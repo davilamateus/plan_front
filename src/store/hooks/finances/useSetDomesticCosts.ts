@@ -1,10 +1,10 @@
 
 import { useDispatch } from 'react-redux';
-import IFinancesExpense from '../../../types/finances/IExpense';
+import { IFinancesExpenseList } from '../../../types/finances/IExpense';
 
 function useSetDomesticCosts() {
     const dispatch = useDispatch();
-    return (domesticCosts: IFinancesExpense[]) => {
+    return (domesticCosts: IFinancesExpenseList[]) => {
         dispatch({
             type: '@domestiCosts/SET_DOMESTIC_COSTS', domesticCosts
         });

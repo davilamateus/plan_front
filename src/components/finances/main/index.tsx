@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import ButtonAdd from '../../communs/buttons/add'
+import ButtonAdd from './../buttonAdd'
 import BoxFullpage from '../../communs/boxFullpage';
 import ModalAddFinances from '../modalAdd/main';
 import EntracesMain from '../entraces/main';
-import IFinancesExpense from '../../../types/finances/IExpense';
 import firstAndLastDayOfTheMonth from '../../../functions/date/firstAndLastDayOfTheMonth';
 import useGetExpenseApi from '../../../hooks/finances/useGetExpenses';
 import useGetDomesticCosts from '../../../store/hooks/finances/useGetDomesticCosts';
 import useGetEntraces from '../../../store/hooks/finances/useGetEntraces';
 import useGetTripCosts from '../../../store/hooks/finances/useGetTripCosts';
-import useSetDomesticCosts from '../../../store/hooks/finances/useSetDomesticCosts';
 import useSetEntraces from '../../../store/hooks/finances/useSetEntraces';
-import useSetTripCosts from '../../../store/hooks/finances/useSetTripCosts';
 import getMonthNameFromTimestamp from './../../../functions/date/getMonthNameFromTimestamp'
-import DomesticCostsStates from '../../../store/modules/finances/reducerDomesticCosts';
 import DomesticMain from '../domestic/main';
+import { IFinancesExpenseList } from '../../../types/finances/IExpense';
 
 const MainFinances = () => {
     const [modalAdd, setModalAdd] = useState(false);
 
-    const [entraces, setEntraces] = useState<IFinancesExpense[]>([])
-    const [domesticCosts, setDomesticCosts] = useState<IFinancesExpense[]>([]);
-    const [tripCosts, setTripCosts] = useState<IFinancesExpense[]>([]);
+    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([])
+    const [domesticCosts, setDomesticCosts] = useState<IFinancesExpenseList[]>([]);
+    const [tripCosts, setTripCosts] = useState<IFinancesExpenseList[]>([]);
     const [monthName, setMonthName] = useState(getMonthNameFromTimestamp(new Date().getTime()));
     const [entraceTotalThatMonth, setEntraceTotalThatMonth] = useState<number>(0);
     const [domesticTotalThatMonth, setDomesticTotalThatMonth] = useState<number>(0);
@@ -127,6 +124,7 @@ const MainFinances = () => {
                     tripTotalThatMonth={tripTotalThatMonth}
                     totalCostsThatMonth={entraceTotalThatMonth - domesticTotalThatMonth - tripTotalThatMonth}
                 />
+                <hr />
                 <DomesticMain
 
                 />

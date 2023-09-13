@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart, registerables } from 'chart.js/auto';
 import './style.scss'
@@ -6,12 +5,7 @@ Chart.register(...registerables);
 
 
 
-
 function GraficOfBar({ barData }: any) {
-
-
-
-
 
     const data = {
         labels: barData.title,

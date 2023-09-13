@@ -15,7 +15,6 @@ const InputMoney = ({ title, setInput, input }: type) => {
         <label>
             <h4>{title}</h4>
             <div className="input-money">
-                <span>$</span>
                 <CurrencyFormat
                     isNumericString={true}
                     thousandSeparator={false}

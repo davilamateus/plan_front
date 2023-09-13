@@ -1,5 +1,35 @@
 @import './color';
 
+
+.clean-input{
+
+    border: 2px solid $input-border-color;
+    border-radius: 8px;
+    padding: 12px;
+    h4{
+        font-size: 10pt;
+    }
+    input{
+        background-color: $box-background!important;
+        z-index: 4;
+        border: none!important;
+        padding: 0;
+        background:none;
+        margin-top: -28px;
+        transition: 0.1s;
+        &:not([value=""]){
+            margin-top: 0px;
+        }
+        &:focus{
+            margin-top: 0px;
+
+        }
+
+    }
+}
+
+ 
+
 label{
     font-weight: 900;
     margin: 0 auto;
@@ -8,10 +38,10 @@ label{
         margin: 0;
         margin-bottom: 8px;
     }
-    div{
         display: flex;
         width: 100%;
-    }
+        flex-direction: column;
+    
 }
 input, select{
     border-radius: 8px;

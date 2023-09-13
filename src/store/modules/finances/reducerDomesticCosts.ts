@@ -1,7 +1,9 @@
 import produce from 'immer';
-import IFinancesExpense from '../../../types/finances/IExpense';
-import { WritableDraft } from 'immer/dist/internal';
-const domesticCosts: IFinancesExpense[] | boolean = false
+import { IFinancesExpenseList } from '../../../types/finances/IExpense';
+
+
+
+const domesticCosts: IFinancesExpenseList[] | boolean = false
 const INITIAL_STATE = {
     domesticCosts
 };
