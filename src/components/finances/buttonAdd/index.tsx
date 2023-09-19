@@ -2,14 +2,15 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import './style.scss';
 import ModalAddEntrances from '../modalAdd/entraces';
 import BoxFullpage from '../../communs/boxFullpage';
+import ModalAddGoals from '../modalAdd/goals';
 interface type {
-    setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const ButtonAdd = ({ setModal }: type) => {
+const ButtonAdd = () => {
 
-    const [show, setShow] = useState(true);
-    const [element, setElement] = useState<JSX.Element>();
+    const [show, setShow] = useState(false);
+    const [element, setElement] = useState<JSX.Element | boolean>();
+
 
 
     useEffect(() => {
@@ -40,13 +41,19 @@ const ButtonAdd = ({ setModal }: type) => {
                             <div onClick={() => {
                                 setElement(
                                     <ModalAddEntrances
-                                        setOpened={setModal}
                                     />
                                 )
                             }} >
                                 Entraces
                             </div>
-                            <div>
+                            <div onClick={() => {
+                                setElement(
+                                    <ModalAddGoals
+                                        type={1}
+                                        setOpened={setShow}
+                                    />
+                                )
+                            }} >
                                 Domestic Goals
                             </div>
                             <div>
@@ -72,7 +79,7 @@ const ButtonAdd = ({ setModal }: type) => {
                 </div>
                 {element ?
                     <BoxFullpage
-                        setOpened={(setShow)}
+                        setOpened={setShow}
                         content={element}
                     />
                     : ''}

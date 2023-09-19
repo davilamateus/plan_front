@@ -18,7 +18,7 @@ const AvatarComponent = () => {
                     <div className="avatar-photo-box">
                         <div
                             style={{
-                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo}`
+                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo}.jpeg`
                             }}
                             className="avatar-photo"
                         >

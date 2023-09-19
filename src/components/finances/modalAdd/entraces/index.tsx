@@ -3,14 +3,10 @@ import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
-import useAddGoals from "../../../../hooks/finances/useAddGoals";
-import useAddExpense from "../../../../hooks/finances/useAddExpense";
+import useAddEntraces from "../../../../hooks/finances/entraces/useAddEntraces";
 
-interface type {
-    setOpened: Dispatch<SetStateAction<boolean>>;
-}
 
-const ModalAddEntrances = ({ setOpened }: type) => {
+const ModalAddEntrances = () => {
 
     const [title, setTitle] = useState<string>('');
     const [date, setDate] = useState(new Date().getTime());
@@ -18,7 +14,7 @@ const ModalAddEntrances = ({ setOpened }: type) => {
     const [btnLoading, setBtnLoading] = useState(false);
     const [btnStatus, setBtnStatus] = useState(false);
 
-    const UseAddFinancesExpense = useAddExpense();
+    const UseAddEntraces = useAddEntraces();
 
     useEffect(() => {
         if (title && date && value) {
@@ -33,17 +29,16 @@ const ModalAddEntrances = ({ setOpened }: type) => {
         setBtnLoading(true);
 
         const entrace = {
-            type: 1,
+            type: 0,
             title,
             value,
             date
         }
-        UseAddFinancesExpense(entrace);
-
-        setTitle('')
-        setValue(0)
+        UseAddEntraces(entrace);
+        setTitle('');
+        setValue(0);
         setDate(new Date().getTime());
-        setBtnLoading(false)
+        setBtnLoading(false);
     }
 
     return (

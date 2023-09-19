@@ -3,10 +3,11 @@ import InputSimple from "../../../communs/inputs/simples";
 import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
-import useEditExpense from "../../../../hooks/finances/useEditExpense";
-import './style.scss';
-import useDeleteExpense from "../../../../hooks/finances/useDeleteExpense";
+import './../style.scss';
 import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
+import useEditEntraces from "../../../../hooks/finances/entraces/useEditEntraces";
+import useDeleteEntraces from "../../../../hooks/finances/entraces/useDeleteEntraces";
+
 
 interface type {
     entrace: IFinancesExpenseList;
@@ -25,8 +26,8 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
     const [date, setDate] = useState<number>(entrace.date);
 
 
-    const UseEditExpense = useEditExpense();
-    const UseDeleteExpense = useDeleteExpense();
+    const UseEditEntraces = useEditEntraces();
+    const UseDeleteEntraces = useDeleteEntraces();
 
     useEffect(() => {
         if (title && date && value) {
@@ -39,11 +40,10 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
 
     function editEntrace() {
         setBtnLoading(true)
-        UseEditExpense(
+        UseEditEntraces(
             {
                 title,
                 value,
-                type: 1,
                 id: entrace.id,
                 date
             }
@@ -55,16 +55,14 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
 
     function deleteEntrace() {
         setBtnLoadingDelete(true)
-        UseDeleteExpense(entrace.id, 1).then(() => {
+        UseDeleteEntraces(entrace.id).then(() => {
             setOpened(false);
-        })
+        });
+    };
 
-    }
-
-    console.log(date)
 
     return (
-        < div className="edit-entrace">
+        < div className="edit-modal">
             <h2>Edit Entrace</h2>
             <form onSubmit={(e) => { e.preventDefault() }} >
 

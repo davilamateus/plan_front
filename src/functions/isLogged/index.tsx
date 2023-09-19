@@ -13,7 +13,6 @@ const IsLogged = () => {
 
   useEffect(() => {
     if (token) {
-      console.log('sim');
       UserGetUserDetails(token).then((data) => {
         if (data.status === 200) {
           UseSetAvatar(

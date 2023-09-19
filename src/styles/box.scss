@@ -4,7 +4,7 @@
     background-color: $box-background;
     border-radius: 8px;
     box-shadow: 3px 8px 22px $box-shadow;
-    width: 85%;
+    width: 95%;
     padding: 16px;
     max-width: 360px;
 }
@@ -15,7 +15,18 @@
     margin: 0 auto;
     padding-left: 128px;
     padding-right: 32px;
+    padding-bottom: 86px;
     width: calc(100% - 16px);
+}
+
+.display-none{
+    display: none;
+}
+.display-flex{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 8px;
 }
 
 
@@ -27,6 +38,8 @@ hr{
 @media only screen and (max-width: 720px) {
     .page-container{
         padding: 0;
+        padding-bottom: 64px;
+
         width: 95vw;
     }
 

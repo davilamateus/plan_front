@@ -1,0 +1,46 @@
+@import './../../../../styles/color';
+
+.finances-goals-edit-actives{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: -28px;
+    cursor: pointer;
+    .finances-goals-edit-actives-item{
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid  $input-border-color;
+        padding-bottom: 8px;
+        .finances-goals-edit-actives-text{
+            width: 110px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            left: 0;
+            div{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 4px;
+                .circle{
+                    width: 4px;
+                    height: 12px;
+                    border-radius: 8px;
+                    background-color: $primary-color;
+                }
+                .finances-goals-edit-actives-title{
+                    font-weight: 800;
+                    width: 100px;
+                    color: $title-color;
+                }
+            }
+        }
+        .finances-goals-edit-actives-date{
+            font-style: italic;
+        }
+        .finances-goals-edit-actives-value{
+            color: $title-color;
+        }
+    }
+}

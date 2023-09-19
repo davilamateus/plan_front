@@ -3,7 +3,7 @@ import './style.scss'
 
 interface type {
     setOpened: Dispatch<SetStateAction<boolean>>;
-    content: JSX.Element
+    content: JSX.Element | boolean
 }
 
 const BoxFullpage = ({ setOpened, content }: type) => {

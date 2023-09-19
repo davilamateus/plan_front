@@ -1,0 +1,6 @@
+.domestic-total-main{
+        display: grid;
+        width: auto;
+        grid-template-columns: 45% calc(55% - 16px);
+        gap: 16px;
+    }

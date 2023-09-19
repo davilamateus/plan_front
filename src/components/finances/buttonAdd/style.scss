@@ -2,29 +2,29 @@
 
 .button-add-finance{
     position: fixed;
-    bottom:0;
     display: flex;
-    justify-content: end!important;
-    width: 100%;
-    left: 0px;
     align-items: end;
-    background-color: rgba(255, 255, 255, 0);
-    height: 100vw;
-    padding-bottom: 32px;
-    z-index: 3;
-
-
+    z-index:0  ;
+    bottom:64px;
+    right: 16px;
+    z-index: 2;
+    
+    
     .page-container{
+        max-width: 100px;
         flex-direction: row;
-        display: flex;
+        display: grid;
         justify-content: end;
         align-items: end;
+        grid-template-columns: auto;
         gap: 32px;
         .option-animation{
             opacity: 1!important;
         
         }
         .options{
+            grid-column-end: 1;
+            width: max-content;
             div{
                 background-color: $box-background;
                 box-shadow: 3px 3px 10px $box-shadow;
@@ -58,7 +58,6 @@
         transition: 0.4s;
         padding: 0;
         cursor: pointer;
-        float: right;
         .button-add-close{
             height: 3px;
             width: 16px;

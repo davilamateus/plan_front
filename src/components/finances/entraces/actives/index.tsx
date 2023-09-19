@@ -12,8 +12,6 @@ const EntracesActives = () => {
     const [index, setIndex] = useState<number>(0);
     const UseGetEntraces = useGetEntraces();
 
-
-
     useEffect(() => {
         if (UseGetEntraces.entraces !== false) {
             setEntraces(UseGetEntraces);
@@ -22,30 +20,34 @@ const EntracesActives = () => {
 
     return (
         <div className='finances-entraces-actives'>
-            <table >
-                <tr>
-                    <th>Title:</th>
-                    <th>Date:</th>
-                    <th>Value:</th>
-                </tr>
-                <tbody className='table-scroll' >
+            <h3>Entraces Actives</h3>
+            <div className='finances-entraces-actives-table'>
 
-                    {entraces.length > 0 ?
-                        entraces.map((item, index) => (
-                            <tr
-                                onClick={() => {
-                                    setOpened(true)
-                                    setIndex(index)
-                                }}
-                                key={index}
-                            >
-                                <td width={'200px'}>{item.title}</td>
-                                <td>{TimestampToDate(item.date)}</td>
-                                <td className='bord'>{item.value}</td>
-                            </tr>
-                        ))
-                        : ''}
-                </tbody>
+                {entraces.length > 0 ?
+                    entraces.map((item, index) => (
+                        <div
+                            className='finances-entraces-actives-item'
+                            onClick={() => {
+                                setOpened(true)
+                                setIndex(index)
+                            }}
+                            key={index}
+                        >
+                            <div className='finances-entraces-actives-text' >
+                                <div>
+                                    <div className='circle'></div>
+                                    <div className="finances-entraces-actives-title">
+                                        {item.title}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='finances-entraces-actives-date'>
+                                {TimestampToDate(item.date)}
+                            </div>
+                            <div className='finances-entraces-actives-value'>{item.value}</div>
+                        </div>
+                    ))
+                    : ''}
                 {opened ?
                     <BoxFullpage
                         content={
@@ -57,7 +59,8 @@ const EntracesActives = () => {
                         setOpened={setOpened}
                     />
                     : ''}
-            </table>
+            </div>
+
         </div >
 
     )

@@ -4,6 +4,7 @@ export interface IFinancesExpenseList {
     title: string;
     value: number;
     date: number;
+    financesGoalId: number | undefined;
 }
 
 export interface IFinancesExpenseAdd {
@@ -11,5 +12,6 @@ export interface IFinancesExpenseAdd {
     title: string;
     value: number;
     date: number;
+    financesGoalId: number | undefined;
 }
 

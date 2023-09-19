@@ -1,0 +1,10 @@
+
+@import './../../../../../styles/color';
+
+
+.grafic-entraces-box{
+    background-color: $box-background;
+    padding: 16px;
+    box-shadow: 3px 3px 22px $box-shadow;
+    border-radius: 8px;
+}

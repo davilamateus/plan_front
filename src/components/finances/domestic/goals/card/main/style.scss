@@ -1,0 +1,37 @@
+@import './../../../../../../styles/color';
+
+.domestic-goals-box{
+    background-color:$box-background;
+    width: max-content;
+    max-width: 85vw;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 16px;
+    box-shadow: 3px 3px 10px $box-shadow;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        box-shadow: 3px 3px 20px $box-shadow-hover;
+
+    }
+    .domestic-goals-left{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        .domestic-goal-porcent{
+            font-size: 10pt;
+        }
+
+    }
+    .domestic-goals-content{
+        .bolder{
+            font-weight: 600;
+            color: $title-color;
+        }
+    }
+
+}

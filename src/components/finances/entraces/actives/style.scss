@@ -1,11 +1,59 @@
 @import './../../../../styles/color';
 
-.finances-entraces-actives{
-    height: 280px;
+.finances-entraces-actives-table{
+    max-height: 280px;
     overflow: scroll;
-        box-shadow: 3px 3px 22px $box-shadow;
+    box-shadow: 3px 3px 22px $box-shadow;
     background-color:$box-background;
     border-radius: 8px;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    
+}
+.finances-entraces-actives-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    &:hover{
+        background-color: $input-border-color;
+    }
+    .finances-entraces-actives-text{
+        width: 130px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        div{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            .circle{
+                width: 4px;
+                height: 12px;
+                border-radius: 8px;
+                background-color: $primary-color;
+            }
+        }
+        .finances-entraces-actives-title{
+            font-size: 16px;
+            font-weight: 800;
+            color: $title-color;
+            font-size: 14px;
+        }
+        
+    }
+    .finances-entraces-actives-date{
+        font-size: 13px;
+        font-style: italic;
+        margin: 0 auto;
+        width: 90px;
+    }
+    .finances-entraces-actives-value{
+         color: $title-color;
+         font-size: 13px;
+         width: 80px;
+         text-align: end;
 
+
+    }
 }

@@ -5,6 +5,7 @@ export interface IFinancesGoalsList {
     type: number;
     title: string;
     value: number;
+    valueItens: number;
     icon: number;
     color: string;
     itens: IFinancesExpenseList[]
