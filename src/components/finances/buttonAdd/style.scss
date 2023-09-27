@@ -5,7 +5,7 @@
     display: flex;
     align-items: end;
     z-index:0  ;
-    bottom:64px;
+    bottom:-34px;
     right: 16px;
     z-index: 2;
     
@@ -34,12 +34,17 @@
                 opacity: 0;
                 transition: 0.4s;
                 cursor: pointer;
+                &:hover{
+                    box-shadow: 3px 3px 10px $box-shadow-hover;
+
+            }
             }
             justify-content: end;
             align-items: end;
             display: flex;
             flex-direction: column;
             gap: 8px;
+ 
         }
     }
     

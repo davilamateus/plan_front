@@ -35,12 +35,13 @@ const DomesticCostPlanning = ({ fromDate, toDate }: type) => {
                 {goals.length > 0 ?
                     <>
                         {goals.map((item: IFinancesGoalsList) => (
-                            <DomesticGoalsCard
-                                key={item.id}
-                                goal={item}
-                                toDate={toDate}
-                                fromDate={fromDate}
-                            />
+                            item.title === "Others" && item.valueItens === 0 ? '' :
+                                <DomesticGoalsCard
+                                    key={item.id}
+                                    goal={item}
+                                    toDate={toDate}
+                                    fromDate={fromDate}
+                                />
                         ))}
                     </>
                     : ''}

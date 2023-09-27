@@ -6,7 +6,8 @@ import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import './style.scss';
-import DomesticTotalMain from '../total/main';
+import DomesticTotalCard from '../total/card/main';
+import DomesticExpensesActives from '../total/actives';
 
 const DomesticMain = () => {
 
@@ -38,7 +39,7 @@ const DomesticMain = () => {
 
 
   return (
-    <>
+    <div className='domestic-cost'>
       <div className='domestic-cost-header'>
         <h3>Domestic cost planning</h3>
         <InputDateRange
@@ -48,13 +49,21 @@ const DomesticMain = () => {
           setToDate={setToDate}
         />
       </div>
-      <DomesticCostPlanning
-        fromDate={fromDate}
-        toDate={toDate}
-      />
-      <DomesticTotalMain
-      />
-    </>
+      <div className='domestic-cost-components'>
+        <DomesticCostPlanning
+          fromDate={fromDate}
+          toDate={toDate}
+        />
+        <div className='domestic-cost-components-botton'>
+          <DomesticTotalCard
+          />
+          <DomesticExpensesActives
+          />
+        </div>
+
+
+      </div>
+    </div>
   )
 }
 

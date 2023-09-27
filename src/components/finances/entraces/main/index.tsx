@@ -9,8 +9,10 @@ const EntracesMain = () => {
         <div className='entrace-main'>
             <div className='entraces-components'>
                 <FinancesResume />
-                <FinancesEntracesGrafic />
-                <EntracesActives />
+                <div className="entraces-components-botton">
+                    <FinancesEntracesGrafic />
+                    <EntracesActives />
+                </div>
             </div>
         </div>
     )

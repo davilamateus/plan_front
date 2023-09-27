@@ -3,6 +3,7 @@ import useGetEntraces from '../../../../../store/hooks/finances/useGetEntraces';
 import GetFirstAndLastDayTimestamps from '../../../../../functions/date/GetTimestampInfomartions';
 import GraficOfBar from '../grafic/grafic';
 import { IFinancesExpenseList } from '../../../../../types/finances/IExpense';
+import './style.scss';
 
 
 
@@ -81,14 +82,14 @@ const FinancesEntracesGrafic = () => {
 
             ],
             value: [
-                thatMonth_7,
-                thatMonth_6,
-                thatMonth_5,
-                thatMonth_4,
-                thatMonth_3,
-                thatMonth_2,
-                thatMonth_1,
-                thatMonth,
+                thatMonth_7 / 100,
+                thatMonth_6 / 100,
+                thatMonth_5 / 100,
+                thatMonth_4 / 100,
+                thatMonth_3 / 100,
+                thatMonth_2 / 100,
+                thatMonth_1 / 100,
+                thatMonth / 100,
             ]
         })
     }, [thatMonth, thatMonth_1, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7])
@@ -99,7 +100,7 @@ const FinancesEntracesGrafic = () => {
     return (
         <>
             {barData ?
-                <div>
+                <div className='finances-entraces-grafic'>
                     <h3>Entraces Historic</h3>
                     <GraficOfBar barData={barData} />
                 </div>

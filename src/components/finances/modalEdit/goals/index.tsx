@@ -12,6 +12,7 @@ import ModalEditExpenses from '../expenses';
 import useEditGoal from '../../../../hooks/finances/goals/useEditGoal';
 import useEditExpense from '../../../../hooks/finances/expenses/useEditExpense';
 import useDeleteGoal from '../../../../hooks/finances/goals/useDeleteGoals';
+import FormartMoney from '../../../../functions/formartMoney/formartMoney';
 
 interface type {
     setOpened: Dispatch<SetStateAction<boolean>>;
@@ -78,7 +79,7 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
     return (
         <>
             <div className="modal-box-opened">
-                {goal.id !== 0 ?
+                {goal.id !== 0 ? // Diferent of Other category
 
                     <>
                         <h3>Edit Goal</h3>
@@ -134,7 +135,7 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
                                                 <div className='finances-goals-edit-actives-date'>
                                                     {TimestampToDate(item.date)}
                                                 </div>
-                                                <div className='finances-goals-edit-actives-value'>{item.value}</div>
+                                                <div className='finances-goals-edit-actives-value'>{FormartMoney(item.value)}</div>
                                             </div>
                                         </div>
                                     ))}
@@ -192,7 +193,7 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
                                                 <div className='finances-goals-edit-actives-date'>
                                                     {TimestampToDate(item.date)}
                                                 </div>
-                                                <div className='finances-goals-edit-actives-value'>{item.value}</div>
+                                                <div className='finances-goals-edit-actives-value'>{FormartMoney(item.value)}</div>
                                             </div>
                                         </div>
                                     ))}

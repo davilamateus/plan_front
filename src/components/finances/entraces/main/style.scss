@@ -3,14 +3,22 @@
     .entraces-components{
         display: grid;
         width: auto;
-        grid-template-columns: 20% 50% calc(30% - 32px);
+        grid-template-columns: 20% calc(80% - 32px);
         gap: 16px;
         height: 360px;
         overflow: hidden;
+        .entraces-components-botton{
+            margin-top: 32px;
+            display: flex;
+            width: 100%;
+            gap: 16px;
+            justify-content: space-between;
+ 
+        }
     }
 }
 
-@media only screen and (max-width: 1040px) {
+@media only screen and (max-width: 1140px) {
         .entraces-components{
              display: contents!important;
 

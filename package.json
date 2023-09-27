@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@formatjs/intl-relativetimeformat": "^11.2.6",
+    "@formatjs/intl-utils": "^3.8.4",
+    "@pismo/react-currency-input": "^2.0.2",
+    "@progress/kendo-react-intl": "^5.18.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,9 +19,10 @@
     "date-fns": "^2.30.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
-    "react-currency-format": "^1.1.0",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
+    "react-intl": "^6.4.7",
+    "react-intl-currency-input": "0.2.6",
     "react-loading-skeleton": "^3.3.1",
     "react-redux": "^8.1.2",
     "react-router": "^6.15.0",
@@ -54,6 +59,7 @@
   "devDependencies": {
     "@types/chart.js": "^2.9.38",
     "@types/react-currency-format": "^1.0.0",
-    "@types/react-date-range": "^1.4.4"
+    "@types/react-date-range": "^1.4.4",
+    "react-intl-currency-input": "^0.3.3"
   }
 }

@@ -5,6 +5,7 @@ import './style.scss';
 import BoxFullpage from '../../../communs/boxFullpage';
 import ModalEditEntrances from '../../modalEdit/entraces';
 import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
+import FormartMoney from '../../../../functions/formartMoney/formartMoney';
 
 const EntracesActives = () => {
     const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
@@ -15,8 +16,10 @@ const EntracesActives = () => {
     useEffect(() => {
         if (UseGetEntraces.entraces !== false) {
             setEntraces(UseGetEntraces);
+
         }
     }, [UseGetEntraces]);
+
 
     return (
         <div className='finances-entraces-actives'>
@@ -44,7 +47,7 @@ const EntracesActives = () => {
                             <div className='finances-entraces-actives-date'>
                                 {TimestampToDate(item.date)}
                             </div>
-                            <div className='finances-entraces-actives-value'>{item.value}</div>
+                            <div className='finances-entraces-actives-value'>{FormartMoney(item.value)}</div>
                         </div>
                     ))
                     : ''}

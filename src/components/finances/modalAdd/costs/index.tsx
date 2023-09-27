@@ -13,7 +13,7 @@ interface type {
     color: string;
     icon: number;
     title: string;
-    value: number | undefined;
+    value: number;
 }
 
 const ModalAddCosts = ({ setBtnStatus, setTitle, title, setValue, value, color, setColor, icon, setIcon }: type) => {

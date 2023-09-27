@@ -4,6 +4,7 @@ import DomesticCostPlanningCircle from '../circle';
 import './style.scss'
 import BoxFullpage from '../../../../../communs/boxFullpage';
 import ModalEditGoals from '../../../../modalEdit/goals';
+import FormartMoney from '../../../../../../functions/formartMoney/formartMoney';
 
 
 interface type {
@@ -53,7 +54,7 @@ const DomesticGoalsCard = ({ goal, fromDate, toDate }: type) => {
                             <>
                                 {porcent}%
                             </>
-                            : Infinity}
+                            : ''}
                     </div>
                 </div>
                 <div className="domestic-goals-content">
@@ -64,15 +65,15 @@ const DomesticGoalsCard = ({ goal, fromDate, toDate }: type) => {
                         <span
                             className='bolder'
                             style={{ color: `${goal.color}` }}
-                        >{calc}</span>
-
-                        <span> of </span>
-                        <span >{goal.value}</span>
+                        >{FormartMoney(calc)}</span>
+                        {goal.value !== null ?
+                            <span>  of  {FormartMoney(goal.value)}</span>
+                            : ''}
 
                     </div>
                 </div>
             </div>
-            {opened && goal.id !== 0 || opened && (goal.id == 0 && goal.itens.length > 0) ?
+            {opened ?
 
                 <BoxFullpage
                     setOpened={setOpened}

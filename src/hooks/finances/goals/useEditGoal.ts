@@ -17,6 +17,7 @@ const useEditGoal = () => {
             .then(() => {
                 UseGetGoal(fromDate, toDate, goal.type, true);
 
+
             })
             .catch((error) => console.log(error))
         return res;

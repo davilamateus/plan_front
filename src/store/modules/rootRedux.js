@@ -5,8 +5,9 @@ import avatar from './avatar/reducer';
 import entraces from './finances/reducerEntraces';
 import domesticCosts from './finances/reducerDomesticCosts';
 import domesticGoals from './finances/reducerDomesticGoals';
-import tripCosts from './finances/reducerTripCosts';
+import tripGoals from './finances/reducerTripGoals';
+import cashInHand from './finances/reducerCashInHand';
 
 export default combineReducers({
-    message, pageTitle, avatar, domesticCosts, entraces, tripCosts, domesticGoals
+    message, pageTitle, avatar, domesticCosts, entraces, tripGoals, domesticGoals, cashInHand
 });

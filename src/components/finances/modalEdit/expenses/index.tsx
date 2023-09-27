@@ -10,6 +10,7 @@ import useDeleteExpense from "../../../../hooks/finances/expenses/useDeleteExpen
 import GetTimestampInfomartions from "../../../../functions/date/GetTimestampInfomartions";
 import InputSelectCategory from "../../../communs/inputs/selecCategory";
 import useGetDomesticGoals from "../../../../store/hooks/finances/useGetDomesticGoals";
+import useGetTripGoals from "../../../../store/hooks/finances/useGetTripGoals";
 
 
 interface type {
@@ -35,6 +36,7 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
     const UseEditExpenses = useEditExpense();
     const UseDeleteExpenses = useDeleteExpense();
     const UseGetDomesticGoals = useGetDomesticGoals();
+    const UseGetTripGoals = useGetTripGoals();
 
 
     useEffect(() => {
@@ -66,7 +68,6 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
 
     }
 
-    console.log(financesGoalId)
 
     function deleteEntrace() {
         setBtnLoadingDelete(true)
@@ -75,6 +76,8 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
         });
     };
 
+
+    console.log('Expensetipe', expenses.type)
 
     return (
         < div className="edit-modal">
@@ -89,7 +92,7 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
                 />
                 <InputSelectCategory
                     title="Select a category:"
-                    goals={UseGetDomesticGoals}
+                    goals={expenses.type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
                     selectOption={financesGoalId}
                     setSelectOptions={setFinancesGoalId}
                 />

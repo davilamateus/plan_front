@@ -56,7 +56,7 @@ function GraficOfBar({ barData }: any) {
 
 
     return (
-        <div className='grafic-entraces-box' style={{ width: '100%', height: '280px' }}>
+        <div className='grafic-entraces-box' style={{ width: 'auto', height: '280px' }}>
             <Bar data={data} options={options} />
         </div>
     );

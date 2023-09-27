@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import FinanceSimpleResult from '../../comuns/FinanceSimpleResult';
 import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInfomartions';
-import useGetDomesticCosts from '../../../../store/hooks/finances/useGetDomesticCosts';
 import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
-import useGetTripCosts from '../../../../store/hooks/finances/useGetTripCosts';
 import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 import './style.scss'
 import useGetEntracesApi from '../../../../hooks/finances/entraces/useGetEntraces';
-import useGetExpenseApi from '../../../../hooks/finances/expenses/useGetExpenses';
+import useGetTripGoals from '../../../../store/hooks/finances/useGetTripGoals';
+import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
+import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
+import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
 
 const FinancesResume = () => {
 
@@ -21,11 +22,11 @@ const FinancesResume = () => {
 
 
     const UseGetEntraces = useGetEntraces();
-    const UseGetDomesticCosts = useGetDomesticCosts();
-    const UseGetTripCosts = useGetTripCosts();
+    const UseGetDomesticGoals = useGetDomesticGoals();
+    const UseGetTripGoals = useGetTripGoals();
 
-    const UseGetExpenses = useGetExpenseApi();
     const UseGetEntracesApi = useGetEntracesApi();
+    const UseGetGoalsApi = useGetGoalsApi();
 
 
     // Getting Entraces
@@ -50,23 +51,34 @@ const FinancesResume = () => {
         }
     }, [entraces]);
 
+
+
+
+
     // Getting Domestic
     useEffect(() => {
-        if (UseGetDomesticCosts.domesticCosts === false) {
-            UseGetExpenses(0, 1000000000000000000, 1, true);
-        } else {
-            setDomestic(UseGetDomesticCosts);
+        if (UseGetDomesticGoals == false) {
+            UseGetGoalsApi(GetTimestampInfomartions(new Date().getTime(), 0).firstDay, GetTimestampInfomartions(new Date().getTime(), 0).lastDay, 1, true);
 
+        } else {
+            setDomestic(UseGetDomesticGoals)
         }
-    }, [UseGetDomesticCosts])
+
+
+    }, [UseGetDomesticGoals]);
+
+
+
+
+
+
 
     // Getting Domestic Total Value
     useEffect(() => {
         if (domestic.length > 0) {
             let total = 0
-            domestic.map((item) => {
-                if (item.date >= GetTimestampInfomartions(new Date().getTime(), 0).firstDay && item.date <= GetTimestampInfomartions(new Date().getTime(), 0).lastDay)
-                    total = total + item.value;
+            domestic.map((expense: IFinancesExpenseList) => {
+                total = total + expense.value;
             })
             setDomesticTotalThatMonth(total);
         }
@@ -75,17 +87,41 @@ const FinancesResume = () => {
 
 
 
-    // Getting Trips
+
+
+
+
+    // Getting trip
     useEffect(() => {
-        if (UseGetTripCosts.tripCosts === false) {
-            UseGetExpenses(0, 1000000000000000000, 2, true);
+        if (UseGetTripGoals === false) {
+            UseGetGoalsApi(0, 1000000000000000000, 2, true);
+
         } else {
-            setTrip(UseGetTripCosts);
+            let array: IFinancesExpenseList[] = [];
+
+            if (UseGetTripGoals.length > 0) {
+                UseGetTripGoals.map((goals: IFinancesGoalsList) => {
+                    if (goals.itens.length > 0) {
+                        goals.itens.map((tripExpense: IFinancesExpenseList) => {
+                            if (tripExpense) {
+
+
+                                if (tripExpense.date >= GetTimestampInfomartions(new Date().getTime(), 0).firstDay && tripExpense.date) {
+                                    array.push(tripExpense)
+
+                                }
+                            }
+                        })
+                    }
+
+
+                })
+
+            }
+            setTrip(array);
 
         }
-
-    }, [UseGetTripCosts]);
-
+    }, [UseGetTripGoals])
 
 
 
@@ -100,7 +136,6 @@ const FinancesResume = () => {
             setTripTotalThatMonth(total);
         }
     }, [trip]);
-
 
 
 
