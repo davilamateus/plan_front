@@ -9,7 +9,6 @@
     right: 16px;
     z-index: 2;
     
-    
     .page-container{
         max-width: 100px;
         flex-direction: row;
@@ -17,39 +16,53 @@
         justify-content: end;
         align-items: end;
         grid-template-columns: auto;
-        gap: 32px;
+        gap: 16px;
         .option-animation{
             opacity: 1!important;
         
         }
-        .options{
+        .background-opened{
+            background-color:$box-fullpage-background;
+            opacity: 0.5;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            position: fixed;
+        }
+        .button-add-finance-options{
             grid-column-end: 1;
             width: max-content;
-            div{
-                background-color: $box-background;
-                box-shadow: 3px 3px 10px $box-shadow;
-                padding: 16px;
-                width: max-content;
-                border-radius: 16px;
+            height: max-content;
+            z-index: 2;
+            flex-direction: column;
+            gap: 0px;
+            border-radius: 8px;
+            background-color: $box-background;
+            padding: 0;
+            li{
+                 &:hover{
+                    background-color: $input-border-color;
+                    color: $title-color;
+                }
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                img{
+                    width: 16px;
+                    height: 16px;
+                    opacity: 0.5;
+                }
+                list-style: none;
+                padding: 16px 24px;
                 opacity: 0;
                 transition: 0.4s;
-                cursor: pointer;
-                &:hover{
-                    box-shadow: 3px 3px 10px $box-shadow-hover;
+                cursor: pointer;       
+            }
 
-            }
-            }
-            justify-content: end;
-            align-items: end;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
- 
         }
     }
     
-    
-
     .button-add{
         background-color: $primary-color;
         width: 48px;

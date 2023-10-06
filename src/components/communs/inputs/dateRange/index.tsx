@@ -79,7 +79,7 @@ const InputDateRange = ({ setFromDate, setToDate, fromDate, toDate }: type) => {
 
     return (
         <div className='date-range'>
-            <h3>Period</h3>
+            <h4>Period</h4>
             <select
                 value={monthSelected}
                 onChange={(e) => { setMonthSelected(+(e.target.value)) }}

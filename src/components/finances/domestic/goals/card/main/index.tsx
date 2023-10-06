@@ -22,7 +22,7 @@ const DomesticGoalsCard = ({ goal, fromDate, toDate }: type) => {
     useEffect(() => {
         let calc = 0
         goal.itens.map((item) => {
-            if (item.value > 0) {
+            if (item?.value > 0) {
                 calc = calc + item.value
 
             }

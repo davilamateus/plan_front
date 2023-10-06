@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { IFinancesExpenseList } from "../../../../../types/finances/IExpense";
-import TimestampToDate from "../../../../../functions/date/timestampToDate";
-import BoxFullpage from "../../../../communs/boxFullpage";
-import useGetDomesticGoals from "../../../../../store/hooks/finances/useGetDomesticGoals";
-import { IFinancesGoalsList } from "../../../../../types/finances/IGoals";
-import ModalEditExpenses from "../../../modalEdit/expenses";
+import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
+import TimestampToDate from "../../../../functions/date/timestampToDate";
+import BoxFullpage from "../../../communs/boxFullpage";
+import useGetDomesticGoals from "../../../../store/hooks/finances/useGetDomesticGoals";
+import { IFinancesGoalsList } from "../../../../types/finances/IGoals";
+import ModalEditExpenses from "../../modalEdit/expenses";
 import './style.scss';
-import FormartMoney from "../../../../../functions/formartMoney/formartMoney";
+import FormartMoney from "../../../../functions/formartMoney/formartMoney";
 
 
 interface expenses {
@@ -94,7 +94,9 @@ const DomesticExpensesActives = () => {
                             <div className='finances-domestic-expenses-actives-value'>{FormartMoney(item.expense.value)}</div>
                         </div>
                     ))
-                    : ''}
+                    : <span className="no-activities">
+                        No activities added yet.
+                    </span>}
                 {opened ?
                     <BoxFullpage
                         content={
@@ -113,4 +115,4 @@ const DomesticExpensesActives = () => {
     )
 }
 
-export default DomesticExpensesActives
+export default DomesticExpensesActives;

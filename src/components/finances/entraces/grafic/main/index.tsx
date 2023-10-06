@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useGetEntraces from '../../../../../store/hooks/finances/useGetEntraces';
 import GetFirstAndLastDayTimestamps from '../../../../../functions/date/GetTimestampInfomartions';
 import GraficOfBar from '../grafic/grafic';
@@ -62,9 +62,7 @@ const FinancesEntracesGrafic = () => {
                 }
             })
         }
-
-
-    }, [entraces])
+    }, [dateToday, entraces])
 
 
     useEffect(() => {
@@ -101,7 +99,7 @@ const FinancesEntracesGrafic = () => {
         <>
             {barData ?
                 <div className='finances-entraces-grafic'>
-                    <h3>Entraces Historic</h3>
+                    <h3 className='sub-title'>Entraces Historic</h3>
                     <GraficOfBar barData={barData} />
                 </div>
                 : ''}

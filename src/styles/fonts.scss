@@ -24,3 +24,11 @@ p , span, label{
     font-family: 'Helvetica', sans-serif;
     color: $paragraph-color;
 }
+
+.sub-title{
+    border-bottom: 1px solid transparent; /* Largura da borda e torna a cor da borda transparente */
+    border-image: linear-gradient(to left, rgba(0, 255, 0, 0) ,rgba(0, 255, 0, 0)20%,$primary-color 50%, $primary-color) 1;
+    padding-bottom: 4px;
+    width: max-content;
+    margin-bottom: 24px!important;
+}

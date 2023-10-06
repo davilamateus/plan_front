@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
 import TimestampToDate from '../../../../functions/date/timestampToDate';
 import './style.scss';
@@ -8,24 +8,25 @@ import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 import FormartMoney from '../../../../functions/formartMoney/formartMoney';
 
 const EntracesActives = () => {
+
     const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
     const [opened, setOpened] = useState(false);
     const [index, setIndex] = useState<number>(0);
+
+
     const UseGetEntraces = useGetEntraces();
 
     useEffect(() => {
         if (UseGetEntraces.entraces !== false) {
             setEntraces(UseGetEntraces);
-
         }
     }, [UseGetEntraces]);
 
 
     return (
         <div className='finances-entraces-actives'>
-            <h3>Entraces Actives</h3>
+            <h3 className='sub-title'>Entraces Actives</h3>
             <div className='finances-entraces-actives-table'>
-
                 {entraces.length > 0 ?
                     entraces.map((item, index) => (
                         <div
@@ -50,7 +51,9 @@ const EntracesActives = () => {
                             <div className='finances-entraces-actives-value'>{FormartMoney(item.value)}</div>
                         </div>
                     ))
-                    : ''}
+                    : <span className="no-activities">
+                        No activities added yet.
+                    </span>}
                 {opened ?
                     <BoxFullpage
                         content={

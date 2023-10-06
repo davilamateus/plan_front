@@ -1,85 +1,77 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import './style.scss';
+import { useEffect, useState } from 'react';
 import ModalAddEntrances from '../modalAdd/entraces';
 import BoxFullpage from '../../communs/boxFullpage';
 import ModalAddGoals from '../modalAdd/goals';
-interface type {
-}
+import ModalAddExpenses from '../modalAdd/expenses';
+import './style.scss';
+
 
 const ButtonAdd = () => {
 
-    const [show, setShow] = useState(false);
-    const [element, setElement] = useState<JSX.Element | boolean>();
+    const [opened, setOpened] = useState(false);
+    const [element, setElement] = useState<JSX.Element | undefined>();
 
-
-
-    useEffect(() => {
-
-        if (show) {
-            for (let i = 4; i >= 0; i--) {
-                addAnimation((document.querySelectorAll('.page-container .options div').length - i) * 90, document.querySelectorAll('.page-container .options div')[i])
-            }
-        } else {
-            setElement(undefined)
-        }
-
-    }, [show])
-
+    //Animation Buttons
     function addAnimation(time: number, div: { classList: { add: (arg0: string) => void; }; }) {
         setTimeout(() => {
             div.classList.add('option-animation')
         }, time);
-    }
+    };
+    useEffect(() => {
+        if (opened) {
+            for (let i = 4; i >= 0; i--) {
+                addAnimation((document.querySelectorAll('.page-container .button-add-finance-options li').length - i) * 90,
+                    document.querySelectorAll('.page-container .button-add-finance-options li')[i])
+            }
+        } else {
+            setElement(undefined);
+        };
+    }, [opened]);
+
 
     return (
         <div className="button-add-finance">
             <div className='page-container'>
-                {
-                    show ?
-
-                        <div className={`options `}>
-                            <div onClick={() => {
-                                setElement(
-                                    <ModalAddEntrances
-                                    />
-                                )
-                            }} >
+                {opened ?
+                    <>
+                        <div className="background-opened"></div>
+                        <ul className={`button-add-finance-options`}>
+                            <li onClick={() => { setElement(<ModalAddEntrances />) }} >
+                                <img src="../../../../icons/entraces.svg" alt="" />
                                 Entraces
-                            </div>
-                            <div onClick={() => {
-                                setElement(
-                                    <ModalAddGoals
-                                        type={1}
-                                        setOpened={setShow}
-                                    />
-                                )
-                            }} >
+                            </li>
+                            <li onClick={() => { setElement(<ModalAddGoals type={1} setOpened={setOpened} />) }} >
+                                <img src="../../../../icons/goalsdomestic.svg" alt="" />
                                 Domestic Goals
-                            </div>
-                            <div>
+                            </li>
+                            <li onClick={() => { setElement(<ModalAddExpenses type={1} setOpened={setOpened} />) }}>
+                                <img src="../../../../icons/homecost.svg" alt="" />
                                 Domestic Cost
-                            </div>
-                            <div>
+                            </li>
+                            <li onClick={() => { setElement(<ModalAddGoals type={2} setOpened={setOpened} />) }} >
+                                <img src="../../../../icons/goalstrip.svg" alt="" />
                                 Travel Goals
-                            </div>
-                            <div>
+                            </li>
+                            <li onClick={() => { setElement(<ModalAddExpenses type={2} setOpened={setOpened} />) }} >
+                                <img src="../../../../icons/planer.svg" alt="" />
                                 Travel Cost
-                            </div>
-                        </div>
-                        : ''
+                            </li>
+                        </ul>
+                    </>
+                    : ''
                 }
 
                 <div
-                    onClick={() => { setShow(show ? false : true) }}
+                    onClick={() => { setOpened(opened ? false : true) }}
                     className='button-add '>
-                    {show ?
+                    {opened ?
                         <span className='button-add-close'></span> :
                         < img src="./../../../../../icons/add.svg" alt="ADD" />
                     }
                 </div>
                 {element ?
                     <BoxFullpage
-                        setOpened={setShow}
+                        setOpened={setOpened}
                         content={element}
                     />
                     : ''}
@@ -88,4 +80,4 @@ const ButtonAdd = () => {
     )
 }
 
-export default ButtonAdd
+export default ButtonAdd;

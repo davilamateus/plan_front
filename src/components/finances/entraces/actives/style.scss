@@ -5,7 +5,7 @@
 
 }
 .finances-entraces-actives-table{
-    max-height: 280px;
+    height: 280px;
     overflow: scroll;
     box-shadow: 3px 3px 22px $box-shadow;
     background-color:$box-background;
@@ -41,10 +41,9 @@
             }
         }
         .finances-entraces-actives-title{
-            font-size: 14px;
-            font-weight: 800;
+            font-size: 12px;
             color: $title-color;
-            font-size: 14px;
+            font-weight: 600;
         }
         
     }
@@ -56,10 +55,10 @@
     }
     .finances-entraces-actives-value{
          color: $title-color;
-         font-size: 13px;
+         font-size: 12px;
          width: 80px;
          text-align: end;
-         font-weight: 800;
+         font-weight: 600;
 
 
     }

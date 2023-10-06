@@ -30,7 +30,7 @@ const DomesticTotalCardGrafic = () => {
                 totalEachGoal.push(goal.valueItens);
                 takingLabels.push(goal.title);
                 goal.itens.map((item) => {
-                    if (item.value) {
+                    if (item?.value) {
                         totalPaid = totalPaid + item.value
 
                     }

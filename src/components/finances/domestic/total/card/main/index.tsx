@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import FinanceSimpleResult from '../../../../comuns/FinanceSimpleResult';
+import FinanceSimpleResult from '../../../../comuns/financeSimpleResult';
 import { IFinancesGoalsList } from '../../../../../../types/finances/IGoals';
 import useGetDomesticGoals from '../../../../../../store/hooks/finances/useGetDomesticGoals';
 import DomesticTotalCardGrafic from '../grafic';
@@ -24,7 +24,7 @@ const DomesticTotalCard = () => {
                 totalPlanning = goal.value + totalPlanning;
                 if (goal.itens.length > 0) {
                     goal.itens.map((item) => {
-                        if (item.value) {
+                        if (item?.value) {
                             totalPaid = totalPaid + item.value
                         }
 

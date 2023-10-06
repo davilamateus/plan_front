@@ -3,31 +3,36 @@ import InputSimple from "../../../communs/inputs/simples";
 import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
-import './../style.scss';
-import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
-import useEditEntraces from "../../../../hooks/finances/entraces/useEditEntraces";
-import useDeleteEntraces from "../../../../hooks/finances/entraces/useDeleteEntraces";
+import InputSelectCategory from "../../../communs/inputs/selecCategory";
+import useGetDomesticGoals from "../../../../store/hooks/finances/useGetDomesticGoals";
+import useGetTripGoals from "../../../../store/hooks/finances/useGetTripGoals";
+import useAddExpense from "../../../../hooks/finances/expenses/useAddExpense";
+import useGetGoalsApi from "../../../../hooks/finances/goals/useGetGoals";
 
 
 interface type {
-    entrace: IFinancesExpenseList;
+    type: number;
     setOpened: Dispatch<SetStateAction<boolean>>;
 
 }
 
-const ModalEditEntrances = ({ entrace, setOpened }: type) => {
+const ModalAddExpenses = ({ type, setOpened }: type) => {
 
     const [btnLoading, setBtnLoading] = useState(false);
-    const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
     const [btnStatus, setBtnStatus] = useState(false);
 
-    const [title, setTitle] = useState(entrace.title);
-    const [value, setValue] = useState<number>(entrace.value);
-    const [date, setDate] = useState<number>(entrace.date);
+
+    const [title, setTitle] = useState('');
+    const [value, setValue] = useState<number>(0);
+    const [date, setDate] = useState<number>(new Date().getTime());
+    const [financesGoalId, setFinancesGoalId] = useState<number | undefined>(undefined);
 
 
-    const UseEditEntraces = useEditEntraces();
-    const UseDeleteEntraces = useDeleteEntraces();
+
+    const UseGetDomesticGoals = useGetDomesticGoals();
+    const UseGetTripGoals = useGetTripGoals();
+    const UseAddExpenses = useAddExpense();
+
 
     useEffect(() => {
         if (title && date && value) {
@@ -38,33 +43,32 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
     }, [title, date, value])
 
 
-    function editEntrace() {
+    function addExpense() {
         setBtnLoading(true)
-        UseEditEntraces(
+        UseAddExpenses(
             {
                 title,
                 value,
-                id: entrace.id,
-                date
-            }
+                date,
+                type: type,
+                financesGoalId: financesGoalId
+            },
+
         ).then(() => {
+
             setOpened(false)
         })
 
     }
 
-    function deleteEntrace() {
-        setBtnLoadingDelete(true)
-        UseDeleteEntraces(entrace.id).then(() => {
-            setOpened(false);
-        });
-    };
+
+
 
 
 
     return (
         < div className="edit-modal">
-            <h2>Edit Entrace</h2>
+            <h2>Add Expenses</h2>
             <form onSubmit={(e) => { e.preventDefault() }} >
 
                 <InputSimple
@@ -72,6 +76,12 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
                     setInput={setTitle}
                     input={title}
                     placeholder="Type a title..."
+                />
+                <InputSelectCategory
+                    title="Select a category:"
+                    goals={type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
+                    selectOption={financesGoalId}
+                    setSelectOptions={setFinancesGoalId}
                 />
                 <InputDate
                     title='Date:'
@@ -84,22 +94,16 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
                     input={value}
                 />
                 <ButtonSimple
-                    title="Save"
+                    title="Add"
                     type='success'
-                    action={() => { editEntrace() }}
+                    action={() => { addExpense() }}
                     status={btnStatus}
                     loading={btnLoading}
                 />
-                <ButtonSimple
-                    title="Delete entrace"
-                    type='delete'
-                    action={() => { deleteEntrace() }}
-                    status={true}
-                    loading={btnLoadingDelete}
-                />
+
             </form>
         </div>
     )
 }
 
-export default ModalEditEntrances;
+export default ModalAddExpenses;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IFinancesGoalsList } from "../../../../types/finances/IGoals";
 import useGetTripGoals from "../../../../store/hooks/finances/useGetTripGoals";
-import FinanceSimpleResult from "../../comuns/FinanceSimpleResult";
+import FinanceSimpleResult from "../../comuns/financeSimpleResult";
 import useGetAvatar from "../../../../store/hooks/avatar/useGetAvatar";
 import useGetCashInHand from "../../../../store/hooks/finances/useGetCashInHand";
 import useGetCashInHandApi from "../../../../hooks/finances/cashInHand/useGetCashInHand";
@@ -39,7 +39,6 @@ const TripResume = () => {
 
     useEffect(() => {
         if (UseGetCashInHand !== false) {
-            console.log('pegando dinheiro', UseGetCashInHand)
             if (UseGetCashInHand > 0) {
                 setTotalCash(UseGetCashInHand);
 
@@ -66,7 +65,6 @@ const TripResume = () => {
         let totalPaid = 0
         if (goals.length > 0) {
             goals.map((goal: IFinancesGoalsList) => {
-                console.log("goals resulme", total)
                 if (goal.value !== null) {
                     total = total + goal.value
 
@@ -87,7 +85,6 @@ const TripResume = () => {
 
 
     function monthsCalc(timestamp1: number, timestamp2: number): number {
-        console.log(timestamp1, timestamp2)
         const data1 = new Date(timestamp1);
         const data2 = new Date(timestamp2);
 
@@ -96,6 +93,9 @@ const TripResume = () => {
 
         return calc;
     }
+
+    console.log(whenCalc)
+
 
     return (
         <div className="trip-resume">
@@ -125,7 +125,7 @@ const TripResume = () => {
                     <span>Join by month until the trip</span>
                     <h4>{`${(totalGoals - totalCash - totalPaid) / whenCalc > 0 ?
 
-                        FormartMoney(((totalGoals - totalCash - totalPaid) / whenCalc)) + ' durin ' + whenCalc + (whenCalc > 1 ? ' months' : 'month')
+                        FormartMoney(+((((totalGoals - totalCash - totalPaid) / whenCalc)).toFixed(0))) + ' durin ' + whenCalc + (whenCalc > 1 ? ' months' : 'month')
 
                         : FormartMoney(0)}`}</h4>
                 </div>

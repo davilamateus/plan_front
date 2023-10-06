@@ -1,7 +1,12 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import CurrencyFormat from 'react-currency-format';
 import './style.scss';
-import FormartMoney from "../../../../functions/formartMoney/formartMoney";
+import {
+    CurrencyInput,
+    Currencies,
+    Locales
+} from 'input-currency-react';
+
+
 
 
 interface type {
@@ -15,21 +20,32 @@ const InputMoney = ({ title, setInput, input }: type) => {
 
 
 
+    const handleOnChange = (inputElement: any, maskedValue: any, value: any) => {
+        setInput(value.replace('.', ''))
+        console.log(value.replace('.', ''))
+    };
+
+    ;
+
 
     return (
         <label>
             <h4>{title}</h4>
             <div className="input-money">
-                <span className="value-input-money">{FormartMoney(input)}</span>
-
-                <input
-                    type="number"
-                    placeholder="0.00"
-                    value={input}
-                    onChange={(e) => {
-                        setInput(+e.target.value)
+                <CurrencyInput
+                    value={input.toString()} // Initial value
+                    options={{
+                        precision: 2,
+                        style: "currency",
+                        allowNegative: false,
+                        alwaysNegative: false,
+                        locale: Locales["English (United States)"], // Format Type
+                        i18nCurrency: Currencies["US Dollar"] // Symbol
                     }}
+                    autoFocus={true}
+                    onChangeEvent={handleOnChange}
                 />
+
             </div>
         </label>
     )

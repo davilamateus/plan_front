@@ -3,8 +3,6 @@ import { Chart, registerables } from 'chart.js';
 import './style.scss';
 Chart.register(...registerables);
 
-
-
 function GraficOfBar({ barData }: any) {
 
     const data = {

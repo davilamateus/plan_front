@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FinanceSimpleResult from '../../comuns/FinanceSimpleResult';
+import FinanceSimpleResult from '../../comuns/financeSimpleResult';
 import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInfomartions';
 import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
 import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
@@ -9,6 +9,7 @@ import useGetTripGoals from '../../../../store/hooks/finances/useGetTripGoals';
 import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
+import { IFinancesEntraces } from '../../../../types/finances/IEntraces';
 
 const FinancesResume = () => {
 
@@ -29,6 +30,8 @@ const FinancesResume = () => {
     const UseGetGoalsApi = useGetGoalsApi();
 
 
+
+
     // Getting Entraces
     useEffect(() => {
         if (UseGetEntraces.entraces === false) {
@@ -43,7 +46,7 @@ const FinancesResume = () => {
     useEffect(() => {
         if (entraces.length > 0) {
             let total = 0;
-            entraces.map((item) => {
+            entraces.map((item: IFinancesEntraces) => {
                 if (item.date >= GetTimestampInfomartions(new Date().getTime(), 0).firstDay)
                     total = total + item.value;
             })
@@ -142,7 +145,7 @@ const FinancesResume = () => {
 
     return (
         <div className='finances-resume'>
-            <h3>{monthName} Resume</h3>
+            <h3 className='sub-title'>{monthName} Resume</h3>
             <div className='finances-resume-cards'>
                 <FinanceSimpleResult
                     title={`Total Entraces`}

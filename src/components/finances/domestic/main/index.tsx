@@ -7,7 +7,7 @@ import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomestic
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import './style.scss';
 import DomesticTotalCard from '../total/card/main';
-import DomesticExpensesActives from '../total/actives';
+import DomesticExpensesActives from '../actives';
 
 const DomesticMain = () => {
 

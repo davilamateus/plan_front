@@ -6,11 +6,9 @@
         grid-template-columns: 20% calc(80% - 32px);
         gap: 16px;
         height: 360px;
-        overflow: hidden;
         .entraces-components-botton{
-            margin-top: 32px;
-            display: flex;
-            width: 100%;
+            display: grid;
+            grid-template-columns: 65% calc(35% - 16px);           
             gap: 16px;
             justify-content: space-between;
  
@@ -20,8 +18,24 @@
 
 @media only screen and (max-width: 1140px) {
         .entraces-components{
-             display: contents!important;
+            display: contents!important;
+            .entraces-components-botton{
+                
+                margin-top: 62px!important;
+            }
+        }
 
+
+}
+
+@media only screen and (max-width: 980px) {
+ 
+            .entraces-components-botton{
+                display: contents!important;
+                .finances-entraces-grafic{
+                    margin-top: 32px;
+                }
+            
         }
 
 

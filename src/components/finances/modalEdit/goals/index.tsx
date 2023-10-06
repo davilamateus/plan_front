@@ -8,7 +8,7 @@ import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import TimestampToDate from '../../../../functions/date/timestampToDate';
 import './style.scss';
 import BoxFullpage from '../../../communs/boxFullpage';
-import ModalEditExpenses from '../expenses';
+import ModalEditExpenses from '../../modalEdit/expenses';
 import useEditGoal from '../../../../hooks/finances/goals/useEditGoal';
 import useEditExpense from '../../../../hooks/finances/expenses/useEditExpense';
 import useDeleteGoal from '../../../../hooks/finances/goals/useDeleteGoals';
