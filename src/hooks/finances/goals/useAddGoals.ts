@@ -10,8 +10,10 @@ const useAddGoals = () => {
     const getMonthInfors = GetTimestampInfomartions(new Date().getTime(), 0);
 
     return async (goals: IFinancesGoalsAdd) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
         const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         const res = await Api.post('/finances/goals', goals, config)

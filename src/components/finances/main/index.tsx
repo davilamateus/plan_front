@@ -6,6 +6,7 @@ import './style.scss';
 
 const MainFinances = () => {
 
+
     return (
         <>
             <ButtonAdd />
@@ -14,8 +15,6 @@ const MainFinances = () => {
             <DomesticMain />
             <hr />
             <TravelMain />
-
-
         </>
     )
 }

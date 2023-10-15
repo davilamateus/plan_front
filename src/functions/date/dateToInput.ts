@@ -3,7 +3,7 @@ export default function DateToInput(date: number) {
     let year = new Date(Number(date) * 1).getFullYear()
     let month = ''
     let day = ''
-    if (new Date(Number(date) * 1).getMonth() < 10) {
+    if (new Date(Number(date) * 1).getMonth() < 9) {
         month = `0${new Date((Number(date) * 1)).getMonth() + 1}`
     } else {
         month = `${new Date((Number(date) * 1)).getMonth() + 1}`

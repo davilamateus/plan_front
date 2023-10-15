@@ -10,6 +10,7 @@ import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
 import { IFinancesEntraces } from '../../../../types/finances/IEntraces';
+import TitleOfSession from '../../../communs/titleOfSession';
 
 const FinancesResume = () => {
 
@@ -145,7 +146,7 @@ const FinancesResume = () => {
 
     return (
         <div className='finances-resume'>
-            <h3 className='sub-title'>{monthName} Resume</h3>
+            <TitleOfSession title={monthName + ' Resume'} />
             <div className='finances-resume-cards'>
                 <FinanceSimpleResult
                     title={`Total Entraces`}

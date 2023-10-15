@@ -8,6 +8,8 @@ interface type {
 }
 
 const InputDate = ({ title, date, setDate }: type) => {
+    console.log('Aqui', DateToInput(date))
+
 
 
     return (

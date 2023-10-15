@@ -8,6 +8,7 @@ import useGetCashInHandApi from "../../../../hooks/finances/cashInHand/useGetCas
 import './style.scss';
 import FormartMoney from "../../../../functions/formartMoney/formartMoney";
 import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
+import TitleOfSession from "../../../communs/titleOfSession";
 
 const TripResume = () => {
 
@@ -99,7 +100,7 @@ const TripResume = () => {
 
     return (
         <div className="trip-resume">
-            <h3>Trip Resume</h3>
+            <TitleOfSession title='Travel Cost Planning' />
             <div className="trip-resume-results">
                 <FinanceSimpleResult
                     title='Cost total planning for trip'
@@ -123,11 +124,11 @@ const TripResume = () => {
                 />
                 <div className='finance-simple-result'>
                     <span>Join by month until the trip</span>
-                    <h4>{`${(totalGoals - totalCash - totalPaid) / whenCalc > 0 ?
+                    <span className="finance-simple-result-value">{`${(totalGoals - totalCash - totalPaid) / whenCalc > 0 ?
 
-                        FormartMoney(+((((totalGoals - totalCash - totalPaid) / whenCalc)).toFixed(0))) + ' durin ' + whenCalc + (whenCalc > 1 ? ' months' : 'month')
+                        FormartMoney(+((((totalGoals - totalCash - totalPaid) / whenCalc)).toFixed(0))) + ' durin ' + whenCalc + (whenCalc > 1 ? ' months.' : ' month.')
 
-                        : FormartMoney(0)}`}</h4>
+                        : FormartMoney(0)}`}</span>
                 </div>
 
             </div>

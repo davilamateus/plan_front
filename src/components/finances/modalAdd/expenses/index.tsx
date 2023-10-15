@@ -68,9 +68,7 @@ const ModalAddExpenses = ({ type, setOpened }: type) => {
 
     return (
         < div className="edit-modal">
-            <h2>Add Expenses</h2>
             <form onSubmit={(e) => { e.preventDefault() }} >
-
                 <InputSimple
                     title='Title:'
                     setInput={setTitle}

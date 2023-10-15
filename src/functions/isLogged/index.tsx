@@ -27,8 +27,6 @@ const IsLogged = () => {
             data.data.when,
             data.data.photo,
           )
-
-
         }
         else if (data.status === 401) {
           nav('/login');

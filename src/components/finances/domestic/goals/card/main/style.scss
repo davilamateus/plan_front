@@ -3,12 +3,11 @@
 .domestic-goals-box{
     background-color:$box-background;
     width: max-content;
-    max-width: 85vw;
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 8px;
-    border-radius: 16px;
+    border-radius: 8px;
     box-shadow: 3px 3px 10px $box-shadow;
     cursor: pointer;
     transition: 0.3s;
@@ -23,15 +22,26 @@
         align-items: center;
         gap: 4px;
         .domestic-goal-porcent{
-            font-size: 10pt;
+            font-size: 11px;
         }
 
     }
     .domestic-goals-content{
-        .bolder{
+        .domestic-goals-title{
             font-weight: 600;
+            font-size: 14px;
             color: $title-color;
         }
+        span{
+            font-size: 14px;
+        }
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .domestic-goals-box{
+        width: 95vw!important;
     }
 
 }

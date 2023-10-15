@@ -1,10 +1,6 @@
 @import './../../../../styles/color';
 
 .travel-cards{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
     .travel-cards-itens{
         display: flex;
         flex-direction: column;
@@ -17,7 +13,7 @@
         border-radius: 8px;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 2px;
         box-shadow: 3px 3px 10px $box-shadow;
         cursor: pointer;
         transition: 0.3s;
@@ -25,9 +21,9 @@
             box-shadow: 3px 3px 10px $box-shadow-hover;
         }
         .travel-card-top{
-            font-weight: 800;
+            font-weight: 600;
             display: flex;
-            gap: 8px;
+            gap: 4px;
             span{
                 color: $title-color;
                 
@@ -37,23 +33,21 @@
         .travel-card-medium{
             .travel-card-value{
                 color: $title-color;
-                font-weight: 800;
 
             }
         }
         .travel-card-bottom{
             display: flex;
             gap: 8px;
-            font-size: 12px;
             .travel-card-bar{
                 height: 10px;
                 width: 240px;
                 background-color: $input-border-color;
-                border-radius: 8px;
+                border-radius: 4px;
                 width: calc(100% - 58px);
                 div{
                     height: 10px;
-                    border-radius: 8px;
+                    border-radius: 2px;
                 }
             }
         }

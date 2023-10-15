@@ -59,7 +59,6 @@ const InputDateRange = ({ setFromDate, setToDate, fromDate, toDate }: type) => {
             UseGetGoals(fromDate, toDate, 1, true);
         }
 
-
     }, [toDate, fromDate])
 
     useEffect(() => {

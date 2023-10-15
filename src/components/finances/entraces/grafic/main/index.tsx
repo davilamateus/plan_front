@@ -4,6 +4,7 @@ import GetFirstAndLastDayTimestamps from '../../../../../functions/date/GetTimes
 import GraficOfBar from '../grafic/grafic';
 import { IFinancesExpenseList } from '../../../../../types/finances/IExpense';
 import './style.scss';
+import TitleOfSession from '../../../../communs/titleOfSession';
 
 
 
@@ -99,7 +100,7 @@ const FinancesEntracesGrafic = () => {
         <>
             {barData ?
                 <div className='finances-entraces-grafic'>
-                    <h3 className='sub-title'>Entraces Historic</h3>
+                    <TitleOfSession title='Historic Entraces' />
                     <GraficOfBar barData={barData} />
                 </div>
                 : ''}

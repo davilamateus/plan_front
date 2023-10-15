@@ -8,6 +8,7 @@ import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import './style.scss';
 import DomesticTotalCard from '../total/card/main';
 import DomesticExpensesActives from '../actives';
+import TitleOfSession from '../../../communs/titleOfSession';
 
 const DomesticMain = () => {
 
@@ -41,7 +42,7 @@ const DomesticMain = () => {
   return (
     <div className='domestic-cost'>
       <div className='domestic-cost-header'>
-        <h3>Domestic cost planning</h3>
+        <TitleOfSession title='Domestic Goals' />
         <InputDateRange
           setFromDate={setFromDate}
           fromDate={fromDate}

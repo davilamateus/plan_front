@@ -13,7 +13,7 @@ const AvatarComponent = () => {
                 <div className='avatar-box'>
                     <div className="avatar-text">
                         <span className='avatar-name'>{UseGetAvatar.name}</span>
-                        <span>{UseGetAvatar.country_trip} - {UseGetAvatar.country_trip}</span>
+                        <span className='avatar-country'> {UseGetAvatar.country_trip} - {UseGetAvatar.country_trip}</span>
                     </div>
                     <div className="avatar-photo-box">
                         <div

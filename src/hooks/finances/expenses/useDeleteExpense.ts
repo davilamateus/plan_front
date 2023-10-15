@@ -9,8 +9,10 @@ const useDeleteExpense = () => {
 
 
     return async (id: number, type: number) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
         const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         const res = await Api.delete(`/finances/expense?id=${id}`, config)

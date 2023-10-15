@@ -3,10 +3,11 @@ import './style.scss'
 
 interface type {
     setOpened: Dispatch<SetStateAction<boolean>>;
-    content: JSX.Element | boolean
+    content: JSX.Element | boolean;
+    title: string;
 }
 
-const BoxFullpage = ({ setOpened, content }: type) => {
+const BoxFullpage = ({ setOpened, content, title }: type) => {
 
 
     const [animation, setAnimation] = useState('');
@@ -35,6 +36,7 @@ const BoxFullpage = ({ setOpened, content }: type) => {
                     <img src="./../../../../icons/btn-close.svg" alt="close" />
                 </button>
                 <div className="box-fullpage-content">
+                    <h3 className="title-box">{title}</h3>
                     {content}
                 </div>
             </div>

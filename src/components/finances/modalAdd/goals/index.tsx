@@ -41,7 +41,6 @@ const ModalAddGoals = ({ type, setOpened }: type) => {
 
     return (
         <div className="modal-box-opened">
-            <h3>Add Goals</h3>
             <InputSimple
                 title='Title:'
                 setInput={setTitle}

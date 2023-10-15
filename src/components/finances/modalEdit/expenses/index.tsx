@@ -4,7 +4,7 @@ import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
 import './../style.scss';
-import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
+import { IFinancesExpenseAdd, IFinancesExpenseList } from "../../../../types/finances/IExpense";
 import useEditExpense from "../../../../hooks/finances/expenses/useEditExpense";
 import useDeleteExpense from "../../../../hooks/finances/expenses/useDeleteExpense";
 import GetTimestampInfomartions from "../../../../functions/date/GetTimestampInfomartions";
@@ -14,22 +14,22 @@ import useGetTripGoals from "../../../../store/hooks/finances/useGetTripGoals";
 
 
 interface type {
-    expenses: IFinancesExpenseList;
+    expense: IFinancesExpenseList;
     setOpened: Dispatch<SetStateAction<boolean>>;
 
 }
 
-const ModalEditExpenses = ({ expenses, setOpened }: type) => {
+const ModalEditExpenses = ({ expense, setOpened }: type) => {
 
     const [btnLoading, setBtnLoading] = useState(false);
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
     const [btnStatus, setBtnStatus] = useState(false);
 
 
-    const [title, setTitle] = useState(expenses.title);
-    const [value, setValue] = useState<number>(expenses.value);
-    const [date, setDate] = useState<number>(expenses.date);
-    const [financesGoalId, setFinancesGoalId] = useState<number | undefined>(expenses.financesGoalId);
+    const [title, setTitle] = useState(expense.title);
+    const [value, setValue] = useState<number>(expense.value);
+    const [date, setDate] = useState<number>(expense.date);
+    const [financesGoalId, setFinancesGoalId] = useState<number | undefined>(expense.financesGoalId);
 
 
 
@@ -54,10 +54,10 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
             {
                 title,
                 value,
-                id: expenses.id,
+                id: expense.id,
                 date,
-                type: expenses.type,
-                financesGoalId: financesGoalId
+                type: expense.type,
+                financesGoalId: financesGoalId,
             },
             GetTimestampInfomartions(date, 0).firstDay,
             GetTimestampInfomartions(date, 0).lastDay,
@@ -71,19 +71,16 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
 
     function deleteEntrace() {
         setBtnLoadingDelete(true)
-        UseDeleteExpenses(expenses.id, expenses.type).then(() => {
+        UseDeleteExpenses(expense.id, expense.type).then(() => {
             setOpened(false);
         });
     };
 
 
-    console.log('Expensetipe', expenses.type)
 
     return (
         < div className="edit-modal">
-            <h2>Edit Expenses</h2>
             <form onSubmit={(e) => { e.preventDefault() }} >
-
                 <InputSimple
                     title='Title:'
                     setInput={setTitle}
@@ -92,7 +89,7 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
                 />
                 <InputSelectCategory
                     title="Select a category:"
-                    goals={expenses.type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
+                    goals={expense.type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
                     selectOption={financesGoalId}
                     setSelectOptions={setFinancesGoalId}
                 />
@@ -114,7 +111,7 @@ const ModalEditExpenses = ({ expenses, setOpened }: type) => {
                     loading={btnLoading}
                 />
                 <ButtonSimple
-                    title="Delete expenses"
+                    title="Delete expense"
                     type='delete'
                     action={() => { deleteEntrace() }}
                     status={true}

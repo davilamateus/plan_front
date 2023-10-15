@@ -32,19 +32,22 @@ const InputMoney = ({ title, setInput, input }: type) => {
         <label>
             <h4>{title}</h4>
             <div className="input-money">
-                <CurrencyInput
-                    value={input.toString()} // Initial value
-                    options={{
-                        precision: 2,
-                        style: "currency",
-                        allowNegative: false,
-                        alwaysNegative: false,
-                        locale: Locales["English (United States)"], // Format Type
-                        i18nCurrency: Currencies["US Dollar"] // Symbol
-                    }}
-                    autoFocus={true}
-                    onChangeEvent={handleOnChange}
-                />
+                <div>
+                    <span>R$</span>
+                    <CurrencyInput
+                        value={input.toString()} // Initial value
+                        options={{
+                            precision: 2,
+                            style: "decimal",
+                            allowNegative: false,
+                            alwaysNegative: false,
+                            locale: Locales["English (United States)"], // Format Type
+                            i18nCurrency: Currencies["US Dollar"] // Symbol
+                        }}
+                        autoFocus={true}
+                        onChangeEvent={handleOnChange}
+                    />
+                </div>
 
             </div>
         </label>

@@ -4,8 +4,10 @@ import useSetTripGoals from "../../../store/hooks/finances/useSetTripGoals";
 
 
 const useGetGoalsApi = () => {
+    let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
     const config = {
-        headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${token}` }
     };
 
     const UseSetDomesticGoals = useSetDomesticGoals();
@@ -15,6 +17,7 @@ const useGetGoalsApi = () => {
     return async (fromDate: Number, toDate: number, type: number, save: boolean) => {
         const res = await Api.get(`/finances/goals?fromDate=${fromDate}&toDate=${toDate}&type=${type}`, config)
             .then((data: any) => {
+                console.log('Data', data)
                 if (save) {
                     if (type == 1) {
                         UseSetDomesticGoals(data.data);

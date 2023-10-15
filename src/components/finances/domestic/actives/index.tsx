@@ -7,6 +7,8 @@ import { IFinancesGoalsList } from "../../../../types/finances/IGoals";
 import ModalEditExpenses from "../../modalEdit/expenses";
 import './style.scss';
 import FormartMoney from "../../../../functions/formartMoney/formartMoney";
+import TitleOfSession from "../../../communs/titleOfSession";
+import ExpensesActives from "../../comuns/actives";
 
 
 interface expenses {
@@ -60,57 +62,12 @@ const DomesticExpensesActives = () => {
 
 
     return (
-        <div className='finances-domestic-expenses-actives'>
-            <h3>Entraces Actives</h3>
-            <div className='finances-domestic-expenses-actives-table'>
+        <div>
+            <TitleOfSession title='Domestic Actives' />
+            <ExpensesActives active={expenses} height={'200px'} />
+        </div>
 
-                {expenses.length > 0 ?
-                    expenses.map((item, index) => (
-                        <div
-                            className='finances-domestic-expenses-actives-item'
-                            onClick={() => {
-                                setOpened(true)
-                                setIndex(index)
-                            }}
-                            key={index}
-                        >
-                            <div className='finances-domestic-expenses-actives-left' >
-                                <div style={{ backgroundColor: item.color }} className='finance-bar-color'></div>
-                                <div className='finances-domestic-expenses-actives-text' >
-                                    <div className="finances-domestic-expenses-actives-title">
-                                        {item.expense.title}
-                                    </div>
-                                    <div className='finances-domestic-expenses-actives-category'>
-                                        <img src={`./../../../../../../icons/categories/${item.icon}.svg`} alt="" />
-                                        <span style={{ color: item.color }}>
-                                            {item.category}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='finances-domestic-expenses-actives-date'>
-                                {TimestampToDate(item.expense.date)}
-                            </div>
-                            <div className='finances-domestic-expenses-actives-value'>{FormartMoney(item.expense.value)}</div>
-                        </div>
-                    ))
-                    : <span className="no-activities">
-                        No activities added yet.
-                    </span>}
-                {opened ?
-                    <BoxFullpage
-                        content={
-                            <ModalEditExpenses
-                                setOpened={setOpened}
-                                expenses={expenses[index].expense}
-                            />
-                        }
-                        setOpened={setOpened}
-                    />
-                    : ''}
-            </div>
 
-        </div >
 
     )
 }

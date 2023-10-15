@@ -76,13 +76,13 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
     }
 
 
+
     return (
         <>
             <div className="modal-box-opened">
                 {goal.id !== 0 ? // Diferent of Other category
 
                     <>
-                        <h3>Edit Goal</h3>
                         <InputSimple
                             title='Title:'
                             setInput={setTitle}
@@ -106,8 +106,8 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
                         />
                         {goal.itens.length > 0 ?
                             <>
-                                <h4>Itens:</h4>
                                 <div className="finances-goals-edit-actives">
+                                    <h4>Itens:</h4>
                                     {goal.itens.map((item, index) => (
                                         <div
                                             key={item.id}
@@ -207,10 +207,11 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
             </div>
             {itemOpened ?
                 <BoxFullpage
+                    title='Edit Cost'
                     content={
                         <ModalEditExpenses
                             setOpened={setItemOpened}
-                            expenses={goal.itens[index]}
+                            expense={goal.itens[index]}
                         />
                     }
                     setOpened={setItemOpened}

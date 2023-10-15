@@ -10,6 +10,7 @@ const ButtonAdd = () => {
 
     const [opened, setOpened] = useState(false);
     const [element, setElement] = useState<JSX.Element | undefined>();
+    const [title, setTitle] = useState('');
 
     //Animation Buttons
     function addAnimation(time: number, div: { classList: { add: (arg0: string) => void; }; }) {
@@ -20,7 +21,7 @@ const ButtonAdd = () => {
     useEffect(() => {
         if (opened) {
             for (let i = 4; i >= 0; i--) {
-                addAnimation((document.querySelectorAll('.page-container .button-add-finance-options li').length - i) * 90,
+                addAnimation((document.querySelectorAll('.page-container .button-add-finance-options li').length - i) * 50,
                     document.querySelectorAll('.page-container .button-add-finance-options li')[i])
             }
         } else {
@@ -34,25 +35,40 @@ const ButtonAdd = () => {
             <div className='page-container'>
                 {opened ?
                     <>
-                        <div className="background-opened"></div>
+                        <div className="background-opened" onClick={() => { setOpened(false) }}></div>
                         <ul className={`button-add-finance-options`}>
-                            <li onClick={() => { setElement(<ModalAddEntrances />) }} >
+                            <li onClick={() => {
+                                setTitle('Entrace')
+                                setElement(<ModalAddEntrances />)
+                            }} >
                                 <img src="../../../../icons/entraces.svg" alt="" />
                                 Entraces
                             </li>
-                            <li onClick={() => { setElement(<ModalAddGoals type={1} setOpened={setOpened} />) }} >
+                            <li onClick={() => {
+                                setTitle('Domestic Goal')
+                                setElement(<ModalAddGoals type={1} setOpened={setOpened} />)
+                            }} >
                                 <img src="../../../../icons/goalsdomestic.svg" alt="" />
                                 Domestic Goals
                             </li>
-                            <li onClick={() => { setElement(<ModalAddExpenses type={1} setOpened={setOpened} />) }}>
+                            <li onClick={() => {
+                                setTitle('Domestic Cost')
+                                setElement(<ModalAddExpenses type={1} setOpened={setOpened} />)
+                            }}>
                                 <img src="../../../../icons/homecost.svg" alt="" />
                                 Domestic Cost
                             </li>
-                            <li onClick={() => { setElement(<ModalAddGoals type={2} setOpened={setOpened} />) }} >
+                            <li onClick={() => {
+                                setTitle('Travel Goal')
+                                setElement(<ModalAddGoals type={2} setOpened={setOpened} />)
+                            }} >
                                 <img src="../../../../icons/goalstrip.svg" alt="" />
                                 Travel Goals
                             </li>
-                            <li onClick={() => { setElement(<ModalAddExpenses type={2} setOpened={setOpened} />) }} >
+                            <li onClick={() => {
+                                setTitle('Travel Cost')
+                                setElement(<ModalAddExpenses type={2} setOpened={setOpened} />)
+                            }} >
                                 <img src="../../../../icons/planer.svg" alt="" />
                                 Travel Cost
                             </li>
@@ -73,6 +89,7 @@ const ButtonAdd = () => {
                     <BoxFullpage
                         setOpened={setOpened}
                         content={element}
+                        title={title}
                     />
                     : ''}
             </div>

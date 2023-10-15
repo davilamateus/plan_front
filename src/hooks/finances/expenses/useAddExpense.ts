@@ -1,5 +1,4 @@
 import Api from "../../../axios";
-import useGetExpenseApi from "./useGetExpenses";
 import { IFinancesExpenseAdd } from "../../../types/finances/IExpense";
 import useGetGoalsApi from "../goals/useGetGoals";
 import GetTimestampInfomartions from "../../../functions/date/GetTimestampInfomartions";
@@ -10,8 +9,10 @@ const useAddExpense = () => {
 
 
     return async (finances: IFinancesExpenseAdd) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
         const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         const res = await Api.post('/finances/expense', finances, config)

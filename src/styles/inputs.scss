@@ -43,12 +43,14 @@ label{
         flex-direction: column;
     
 }
-input, select{
+input, select,text{
     border-radius: 8px;
-    border:2px solid $input-border-color;
+    border:1px solid $input-border-color;
     padding: 12px;
     margin: 0;
     width: -webkit-fill-available;
+    color: $paragraph-dark-color;
+    background-color: rgba(255, 0, 0, 0);
 }
 input::placeholder{
     opacity: 0.6;

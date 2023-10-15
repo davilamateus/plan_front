@@ -6,6 +6,7 @@ import BoxFullpage from '../../../communs/boxFullpage';
 import ModalEditEntrances from '../../modalEdit/entraces';
 import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 import FormartMoney from '../../../../functions/formartMoney/formartMoney';
+import TitleOfSession from '../../../communs/titleOfSession';
 
 const EntracesActives = () => {
 
@@ -25,7 +26,7 @@ const EntracesActives = () => {
 
     return (
         <div className='finances-entraces-actives'>
-            <h3 className='sub-title'>Entraces Actives</h3>
+            <TitleOfSession title='Entraces Resume' />
             <div className='finances-entraces-actives-table'>
                 {entraces.length > 0 ?
                     entraces.map((item, index) => (
@@ -56,6 +57,7 @@ const EntracesActives = () => {
                     </span>}
                 {opened ?
                     <BoxFullpage
+                        title='Edit Entrace'
                         content={
                             <ModalEditEntrances
                                 setOpened={setOpened}

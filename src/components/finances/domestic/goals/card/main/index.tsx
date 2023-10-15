@@ -58,24 +58,15 @@ const DomesticGoalsCard = ({ goal, fromDate, toDate }: type) => {
                     </div>
                 </div>
                 <div className="domestic-goals-content">
-                    <div className='bolder'>
-                        {goal.title}
-                    </div>
-                    <div>
-                        <span
-                            className='bolder'
-                            style={{ color: `${goal.color}` }}
-                        >{FormartMoney(calc)}</span>
-                        {goal.value !== null ?
-                            <span>  of  {FormartMoney(goal.value)}</span>
-                            : ''}
-
-                    </div>
+                    <div className='domestic-goals-title'>{goal.title}</div>
+                    <span style={{ color: `${goal.color}` }}>{FormartMoney(calc)}</span>
+                    {goal.value !== null ? <span>  of  {FormartMoney(goal.value)}</span> : ''}
                 </div>
             </div>
             {opened ?
 
                 <BoxFullpage
+                    title='Edit Goal'
                     setOpened={setOpened}
                     content={
                         <ModalEditGoals

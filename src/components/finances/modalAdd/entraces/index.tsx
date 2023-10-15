@@ -43,7 +43,6 @@ const ModalAddEntrances = () => {
 
     return (
         <div className="modal-box-opened">
-            <h3>Add Entrace</h3>
             <InputSimple
                 title='Title:'
                 setInput={setTitle}

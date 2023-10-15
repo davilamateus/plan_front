@@ -9,8 +9,10 @@ const useEditGoal = () => {
     const UseGetGoal = useGetGoalsApi();
 
     return async (goal: IFinancesGoalsList, fromDate: number, toDate: number) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
         const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         const res = await Api.patch('/finances/goals/', goal, config)

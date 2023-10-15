@@ -64,7 +64,6 @@ const ModalEditEntrances = ({ entrace, setOpened }: type) => {
 
     return (
         < div className="edit-modal">
-            <h2>Edit Entrace</h2>
             <form onSubmit={(e) => { e.preventDefault() }} >
 
                 <InputSimple

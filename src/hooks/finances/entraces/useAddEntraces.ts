@@ -9,8 +9,10 @@ const useAddEntraces = () => {
     const UseGetEntracesApi = useGetEntracesApi();
 
     return async (entrace: IFinancesEntracesAdd) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
         const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
         const res = await Api.post('/finances/entraces', entrace, config)

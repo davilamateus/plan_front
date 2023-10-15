@@ -1,10 +1,9 @@
 @import './../../../../styles/color';
 
-.finances-domestic-expenses-actives-table{
+.finances-actives-table{
     min-height: 230px;
-    max-height: 280px;
     overflow: scroll;
-    box-shadow: 3px 3px 22px $box-shadow;
+    box-shadow: 3px 3px 10px $box-shadow;
     background-color:$box-background;
     border-radius: 8px;
     cursor: pointer;
@@ -12,16 +11,16 @@
     flex-direction: column;
     
 }
-.finances-domestic-expenses-actives-item{
+.finances-actives-item{
     display: grid;
-    grid-template-columns: calc(60% - 16px) 20% 20%;
+    grid-template-columns: 60% 20% 20%;
     justify-content: space-between;
     padding: 16px;
     border-bottom: 1px solid $input-border-color;
     &:hover{
         background-color: $input-border-color;
     }
-    .finances-domestic-expenses-actives-left{
+    .finances-actives-left{
         display: flex;
         gap: 4px;
         .finance-bar-color{
@@ -30,9 +29,9 @@
             border-radius: 8px;
             
         }
-        .finances-domestic-expenses-actives-text{
+        .finances-actives-text{
         display: grid;
-        grid-template-columns: calc(80% - 16px) 20%;
+        grid-template-columns: 50%50%;
         gap: 4px;
         width: 100%;
         div{
@@ -45,24 +44,26 @@
                 border-radius: 8px;
             }
         }
-        .finances-domestic-expenses-actives-title{
+        .finances-actives-title{
             font-weight: 800;
             width: 100%;
             color: $title-color;
             font-size: 12px;
         }
-        .finances-domestic-expenses-actives-category{
-            font-size: 12px;
+        .finances-actives-category{
             color: $title-color;
             display: flex;
             align-items: center;
             gap: 4px;
             margin-top: 4px;
             font-style: italic;
+            span{
+                font-size: 12px!important;
+            }
         }
     }
 }
-.finances-domestic-expenses-actives-date{
+.finances-actives-date{
     font-size: 12px;
     font-style: italic;
     margin: 0 auto;
@@ -70,7 +71,7 @@
     align-items: center;
     justify-content: center;
 }
-.finances-domestic-expenses-actives-value{
+.finances-actives-value{
     color: $title-color;
     font-size: 12px;
     justify-content: right;
@@ -87,11 +88,11 @@
 
 @media only screen and (max-width: 990px) {
 
-    .finances-domestic-expenses-actives-text{
+    .finances-actives-text{
         flex-direction: column!important;
         width: 160px!important;
     }
-    .finances-domestic-expenses-actives-category{
+    .finances-actives-category{
         font-size: 12px!important;
 
     }

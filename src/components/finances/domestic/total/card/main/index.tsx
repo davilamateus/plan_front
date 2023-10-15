@@ -4,6 +4,7 @@ import { IFinancesGoalsList } from '../../../../../../types/finances/IGoals';
 import useGetDomesticGoals from '../../../../../../store/hooks/finances/useGetDomesticGoals';
 import DomesticTotalCardGrafic from '../grafic';
 import './style.scss';
+import TitleOfSession from '../../../../../communs/titleOfSession';
 
 
 
@@ -41,10 +42,9 @@ const DomesticTotalCard = () => {
 
     return (
         <div className='domestic-total-card'>
-            <h3>Total domestic expenses</h3>
+            <TitleOfSession title='Total domestic expenses' />
             <div className='domestic-total-card-box'>
                 <div className='domestic-total-card-resume'>
-
                     <FinanceSimpleResult
                         title='Total planning'
                         value={total}

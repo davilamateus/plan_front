@@ -10,8 +10,10 @@ const useEditExpense = () => {
     const UseGetGoals = useGetGoalsApi();
 
     return async (finances: IFinancesExpenseList, fromDate: number, toDate: number, save: boolean) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
         const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+            headers: { Authorization: `Bearer ${token}` }
         };
 
 

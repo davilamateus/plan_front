@@ -1,5 +1,9 @@
 @import './../../../../styles/color';
 
+
+button{
+    font-size: 14px;
+}
 .button-simple{
     width: 100%;
     padding: 12px;
@@ -24,12 +28,15 @@
 .button-delete{
     box-shadow: none;
     padding: 6px;
-    border: 1px solid $terciary-color;
+    font-weight: 400;
+    border: 0.4px solid $terciary-color;
     color: $terciary-color;
     background-color: #ff00;
+    opacity: 0.5;
     &:hover{
-            background-color: $terciary-color;
-            color: $title-color;
+        opacity: 1;
+        background-color: #ff00;
+
     }
 
 }

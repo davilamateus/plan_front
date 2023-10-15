@@ -11,7 +11,11 @@ interface type {
 }
 const DomesticCostPlanning = ({ fromDate, toDate }: type) => {
 
+
+    const [goals, setGoals] = useState<IFinancesGoalsList[]>([]);
     const [dateLocked, setDateLoked] = useState(true);
+    const UseGetGoals = useGetGoalsApi();
+
 
     const UseGetDomesticGoals = useGetDomesticGoals();
 
@@ -25,9 +29,6 @@ const DomesticCostPlanning = ({ fromDate, toDate }: type) => {
         }
     }, [UseGetDomesticGoals])
 
-
-    const UseGetGoals = useGetGoalsApi();
-    const [goals, setGoals] = useState<IFinancesGoalsList[]>([]);
 
     return (
         <div className='finances-domestic-goals-main'>

@@ -10,8 +10,10 @@ const useGetExpenseApi = () => {
     const UseSetEntrace = useSetEntraces();
     const UseSetDomesticCosts = useSetDomesticCosts();
 
+    let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
     const config = {
-        headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
+        headers: { Authorization: `Bearer ${token}` }
     };
 
     return async (fromDate: Number, toDate: number, type: number, save: boolean) => {

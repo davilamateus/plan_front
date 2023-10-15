@@ -4,16 +4,29 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-top: -28px;
+    margin: 0px -16px 16px -16px;
     cursor: pointer;
+    padding-bottom: 32px;
+    h4{
+        margin: 0;
+        margin-bottom: 8px;
+        padding-top: 32px;
+        padding-left: 16px;
+    }
+    background-color: $background;
     .finances-goals-edit-actives-item{
-        font-size: 14px;
-        display: flex;
+        padding:0px 16px;
+        font-size: 12px;
+        margin-top: 8px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         justify-content: space-between;
         border-bottom: 1px solid  $input-border-color;
-        padding-bottom: 8px;
+        padding: 8px 16px;
+        &:hover{
+            background-color: $input-border-color;
+        }
         .finances-goals-edit-actives-text{
-            width: 110px;
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -30,17 +43,18 @@
                     background-color: $primary-color;
                 }
                 .finances-goals-edit-actives-title{
-                    font-weight: 800;
-                    width: 100px;
+                    font-weight: 600;
                     color: $title-color;
                 }
             }
         }
         .finances-goals-edit-actives-date{
+            text-align: center;
             font-style: italic;
         }
         .finances-goals-edit-actives-value{
             color: $title-color;
+            text-align: end;
         }
     }
 }

@@ -16,7 +16,7 @@
         justify-content: end;
         align-items: end;
         grid-template-columns: auto;
-        gap: 16px;
+        gap: 8px;
         .option-animation{
             opacity: 1!important;
         
@@ -36,27 +36,29 @@
             height: max-content;
             z-index: 2;
             flex-direction: column;
-            gap: 0px;
-            border-radius: 8px;
-            background-color: $box-background;
+            display: grid;
+            gap: 8px;
             padding: 0;
             li{
+                border-radius: 8px;
+                background-color: $box-background;
                  &:hover{
-                    background-color: $input-border-color;
+                    background-color:$primary-color;
                     color: $title-color;
                 }
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                font-size: 14px;
                 img{
-                    width: 16px;
-                    height: 16px;
-                    opacity: 0.5;
+                    width: 12px;
+                    height: 12px;
+                    opacity: 0.3;
                 }
                 list-style: none;
-                padding: 16px 24px;
+                padding: 12px 16px;
                 opacity: 0;
-                transition: 0.4s;
+                transition: 0.2s;
                 cursor: pointer;       
             }
 

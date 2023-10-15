@@ -45,7 +45,6 @@ const ForgetPassword = () => {
 
     return (
         <div className='modal-forget-password'>
-            <h2>Forget Password</h2>
             <p>Type or email and we are going to email with
                 the instructions for creating a new password.</p>
             <InputEmail

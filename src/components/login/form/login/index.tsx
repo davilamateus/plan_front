@@ -126,6 +126,7 @@ const LoginFormLogin = () => {
             </button>
             {modalForgetOpened ?
                 <BoxFullpage
+                    title='Forget Password'
                     setOpened={setModalForgetOpened}
                     content={
                         <ForgetPassword />

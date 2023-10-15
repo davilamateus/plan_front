@@ -6,6 +6,7 @@ import './style.scss';
 import BoxFullpage from '../../../communs/boxFullpage';
 import ModalEditGoals from '../../modalEdit/goals';
 import FormartMoney from '../../../../functions/formartMoney/formartMoney';
+import TitleOfSession from '../../../communs/titleOfSession';
 
 const TravelCards = () => {
 
@@ -31,7 +32,7 @@ const TravelCards = () => {
     return (
         <>
             <div className="travel-cards">
-                <h3>Travel  cost planning</h3>
+                <TitleOfSession title='Travel Cost Planning' />
                 <div className="travel-cards-itens">
                     {goals.length > 0 ?
                         goals.map((goal, index) => (
@@ -70,6 +71,7 @@ const TravelCards = () => {
             </div>
             {opened ?
                 <BoxFullpage
+                    title='Edit Goal'
                     setOpened={setOpened}
                     content={
                         <ModalEditGoals

@@ -9,10 +9,11 @@ const useEditEntraces = () => {
     const UseGetEntraces = useGetEntracesApi();
 
     return async (entrace: IFinancesEntraces) => {
-        const config = {
-            headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }
-        };
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
         const res = await Api.patch('/finances/entraces', entrace, config)
             .then(() => {
                 UseGetEntraces(0, 10000000000000000000, true);
