@@ -34,6 +34,8 @@ const DomesticCostPlanningCircle = ({ value, color, icon }: type) => {
             borderWidth: 0,
             offset: 0,
             weight: 0.1,
+
+
         }],
     };
 

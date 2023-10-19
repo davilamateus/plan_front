@@ -3,10 +3,10 @@ import './style.scss';
 interface type {
     title: string;
 }
-const TitleOfSession = ({ title }: type) => {
+const titleOfSession = ({ title }: type) => {
     return (
-        <h4 className='title-of-session'>{title}</h4>
+        <h2 className='title-of-session'>{title}</h2>
     )
 }
 
-export default TitleOfSession;
+export default titleOfSession;

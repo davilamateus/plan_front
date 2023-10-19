@@ -2,10 +2,9 @@
 import { useState, useEffect } from 'react';
 import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
-import './style.scss';
 import useGetTripGoals from '../../../../store/hooks/finances/useGetTripGoals';
 import ExpensesActives from '../../comuns/actives';
-import TitleOfSession from '../../../communs/titleOfSession';
+import TitleOfSession from '../../../communs/titleOfComponent';
 
 
 interface trips {
@@ -58,10 +57,7 @@ const TripExpensesActives = () => {
 
 
     return (
-        <div>
-            <TitleOfSession title='Travel Actives' />
-            <ExpensesActives active={trips} height={'auto'} />
-        </div>
+        <ExpensesActives active={trips} height={'auto'} />
     )
 }
 

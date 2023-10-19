@@ -61,8 +61,8 @@ const DomesticTotalCardGrafic = () => {
             data: eachGoalValue,
             backgroundColor: colors,
             borderWidth: 0,
-            offset: 0,
-            weight: 20.1,
+            borderRadius: 8,
+            spacing: 0
         }],
     };
 
@@ -86,7 +86,7 @@ const DomesticTotalCardGrafic = () => {
 
     return (
         <div className='grafic-domestic-total-box'>
-            <div className='grafic-domestic-total-grafic' style={{ width: '196px' }}> {/* Defina largura e altura como desejado */}
+            <div className='grafic-domestic-total-grafic' style={{ width: '128px' }}> {/* Defina largura e altura como desejado */}
                 <Doughnut width={48} height={48} data={data} options={options} />
             </div>
 

@@ -3,7 +3,7 @@
     .entraces-components{
         display: grid;
         width: auto;
-        grid-template-columns: 20% calc(80% - 32px);
+        grid-template-columns: 20% calc(80% - 16px);
         gap: 16px;
         height: 360px;
         .entraces-components-botton{

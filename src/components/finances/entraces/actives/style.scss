@@ -7,22 +7,19 @@
 .finances-entraces-actives-table{
     height: 280px;
     overflow: scroll;
-    box-shadow: 3px 3px 22px $box-shadow;
-    background-color:$box-background;
-    border-radius: 8px;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     
 }
 .finances-entraces-actives-item{
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     padding: 16px;
     border-bottom: 1px solid $input-border-color;
 
     &:hover{
-        background-color: $input-border-color;
+        background-color: $todolist-background;
     }
     .finances-entraces-actives-text{
         width: 130px;
@@ -42,19 +39,17 @@
         }
         .finances-entraces-actives-title{
             font-size: 12px;
-            color: $title-color;
-            font-weight: 600;
-        }
+            color: $paragraph-dark-color;
+                    }
         
     }
     .finances-entraces-actives-date{
-        font-size: 11px;
-        font-style: italic;
         margin: 0 auto;
+        font-size: 8pt;
         width: 90px;
     }
     .finances-entraces-actives-value{
-         color: $title-color;
+         color: $paragraph-dark-color;
          font-size: 12px;
          width: 80px;
          text-align: end;

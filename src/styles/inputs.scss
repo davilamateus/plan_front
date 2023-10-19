@@ -6,9 +6,7 @@
     border: 2px solid $input-border-color;
     border-radius: 8px;
     padding: 12px;
-    h4{
-        font-size: 10pt;
-    }
+  
     input{
         background-color: $box-background!important;
         z-index: 4;
@@ -31,12 +29,13 @@
  
 
 label{
-    font-weight: 900;
+    font-weight: 600;
     margin: 0 auto;
     width: 100%;
     h4{
         margin: 0;
         margin-bottom: 8px;
+        font-size: 14px;
     }
         display: flex;
         width: 100%;

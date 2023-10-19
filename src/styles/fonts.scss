@@ -1,28 +1,35 @@
 @import './color';
-h1,h2,h{
+h1, h2,h3,h4,h5 {
     font-family: 'Lato', sans-serif;
     font-weight: 900;
 }
 
-p, button, h1, h2,h3,h4,h5 ,input, a, span, label{
+ button, h1, h2,h3,h4,h5 ,input, label{
     color: $title-color;
 
 }
 
-button{
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
 
-}
 
 h1{
     font-size: 42pt;
     line-height: 38pt;
 }
+h4{
+    font-size: 16px;
+    font-weight: 600;
+}
 
-p , span, label{
+input{
+    font-size: 16px;
+}
+label{
+    font-size: 14px!important;
+}
+
+p, span,div,input{
     font-family: 'Helvetica', sans-serif;
     color: $paragraph-color;
-    font-size: 14px;
+    font-size: 10pt;
 }
 

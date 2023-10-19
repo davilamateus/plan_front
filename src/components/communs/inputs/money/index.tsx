@@ -22,7 +22,6 @@ const InputMoney = ({ title, setInput, input }: type) => {
 
     const handleOnChange = (inputElement: any, maskedValue: any, value: any) => {
         setInput(value.replace('.', ''))
-        console.log(value.replace('.', ''))
     };
 
     ;
@@ -33,7 +32,7 @@ const InputMoney = ({ title, setInput, input }: type) => {
             <h4>{title}</h4>
             <div className="input-money">
                 <div>
-                    <span>R$</span>
+                    <span>$</span>
                     <CurrencyInput
                         value={input.toString()} // Initial value
                         options={{
@@ -44,7 +43,7 @@ const InputMoney = ({ title, setInput, input }: type) => {
                             locale: Locales["English (United States)"], // Format Type
                             i18nCurrency: Currencies["US Dollar"] // Symbol
                         }}
-                        autoFocus={true}
+                        autoFocus={false}
                         onChangeEvent={handleOnChange}
                     />
                 </div>

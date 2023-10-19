@@ -2,15 +2,17 @@
 
 .button-add-page{
     position: fixed;
-    bottom:72px;
+    bottom:12px;
     display: flex;
     justify-content: end!important;
     width: 100%;
-    left: 0;
+    left: -18px;
+    z-index: 3;
     
     
 
     .button-add{
+        margin-bottom: 48px;
         background-color: $primary-color;
         width: 48px;
         height: 48px;
@@ -19,7 +21,7 @@
         justify-content: center;
         align-items: center;
         box-shadow: 3px 3px 20px $box-shadow-green;
-        opacity: 0.8;
+        opacity: 1;
         transition: 0.4s;
         padding: 0;
         cursor: pointer;
@@ -30,5 +32,27 @@
         img{
             width: 18px;
         }
+    }
+
+    .page-backgroud{
+        animation: backgroundAnimation 0.4s linear forwards;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        display:flex;
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+
+    .button-add-content{
+        width: max-content;
+        height: 100vh;
+        position: fixed;
+        display:flex;
+        top: 0;
+        left: 0;
+        overflow: scroll;
+        z-index: 3;
     }
 }

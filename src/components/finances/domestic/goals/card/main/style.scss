@@ -1,18 +1,15 @@
 @import './../../../../../../styles/color';
 
 .domestic-goals-box{
-    background-color:$box-background;
     width: max-content;
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 8px;
-    border-radius: 8px;
-    box-shadow: 3px 3px 10px $box-shadow;
     cursor: pointer;
     transition: 0.3s;
     &:hover{
-        box-shadow: 3px 3px 20px $box-shadow-hover;
+        box-shadow: 0px 0px 16px $box-shadow-hover;
 
     }
     .domestic-goals-left{
@@ -27,13 +24,15 @@
 
     }
     .domestic-goals-content{
-        .domestic-goals-title{
-            font-weight: 600;
-            font-size: 14px;
-            color: $title-color;
+        gap: 4px;
+        display: flex;
+        flex-direction: column;
+        .domestic-goals-value{
+            span{
+                            }
         }
-        span{
-            font-size: 14px;
+        .domestic-goals-title{
+                        color: $paragraph-dark-color;
         }
     }
 

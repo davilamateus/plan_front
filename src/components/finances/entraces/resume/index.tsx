@@ -10,16 +10,17 @@ import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
 import { IFinancesEntraces } from '../../../../types/finances/IEntraces';
-import TitleOfSession from '../../../communs/titleOfSession';
+import TitleOfSession from '../../../communs/titleOfComponent';
 
 const FinancesResume = () => {
 
     const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
     const [domestic, setDomestic] = useState<IFinancesExpenseList[]>([]);
     const [trip, setTrip] = useState<IFinancesExpenseList[]>([]);
-    const [entraceTotalThatMonth, setEntraceTotalThatMonth] = useState<number>(0);
-    const [domesticTotalThatMonth, setDomesticTotalThatMonth] = useState<number>(0);
-    const [tripTotalThatMonth, setTripTotalThatMonth] = useState<number>(0);
+    const [entraceTotalThatMonth, setEntraceTotalThatMonth] = useState<number | null>(null);
+    const [domesticTotalThatMonth, setDomesticTotalThatMonth] = useState<number | null>(null);
+    const [tripTotalThatMonth, setTripTotalThatMonth] = useState<number | null>(null);
+    const [profit, setProfit] = useState<number | null>(null);
     const monthName = GetTimestampInfomartions(new Date().getTime(), 0).nameOfMonth;
 
 
@@ -118,6 +119,10 @@ const FinancesResume = () => {
                         })
                     }
 
+                    else {
+                        setTripTotalThatMonth(0)
+
+                    }
 
                 })
 
@@ -125,7 +130,10 @@ const FinancesResume = () => {
             setTrip(array);
 
         }
+
+
     }, [UseGetTripGoals])
+
 
 
 
@@ -140,6 +148,12 @@ const FinancesResume = () => {
             setTripTotalThatMonth(total);
         }
     }, [trip]);
+
+    useEffect(() => {
+        if (entraceTotalThatMonth !== null && domesticTotalThatMonth !== null && tripTotalThatMonth !== null) {
+            setProfit(entraceTotalThatMonth - domesticTotalThatMonth - tripTotalThatMonth);
+        }
+    }, [entraceTotalThatMonth, domesticTotalThatMonth, tripTotalThatMonth]);
 
 
 
@@ -162,7 +176,7 @@ const FinancesResume = () => {
                 />
                 <FinanceSimpleResult
                     title={`Total Profit`}
-                    value={entraceTotalThatMonth - domesticTotalThatMonth - tripTotalThatMonth}
+                    value={profit}
                 />
             </div>
         </div>)

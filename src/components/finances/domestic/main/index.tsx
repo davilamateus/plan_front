@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import InputDateRange from '../../../communs/inputs/dateRange';
-import DomesticCostPlanning from '../goals/main'
+import DomesticCostGoals from '../goals/main'
 import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInfomartions';
 import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
-import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import './style.scss';
-import DomesticTotalCard from '../total/card/main';
+import DomesticResume from '../resume/card/main';
 import DomesticExpensesActives from '../actives';
 import TitleOfSession from '../../../communs/titleOfSession';
 
@@ -18,19 +17,13 @@ const DomesticMain = () => {
 
 
   const UseGetDomesticGoals = useGetDomesticGoals();
-  const [dateLocked, setDateLoked] = useState(true);
 
 
   const UseGetGoals = useGetGoalsApi();
-  const [goals, setGoals] = useState<IFinancesGoalsList[]>([]);
 
   useEffect(() => {
     if (UseGetDomesticGoals == false) {
       UseGetGoals(fromDate, toDate, 1, true);
-      setDateLoked(false)
-    } else {
-      setDateLoked(false)
-      setGoals(UseGetDomesticGoals)
     }
   }, [UseGetDomesticGoals])
 
@@ -42,7 +35,7 @@ const DomesticMain = () => {
   return (
     <div className='domestic-cost'>
       <div className='domestic-cost-header'>
-        <TitleOfSession title='Domestic Goals' />
+        <TitleOfSession title='Domestic' />
         <InputDateRange
           setFromDate={setFromDate}
           fromDate={fromDate}
@@ -51,12 +44,12 @@ const DomesticMain = () => {
         />
       </div>
       <div className='domestic-cost-components'>
-        <DomesticCostPlanning
+        <DomesticCostGoals
           fromDate={fromDate}
           toDate={toDate}
         />
         <div className='domestic-cost-components-botton'>
-          <DomesticTotalCard
+          <DomesticResume
           />
           <DomesticExpensesActives
           />

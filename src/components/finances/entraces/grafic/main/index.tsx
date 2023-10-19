@@ -4,14 +4,17 @@ import GetFirstAndLastDayTimestamps from '../../../../../functions/date/GetTimes
 import GraficOfBar from '../grafic/grafic';
 import { IFinancesExpenseList } from '../../../../../types/finances/IExpense';
 import './style.scss';
-import TitleOfSession from '../../../../communs/titleOfSession';
+import TitleOfSession from '../../../../communs/titleOfComponent';
+import IBarData from '../../../../../types/finances/entraces/IBarData';
 
 
 
 
 const FinancesEntracesGrafic = () => {
-    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([])
+    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
+
     const UseGetEntraces = useGetEntraces();
+
     const [thatMonth, setThatMonth] = useState<number>(0)
     const [thatMonth_1, setThatMonth_1] = useState<number>(0)
     const [thatMonth_2, setThatMonth_2] = useState<number>(0)
@@ -20,7 +23,7 @@ const FinancesEntracesGrafic = () => {
     const [thatMonth_5, setThatMonth_5] = useState<number>(0)
     const [thatMonth_6, setThatMonth_6] = useState<number>(0)
     const [thatMonth_7, setThatMonth_7] = useState<number>(0)
-    const [barData, setBarData] = useState<any>()
+    const [barData, setBarData] = useState<IBarData>({ title: ['', '', '', '', '', '', '', ''], value: [1000, 2000, 1400, 1600, 2000, 3000, 1000], loading: true })
     const dateToday = new Date().getTime();
 
 
@@ -62,35 +65,37 @@ const FinancesEntracesGrafic = () => {
                     setThatMonth_7(old => old + item.value)
                 }
             })
+            setBarData({
+                title: [
+                    GetFirstAndLastDayTimestamps(dateToday, -7).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -6).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -5).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -4).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -3).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -2).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -1).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, 0).nameOfMonthShort,
+
+                ],
+                value: [
+                    thatMonth_7 / 100,
+                    thatMonth_6 / 100,
+                    thatMonth_5 / 100,
+                    thatMonth_4 / 100,
+                    thatMonth_3 / 100,
+                    thatMonth_2 / 100,
+                    thatMonth_1 / 100,
+                    thatMonth / 100,
+                ],
+                loading: false
+
+            })
         }
-    }, [dateToday, entraces])
+    }, [dateToday, entraces, thatMonth, thatMonth_1, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7])
 
 
     useEffect(() => {
-        setBarData([])
-        setBarData({
-            title: [
-                GetFirstAndLastDayTimestamps(dateToday, -7).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, -6).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, -5).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, -4).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, -3).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, -2).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, -1).nameOfMonthShort,
-                GetFirstAndLastDayTimestamps(dateToday, 0).nameOfMonthShort,
 
-            ],
-            value: [
-                thatMonth_7 / 100,
-                thatMonth_6 / 100,
-                thatMonth_5 / 100,
-                thatMonth_4 / 100,
-                thatMonth_3 / 100,
-                thatMonth_2 / 100,
-                thatMonth_1 / 100,
-                thatMonth / 100,
-            ]
-        })
     }, [thatMonth, thatMonth_1, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7])
 
 
@@ -98,12 +103,10 @@ const FinancesEntracesGrafic = () => {
 
     return (
         <>
-            {barData ?
-                <div className='finances-entraces-grafic'>
-                    <TitleOfSession title='Historic Entraces' />
-                    <GraficOfBar barData={barData} />
-                </div>
-                : ''}
+            <div className='finances-entraces-grafic'>
+                <TitleOfSession title='Historic' />
+                <GraficOfBar barData={barData} />
+            </div>
         </>
     )
 }

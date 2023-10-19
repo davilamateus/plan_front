@@ -1,10 +1,11 @@
+import './style.scss';
 import { useState } from "react";
 import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
 import TimestampToDate from "../../../../functions/date/timestampToDate";
 import BoxFullpage from "../../../communs/boxFullpage";
 import ModalEditExpenses from "../../modalEdit/expenses";
-import './style.scss';
 import FormartMoney from "../../../../functions/formartMoney/formartMoney";
+import TitleOfSession from '../../../communs/titleOfComponent';
 
 
 interface type {
@@ -20,13 +21,14 @@ interface type {
 
 const ExpensesActives = ({ active, height }: type) => {
 
-
     const [opened, setOpened] = useState(false);
     const [index, setIndex] = useState<number>(0);
 
     return (
         <div className='finances-actives'>
-            <div className='finances-actives-table' style={{ maxHeight: `${height}` }}>
+            <TitleOfSession title='Actives' />
+
+            <div className='finances-actives-table box' style={{ maxHeight: `${height}` }}>
                 {active.length > 0 ?
                     active.map((item, index) => (
                         <div
@@ -73,9 +75,7 @@ const ExpensesActives = ({ active, height }: type) => {
                     />
                     : ''}
             </div>
-
         </div >
-
     )
 }
 

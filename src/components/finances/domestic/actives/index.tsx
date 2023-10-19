@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
 import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
-import TimestampToDate from "../../../../functions/date/timestampToDate";
-import BoxFullpage from "../../../communs/boxFullpage";
 import useGetDomesticGoals from "../../../../store/hooks/finances/useGetDomesticGoals";
 import { IFinancesGoalsList } from "../../../../types/finances/IGoals";
-import ModalEditExpenses from "../../modalEdit/expenses";
-import './style.scss';
-import FormartMoney from "../../../../functions/formartMoney/formartMoney";
-import TitleOfSession from "../../../communs/titleOfSession";
+import TitleOfSession from "../../../communs/titleOfComponent";
 import ExpensesActives from "../../comuns/actives";
 
 
@@ -22,8 +17,6 @@ const DomesticExpensesActives = () => {
 
 
     const [goals, setGoals] = useState<IFinancesGoalsList[]>([]);
-    const [opened, setOpened] = useState(false);
-    const [index, setIndex] = useState<number>(0);
     const [expenses, setExpenses] = useState<expenses[]>([]);
 
 
@@ -62,10 +55,8 @@ const DomesticExpensesActives = () => {
 
 
     return (
-        <div>
-            <TitleOfSession title='Domestic Actives' />
-            <ExpensesActives active={expenses} height={'200px'} />
-        </div>
+        <ExpensesActives active={expenses} height={'200px'} />
+
 
 
 

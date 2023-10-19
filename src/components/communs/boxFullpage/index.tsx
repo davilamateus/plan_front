@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import './style.scss'
 
 interface type {
@@ -10,25 +10,17 @@ interface type {
 const BoxFullpage = ({ setOpened, content, title }: type) => {
 
 
-    const [animation, setAnimation] = useState('');
-
-    useEffect(() => {
-        setTimeout(() => {
-            setAnimation('animation')
-        }, 100);
-
-    }, []);
 
 
     return (
         <div
             className={`box-fullpage `}>
             <div
-                className={`box-fullpage-background box-fullpage-background-${animation}`}
+                className={`box-fullpage-background `}
                 onClick={() => { setOpened(false) }}>
             </div>
             <div
-                className={`box-fullpage-box box-fullpage-box-${animation} box`}
+                className={`box-fullpage-box box`}
             >
                 <button
                     className="btn-close"

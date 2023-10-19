@@ -8,7 +8,7 @@ import useGetCashInHandApi from "../../../../hooks/finances/cashInHand/useGetCas
 import './style.scss';
 import FormartMoney from "../../../../functions/formartMoney/formartMoney";
 import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
-import TitleOfSession from "../../../communs/titleOfSession";
+import TitleOfSession from "../../../communs/titleOfComponent";
 
 const TripResume = () => {
 
@@ -100,7 +100,7 @@ const TripResume = () => {
 
     return (
         <div className="trip-resume">
-            <TitleOfSession title='Travel Cost Planning' />
+            <TitleOfSession title='Resume' />
             <div className="trip-resume-results">
                 <FinanceSimpleResult
                     title='Cost total planning for trip'

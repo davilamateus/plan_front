@@ -3,9 +3,10 @@
 .menu-box{
     min-height: calc(100vh - 32px);
     margin-top: 16px;
+    margin-left: 4px;
     background-color: $box-background;
     border-radius: 16px;
-    box-shadow:  3px 3px  22px $box-shadow;
+    border: 1px solid $input-border-color;
     width: 64px;
     display: flex;
     flex-direction: column;
@@ -98,6 +99,7 @@
         bottom: 0!important;
         justify-content: center;
         border-radius: 0;
+        margin-left: 0;
         &:hover{
             width: 100vw;
         }
@@ -107,7 +109,7 @@
         .nav ul{       
             margin-top: 4px;                                                                                                                                                                                                                                                                                                                                  
             align-items: center;
-            width: 100vw;
+            width: 90vw;
             flex-direction: row;
             justify-content: space-between;
             li a{

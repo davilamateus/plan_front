@@ -3,22 +3,20 @@
 .finances-actives-table{
     min-height: 230px;
     overflow: scroll;
-    box-shadow: 3px 3px 10px $box-shadow;
-    background-color:$box-background;
-    border-radius: 8px;
-    cursor: pointer;
     display: flex;
     flex-direction: column;
     
 }
 .finances-actives-item{
+     cursor: pointer;
     display: grid;
-    grid-template-columns: 60% 20% 20%;
+    grid-template-columns: calc(60% - 32px) 20% 20%;
     justify-content: space-between;
     padding: 16px;
+    gap: 16px;
     border-bottom: 1px solid $input-border-color;
     &:hover{
-        background-color: $input-border-color;
+        background-color: $todolist-background;
     }
     .finances-actives-left{
         display: flex;
@@ -45,40 +43,36 @@
             }
         }
         .finances-actives-title{
-            font-weight: 800;
             width: 100%;
-            color: $title-color;
-            font-size: 12px;
+            color: $paragraph-dark-color;
+            padding-right: 16px;
         }
         .finances-actives-category{
-            color: $title-color;
             display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 4px;
-            font-style: italic;
             span{
-                font-size: 12px!important;
+             font-size: 8pt;
+            }
+            img{
+                height:10px;
+                max-width: 10px;
             }
         }
     }
 }
 .finances-actives-date{
-    font-size: 12px;
-    font-style: italic;
+    font-size: 8pt;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .finances-actives-value{
-    color: $title-color;
-    font-size: 12px;
+    color: $paragraph-dark-color;
     justify-content: right;
     width: 100%;
     display: flex;
     align-items: center;
-             font-weight: 800;
+    font-weight: 600;
 
     
 
@@ -89,6 +83,7 @@
 @media only screen and (max-width: 990px) {
 
     .finances-actives-text{
+        display: flex!important;
         flex-direction: column!important;
         width: 160px!important;
     }

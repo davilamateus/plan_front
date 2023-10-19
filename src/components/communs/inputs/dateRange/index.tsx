@@ -3,7 +3,6 @@ import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInf
 import './style.scss'
 import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
-import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 
 
 interface type {
@@ -17,8 +16,9 @@ const InputDateRange = ({ setFromDate, setToDate, fromDate, toDate }: type) => {
 
 
     const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        'Jan', 'Feb', 'Mar', 'Apr',
+        'May', 'Jun', 'Jul', 'Aug',
+        'Sep', 'Oct', 'Nov', 'Dec'
     ];
     function getYearsFromCurrentToPast(): number[] {
         const years = [];
@@ -78,7 +78,7 @@ const InputDateRange = ({ setFromDate, setToDate, fromDate, toDate }: type) => {
 
     return (
         <div className='date-range'>
-            <h4>Period</h4>
+            <img src="./../../../../../icons/calendar.svg" alt="" />
             <select
                 value={monthSelected}
                 onChange={(e) => { setMonthSelected(+(e.target.value)) }}

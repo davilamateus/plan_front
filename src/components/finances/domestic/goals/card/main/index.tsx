@@ -36,7 +36,7 @@ const DomesticGoalsCard = ({ goal, fromDate, toDate }: type) => {
     return (
         <>
             <div
-                className='domestic-goals-box'
+                className='domestic-goals-box box'
                 onClick={() => {
                     setOpened(true);
                 }}
@@ -59,8 +59,10 @@ const DomesticGoalsCard = ({ goal, fromDate, toDate }: type) => {
                 </div>
                 <div className="domestic-goals-content">
                     <div className='domestic-goals-title'>{goal.title}</div>
-                    <span style={{ color: `${goal.color}` }}>{FormartMoney(calc)}</span>
-                    {goal.value !== null ? <span>  of  {FormartMoney(goal.value)}</span> : ''}
+                    <div className='domestic-goals-value'>
+                        <span style={{ color: `${goal.color}` }}>{FormartMoney(calc)}</span>
+                        {goal.value !== null ? <span>  of  {FormartMoney(goal.value)}</span> : ''}
+                    </div>
                 </div>
             </div>
             {opened ?

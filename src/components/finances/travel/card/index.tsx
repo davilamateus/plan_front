@@ -6,7 +6,7 @@ import './style.scss';
 import BoxFullpage from '../../../communs/boxFullpage';
 import ModalEditGoals from '../../modalEdit/goals';
 import FormartMoney from '../../../../functions/formartMoney/formartMoney';
-import TitleOfSession from '../../../communs/titleOfSession';
+import TitleOfSession from '../../../communs/titleOfComponent';
 
 const TravelCards = () => {
 
@@ -25,14 +25,14 @@ const TravelCards = () => {
         } else {
             setGoals(UseGetTripGoals);
         }
-    }, [UseGetTripGoals]);
+    }, [UseGetGoalsApi, UseGetTripGoals]);
 
 
 
     return (
         <>
             <div className="travel-cards">
-                <TitleOfSession title='Travel Cost Planning' />
+                <TitleOfSession title='Goals' />
                 <div className="travel-cards-itens">
                     {goals.length > 0 ?
                         goals.map((goal, index) => (
@@ -40,7 +40,7 @@ const TravelCards = () => {
                                 <div onClick={() => {
                                     setIndex(index);
                                     setOpened(true);
-                                }} key={goal.id} className='travel-card'>
+                                }} key={goal.id} className='travel-card box'>
                                     <div className="travel-card-top">
                                         <img src={`./../../../../../icons/categories/${goal.icon}.svg`} alt="" />
                                         <span>{goal.title}</span>
