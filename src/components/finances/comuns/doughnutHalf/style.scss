@@ -1,0 +1,11 @@
+@import './../../../../styles/color';
+.doughnut-half{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .porcents{
+        position: absolute;
+        margin-top: 52px;
+    }
+
+}

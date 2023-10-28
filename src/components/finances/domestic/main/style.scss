@@ -17,7 +17,7 @@
         .domestic-cost-components-botton{
             display: grid;
             width: auto;
-            grid-template-columns: 40% calc(60% - 16px);
+            grid-template-columns: 3fr 5fr;
             gap: 16px;
         }
         

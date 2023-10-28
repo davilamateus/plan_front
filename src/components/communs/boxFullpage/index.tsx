@@ -1,17 +1,13 @@
+import './style.scss';
 import { Dispatch, SetStateAction } from "react";
-import './style.scss'
 
 interface type {
     setOpened: Dispatch<SetStateAction<boolean>>;
     content: JSX.Element | boolean;
     title: string;
-}
+};
 
 const BoxFullpage = ({ setOpened, content, title }: type) => {
-
-
-
-
     return (
         <div
             className={`box-fullpage `}>
@@ -35,5 +31,4 @@ const BoxFullpage = ({ setOpened, content, title }: type) => {
         </div>
     )
 }
-
-export default BoxFullpage
+export default BoxFullpage;

@@ -17,7 +17,6 @@ const useGetGoalsApi = () => {
     return async (fromDate: Number, toDate: number, type: number, save: boolean) => {
         const res = await Api.get(`/finances/goals?fromDate=${fromDate}&toDate=${toDate}&type=${type}`, config)
             .then((data: any) => {
-                console.log('Data', data)
                 if (save) {
                     if (type == 1) {
                         UseSetDomesticGoals(data.data);

@@ -12,11 +12,11 @@
         padding-top: 32px;
         padding-left: 16px;
     }
-    background-color: $background;
+    background-color: $quintenary-color;
     .finances-goals-edit-actives-item{
         cursor: pointer;
         padding:0px 16px;
-        font-size: 12px;
+        font-size: 8%;
         margin-top: 8px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -43,14 +43,13 @@
                     background-color: $primary-color;
                 }
                 .finances-goals-edit-actives-title{
-                    font-weight: 600;
                     color: $paragraph-dark-color;
                 }
             }
         }
         .finances-goals-edit-actives-date{
             text-align: center;
-            font-style: italic;
+            font-size: 8pt;
         }
         .finances-goals-edit-actives-value{
             color: $paragraph-dark-color;

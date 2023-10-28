@@ -1,34 +1,6 @@
 
 @import './../../../../styles/color';
 .trip-resume{
-    .trip-resume-results{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 16px;
-        .finance-simple-result{
-            width: 170px;
-        }
-    }
-    .trip-resume-bar{
-        width: 100%;
-        height: 8px;
-        border-radius: 8px;
-        background-color: $box-background;
-        box-shadow: 3px 3px 10px $box-shadow;
-        overflow: hidden;
-        display: flex;
-        div{
-            height: 18px;
-        }
-        .trip-resume-bar-paid{
-            background-color: $primary-color;
-        }
-        .trip-resume-bar-cash{
-            background-color: $quartenary-color;
-
-        }
-
-        
-    }
+    display: flex;
+   
 }

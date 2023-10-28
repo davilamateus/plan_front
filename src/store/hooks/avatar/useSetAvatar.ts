@@ -8,9 +8,12 @@ function useSetAvatar() {
         city_local: any,
         state_local: any,
         country_local: any,
+        currency_local: any,
         city_trip: any,
         state_trip: any,
         country_trip: any,
+        currency_trip: any,
+        country_code: any,
         when: any,
         photo: any
     ) => {
@@ -20,9 +23,12 @@ function useSetAvatar() {
             city_local,
             state_local,
             country_local,
+            currency_local,
             city_trip,
             state_trip,
             country_trip,
+            currency_trip,
+            country_code,
             when,
             photo
 

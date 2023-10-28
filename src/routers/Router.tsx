@@ -10,6 +10,8 @@ import CreateUserDetails from '../pages/createUserDetails';
 import Menu from '../components/menu';
 import HeaderMain from '../components/header/main';
 import PageFinances from '../pages/finances';
+import NoticesPage from '../pages/noticies';
+import PageExchange from '../pages/exchange';
 
 
 
@@ -29,6 +31,8 @@ function AppRouter() {
                     <Route path='/' element={<><HeaderMain /> <Menu /> </>}>
                         <Route path='/' element={<HomePage />} />
                         <Route path='/finances' element={<PageFinances />} />
+                        <Route path='/noticies' element={<NoticesPage />} />
+                        <Route path='/exchange' element={<PageExchange />} />
                     </Route>
                 </Routes>
             </Provider>

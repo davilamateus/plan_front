@@ -4,6 +4,7 @@ export interface IFinancesExpenseList {
     title: string;
     value: number;
     date: number;
+    color: string | null;
     financesGoalId: number | undefined;
 }
 

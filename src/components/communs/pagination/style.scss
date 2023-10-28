@@ -1,0 +1,36 @@
+@import './../../../styles/color';
+
+.pages-numbers-box{
+        display: flex;
+    justify-content: center;
+    padding: 64px 16px;
+}
+
+.pages-numbers-list{
+    border-radius: 8px;
+    padding: 8px 32px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    background-color: $box-background;
+    width: max-content;
+    transition: 0.4s;
+    img{
+        padding: 0 16px;
+    }
+    div{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        color: $paragraph-color;
+        font-size: 16px;
+        width: 32px;
+        height: 32px;
+    }
+}
+.page-now{
+    background-color: $primary-color!important;
+    color: #fff!important;
+}

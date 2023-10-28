@@ -21,9 +21,12 @@ const IsLogged = () => {
             data.data.city_local,
             data.data.state_local,
             data.data.country_local,
+            data.data.currency_local,
             data.data.city_trip,
             data.data.state_trip,
             data.data.country_trip,
+            data.data.currency_trip,
+            data.data.country_code,
             data.data.when,
             data.data.photo,
           )

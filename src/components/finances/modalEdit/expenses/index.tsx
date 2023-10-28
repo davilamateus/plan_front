@@ -58,6 +58,7 @@ const ModalEditExpenses = ({ expense, setOpened }: type) => {
                 date,
                 type: expense.type,
                 financesGoalId: financesGoalId,
+                color: null
             },
             GetTimestampInfomartions(date, 0).firstDay,
             GetTimestampInfomartions(date, 0).lastDay,

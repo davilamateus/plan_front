@@ -7,7 +7,7 @@ import ButtonSimple from "../communs/buttons/simple/simple";
 import useCreateUserDetails from "../../hooks/user/useCreateUserDetails";
 import { useNavigate } from "react-router";
 import LogoBottom from "../communs/logoBottom";
-
+import { currency } from './currency';
 const CreateUserDetailsComponent = () => {
 
     const [photo, setPhoto] = useState<string | undefined>(undefined);
@@ -17,6 +17,7 @@ const CreateUserDetailsComponent = () => {
     const [cityTrip, setCityTrip] = useState<string>('');
     const [stateTrip, setStateTrip] = useState<string>('');
     const [countryTrip, setCountryTrip] = useState<string>('');
+    const [countryCode, setCountryCode] = useState<string>('');
     const [when, setWhen] = useState<number>(new Date().getTime());
     const [btnLoading, setBtnLoading] = useState(false);
     const [btnStatus, setBtnStatus] = useState(false);
@@ -32,7 +33,7 @@ const CreateUserDetailsComponent = () => {
 
     function createDetails() {
         setBtnLoading(true);
-        UseCreateUserDetails(photo, when, cityNow, stateNow, countryNow, cityTrip, stateTrip, countryTrip)
+        UseCreateUserDetails(photo, when, cityNow, stateNow, countryNow, getCurrency(countryNow), cityTrip, stateTrip, countryTrip, getCurrency(countryTrip), countryCode)
             .then((data: any) => {
                 if (data.status == 200) {
                     nav('/');
@@ -40,8 +41,18 @@ const CreateUserDetailsComponent = () => {
                     nav('/login');
                 }
             });
-
     };
+
+
+
+    const currencyCities: any = currency
+
+    function getCurrency(countrySearch: string) {
+        const findCountry = currencyCities.find((country: any) => country.name == countrySearch);
+        console.log(findCountry.currency)
+        return findCountry.currency
+    }
+
     return (
         <div className="create-user-details">
             <div className="create-user-details-main">
@@ -61,12 +72,14 @@ const CreateUserDetailsComponent = () => {
                             setCity={setCityNow}
                             setCountry={setCountryNow}
                             setState={setStateNow}
+
                         />
                         <InputCity
                             title='Where do intend to go trip?'
                             setCity={setCityTrip}
                             setCountry={setCountryTrip}
                             setState={setStateTrip}
+                            setCountryCode={setCountryCode}
                         />
                         <InputDate
                             date={when}

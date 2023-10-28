@@ -2,18 +2,19 @@
 
 .box{
     background-color: $box-background;
-    border-radius: 8px;
-    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px $box-shadow;
 }
 
 .page-container{
-    padding: 0;
-    max-width: 1550px;
+    width: 1450px;
+    max-width: calc(100vw - 112px);
     margin: 0 auto;
-    padding-left: 128px;
-    padding-right: 32px;
-    padding-bottom: 132px;
-    width: calc(100% - 16px);
+    padding: 0 16px;
+    padding-left: calc(16px + 32px);
+         padding-bottom: 112px;
+
 }
 
 .display-none{
@@ -28,15 +29,19 @@
 
 
 hr{
-    border: 0.7px solid $input-border-color;
+    border: none;
+    height: 1px;
+    background-color: $input-border-color;
+    width: 100%;
     margin: 32px auto;
 }
 
 @media only screen and (max-width: 720px) {
     .page-container{
-        padding: 0;
-        padding-bottom: 132px;
-        width: 95vw;
+        padding: 0 16px;
+     max-width: calc(100vw);
+
+        margin: 0 auto;
     }
 
 }

@@ -1,12 +1,9 @@
 .trip-components{
-        display: grid;
-        width: auto;
-        grid-template-columns: 70%  calc(30% - 16px);
-        gap: 16px;
+
         .trip-components-top{
                 display: grid;
                 width: 100%;
-                grid-template-columns: 35%  calc(65% - 16px);
+                grid-template-columns:3fr 5fr;
                 gap: 16px;
                 
         }

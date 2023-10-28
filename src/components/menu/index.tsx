@@ -28,11 +28,11 @@ const Menu = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link className={pageActived === 'blog' ? 'active' : ''} to={'/blog'}>
+                            <Link className={pageActived === 'noticies' ? 'active' : ''} to={'/noticies'}>
                                 <div >
                                     <img src="./../../../icons/blog.svg" alt="" />
                                 </div>
-                                <p>Blog</p>
+                                <p>Notices</p>
                             </Link>
                         </li>
                         <li>
@@ -53,11 +53,11 @@ const Menu = () => {
                         </li>
                         <li>
 
-                            <Link className={pageActived === 'money' ? 'active' : ''} to={'/money'}>
+                            <Link className={pageActived === 'exchange' ? 'active' : ''} to={'/exchange'}>
                                 <div  >
                                     <img src="./../../../icons/money.svg" alt="" />
                                 </div >
-                                <p>Money</p>
+                                <p>Exchange</p>
                             </Link>
                         </li>
                         <li>

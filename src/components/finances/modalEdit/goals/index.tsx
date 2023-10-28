@@ -13,15 +13,15 @@ import useEditGoal from '../../../../hooks/finances/goals/useEditGoal';
 import useEditExpense from '../../../../hooks/finances/expenses/useEditExpense';
 import useDeleteGoal from '../../../../hooks/finances/goals/useDeleteGoals';
 import FormartMoney from '../../../../functions/formartMoney/formartMoney';
+import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInfomartions';
 
 interface type {
     setOpened: Dispatch<SetStateAction<boolean>>;
     goal: IFinancesGoalsList;
-    fromDate: number;
-    toDate: number;
+
 }
 
-const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
+const ModalEditGoals = ({ goal, setOpened }: type) => {
 
     const [title, setTitle] = useState<string>(goal.title);
     const [value, setValue] = useState(goal.value);
@@ -51,25 +51,26 @@ const ModalEditGoals = ({ goal, setOpened, fromDate, toDate }: type) => {
 
     function editGoal() {
         setBtnLoading(true);
-        UseEditGoal({ id: goal.id, type: goal.type, title, value, icon, color, itens: goal.itens, valueItens: goal.valueItens }, fromDate, toDate);
+        UseEditGoal({ id: goal.id, type: goal.type, title, value, icon, color, itens: goal.itens, valueItens: goal.valueItens });
         setOpened(false)
     }
     function deleteGoals() {
         setBtnLoadingDelete(true);
         if (goal.itens.length > 0) {
             goal.itens.map((item) => {
-                UseEditExpense({
+                return UseEditExpense({
                     title: item.title,
                     financesGoalId: undefined,
                     value: item.value,
                     id: item.id,
                     date: item.date,
-                    type: item.type
-                }
-                    , fromDate, toDate, false)
+                    type: item.type,
+                    color: null
+                },
+                    GetTimestampInfomartions(item.date, 0).firstDay, GetTimestampInfomartions(item.date, 0).lastDay, false);
             })
         }
-        UseDeleteGoals(goal, fromDate, toDate, true);
+        UseDeleteGoals(goal, GetTimestampInfomartions(new Date().getTime(), 0).firstDay, GetTimestampInfomartions(new Date().getTime(), 0).lastDay, true);
         setBtnLoadingDelete(false);
         setOpened(false)
 

@@ -1,19 +1,14 @@
 .entrace-main{
     width: 100%;
-    .entraces-components{
-        display: grid;
-        width: auto;
-        grid-template-columns: 20% calc(80% - 16px);
-        gap: 16px;
-        height: 360px;
+
         .entraces-components-botton{
             display: grid;
-            grid-template-columns: 65% calc(35% - 16px);           
+            grid-template-columns:3fr 5fr;           
             gap: 16px;
             justify-content: space-between;
  
         }
-    }
+    
 }
 
 @media only screen and (max-width: 1140px) {

@@ -1,0 +1,46 @@
+@import './../../../../../../styles/color';
+
+.goals-box{
+    width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        box-shadow: 0px 0px 16px $box-shadow-hover;
+
+    }
+    .goals-left{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        .goal-porcent{
+            font-size: 11px;
+        }
+
+    }
+    .goals-content{
+        gap: 4px;
+        display: flex;
+        flex-direction: column;
+        .goals-value{
+            span{
+                            }
+        }
+        .goals-title{
+                        color: $paragraph-dark-color;
+        }
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .goals-box{
+        width: 100%!important;
+    }
+
+}

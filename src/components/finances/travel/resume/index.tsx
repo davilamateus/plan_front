@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IFinancesGoalsList } from "../../../../types/finances/IGoals";
 import useGetTripGoals from "../../../../store/hooks/finances/useGetTripGoals";
-import FinanceSimpleResult from "../../comuns/financeSimpleResult";
+import FinanceSimpleResult from "../../comuns/resume";
 import useGetAvatar from "../../../../store/hooks/avatar/useGetAvatar";
 import useGetCashInHand from "../../../../store/hooks/finances/useGetCashInHand";
 import useGetCashInHandApi from "../../../../hooks/finances/cashInHand/useGetCashInHand";
@@ -9,6 +9,7 @@ import './style.scss';
 import FormartMoney from "../../../../functions/formartMoney/formartMoney";
 import { IFinancesExpenseList } from "../../../../types/finances/IExpense";
 import TitleOfSession from "../../../communs/titleOfComponent";
+import DoughnutHalf from "../../comuns/doughnutHalf";
 
 const TripResume = () => {
 
@@ -95,49 +96,48 @@ const TripResume = () => {
         return calc;
     }
 
-    console.log(whenCalc)
 
 
     return (
-        <div className="trip-resume">
+        <div>
             <TitleOfSession title='Resume' />
-            <div className="trip-resume-results">
-                <FinanceSimpleResult
-                    title='Cost total planning for trip'
-                    value={totalGoals}
-                />
-                <FinanceSimpleResult
-                    title='Total trip paid'
-                    value={totalPaid}
-                />
-                <FinanceSimpleResult
-                    title='Fault to pay for tripping'
-                    value={totalGoals - totalPaid}
-                />
-                <FinanceSimpleResult
-                    title='Cash in cash'
-                    value={totalCash}
-                />
-                <FinanceSimpleResult
-                    title='Cash - missing for trip'
-                    value={totalGoals - totalCash - totalPaid}
-                />
-                <div className='finance-simple-result'>
-                    <span>Join by month until the trip</span>
-                    <span className="finance-simple-result-value">{`${(totalGoals - totalCash - totalPaid) / whenCalc > 0 ?
+            <div className="trip-resume">
+                <div className="trip-resume-results">
+                    <FinanceSimpleResult
+                        title='Cost total planning for trip'
+                        value={totalGoals}
+                    />
+                    <FinanceSimpleResult
+                        title='Total trip paid'
+                        value={totalPaid}
+                    />
+                    <FinanceSimpleResult
+                        title='Fault to pay for tripping'
+                        value={totalGoals - totalPaid}
+                    />
+                    <FinanceSimpleResult
+                        title='Cash in cash'
+                        value={totalCash}
+                    />
+                    <FinanceSimpleResult
+                        title='Cash - missing for trip'
+                        value={totalGoals - totalCash - totalPaid}
+                    />
+                    <div className='finance-simple-result'>
+                        <span>Join by month until the trip</span>
+                        <span className="finance-simple-result-value">{`${(totalGoals - totalCash - totalPaid) / whenCalc > 0 ?
 
-                        FormartMoney(+((((totalGoals - totalCash - totalPaid) / whenCalc)).toFixed(0))) + ' durin ' + whenCalc + (whenCalc > 1 ? ' months.' : ' month.')
+                            FormartMoney(+((((totalGoals - totalCash - totalPaid) / whenCalc)).toFixed(0))) + ' durin ' + whenCalc + (whenCalc > 1 ? ' months.' : ' month.')
 
-                        : FormartMoney(0)}`}</span>
+                            : FormartMoney(0)}`}</span>
+                    </div>
+
                 </div>
-
-            </div>
-            <div className="trip-resume-bar">
-                <div style={{ width: ` ${((totalPaid * 100) / totalGoals)}%` }} className="trip-resume-bar-paid"></div>
-                <div style={{ width: `${(totalCash * 100) / totalGoals}%` }} className="trip-resume-bar-cash"></div>
+                <DoughnutHalf labels={['Total trip paid', 'Cash in cash', 'Cash - missing for trip']} values={[totalPaid, totalCash, (totalGoals - totalCash - totalPaid)]} colors={['#6AD9A8', '#F1F180', '#edf0eeed']} porcent={(totalCash + totalPaid) * 100 / totalGoals} />
 
             </div>
         </div>
+
     )
 }
 

@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react'
-import useGetEntraces from '../../../../../store/hooks/finances/useGetEntraces';
 import GetFirstAndLastDayTimestamps from '../../../../../functions/date/GetTimestampInfomartions';
 import GraficOfBar from '../grafic/grafic';
-import { IFinancesExpenseList } from '../../../../../types/finances/IExpense';
 import './style.scss';
 import TitleOfSession from '../../../../communs/titleOfComponent';
 import IBarData from '../../../../../types/finances/entraces/IBarData';
+import { IFinancesEntraces } from '../../../../../types/finances/IEntraces';
 
+interface type {
+    entraces: IFinancesEntraces[]
+}
+const FinancesEntracesGrafic = ({ entraces }: type) => {
 
-
-
-const FinancesEntracesGrafic = () => {
-    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
-
-    const UseGetEntraces = useGetEntraces();
 
     const [thatMonth, setThatMonth] = useState<number>(0)
     const [thatMonth_1, setThatMonth_1] = useState<number>(0)
@@ -23,16 +20,15 @@ const FinancesEntracesGrafic = () => {
     const [thatMonth_5, setThatMonth_5] = useState<number>(0)
     const [thatMonth_6, setThatMonth_6] = useState<number>(0)
     const [thatMonth_7, setThatMonth_7] = useState<number>(0)
-    const [barData, setBarData] = useState<IBarData>({ title: ['', '', '', '', '', '', '', ''], value: [1000, 2000, 1400, 1600, 2000, 3000, 1000], loading: true })
+    const [thatMonth_8, setThatMonth_8] = useState<number>(0)
+    const [thatMonth_9, setThatMonth_9] = useState<number>(0)
+    const [thatMonth_10, setThatMonth_10] = useState<number>(0)
+    const [thatMonth_11, setThatMonth_11] = useState<number>(0)
+    const [barData, setBarData] = useState<IBarData>({ title: ['', '', '', '', '', '', '', '', '', '', '', ''], value: [1000, 2000, 1400, 1600, 2000, 3000, 1000, 2000, 3000, 1000], loading: true })
     const dateToday = new Date().getTime();
 
 
 
-    useEffect(() => {
-        if (UseGetEntraces.entraces !== false) {
-            setEntraces(UseGetEntraces);
-        }
-    }, [UseGetEntraces]);
 
 
     useEffect(() => {
@@ -45,6 +41,10 @@ const FinancesEntracesGrafic = () => {
             setThatMonth_5(0)
             setThatMonth_6(0)
             setThatMonth_7(0)
+            setThatMonth_8(0)
+            setThatMonth_9(0)
+            setThatMonth_10(0)
+            setThatMonth_11(2)
             entraces.map((item, index) => {
                 if (item.date >= GetFirstAndLastDayTimestamps(dateToday, 0).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, 0).lastDay) {
                     setThatMonth(old => old + item.value)
@@ -64,9 +64,25 @@ const FinancesEntracesGrafic = () => {
                 } else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -7).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -7).lastDay) {
                     setThatMonth_7(old => old + item.value)
                 }
+                else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -8).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -8).lastDay) {
+                    setThatMonth_8(old => old + item.value)
+                }
+                else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -9).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -9).lastDay) {
+                    setThatMonth_9(old => old + item.value)
+                }
+                else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -10).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -10).lastDay) {
+                    setThatMonth_10(old => old + item.value)
+                }
+                else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -11).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -11).lastDay) {
+                    setThatMonth_11(old => old + item.value)
+                }
             })
             setBarData({
                 title: [
+                    GetFirstAndLastDayTimestamps(dateToday, -11).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -10).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -9).nameOfMonthShort,
+                    GetFirstAndLastDayTimestamps(dateToday, -8).nameOfMonthShort,
                     GetFirstAndLastDayTimestamps(dateToday, -7).nameOfMonthShort,
                     GetFirstAndLastDayTimestamps(dateToday, -6).nameOfMonthShort,
                     GetFirstAndLastDayTimestamps(dateToday, -5).nameOfMonthShort,
@@ -78,6 +94,10 @@ const FinancesEntracesGrafic = () => {
 
                 ],
                 value: [
+                    thatMonth_11 / 100,
+                    thatMonth_10 / 100,
+                    thatMonth_9 / 100,
+                    thatMonth_8 / 100,
                     thatMonth_7 / 100,
                     thatMonth_6 / 100,
                     thatMonth_5 / 100,
@@ -91,15 +111,7 @@ const FinancesEntracesGrafic = () => {
 
             })
         }
-    }, [dateToday, entraces, thatMonth, thatMonth_1, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7])
-
-
-    useEffect(() => {
-
-    }, [thatMonth, thatMonth_1, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7])
-
-
-
+    }, [dateToday, entraces, thatMonth, thatMonth_1, thatMonth_10, thatMonth_11, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7, thatMonth_8, thatMonth_9])
 
     return (
         <>

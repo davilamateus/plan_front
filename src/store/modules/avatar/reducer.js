@@ -5,9 +5,12 @@ const avatar = {
     city_local: '',
     state_local: '',
     country_local: '',
+    currency_local: '',
+    country_code: '',
     city_trip: '',
     state_trip: '',
     country_trip: '',
+    currency_trip: '',
     when: '',
     photo: ''
 }

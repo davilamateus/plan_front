@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import FinanceSimpleResult from '../../comuns/financeSimpleResult';
+import FinanceSimpleResult from '../../comuns/resume';
 import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInfomartions';
 import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
 import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
 import './style.scss'
 import useGetEntracesApi from '../../../../hooks/finances/entraces/useGetEntraces';
 import useGetTripGoals from '../../../../store/hooks/finances/useGetTripGoals';
-import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import { IFinancesGoalsList } from '../../../../types/finances/IGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
 import { IFinancesEntraces } from '../../../../types/finances/IEntraces';
 import TitleOfSession from '../../../communs/titleOfComponent';
+import DoughnutHalf from '../../comuns/doughnutHalf';
 
 const FinancesResume = () => {
 
     const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
     const [domestic, setDomestic] = useState<IFinancesExpenseList[]>([]);
     const [trip, setTrip] = useState<IFinancesExpenseList[]>([]);
-    const [entraceTotalThatMonth, setEntraceTotalThatMonth] = useState<number | null>(null);
-    const [domesticTotalThatMonth, setDomesticTotalThatMonth] = useState<number | null>(null);
-    const [tripTotalThatMonth, setTripTotalThatMonth] = useState<number | null>(null);
-    const [profit, setProfit] = useState<number | null>(null);
+    const [entraceTotalThatMonth, setEntraceTotalThatMonth] = useState<number>(0);
+    const [domesticTotalThatMonth, setDomesticTotalThatMonth] = useState<number>(0);
+    const [tripTotalThatMonth, setTripTotalThatMonth] = useState<number>(0);
+    const [profit, setProfit] = useState<number>(0);
     const monthName = GetTimestampInfomartions(new Date().getTime(), 0).nameOfMonth;
 
 
@@ -29,7 +29,6 @@ const FinancesResume = () => {
     const UseGetTripGoals = useGetTripGoals();
 
     const UseGetEntracesApi = useGetEntracesApi();
-    const UseGetGoalsApi = useGetGoalsApi();
 
 
 
@@ -62,14 +61,7 @@ const FinancesResume = () => {
 
     // Getting Domestic
     useEffect(() => {
-        if (UseGetDomesticGoals == false) {
-            UseGetGoalsApi(GetTimestampInfomartions(new Date().getTime(), 0).firstDay, GetTimestampInfomartions(new Date().getTime(), 0).lastDay, 1, true);
-
-        } else {
-            setDomestic(UseGetDomesticGoals)
-        }
-
-
+        setDomestic(UseGetDomesticGoals)
     }, [UseGetDomesticGoals]);
 
 
@@ -96,43 +88,38 @@ const FinancesResume = () => {
 
 
 
+
     // Getting trip
     useEffect(() => {
         if (UseGetTripGoals === false) {
-            UseGetGoalsApi(0, 1000000000000000000, 2, true);
-
         } else {
-            let array: IFinancesExpenseList[] = [];
 
             if (UseGetTripGoals.length > 0) {
+                let array: IFinancesExpenseList[] = [];
                 UseGetTripGoals.map((goals: IFinancesGoalsList) => {
                     if (goals.itens.length > 0) {
                         goals.itens.map((tripExpense: IFinancesExpenseList) => {
                             if (tripExpense) {
-
-
                                 if (tripExpense.date >= GetTimestampInfomartions(new Date().getTime(), 0).firstDay && tripExpense.date) {
                                     array.push(tripExpense)
-
                                 }
                             }
                         })
                     }
-
                     else {
                         setTripTotalThatMonth(0)
 
                     }
 
                 })
+                setTrip(array);
 
             }
-            setTrip(array);
 
         }
 
-
     }, [UseGetTripGoals])
+
 
 
 
@@ -161,23 +148,30 @@ const FinancesResume = () => {
     return (
         <div className='finances-resume'>
             <TitleOfSession title={monthName + ' Resume'} />
-            <div className='finances-resume-cards'>
-                <FinanceSimpleResult
-                    title={`Total Entraces`}
-                    value={entraceTotalThatMonth}
-                />
-                <FinanceSimpleResult
-                    title={`Total Domestic costs`}
-                    value={domesticTotalThatMonth}
-                />
-                <FinanceSimpleResult
-                    title={`Total Trip Costs`}
-                    value={tripTotalThatMonth}
-                />
-                <FinanceSimpleResult
-                    title={`Total Profit`}
-                    value={profit}
-                />
+            <div className="finance-resume-components">
+                <div className='finances-resume-cards'>
+                    <FinanceSimpleResult
+                        title={`Total Entraces`}
+                        value={entraceTotalThatMonth}
+                    />
+                    <FinanceSimpleResult
+                        title={`Total Domestic costs`}
+                        value={domesticTotalThatMonth}
+                    />
+                    <FinanceSimpleResult
+                        title={`Total Trip Costs`}
+                        value={tripTotalThatMonth}
+                    />
+                    <FinanceSimpleResult
+                        title={`Total Profit`}
+                        value={profit}
+                    />
+                </div>
+                <DoughnutHalf
+                    labels={domesticTotalThatMonth > 0 ? ['Total Domestic costs', 'Total Trip Costs', profit > 0 ? 'Total Profit' : ''] : []}
+                    values={domesticTotalThatMonth > 0 ? [domesticTotalThatMonth, tripTotalThatMonth, profit > 0 ? profit : 0] : []}
+                    colors={domesticTotalThatMonth > 0 ? ['#6958A3', '#F1F180', profit > 0 ? '#6AD9A8' : ''] : []}
+                    porcent={profit > 0 ? (domesticTotalThatMonth + tripTotalThatMonth) * 100 / entraceTotalThatMonth : -(domesticTotalThatMonth + tripTotalThatMonth) * 100 / entraceTotalThatMonth} />
             </div>
         </div>)
 }

@@ -1,0 +1,24 @@
+@import'./../../../styles/color';
+
+.noticies-main{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    .notices-view-more{
+        background: none;
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        padding: 8px;
+        width: 172px;
+        border-radius: 16px;
+        margin: 0 auto;
+        transition: 0.3s;
+        img{
+            width: 32px;
+        }
+        &:hover{
+            background-color: $primary-color;
+            color: $title-color;
+        }
+    }
+}

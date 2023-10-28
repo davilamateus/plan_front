@@ -1,0 +1,28 @@
+@import './../../../styles/color';
+
+.noticies-categories{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 32px;
+    margin-top: 32px;
+
+
+    li{
+        text-align: center;
+        list-style: none;
+        transition: 0.2s;
+        cursor: pointer;
+        font-size: 500;
+        &:hover{
+            color: $paragraph-dark-color ;
+        }
+
+    }
+    .notices-categorie-active{
+        color: $primary-color;
+    }
+
+}

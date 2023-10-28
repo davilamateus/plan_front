@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import InputDateRange from '../../../communs/inputs/dateRange';
-import DomesticCostGoals from '../goals/main'
 import GetTimestampInfomartions from '../../../../functions/date/GetTimestampInfomartions';
 import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomesticGoals';
 import './style.scss';
 import DomesticResume from '../resume/card/main';
-import DomesticExpensesActives from '../actives';
+import DomesticExpensesActives from '../../comuns/actives/main';
 import TitleOfSession from '../../../communs/titleOfSession';
+import FinancesGoals from '../../comuns/goals/main';
 
 const DomesticMain = () => {
 
@@ -19,17 +19,12 @@ const DomesticMain = () => {
   const UseGetDomesticGoals = useGetDomesticGoals();
 
 
-  const UseGetGoals = useGetGoalsApi();
+  const UseGetGoalsApi = useGetGoalsApi();
 
   useEffect(() => {
-    if (UseGetDomesticGoals == false) {
-      UseGetGoals(fromDate, toDate, 1, true);
-    }
-  }, [UseGetDomesticGoals])
+    UseGetGoalsApi(fromDate, toDate, 1, true);
 
-
-
-
+  }, [])
 
 
   return (
@@ -44,14 +39,12 @@ const DomesticMain = () => {
         />
       </div>
       <div className='domestic-cost-components'>
-        <DomesticCostGoals
-          fromDate={fromDate}
-          toDate={toDate}
-        />
+        <FinancesGoals goals={UseGetDomesticGoals} />
         <div className='domestic-cost-components-botton'>
           <DomesticResume
           />
           <DomesticExpensesActives
+            goals={UseGetDomesticGoals}
           />
         </div>
 
