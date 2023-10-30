@@ -44,11 +44,10 @@ const FinancesEntracesGrafic = ({ entraces }: type) => {
             setThatMonth_8(0)
             setThatMonth_9(0)
             setThatMonth_10(0)
-            setThatMonth_11(2)
+            setThatMonth_11(0)
             entraces.map((item, index) => {
                 if (item.date >= GetFirstAndLastDayTimestamps(dateToday, 0).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, 0).lastDay) {
                     setThatMonth(old => old + item.value)
-
                 } else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -1).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -1).lastDay) {
                     setThatMonth_1(old => old + item.value)
                 } else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -2).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -2).lastDay) {
@@ -67,6 +66,7 @@ const FinancesEntracesGrafic = ({ entraces }: type) => {
                 else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -8).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -8).lastDay) {
                     setThatMonth_8(old => old + item.value)
                 }
+
                 else if (item.date >= GetFirstAndLastDayTimestamps(dateToday, -9).firstDay && item.date <= GetFirstAndLastDayTimestamps(dateToday, -9).lastDay) {
                     setThatMonth_9(old => old + item.value)
                 }
@@ -105,7 +105,7 @@ const FinancesEntracesGrafic = ({ entraces }: type) => {
                     thatMonth_3 / 100,
                     thatMonth_2 / 100,
                     thatMonth_1 / 100,
-                    thatMonth / 100,
+                    thatMonth / 100
                 ],
                 loading: false
 
@@ -113,6 +113,8 @@ const FinancesEntracesGrafic = ({ entraces }: type) => {
         }
     }, [dateToday, entraces, thatMonth, thatMonth_1, thatMonth_10, thatMonth_11, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7, thatMonth_8, thatMonth_9])
 
+
+    console.log('Teste', barData)
     return (
         <>
             <div className='finances-entraces-grafic'>

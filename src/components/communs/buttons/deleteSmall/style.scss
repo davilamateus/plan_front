@@ -1,0 +1,16 @@
+@import './../../../../styles/color';
+
+.delete-small{
+    img{
+        width: 12px;
+    }
+            svg, g ,path{
+            color: $paragraph-color;
+            stroke: $paragraph-light-color;
+            fill: $box-background;
+            transition: 0.2s;
+            &:hover{
+                stroke: $terciary-color;
+            }
+        }
+}

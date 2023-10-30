@@ -11,7 +11,7 @@ const Menu = () => {
     }, [useNavigate()])
     return (
         <main>
-            <div className='menu-box'>
+            <div className='menu-box box'>
                 <div className="logo-menu">
                     <Link to={'/'}>
                         <LogoBottom />

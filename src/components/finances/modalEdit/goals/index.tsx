@@ -84,81 +84,87 @@ const ModalEditGoals = ({ goal, setOpened }: type) => {
                 {goal.id !== 0 ? // Diferent of Other category
 
                     <>
-                        <InputSimple
-                            title='Title:'
-                            setInput={setTitle}
-                            input={title}
-                            placeholder="Type a title..."
-                        />
-                        <InputColor
-                            title='Color:'
-                            color={color}
-                            setColor={setColor}
-                        />
-                        <InputIcons
-                            title='Icon:'
-                            icon={icon}
-                            setIcon={setIcon}
-                        />
-                        <InputMoney
-                            title='Valor:'
-                            setInput={setValue}
-                            input={value}
-                        />
-                        {goal.itens.length > 0 ?
-                            <>
-                                <div className="finances-goals-edit-actives">
-                                    <h4>Itens:</h4>
-                                    {goal.itens.map((item, index) => (
-                                        <div
-                                            key={item.id}
-                                            onClick={() => {
-                                                setItemOpened(true);
-                                                setIndex(index);
-                                            }}
-                                        >
+                        <div className="content">
+
+                            <InputSimple
+                                title='Title:'
+                                setInput={setTitle}
+                                input={title}
+                                placeholder="Type a title..."
+                            />
+                            <InputColor
+                                title='Color:'
+                                color={color}
+                                setColor={setColor}
+                            />
+                            <InputIcons
+                                title='Icon:'
+                                icon={icon}
+                                setIcon={setIcon}
+                            />
+                            <InputMoney
+                                title='Valor:'
+                                setInput={setValue}
+                                input={value}
+                            />
+                            {goal.itens.length > 0 ?
+                                <>
+                                    <div className="finances-goals-edit-actives">
+                                        <h4>Itens:</h4>
+                                        {goal.itens.map((item, index) => (
                                             <div
-                                                className='finances-goals-edit-actives-item'
+                                                key={item.id}
                                                 onClick={() => {
-                                                    setOpened(true)
-                                                    setIndex(index)
+                                                    setItemOpened(true);
+                                                    setIndex(index);
                                                 }}
-                                                key={index}
                                             >
-                                                <div className='finances-goals-edit-actives-text' >
-                                                    <div>
-                                                        <div style={{ backgroundColor: color }} className='circle'></div>
-                                                        <div className="finances-goals-edit-actives-title">
-                                                            {item.title}
+                                                <div
+                                                    className='finances-goals-edit-actives-item'
+                                                    onClick={() => {
+                                                        setOpened(true)
+                                                        setIndex(index)
+                                                    }}
+                                                    key={index}
+                                                >
+                                                    <div className='finances-goals-edit-actives-text' >
+                                                        <div>
+                                                            <div style={{ backgroundColor: color }} className='circle'></div>
+                                                            <div className="finances-goals-edit-actives-title">
+                                                                {item.title}
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <div className='finances-goals-edit-actives-date'>
+                                                        {TimestampToDate(item.date)}
+                                                    </div>
+                                                    <div className='finances-goals-edit-actives-value'>{FormartMoney(item.value)}</div>
                                                 </div>
-                                                <div className='finances-goals-edit-actives-date'>
-                                                    {TimestampToDate(item.date)}
-                                                </div>
-                                                <div className='finances-goals-edit-actives-value'>{FormartMoney(item.value)}</div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
+                                        ))}
+                                    </div>
+                                </>
 
-                            : ''}
+                                : ''}
 
-                        <ButtonSimple
-                            title='Edit'
-                            type='success'
-                            status={btnStatus}
-                            loading={btnLoading}
-                            action={() => { editGoal() }}
-                        />
-                        <ButtonSimple
-                            title='Delete'
-                            type='delete'
-                            status={btnStatus}
-                            loading={btnLoading}
-                            action={() => { deleteGoals() }}
-                        />
+                        </div>
+                        <div className="button">
+
+                            <ButtonSimple
+                                title='Edit'
+                                type='success'
+                                status={btnStatus}
+                                loading={btnLoading}
+                                action={() => { editGoal() }}
+                            />
+                            <ButtonSimple
+                                title='Delete'
+                                type='delete'
+                                status={btnStatus}
+                                loading={btnLoading}
+                                action={() => { deleteGoals() }}
+                            />
+                        </div>
 
                     </>
                     :

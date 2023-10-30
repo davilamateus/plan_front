@@ -7,7 +7,7 @@
     border-radius: 8px;
     padding: 12px;
   
-    input{
+    input ,textarea{
         background-color: $box-background!important;
         z-index: 4;
         border: none!important;
@@ -42,7 +42,7 @@ label{
         flex-direction: column;
     
 }
-input, select,text{
+input, select,textarea{
     border-radius: 8px;
     border:1px solid $input-border-color;
     padding: 12px;
@@ -51,7 +51,7 @@ input, select,text{
     color: $paragraph-dark-color;
     background-color: rgba(255, 0, 0, 0);
 }
-input::placeholder{
+input::placeholder , textarea::placeholder{
     opacity: 0.6;
 }
 input:focus{

@@ -56,7 +56,7 @@ const FinanceActives = ({ actives }: type) => {
                     </span>}
                 {opened ?
                     <BoxFullpage
-                        title='Edit cost'
+                        title='Edit'
                         content={actives[index].type == 1 ?
                             <ModalEditExpenses
                                 setOpened={setOpened}

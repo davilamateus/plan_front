@@ -1,0 +1,15 @@
+@import './../../../../styles/color';
+
+.description{
+    textarea{
+        font-size: 14px;
+        font-weight: normal;
+        border: 1px solid $input-border-color;
+        width: 100%;
+    }:focus{
+        outline: none !important;
+        font-style: italic;
+    }  
+
+
+}

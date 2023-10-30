@@ -56,7 +56,7 @@ const PhotoUpdate = ({ photo, setPhoto }: type) => {
 
     return (
         <div
-            style={{ backgroundImage: `url(${BASE_URL}imagens/user/${fileName || photo || 'default.png'})` }}
+            style={{ backgroundImage: `url(${BASE_URL}imagens/user/${fileName || photo || 'default.jpeg'})` }}
             className='photo-update-component'
         >
             <img src="./../../../../../icons/imagem.svg" alt="" />

@@ -82,42 +82,48 @@ const ModalEditExpenses = ({ expense, setOpened }: type) => {
     return (
         < div className="edit-modal">
             <form onSubmit={(e) => { e.preventDefault() }} >
-                <InputSimple
-                    title='Title:'
-                    setInput={setTitle}
-                    input={title}
-                    placeholder="Type a title..."
-                />
-                <InputSelectCategory
-                    title="Select a category:"
-                    goals={expense.type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
-                    selectOption={financesGoalId}
-                    setSelectOptions={setFinancesGoalId}
-                />
-                <InputDate
-                    title='Date:'
-                    date={date}
-                    setDate={setDate}
-                />
-                <InputMoney
-                    title='Valor:'
-                    setInput={setValue}
-                    input={value}
-                />
-                <ButtonSimple
-                    title="Save"
-                    type='success'
-                    action={() => { editEntrace() }}
-                    status={btnStatus}
-                    loading={btnLoading}
-                />
-                <ButtonSimple
-                    title="Delete expense"
-                    type='delete'
-                    action={() => { deleteEntrace() }}
-                    status={true}
-                    loading={btnLoadingDelete}
-                />
+                <div className="content">
+
+                    <InputSimple
+                        title='Title:'
+                        setInput={setTitle}
+                        input={title}
+                        placeholder="Type a title..."
+                    />
+                    <InputSelectCategory
+                        title="Select a category:"
+                        goals={expense.type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
+                        selectOption={financesGoalId}
+                        setSelectOptions={setFinancesGoalId}
+                    />
+                    <InputDate
+                        title='Date:'
+                        date={date}
+                        setDate={setDate}
+                    />
+                    <InputMoney
+                        title='Valor:'
+                        setInput={setValue}
+                        input={value}
+                    />
+                </div>
+                <div className="button">
+
+                    <ButtonSimple
+                        title="Save"
+                        type='success'
+                        action={() => { editEntrace() }}
+                        status={btnStatus}
+                        loading={btnLoading}
+                    />
+                    <ButtonSimple
+                        title="Delete expense"
+                        type='delete'
+                        action={() => { deleteEntrace() }}
+                        status={true}
+                        loading={btnLoadingDelete}
+                    />
+                </div>
             </form>
         </div>
     )

@@ -4,9 +4,6 @@
     min-height: calc(100vh - 32px);
     margin-top: 16px;
     margin-left: 4px;
-    background-color: $box-background;
-    border-radius: 16px;
-    border: 1px solid $input-border-color;
     width: 64px;
     display: flex;
     flex-direction: column;
@@ -16,13 +13,13 @@
     top: 0;
     transition: 0.4s;
     &:hover{
-        width: 186px;
+        width: 146px;
     }
     .logo-menu{
         overflow: hidden;
         margin-top: 32px;
         margin-left: 8px;
-        width: 186px;
+        width: 146px;
         img{
             width: 48px;
         }
@@ -54,6 +51,8 @@
                     align-items: center;
                 }
                 p{
+                    font-weight: 300;
+                    font-size: 9pt!important;
                     grid-column-start: 2;
                     white-space: nowrap;
                     text-align: left;
@@ -63,6 +62,7 @@
                 img{
                     height: 16px;
                     max-width: 16px;
+                    opacity: 0.4;
                 }
             }
         }
@@ -71,6 +71,9 @@
             background-color: $primary-color;
             border-radius: 8px;
             box-shadow: 3px 3px 22px $box-shadow-green;
+            img{
+                opacity: 1;
+            }
             p{
                 color: $title-color;
             }

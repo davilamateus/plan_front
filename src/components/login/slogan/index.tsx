@@ -9,7 +9,7 @@ const SloganComponent = () => {
                     <h1>
                         You can
                         <br />
-                        <span className='slogan-text-green'>fulfill</span> your
+                        <h1 className='slogan-text-green'>fulfill</h1> your
                         <br />
                         dream.
                         <br />

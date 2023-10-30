@@ -1,0 +1,69 @@
+@import './../../../styles/color';
+
+.todolist-card{
+    padding: 8px;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    .todolist-card-top{
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        .todolist-card-top-left{
+            display: flex;
+            gap: 8px;
+            .todolist-color{
+                width: 4px;
+                height: 100;
+                border-radius: 2px;
+            }
+            .todolist-text{
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                .todolist-title{
+                    font-size: 12pt;
+                    color: $paragraph-dark-color;
+                }
+            }
+        }
+        .todolist-card-top-right{
+            img{
+                opacity: 0.4;
+            }
+        }
+
+    }
+    .todolist-botton{
+        display: flex;
+        gap: 4px;
+        .date-late{
+            border: 1px solid $terciary-color;
+            color: $terciary-color;
+            svg , g, circle, path{
+                stroke:$terciary-color!important;
+                opacity: 1;
+            }
+        }
+        div{
+            border: 1px solid $input-border-color;
+            width: max-content;
+            padding: 2px 6px;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 8pt;
+            svg{
+                width: 10px;
+                opacity: 0.4;
+            }
+            img{
+                    width: 10px;
+                opacity: 0.4;
+            }
+        }
+
+
+    }
+}

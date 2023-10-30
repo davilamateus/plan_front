@@ -1,0 +1,64 @@
+@import './../../../../styles/color';
+
+
+.todolist-head{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 16px;
+    h4{
+        padding: 0;
+        margin: 0;
+    }
+}
+.todolist-input{
+    margin: 16px 0;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.task-card{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 4px 16px!important;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover{
+        background-color: $quintenary-color;
+    }
+    .task-left{
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        width: 100%;
+    }
+    .task-status{
+        svg, g, line{
+            width:12px;
+            stroke: $primary-color;
+        }
+        div{
+            width: 12px;
+            height: 12px;
+            border: 1px solid $paragraph-color!important;
+            border-radius: 16px;
+        }
+    }
+    .task-title{
+        color: $paragraph-dark-color;
+        font-weight: 400;
+    }
+    .task-description{
+        font-weight: 200;
+        font-size: 10pt;
+    }
+
+    .task-right{
+
+    }
+}
+.task-done{
+    opacity: 0.3;
+}

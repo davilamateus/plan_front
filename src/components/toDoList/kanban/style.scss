@@ -1,0 +1,28 @@
+@import './../../../styles/color';
+
+.todolist-table{
+    display: flex;
+    gap: 8px;
+
+    .todolist-columm{
+        width: 33.33%;
+        .todolist-content{
+            border-radius: 8px;
+            min-height: 100px;
+            border: 2px dashed $input-border-color;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        } 
+    }
+}
+
+@media only screen and (max-width: 870px) {
+.todolist-table{
+    display: grid;
+    .todolist-columm{
+        width: 100%;
+    }
+  }
+}

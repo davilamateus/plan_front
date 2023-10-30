@@ -1,0 +1,26 @@
+import Api from "../../axios";
+import useGetEntracesApi from "./useGetToDoList";
+
+
+const useDeleteEntraces = () => {
+
+    const UseGetEntraces = useGetEntracesApi();
+
+
+    return async (id: number) => {
+        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
+        const res = await Api.delete(`/finances/entraces?id=${id}`, config)
+            .then(() => {
+                //UseGetEntraces(0, 100000000000000000, true);
+            })
+            .catch((error) => console.log(error))
+        return res;
+    }
+}
+
+export default useDeleteEntraces;

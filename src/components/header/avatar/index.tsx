@@ -18,7 +18,7 @@ const AvatarComponent = () => {
                     <div className="avatar-photo-box">
                         <div
                             style={{
-                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo}.jpeg`
+                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo}`
                             }}
                             className="avatar-photo"
                         >
@@ -29,11 +29,11 @@ const AvatarComponent = () => {
                 :
                 <div className='avatar-box'>
                     <div className="avatar-text">
-                        <Skeleton style={{ width: '120px', height: '23px', margin: '10px -0px 00px 0px' }} />
-                        <Skeleton style={{ width: '120px', height: '18px', }} />
+                        <Skeleton style={{ width: '120px', height: '18px', margin: '10px -0px 00px 0px' }} />
+                        <Skeleton style={{ width: '100px', height: '14px', }} />
                     </div>
                     <div className="avatar-photo-box">
-                        <Skeleton style={{ borderRadius: '72px', width: '72px', height: '72px', margin: '10px -0px 00px 0px' }} />
+                        <Skeleton style={{ borderRadius: '72px', width: '48px', height: '48px', margin: '10px -0px 00px 0px' }} />
                         <ButtonOptions />
                     </div>
                 </div>}

@@ -2,8 +2,8 @@ import React from 'react'
 import IArticle from '../../../types/noticies/IArticle'
 import './style.scss';
 import DateTimeAgo from '../../../functions/date/DateTimeAgo';
-import TitleOfComponent from '../../communs/titleOfComponent';
 import Skeleton from 'react-loading-skeleton';
+import TitleOfSession from '../../communs/titleOfSession';
 
 interface type {
     article: IArticle;
@@ -13,7 +13,7 @@ const NoticiePrincipalCard = ({ article }: type) => {
     return (
         article ?
             <div>
-                <TitleOfComponent title='Last News' />
+                <TitleOfSession title='Last News' />
                 <a className="principal-article box" href={article.link} target="_blank" rel="noreferrer">
                     <div className="principal-article-img" style={{ backgroundImage: `url(${article.image_url})` }}></div>
                     <div className="principal-article-content">
@@ -40,7 +40,7 @@ const NoticiePrincipalCard = ({ article }: type) => {
                 </a>
             </div> :
             <div>
-                <TitleOfComponent title='Last News' />
+                <TitleOfSession title='Last News' />
                 <a className="principal-article box" >
                     <div className="principal-article-img" >
                         <Skeleton style={{ width: '100%', height: '100%', }} />
