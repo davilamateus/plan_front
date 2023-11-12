@@ -13,6 +13,7 @@ import PageFinances from '../pages/finances';
 import NoticesPage from '../pages/noticies';
 import PageExchange from '../pages/exchange';
 import PageToDoList from '../pages/todolist';
+import PageAdvices from '../pages/advices';
 
 
 
@@ -35,6 +36,7 @@ function AppRouter() {
                         <Route path='/noticies' element={<NoticesPage />} />
                         <Route path='/exchange' element={<PageExchange />} />
                         <Route path='/todolist' element={<PageToDoList />} />
+                        <Route path='/advices' element={<PageAdvices />} />
                     </Route>
                 </Routes>
             </Provider>

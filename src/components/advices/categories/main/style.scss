@@ -1,0 +1,40 @@
+.advice-categorie-cards{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+           .advices-categorie-buttons{
+            width: 100%;
+            height: 300px;
+            margin-top: -300px;
+            position: relative;        
+            background-color: rebeccapurple;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            align-items: center;
+            div {
+                opacity: 0.3;
+                transition: 0.4s;
+                svg{
+                    margin-bottom: -330px;
+                    width: 24px;
+            }
+            &:hover{
+                opacity: 1;
+            }
+            }
+        }
+    .advice-categorie-scroll{
+        gap: 8px;
+        top: 0;
+        display: flex;
+        gap: 8px;
+        transition: 1s;
+ 
+
+    }
+
+    
+}

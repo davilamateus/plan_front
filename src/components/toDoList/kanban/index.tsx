@@ -5,6 +5,7 @@ import ToDoListCard from "../card";
 import './style.scss';
 import useEditToDoListPostion from "../../../hooks/toDoList/useEditToDoListPostion";
 import TitleOfComponent from "../../communs/titleOfComponent";
+import Skeleton from "react-loading-skeleton";
 
 interface Column {
     id: number;
@@ -16,9 +17,10 @@ interface type {
     toDo: IToDoListMain[];
     inProgress: IToDoListMain[];
     done: IToDoListMain[];
+    loaded: boolean
 }
 
-const Kanban = ({ toDo, inProgress, done }: type) => {
+const Kanban = ({ toDo, inProgress, done, loaded }: type) => {
     const [movedItems, setMovedItems] = useState<{ items: IToDoListMain[], columnId: number }>({ items: [], columnId: -1 });
 
     const [taskStatus, setTaskStatus] = useState<Record<string, Column>>({
@@ -69,7 +71,6 @@ const Kanban = ({ toDo, inProgress, done }: type) => {
         const { source, destination, draggableId } = result;
 
         if (source.droppableId !== destination.droppableId) {
-            // Movimento entre colunas
             const sourceColumn = columns[source.droppableId];
             const destColumn = columns[destination.droppableId];
             const sourceItems = [...sourceColumn.items];
@@ -87,10 +88,8 @@ const Kanban = ({ toDo, inProgress, done }: type) => {
                     items: destItems,
                 },
             });
-            // Atualize o estado dos itens modificados com a lista de itens e o ID da coluna de destino
             setMovedItems({ items: destItems, columnId: destColumn.id });
         } else {
-            // Movimento na mesma coluna
             const column = columns[source.droppableId];
             const copiedItems = [...column.items];
             const [removed] = copiedItems.splice(source.index, 1);
@@ -102,7 +101,6 @@ const Kanban = ({ toDo, inProgress, done }: type) => {
                     items: copiedItems,
                 },
             });
-            // Atualize o estado dos itens modificados com a lista de itens e o ID da coluna original
             setMovedItems({ items: copiedItems, columnId: column.id });
         }
     }
@@ -140,7 +138,7 @@ const Kanban = ({ toDo, inProgress, done }: type) => {
                                                     {...provided.droppableProps}
                                                     ref={provided.innerRef}
                                                 >
-                                                    {column.items.map((item, index) => {
+                                                    {loaded ? column.items.map((item, index) => {
                                                         return (
                                                             <Draggable
                                                                 key={item.id}
@@ -160,7 +158,112 @@ const Kanban = ({ toDo, inProgress, done }: type) => {
                                                                 }}
                                                             </Draggable>
                                                         );
-                                                    })}
+                                                    }) :
+                                                        <>
+                                                            <div className="todolist-card box">
+                                                                <div className="todolist-card-top">
+                                                                    <div className="todolist-card-top-left">
+                                                                        <div className="todolist-color" >
+
+                                                                            <Skeleton style={{ width: '6px', height: '100%', }} />
+                                                                        </div>
+                                                                        <div className="todolist-text">
+                                                                            <div className="todolist-title">
+                                                                                <Skeleton style={{ width: '226px', height: '14px', }} />
+                                                                            </div>
+                                                                            <div className="todolist-description">
+                                                                                <Skeleton style={{ width: '176px', height: '12px', }} />
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div className="todolist-botton">
+                                                                    <div >
+
+                                                                        <Skeleton style={{ width: '76px', height: '14px', }} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton style={{ width: '14px', height: '14px', }} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton style={{ width: '14px', height: '14px', }} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="todolist-card box">
+                                                                <div className="todolist-card-top">
+                                                                    <div className="todolist-card-top-left">
+                                                                        <div className="todolist-color" >
+
+                                                                            <Skeleton style={{ width: '6px', height: '100%', }} />
+                                                                        </div>
+                                                                        <div className="todolist-text">
+                                                                            <div className="todolist-title">
+                                                                                <Skeleton style={{ width: '226px', height: '14px', }} />
+                                                                            </div>
+                                                                            <div className="todolist-description">
+                                                                                <Skeleton style={{ width: '176px', height: '12px', }} />
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div className="todolist-botton">
+                                                                    <div >
+
+                                                                        <Skeleton style={{ width: '76px', height: '14px', }} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton style={{ width: '14px', height: '14px', }} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton style={{ width: '14px', height: '14px', }} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="todolist-card box">
+                                                                <div className="todolist-card-top">
+                                                                    <div className="todolist-card-top-left">
+                                                                        <div className="todolist-color" >
+
+                                                                            <Skeleton style={{ width: '6px', height: '100%', }} />
+                                                                        </div>
+                                                                        <div className="todolist-text">
+                                                                            <div className="todolist-title">
+                                                                                <Skeleton style={{ width: '226px', height: '14px', }} />
+                                                                            </div>
+                                                                            <div className="todolist-description">
+                                                                                <Skeleton style={{ width: '176px', height: '12px', }} />
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div className="todolist-botton">
+                                                                    <div >
+
+                                                                        <Skeleton style={{ width: '76px', height: '14px', }} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton style={{ width: '14px', height: '14px', }} />
+                                                                    </div>
+                                                                    <div>
+                                                                        <Skeleton style={{ width: '14px', height: '14px', }} />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </>
+
+
+
+                                                    }
                                                     {provided.placeholder}
                                                 </div>
                                             );

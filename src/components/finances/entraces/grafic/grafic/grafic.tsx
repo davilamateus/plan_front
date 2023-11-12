@@ -12,7 +12,6 @@ interface type {
 function GraficOfBar({ barData }: type) {
 
 
-    console.log('Bar', barData)
     const data = {
         labels: barData.title,
         datasets: [

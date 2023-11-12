@@ -98,7 +98,7 @@ const TodoListTask = ({ tasks, todolistId }: type) => {
                             </div>
                         </div>
                     ))
-                    : 'No tasks added'}
+                    : 'No tasks added.'}
             </label>
 
         </div>

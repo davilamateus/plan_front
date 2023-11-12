@@ -11,51 +11,6 @@ import DoughnutHalf from '../../../../comuns/doughnutHalf';
 const DomesticResume = () => {
 
 
-    /*
-    const UseGetDomesticGoals = useGetDomesticGoals();
-    const [labels, setLabels] = useState<string[]>([])
-    const [eachGoalValue, setEachGoalValue] = useState<number[]>([])
-
-
-
-    useEffect(() => {
-        let totalPlanning = 0;
-        let totalEachGoal: number[] = [];
-        let takingColors: string[] = [];
-        let takingLabels: string[] = [];
-
-        let totalPaid = 0
-        if (UseGetDomesticGoals.length > 0) {
-
-            UseGetDomesticGoals.map((goal: IFinancesGoalsList) => {
-                totalPlanning = goal.value + totalPlanning;
-                takingColors.push(goal.color);
-                totalEachGoal.push(goal.valueItens);
-                takingLabels.push(goal.title);
-                goal.itens.map((item) => {
-                    if (item?.value) {
-                        totalPaid = totalPaid + item.value
-
-                    }
-                })
-
-            })
-
-            if (totalPaid < totalPlanning) {
-
-                totalEachGoal.push(totalPlanning - totalPaid);
-                takingColors.push('#f0f0f0');
-                takingLabels.push('Rest');
-            }
-
-            setEachGoalValue(totalEachGoal);
-            setColors(takingColors);
-            setLabels(takingLabels);
-
-        }
-
-    }, [UseGetDomesticGoals]) */
-
     const UseGetDomesticGoals = useGetDomesticGoals();
 
 
@@ -94,7 +49,7 @@ const DomesticResume = () => {
         }
     }, [total])
 
-
+    console.log('&&&&', (paid * 100) / total)
 
     return (
         <div className='domestic-total-card'>

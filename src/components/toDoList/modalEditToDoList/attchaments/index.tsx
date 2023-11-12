@@ -85,7 +85,7 @@ const TodoListAttchaments = ({ attchaments, todolistId }: type) => {
                             </div>
                         </div>
                     ))
-                    : 'No attchaments added'}
+                    : 'No attchaments added.'}
             </label>
 
         </div>

@@ -11,6 +11,8 @@ const avatar = {
     state_trip: '',
     country_trip: '',
     currency_trip: '',
+    currency_lon: '',
+    currency_lat: '',
     when: '',
     photo: ''
 }

@@ -6,6 +6,7 @@ import TitleOfSession from '../../../../communs/titleOfComponent';
 import IBarData from '../../../../../types/finances/entraces/IBarData';
 import { IFinancesEntraces } from '../../../../../types/finances/IEntraces';
 
+
 interface type {
     entraces: IFinancesEntraces[]
 }
@@ -32,6 +33,7 @@ const FinancesEntracesGrafic = ({ entraces }: type) => {
 
 
     useEffect(() => {
+        console.log('*****')
         if (entraces.length > 0) {
             setThatMonth(0)
             setThatMonth_1(0)
@@ -111,10 +113,11 @@ const FinancesEntracesGrafic = ({ entraces }: type) => {
 
             })
         }
-    }, [dateToday, entraces, thatMonth, thatMonth_1, thatMonth_10, thatMonth_11, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7, thatMonth_8, thatMonth_9])
+    }, [entraces, thatMonth, thatMonth_1, thatMonth_10, thatMonth_11, thatMonth_2, thatMonth_3, thatMonth_4, thatMonth_5, thatMonth_6, thatMonth_7, thatMonth_8, thatMonth_9])
 
 
-    console.log('Teste', barData)
+
+
     return (
         <>
             <div className='finances-entraces-grafic'>

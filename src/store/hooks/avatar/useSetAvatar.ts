@@ -14,6 +14,8 @@ function useSetAvatar() {
         country_trip: any,
         currency_trip: any,
         country_code: any,
+        country_lon: any,
+        country_lat: any,
         when: any,
         photo: any
     ) => {
@@ -29,6 +31,8 @@ function useSetAvatar() {
             country_trip,
             currency_trip,
             country_code,
+            country_lon,
+            country_lat,
             when,
             photo
 

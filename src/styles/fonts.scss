@@ -4,7 +4,7 @@ h1, h2,h3,h4,h5 {
     font-weight: 900;
 }
 
- button, h1, h2,h3,h4,h5 ,input, label{
+ button, h1, h2,h3,h4,h5 ,input{
     color: $title-color;
 
 }
@@ -23,12 +23,9 @@ h4{
 input{
     font-size: 16px;
 }
-label{
-    font-size: 14px!important;
-}
+
 
 p, span,div,input{
-    font-family: 'Helvetica', sans-serif;
     color: $paragraph-color;
     font-size: 10pt;
 }

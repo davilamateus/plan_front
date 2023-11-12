@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import './style.scss';
 import Api from '../../../../axios';
@@ -17,9 +16,11 @@ interface Types {
     setState: Dispatch<SetStateAction<string>>;
     setCountry: Dispatch<SetStateAction<string>>;
     setCountryCode?: Dispatch<SetStateAction<string>>;
+    setCountryLon?: Dispatch<SetStateAction<string>>;
+    setCountryLat?: Dispatch<SetStateAction<string>>;
 
 }
-const InputCity = ({ setCity, setState, setCountry, title, setCountryCode }: Types) => {
+const InputCity = ({ setCity, setState, setCountry, title, setCountryCode, setCountryLat, setCountryLon }: Types) => {
 
 
     const [query, setQuery] = useState<string>('');
@@ -62,6 +63,11 @@ const InputCity = ({ setCity, setState, setCountry, title, setCountryCode }: Typ
         setCountry(location.address.country);
         if (setCountryCode) {
             setCountryCode(location.address.country_code);
+        }
+        if (setCountryLat && setCountryLon) {
+            setCountryLat(location.lat);
+            setCountryLon(location.lon);
+
         }
         setSuggestions([]);
     };

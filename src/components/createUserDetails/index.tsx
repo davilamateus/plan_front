@@ -18,6 +18,8 @@ const CreateUserDetailsComponent = () => {
     const [stateTrip, setStateTrip] = useState<string>('');
     const [countryTrip, setCountryTrip] = useState<string>('');
     const [countryCode, setCountryCode] = useState<string>('');
+    const [countryLon, setCountryLon] = useState<string>('');
+    const [countryLat, setCountryLat] = useState<string>('');
     const [when, setWhen] = useState<number>(new Date().getTime());
     const [btnLoading, setBtnLoading] = useState(false);
     const [btnStatus, setBtnStatus] = useState(false);
@@ -33,7 +35,7 @@ const CreateUserDetailsComponent = () => {
 
     function createDetails() {
         setBtnLoading(true);
-        UseCreateUserDetails(photo, when, cityNow, stateNow, countryNow, getCurrency(countryNow), cityTrip, stateTrip, countryTrip, getCurrency(countryTrip), countryCode)
+        UseCreateUserDetails(photo, when, cityNow, stateNow, countryNow, getCurrency(countryNow), cityTrip, stateTrip, countryTrip, getCurrency(countryTrip), countryCode, countryLat, countryLon)
             .then((data: any) => {
                 if (data.status == 200) {
                     nav('/');
@@ -49,7 +51,6 @@ const CreateUserDetailsComponent = () => {
 
     function getCurrency(countrySearch: string) {
         const findCountry = currencyCities.find((country: any) => country.name == countrySearch);
-        console.log(findCountry.currency)
         return findCountry.currency
     }
 
@@ -80,6 +81,8 @@ const CreateUserDetailsComponent = () => {
                             setCountry={setCountryTrip}
                             setState={setStateTrip}
                             setCountryCode={setCountryCode}
+                            setCountryLon={setCountryLon}
+                            setCountryLat={setCountryLat}
                         />
                         <InputDate
                             date={when}

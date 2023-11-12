@@ -27,8 +27,11 @@ const IsLogged = () => {
             data.data.country_trip,
             data.data.currency_trip,
             data.data.country_code,
+            data.data.country_lon,
+            data.data.country_lat,
             data.data.when,
             data.data.photo,
+
           )
         }
         else if (data.status === 401) {

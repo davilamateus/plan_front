@@ -7,11 +7,10 @@ interface types {
     labels?: string[];
     values?: number[];
     colors?: string[];
-    porcent?: number;
+    porcent: number;
 }
 const DoughnutHalf = ({ labels, values, colors, porcent }: types) => {
 
-    console.log('Label', labels, 'Value', values)
 
 
     const data = {
@@ -40,13 +39,15 @@ const DoughnutHalf = ({ labels, values, colors, porcent }: types) => {
 
     }
 
+    console.log('PORCENTES', labels, porcent)
+
 
     return (
         <div className='doughnut-half' style={{ width: '192px' }}>
             <Doughnut width={28} height={28} data={data} options={options} />
             <div className="porcents">
-                {porcent ?
-                    <h3> {porcent.toFixed(2)}%</h3>
+                {porcent >= 0 || porcent < 0 ?
+                    <h3> {+porcent.toFixed(2) == -Infinity ? <img src="./../../../../../icons/infinity.svg" alt="" /> : porcent.toFixed(2) + '' + '%'}</h3>
                     : <Skeleton style={{ width: '68px', height: '48px', }} />
                 }</div>
         </div>

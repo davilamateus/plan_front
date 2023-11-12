@@ -36,6 +36,14 @@ const Menu = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link className={pageActived === 'advices' ? 'active' : ''} to={'/advices'}>
+                                <div >
+                                    <img src="./../../../icons/advices.svg" alt="" />
+                                </div>
+                                <p>Advices</p>
+                            </Link>
+                        </li>
+                        <li>
                             <Link className={pageActived === 'todolist' ? 'active' : ''} to={'/todolist'}>
                                 <div >
                                     <img src="./../../../icons/todolist.svg" alt="" />

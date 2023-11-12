@@ -59,7 +59,7 @@ const TodolistComments = ({ comments, todolistId }: type) => {
                 </div>
                 {inputOpened ?
                     <label className='todolist-comments-input'>
-                        <InputSimple title={'Attchament title'} input={title} setInput={setTitle} placeholder='Type a title of the comments..' />
+                        <InputSimple title={'Comment title'} input={title} setInput={setTitle} placeholder='Type a title of the comments..' />
                         <InputDescription title='Description' setDescription={setDescription} description={description} />
                         <ButtonSimple type='success' loading={loading} status={active} title={'Add comments'} action={AddComment} />
                     </label> : ''}
@@ -76,7 +76,7 @@ const TodolistComments = ({ comments, todolistId }: type) => {
                             </div>
                         </div>
                     ))
-                    : 'No commentss added'}
+                    : 'No comments added.'}
             </label>
 
         </div>

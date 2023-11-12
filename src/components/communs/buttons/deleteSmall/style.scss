@@ -1,7 +1,8 @@
 @import './../../../../styles/color';
 
 .delete-small{
-    img{
+    cursor: pointer;
+    svg{
         width: 12px;
     }
             svg, g ,path{

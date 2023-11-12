@@ -6,6 +6,7 @@ import { IToDoListMain } from '../../../types/toDoList/IToDoList';
 import ButtonAdd from '../../communs/buttons/add';
 import ModalAddToDoList from '../modalAddToDoList';
 import BoxFullpage from '../../communs/boxFullpage';
+import './style.scss';
 
 const ToDoListMain = () => {
 
@@ -16,6 +17,7 @@ const ToDoListMain = () => {
     const [inProgress, setInProgress] = useState<IToDoListMain[]>([]);
     const [done, setDone] = useState<IToDoListMain[]>([]);
     const [opened, setOpened] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         if (UseGetToDoList) {
@@ -36,6 +38,7 @@ const ToDoListMain = () => {
                 setToDo(arrayToDo);
                 setInProgress(arrayInProgress);
                 setDone(arrayDone);
+                setLoaded(true);
             }
 
         } else {
@@ -45,8 +48,8 @@ const ToDoListMain = () => {
 
 
     return (
-        <div>
-            <Kanban toDo={toDo} inProgress={inProgress} done={done} />
+        <div className='todolist-main'>
+            <Kanban toDo={toDo} inProgress={inProgress} done={done} loaded={loaded} />
             <ButtonAdd content={<BoxFullpage content={<ModalAddToDoList setOpened={setOpened} />} setOpened={setOpened} title='Add To do list' />} opened={opened} setOpened={setOpened} />
         </div>
     )
