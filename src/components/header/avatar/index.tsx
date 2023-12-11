@@ -7,6 +7,8 @@ import Skeleton from 'react-loading-skeleton';
 const AvatarComponent = () => {
     const UseGetAvatar = useGetAvatar();
 
+    console.log(UseGetAvatar)
+
     return (
         <div >
             {UseGetAvatar.name ?
@@ -18,7 +20,7 @@ const AvatarComponent = () => {
                     <div className="avatar-photo-box">
                         <div
                             style={{
-                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo}`
+                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo !== null ? UseGetAvatar.photo : 'default.jpeg    '}`
                             }}
                             className="avatar-photo"
                         >

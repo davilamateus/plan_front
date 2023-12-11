@@ -6,7 +6,7 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 interface type {
     advice: IAdvicesMain
-    adviceImg: IAdvicesMainImg
+    adviceImg: IAdvicesMainImg | undefined
 }
 
 const AdviceOpened = ({ advice, adviceImg }: type) => {
@@ -17,24 +17,30 @@ const AdviceOpened = ({ advice, adviceImg }: type) => {
     const [count, setCount] = useState(0);
 
     function changeSlide(value: number) {
-        if (count + value == adviceImg.img.length) {
-            setCount(0)
-        } else if (count + value < 0) {
-            setCount(adviceImg.img.length - 1)
-        } else {
-            setCount(count + value)
+        if (adviceImg) {
+
+            if (count + value == adviceImg?.img.length) {
+                setCount(0)
+            } else if (count + value < 0) {
+                setCount(adviceImg.img.length - 1)
+            } else {
+                setCount(count + value)
+            }
         }
     }
 
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (count < adviceImg.img.length - 1) {
-                setCount(count + 1)
-            } else setCount(0)
+        if (adviceImg) {
 
-        }, 5000);
-        return () => clearInterval(interval);
+            const interval = setInterval(() => {
+                if (count < adviceImg.img.length - 1) {
+                    setCount(count + 1)
+                } else setCount(0)
+
+            }, 5000);
+            return () => clearInterval(interval);
+        }
     }, [count, adviceImg]);
 
 
@@ -69,7 +75,7 @@ const AdviceOpened = ({ advice, adviceImg }: type) => {
     return (
         <div className='advice-opened content'>
             <div className="advice-opened-slide">
-                <div className="advice-opened-bigImg" style={{ backgroundImage: `url(${adviceImg.img[count]?.prefix}original${adviceImg.img[count]?.suffix})` }}>
+                <div className="advice-opened-bigImg" style={{ backgroundImage: `url(${adviceImg?.img[count]?.prefix}original${adviceImg?.img[count]?.suffix})` }}>
                     <div className="advice-opened-back" onClick={() => changeSlide(-1)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="33.314" height="54.312" viewBox="0 0 33.314 54.312">
                             <g id="Grupo_3990" data-name="Grupo 3990" transform="translate(-1466.843 -985.843)">
@@ -90,7 +96,7 @@ const AdviceOpened = ({ advice, adviceImg }: type) => {
                     </div>
                 </div>
                 <div className="advice-opened-imgs">{
-                    adviceImg.img.map((img, index) => (
+                    adviceImg?.img.map((img, index) => (
                         <div
                             className="advice-opened-img"
                             style={{ backgroundImage: `url(${img?.prefix}original${img?.suffix})` }}

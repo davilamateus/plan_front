@@ -39,7 +39,6 @@ const DoughnutHalf = ({ labels, values, colors, porcent }: types) => {
 
     }
 
-    console.log('PORCENTES', labels, porcent)
 
 
     return (

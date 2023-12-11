@@ -34,7 +34,6 @@ const NoticiesMain = () => {
       })
       .catch(error => {
         setLoading(false)
-        console.error('erro:', error);
       });
   }
 

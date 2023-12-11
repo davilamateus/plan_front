@@ -1,0 +1,33 @@
+
+@import './../../../../styles/color';
+.weather-main{
+    width: 55%;
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    .weather-left{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        .weather-date{
+            display: flex;
+            gap: 4px;
+        }
+        .weather-degre{
+            display: flex;
+        }
+        .weather-infor{
+            display: flex;
+            flex-direction: column;
+            text-transform: capitalize;
+        }
+    }
+    .weather-right{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+
+}

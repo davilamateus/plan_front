@@ -5,7 +5,7 @@ interface type {
 }
 const titleOfSession = ({ title }: type) => {
     return (
-        <h2 className='title-of-session'>{title}</h2>
+        <h4 className='title-of-session'>{title}</h4>
     )
 }
 

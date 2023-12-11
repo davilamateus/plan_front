@@ -1,0 +1,43 @@
+@import './../../../../styles/color';
+
+
+.advice-categorie-card{
+    cursor: pointer;
+    .advice-categorie-card-img{
+        border-radius: 8px;
+        overflow: hidden;
+        width: 200px;
+        height: 300px;
+        background-size: cover;
+        background-position: center;
+        .advice-categorie-card-text{
+            color: $background;
+            gap: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: end;
+            height: 100%;
+            width: 100%;
+            text-align: right;
+            background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(1,1,1,0) 58%);
+            .advice-categorie-card-title{
+                font-size: 14pt;
+                font-weight: 900;
+
+            }
+          .advice-categorie-card-categorie{
+                display: flex;
+                align-items: center;
+                margin-bottom: -8px;
+                display: flex;
+                .advice-categorie-card-categorie-icon{
+                    width: 18px;
+                    background-size: cover;
+                    height: 18px;
+                }
+            }
+        }
+    }
+}

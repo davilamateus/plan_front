@@ -1,22 +1,48 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import TitleOfSession from '../../communs/titleOfSession'
 import { Line } from 'react-chartjs-2'
 import './stype.scss';
+import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar';
+import Axios from 'axios'
 
-
-interface type {
-    values: number[]
+interface types {
+    setValue: Dispatch<SetStateAction<number>>;
 }
-const ExchangeHistoric = ({ values }: type) => {
+
+const ExchangeHistoric = ({ setValue }: types) => {
+
+    const UseGetAvatar = useGetAvatar();
+    const [dataValue, setDataValue] = useState<number[]>([]);
+
+    useEffect(() => {
+        if (UseGetAvatar.currency_local) {
+            getCurrency()
+        }
+
+    }, [UseGetAvatar])
+
+    function getCurrency() {
+        Axios.get(`https://economia.awesomeapi.com.br/json/daily/${UseGetAvatar.currency_trip}-${UseGetAvatar.currency_local}/7`).then((data: any) => {
+            let array: number[] = []
+
+            data.data.map((item: any) => {
+                array.push((+item.high))
+            })
+            setDataValue(array.reverse())
+            setValue(array[0]);
+
+        })
+    }
+
 
 
     const data = {
         labels: ["-6d", "-5d", "-4d", "-3d", "-2d", '-1d', 'Today'],
         datasets: [
             {
-                data: values.length > 0 ? values : [3.2, 3.5, 3.2, 3.5, 3.5, 3.2, 3.4],
+                data: dataValue.length > 0 ? dataValue : [3.2, 3.5, 3.2, 3.5, 3.5, 3.2, 3.4],
                 fill: false,
-                borderColor: values.length > 0 ? values[5] < values[6] ? ' #FA385F' : '#6AD9A8' : '#dfdfdf',
+                borderColor: dataValue.length > 0 ? dataValue[5] < dataValue[6] ? ' #FA385F' : '#6AD9A8' : '#dfdfdf',
                 pointRadius: 3,
                 pointBackgroundColor: '#6AD9A8',
                 borderWidth: 4,

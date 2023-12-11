@@ -90,16 +90,20 @@ const AdvicesPrincipal = () => {
     }, [opened])
 
 
+    function witchImg(id: string) {
+        return advicesImg.find(img => img.id == id);
+    }
+
     return (
         loaded ?
             <div>
                 <TitleOfSession title={'Discovery'} />
-                {advicesImg.length > 0 && advicesImg[count] ?
+                {advices.length > 0 ?
                     <div onClick={() => {
                         setOpened(true)
 
                     }} className='principal-advices-background box'
-                        style={{ backgroundImage: `url(${advicesImg[count]?.img[0]?.prefix}original${advicesImg[count]?.img[0]?.suffix})` }}>
+                        style={{ backgroundImage: `url(${witchImg(advices[count].fsq_id)?.img[0].prefix}original${witchImg(advices[count].fsq_id)?.img[0].suffix})` }}>
                         <div className="principal-advices-bottons">
                             <div className="principal-advices-others-photos">
                                 {advicesImg.map((item, index) => (
@@ -113,7 +117,6 @@ const AdvicesPrincipal = () => {
                                                 className="principal-advices-others-photo"
                                                 key={index}
                                                 style={{ backgroundImage: `url(${item.img[0]?.prefix}original${item.img[0]?.suffix})` }}>
-                                                index {index}
                                             </div>
                                             : ''
                                         : ''
@@ -137,7 +140,7 @@ const AdvicesPrincipal = () => {
 
                     : ''}
 
-                {opened ? <BoxFullpage content={<AdviceOpened advice={advices[count]} adviceImg={advicesImg[count]} />} setOpened={setOpened} /> : ''}
+                {opened ? <BoxFullpage content={<AdviceOpened advice={advices[count]} adviceImg={witchImg(advices[count].fsq_id)} />} setOpened={setOpened} /> : ''}
             </div >
             :
             <div>

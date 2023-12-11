@@ -1,0 +1,16 @@
+.advice-categorie-cards-dashboard{
+    overflow: scroll;
+    height: 700px;
+    border-radius: 4px;
+    display: flex;
+    width: 100%;
+ height: max-content;
+}
+    .advice-categorie-scroll-dashboard{
+        gap: 8px;
+        top: 0;
+        display: flex;
+        gap: 8px;
+        transition: 1s;
+        flex-direction: column;
+}

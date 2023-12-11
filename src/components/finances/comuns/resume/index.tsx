@@ -12,7 +12,7 @@ const FinanceSimpleResult = ({ title, value }: type) => {
             <div className='finance-simple-result'>
 
                 <span className='finance-simple-result-title'>{title}:</span>
-                <span className='finance-simple-result-value'>{FormartMoney(value)}</span>
+                <h5 className='finance-simple-result-value'>{FormartMoney(value)}</h5>
 
             </div>
             :

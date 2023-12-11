@@ -15,13 +15,14 @@
     @keyframes fadeBackground {
         0% {
             background: rgba(0, 0, 0, 0); 
+            backdrop-filter: blur(0px);
         }
         100% {
+            backdrop-filter: blur(1px);
             background: $box-fullpage-background;
         }
 }
     .box-fullpage-background{
-        background-color: #ffffff00;
         backdrop-filter: blur(0px);
         display: flex;
         justify-content: center;
@@ -31,8 +32,7 @@
         min-height: 100vh;
         top: 0;
         left: 0;
-        animation: fadeBackground 0.4s ease forwards;
-        transition: 0.4s;
+        animation: fadeBackground 0.6s ease forwards;
     }
 
         @keyframes boxAnimation {
@@ -50,19 +50,18 @@
     padding: 64px 16px 16px 16px;
 }
 
-    .box-fullpage-box{
-        z-index: 4;
-        border: none;
-        width: 480px;
-        max-width: 95vw;
-        max-height: 80vh;
+.box-fullpage-box{
+    z-index: 4;
+    border: none;
+    width: 480px;
+    max-width: 95vw;
         display: flex;
         flex-direction: column;
         align-items: center;
         transition: 0.3s;
         -ms-overflow-style: none; /* for Internet Explorer, Edge */
         scrollbar-width: none; /* for Firefox */
-        animation: boxAnimation 0.6s ease forwards;
+        animation: boxAnimation 0.4s ease forwards;
         background-color: $box-background;
 
 
@@ -72,11 +71,15 @@
 
 
 .box-fullpage-head{
-    padding: 32px 16px;
+    background-color: $box-background;
+    border-radius: 4px;
+    padding:8px 16px;
     position: fixed;
     width: 480px;
     max-width: 95vw;
-    margin-top: -16px;
+    margin-top: 0px;
+    overflow: scroll;
+
 
     .title-box{
         margin: 0 auto;
@@ -100,11 +103,12 @@
             width: 100%;
             
             .content{
+                max-height: 70vh;
                 overflow: scroll;
-                max-height: 80vh;
                 display: flex;
                 flex-direction: column;
                 gap: 32px;
+                padding-bottom: 34px;
             }
             .button{
                 display: flex;

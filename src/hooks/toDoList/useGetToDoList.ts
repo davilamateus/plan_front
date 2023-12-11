@@ -18,7 +18,6 @@ const useGetToDoListApi = () => {
     return async () => {
         const res = await Api.get(`/todolist`, config)
             .then((data) => {
-                console.log('Resultado', data.data)
                 UseSetToDoList(data.data);
 
             })

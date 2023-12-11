@@ -1,0 +1,21 @@
+
+.exchange-dashboard-texts{
+    display: flex;
+    padding: 8px;
+    flex-direction: column;
+    gap: 4px;
+    div {
+        font-size: 9pt;
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+
+    }
+    .exchange-value{
+        font-weight: 800;
+    }
+}
+
+.exchange-dashboard{
+    max-height: 148px;
+}

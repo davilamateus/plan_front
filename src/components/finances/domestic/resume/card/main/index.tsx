@@ -49,7 +49,6 @@ const DomesticResume = () => {
         }
     }, [total])
 
-    console.log('&&&&', (paid * 100) / total)
 
     return (
         <div className='domestic-total-card'>

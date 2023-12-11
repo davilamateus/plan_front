@@ -58,25 +58,6 @@ const AdvicesCategorie = ({ slug, categorie }: type) => {
 
 
 
-    const handleWheel = (event: React.WheelEvent) => {
-        /*
-        
-        if (event.deltaY > 1) {
-            
-                    if (count !== -1 * (advices.length - 1) * 208) {
-                        console.log('')
-                        setCount(count - 208);
-                    }
-                } else if (event.deltaY < +1) {
-                    
-                    if (count !== 0) {
-                        setCount(count + 208);
-                    }
-                }
-                */
-
-    };
-
 
 
     function changeSlide(value: number) {
@@ -101,9 +82,8 @@ const AdvicesCategorie = ({ slug, categorie }: type) => {
 
     return (
         <div>
-
             <TitleOfSession title={slug} />
-            {loaded ?
+            {loaded && advices.length > 0 ?
                 <>
                     <div className="advice-categorie-cards ">
                         <div className="advices-categorie-buttons">
@@ -133,7 +113,6 @@ const AdvicesCategorie = ({ slug, categorie }: type) => {
 
                         </div>
                         <div
-                            onWheel={handleWheel}
                             className="advice-categorie-scroll"
                             style={{ transform: `translate(${count}px)` }}>
                             {

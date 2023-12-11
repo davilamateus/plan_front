@@ -11,6 +11,7 @@ import useGetDomesticGoals from '../../../../store/hooks/finances/useGetDomestic
 import { IFinancesEntraces } from '../../../../types/finances/IEntraces';
 import TitleOfSession from '../../../communs/titleOfComponent';
 import DoughnutHalf from '../../comuns/doughnutHalf';
+import useGetGoalsApi from '../../../../hooks/finances/goals/useGetGoals';
 
 const FinancesResume = () => {
 
@@ -22,6 +23,8 @@ const FinancesResume = () => {
     const [tripTotalThatMonth, setTripTotalThatMonth] = useState<number>(0);
     const [profit, setProfit] = useState<number>(0);
     const monthName = GetTimestampInfomartions(new Date().getTime(), 0).nameOfMonth;
+
+    console.log('aqui', trip)
 
 
     const UseGetEntraces = useGetEntraces();
@@ -57,16 +60,20 @@ const FinancesResume = () => {
 
 
 
+    const UseGetGoalsApi = useGetGoalsApi();
 
+    const timeNow = new Date().getTime()
 
     // Getting Domestic
     useEffect(() => {
-        setDomestic(UseGetDomesticGoals)
+        if (!UseGetDomesticGoals) {
+            UseGetGoalsApi(GetTimestampInfomartions(timeNow, 0).firstDay, GetTimestampInfomartions(timeNow, 0).lastDay, 1, true);
+
+        } else {
+            setDomestic(UseGetDomesticGoals)
+
+        }
     }, [UseGetDomesticGoals]);
-
-
-
-
 
 
 

@@ -19,7 +19,7 @@ const ToDoListCard = ({ toDoList }: type) => {
                     <div className="todolist-card-top-left">
                         <div className="todolist-color" style={{ backgroundColor: toDoList.color }}></div>
                         <div className="todolist-text">
-                            <div className="todolist-title">{toDoList.title}</div>
+                            <h5 className="todolist-title">{toDoList.title}</h5>
                             <div className="todolist-description">{toDoList.description}</div>
                         </div>
                     </div>
@@ -36,7 +36,10 @@ const ToDoListCard = ({ toDoList }: type) => {
                                 <path id="Caminho_90" data-name="Caminho 90" d="M11.93,5.36V9.654h3.031" transform="translate(-5.655 -3.191)" fill="none" stroke="#2b3136" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
                             </g>
                         </svg>
-                        {DateTimeAgo(new Date(toDoList.date))}</div>
+                        <span className='span-small'>
+                            {DateTimeAgo(new Date(toDoList.date))}
+                        </span>
+                    </div>
                     {toDoList.toDoListTasks.length > 0 ?
                         <div>
                             <img src="./../../../../icons/tasks.svg" alt="Tasks" />

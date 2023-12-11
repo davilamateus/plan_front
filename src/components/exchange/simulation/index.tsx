@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TitleOfSession from '../../communs/titleOfSession'
 import InputMoney from '../../communs/inputs/money';
 import './style.scss';
+import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar';
 
 
 interface types {
@@ -10,7 +11,11 @@ interface types {
     currency_trip?: string;
 }
 
-const ExchangeSimulation = ({ exchangeToday = 1, currency_local, currency_trip }: types) => {
+const ExchangeSimulation = ({ exchangeToday = 1, }: types) => {
+
+    const UseGetAvatar = useGetAvatar();
+
+
 
     const [input, setInput] = useState(100000);
     const [type, setType] = useState(1);
@@ -25,12 +30,12 @@ const ExchangeSimulation = ({ exchangeToday = 1, currency_local, currency_trip }
                             <button
                                 onClick={() => { setType(1) }}
                                 className={type === 1 ? 'selected' : ''}>
-                                {currency_local} to {currency_trip}
+                                {UseGetAvatar.currency_local} to {UseGetAvatar.currency_trip}
                             </button>
                             <button
                                 onClick={() => { setType(2) }}
                                 className={type === 2 ? 'selected' : ''}>
-                                {currency_trip} to {currency_local}
+                                {UseGetAvatar.currency_trip} to {UseGetAvatar.currency_local}
                             </button>
                         </div>
                     </div>
@@ -46,11 +51,11 @@ const ExchangeSimulation = ({ exchangeToday = 1, currency_local, currency_trip }
                         <h4>Value</h4>
                         <span className='value'>{type === 1 ?
                             <>
-                                {currency_trip} {((((input / 100) / exchangeToday) * 0.984) * 0.97).toFixed(2)}
+                                {UseGetAvatar.currency_trip} {((((input / 100) / exchangeToday) * 0.984) * 0.97).toFixed(2)}
                             </>
                             :
                             <>
-                                {currency_local} {((((input / 100) * exchangeToday) * 0.984) * 0.97).toFixed(2)}
+                                {UseGetAvatar.currency_local} {((((input / 100) * exchangeToday) * 0.984) * 0.97).toFixed(2)}
                             </>
                         }</span>
                     </div>
@@ -63,11 +68,11 @@ const ExchangeSimulation = ({ exchangeToday = 1, currency_local, currency_trip }
                         <h4>Value</h4>
                         <span className='value'>{type === 1 ?
                             <>
-                                {currency_trip} {((((input / 100) / exchangeToday) * 0.99) * 0.94).toFixed(2)}
+                                {UseGetAvatar.currency_trip} {((((input / 100) / exchangeToday) * 0.99) * 0.94).toFixed(2)}
                             </>
                             :
                             <>
-                                {currency_local} {((((input / 100) * exchangeToday) * 0.99) * 0.94).toFixed(2)}
+                                {UseGetAvatar.currency_local} {((((input / 100) * exchangeToday) * 0.99) * 0.94).toFixed(2)}
                             </>
                         }</span>
                     </div>
@@ -80,11 +85,11 @@ const ExchangeSimulation = ({ exchangeToday = 1, currency_local, currency_trip }
                         <h4>Value</h4>
                         <span className='value'>{type === 1 ?
                             <>
-                                {currency_trip} {((((input / 100) / exchangeToday) * 0.964) * 0.97).toFixed(2)}
+                                {UseGetAvatar.currency_trip} {((((input / 100) / exchangeToday) * 0.964) * 0.97).toFixed(2)}
                             </>
                             :
                             <>
-                                {currency_local} {((((input / 100) * exchangeToday) * 0.964) * 0.97).toFixed(2)}
+                                {UseGetAvatar.currency_local} {((((input / 100) * exchangeToday) * 0.964) * 0.97).toFixed(2)}
                             </>
                         }</span>
                     </div>

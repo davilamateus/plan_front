@@ -6,32 +6,14 @@ import ExchangeSimulation from '../simulation'
 
 const ExchangeMain = () => {
 
-    const UseGetAvatar = useGetAvatar();
-    const [data, setData] = useState<number[]>([]);
+    const [data, setData] = useState<number>(0);
 
-    useEffect(() => {
-        if (UseGetAvatar.currency_local) {
-            getCurrency()
-        }
 
-    }, [UseGetAvatar])
-
-    function getCurrency() {
-        Axios.get(`https://economia.awesomeapi.com.br/json/daily/${UseGetAvatar.currency_trip}-${UseGetAvatar.currency_local}/7`).then((data: any) => {
-            let array: number[] = []
-
-            data.data.map((item: any) => {
-                array.push((+item.high))
-            })
-            setData(array.reverse())
-
-        })
-    }
 
     return (
         <div>
-            <ExchangeHistoric values={data} />
-            <ExchangeSimulation exchangeToday={data[0]} currency_local={UseGetAvatar.currency_local} currency_trip={UseGetAvatar.currency_trip} />
+            <ExchangeHistoric setValue={setData} />
+            <ExchangeSimulation exchangeToday={data} />
         </div>
     )
 }

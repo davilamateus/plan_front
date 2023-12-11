@@ -28,6 +28,7 @@
     "install": "^0.13.0",
     "movie-trailer": "^3.2.2",
     "npm": "^10.2.2",
+    "radio-browser-api": "^6.0.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-chartjs-2": "^5.2.0",

@@ -2,9 +2,11 @@
 
 .todolist-card{
     padding: 8px;
+    height: max-content;
     display: flex;
-    gap: 16px;
+    gap: 8px;
     flex-direction: column;
+    cursor: pointer;
     .todolist-card-top{
         display: flex;
         justify-content: space-between;
@@ -21,10 +23,7 @@
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
-                .todolist-title{
-                    font-size: 12pt;
-                    color: $paragraph-dark-color;
-                }
+
             }
         }
         .todolist-card-top-right{
@@ -39,7 +38,9 @@
         gap: 4px;
         .date-late{
             border: 1px solid $terciary-color;
-            color: $terciary-color;
+            span{
+                color: $terciary-color;
+            }
             svg , g, circle, path{
                 stroke:$terciary-color!important;
                 opacity: 1;
@@ -49,11 +50,10 @@
             border: 1px solid $input-border-color;
             width: max-content;
             padding: 2px 6px;
-            border-radius: 32px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 8pt;
             svg{
                 width: 10px;
                 opacity: 0.4;

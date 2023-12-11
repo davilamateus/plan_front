@@ -1,0 +1,19 @@
+@import './../../../../styles/color';
+
+.noticies-dashboard-main{
+    width: 100%;
+    .noticies-dashboard-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 8px;
+        button{
+            color: $paragraph-color;
+            background: none;
+            border: none;
+            font-size: 10pt;
+            font-weight: 400;
+            
+        }
+    }
+}
