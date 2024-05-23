@@ -1,6 +1,6 @@
 import produce from 'immer';
-import { IFinancesGoalsList } from '../../../types/finances/IGoals';
-const domesticGoals: IFinancesGoalsList[] | boolean = false;
+import { IFinancesGoal } from '../../../types/finances/IGoals';
+const domesticGoals: IFinancesGoal[] | boolean = false;
 const INITIAL_STATE = {
     domesticGoals
 };

@@ -59,7 +59,7 @@ export interface IToDoListCommentsAdd {
 export interface IToDoListAttchamentsAdd {
     title: string;
     link: string;
-    toDoListId: number
+    toDoListId: number;
 }
 
 export interface ITodolistPosition {

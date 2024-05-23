@@ -1,78 +1,67 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useCreateUser } from "../../../../hooks/user/useCreateUser";
+import { isEmail } from "../../../../functions/isEmail";
+import { IRegister } from "../../../../types/login/IRegister";
+import { isPassword } from "../../../../functions/isPassword";
+import { IMessage } from "../../../../types/messages/IMenssage";
 import InputEmail from "../../../communs/inputs/email";
 import InputPassword from "../../../communs/inputs/password";
-import './style.scss';
-import ButtonSimple from "../../../communs/buttons/simple/simple";
-import SocialLogin from "../social";
-import isEmail from "../../../../functions/isEmail";
-import useSetMessage from "../../../../store/hooks/messages/useSetMessage";
 import InputSimple from "../../../communs/inputs/simples";
-import useCreateUser from "../../../../hooks/user/useCreateUser";
+import ButtonSimple from "../../../communs/buttons/simple/simple";
+import PasswordRequirments from "../../../communs/PasswordRequirments";
+import SocialLogin from "../social";
+import Message from "../../../messages";
+import './style.scss';
 
 interface type {
     setMenuSelect: Dispatch<SetStateAction<string>>;
 }
 
 const RegisterFormLogin = ({ setMenuSelect }: type) => {
-    const [name, setName] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const [btnStatus, setBtnStatus] = useState<boolean>(false);
+    const [user, setUser] = useState<IRegister>({ name: '', email: '', password: '', confirmPassword: '' })
     const [btnLoading, setBtnLoading] = useState<boolean>(false);
-
-
-    // useStates Requirements 
-    const [min, setMin] = useState(false);
-    const [upper, setUpper] = useState(false);
-    const [lower, setLower] = useState(false);
-    const [number, setNumber] = useState(false);
-
-
-    useEffect(() => {
-        passwordCreateChange(password)
-    }, [lower, min, number, password, upper])
-
-
-
-    function passwordCreateChange(value: string) {
-        if (value.search(/[a-z]/) >= 0) { setLower(true) } else { setLower(false) };
-        if (value.search(/[A-Z]/) >= 0) { setUpper(true) } else { setUpper(false) };
-        if (value.search(/[0-9]/) >= 0) { setNumber(true) } else { setNumber(false) };
-        if (value.length >= 8) { setMin(true) } else { setMin(false) };
-    }
-
-    useEffect(() => {
-        if (name !== '' && isEmail(email) && upper && lower && min && number && password == confirmPassword) {
-            setBtnStatus(true);
-        } else {
-            setBtnStatus(false);
-        }
-    }, [name, email, password, confirmPassword])
-
-
+    const [message, setMessage] = useState<IMessage>({ status: false })
 
     const UseHookCreateUser = useCreateUser();
-    const setMessage = useSetMessage();
 
-    function register() {
+    const handleRegister = () => {
         setBtnLoading(true);
-        UseHookCreateUser(email, password, name).then((data: any) => {
-            setBtnLoading(false);
-
-            if (data.status === 203) {
-                setMenuSelect('login')
-                setMessage('Email already used!', 'That email already used before. Please to choose other email and try again.', 'atention');
-
-            } else if (data.status === 200) {
-                setMenuSelect('login')
-                setMessage('User registered with success!', 'All right here. Now please check your box email and your span for confirming your account.', 'success');
-            } else {
-                setMessage('Error!', 'Please to try again.', 'error');
-            };
-        });
+        UseHookCreateUser(user)
+            .then((data) => {
+                setBtnLoading(false);
+                if (data.status === 200) {
+                    setMessage({
+                        title: 'User registered with success!',
+                        description: 'All right here. Now please check your box email and your span for confirming your account.',
+                        type: 'success',
+                        status: true
+                    });
+                    // setMenuSelect('login');
+                } else if (data.status === 201) {
+                    setMessage({
+                        title: 'Email already used!',
+                        description: 'That email already used before. Please to choose other email and try again.',
+                        type: 'atention',
+                        status: true
+                    });
+                } else {
+                    setMessage({
+                        title: 'Error',
+                        description: 'Please to try again.',
+                        type: 'error',
+                        status: true
+                    });
+                }
+            })
+            .catch(() => {
+                setMessage({
+                    title: 'Error',
+                    description: 'Please to try again.',
+                    type: 'error',
+                    status: true
+                });
+            })
     };
-
 
 
     return (
@@ -81,49 +70,29 @@ const RegisterFormLogin = ({ setMenuSelect }: type) => {
             <InputSimple
                 title='Full Name:'
                 placeholder='Josh Drake'
-                setInput={setName}
-                input={name}
+                setInput={(e) => setUser({ ...user, name: e })}
+                input={user.name}
             />
             <InputEmail
                 title='Email:'
                 placeholder='exemplo@email.com'
-                setInput={setEmail}
-                input={email}
+                setInput={(e) => setUser({ ...user, email: e })}
+                input={user.email}
             />
             <InputPassword
                 title='Password:'
                 placeholder='********'
-                setInput={setPassword}
-                input={password}
+                setInput={(e) => setUser({ ...user, password: e })}
+                input={user.password}
             />
-            {password == '' || password !== '' && (number && min && upper && lower) ? '' :
-                <div className="req-password">
-                    <div className={upper ? 'success' : ''} >
-                        <div></div>
-                        Upper case
-                    </div>
-                    <div className={lower ? 'success' : ''} >
-                        <div></div>
-                        Lower case
-                    </div>
-                    <div className={number ? 'success' : ''} >
-                        <div></div>
-                        Number
-                    </div>
-
-                    <div className={min ? 'success' : ''} >
-                        <div></div>
-                        Min 8 Caracters
-                    </div>
-                </div>
-            }
+            <PasswordRequirments password={user.password} />
             <InputPassword
                 title='Confirm Password:'
                 placeholder='********'
-                setInput={setConfirmPassword}
-                input={confirmPassword}
+                setInput={(e) => setUser({ ...user, confirmPassword: e })}
+                input={user.confirmPassword}
             />
-            {confirmPassword == '' || password == confirmPassword ? '' :
+            {user.confirmPassword == '' || user.password == user.confirmPassword ? '' :
                 <div className="req-password">
                     <div >
                         <div></div>
@@ -132,18 +101,21 @@ const RegisterFormLogin = ({ setMenuSelect }: type) => {
                 </div>
             }
 
-
             <ButtonSimple
                 title='Register'
                 type='success'
-                status={btnStatus}
-                action={() => { register() }}
+                status={user.name !== '' && isEmail(user.email) && isPassword(user.password) && (user.password === user.confirmPassword)}
+                action={handleRegister}
                 loading={btnLoading}
             />
             <div className="login-social">
                 <p>Or register with your account:</p>
                 <SocialLogin />
             </div>
+            <Message
+                message={message}
+                setMessage={setMessage}
+            />
 
         </>
 

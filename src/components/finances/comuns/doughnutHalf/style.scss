@@ -1,14 +1,13 @@
-@import './../../../../styles/color';
-.doughnut-half{
+@import "./../../../../styles/color";
+.doughnut-half {
     display: flex;
     align-items: center;
     justify-content: center;
-    .porcents{
+    .porcents {
         position: absolute;
         margin-top: 52px;
-        img{
+        img {
             width: 24px;
         }
     }
-
 }

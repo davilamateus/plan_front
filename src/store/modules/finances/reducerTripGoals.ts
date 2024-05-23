@@ -1,8 +1,8 @@
 import produce from 'immer';
-import { IFinancesGoalsList } from '../../../types/finances/IGoals';
+import { IFinancesGoal } from '../../../types/finances/IGoals';
 
 
-const tripGoals: IFinancesGoalsList[] | boolean = false;
+const tripGoals: IFinancesGoal[] | boolean = false;
 
 const INITIAL_STATE = {
     tripGoals

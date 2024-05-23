@@ -1,26 +1,29 @@
-import ButtonAdd from './../../communs/buttons/add';
-import EntracesMain from '../entraces/main';
-import DomesticMain from '../domestic/main';
-import TravelMain from '../travel/main/travel';
-import './style.scss';
-import FinancesMenuAdd from '../menuAdd';
-import { useState } from 'react';
+import { useState } from "react";
+import ButtonAdd from "./../../communs/buttons/add";
+import FinancesMenuAdd from "../menuAdd";
+import TitleOfSession from "../../communs/titleOfSession";
+import ResumeFinances from "../resume/main";
+import FinancesEntraces from "../entraces/main";
+import TravelFinanceMain from "../travel/main";
+import "./style.scss";
 
 const MainFinances = () => {
-    const [opened, setOpened] = useState(false)
-
+    const [opened, setOpened] = useState(false);
 
     return (
-        <>
-            <ButtonAdd setOpened={setOpened} opened={opened}
-                content={<FinancesMenuAdd setOpened={setOpened} />} />
-            <EntracesMain />
+        <div className="finances-page">
+            <ButtonAdd
+                setOpened={setOpened}
+                opened={opened}
+                content={<FinancesMenuAdd setOpened={setOpened} />}
+            />
+            <FinancesEntraces />
             <hr />
-            <DomesticMain />
+            <ResumeFinances />
             <hr />
-            <TravelMain />
-        </>
-    )
-}
+            <TravelFinanceMain />
+        </div>
+    );
+};
 
 export default MainFinances;

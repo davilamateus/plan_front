@@ -1,70 +1,45 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import './style.scss';
-import Api from '../../../../axios';
-import { BASE_URL } from '../../../../axios';
+import { BASE_URL } from "../../../../axios";
+import { useState } from "react";
+import { useGetUser } from "../../../../store/hooks/user/useGetUser";
+import { userUploadPhoto } from "../../../../hooks/user/useUploadPhoto";
+import "./style.scss";
+import { useSetUser } from "../../../../store/hooks/user/useSetUser";
 
-interface type {
-    setPhoto: Dispatch<SetStateAction<string | undefined>>;
-    photo: string | undefined;
-}
-
-
-const PhotoUpdate = ({ photo, setPhoto }: type) => {
-
-
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+const PhotoUpdate = () => {
     const [fileName, setFileName] = useState<string | undefined>(undefined);
+    const UseGetUser = useGetUser();
+    const UseUploadPhoto = userUploadPhoto();
+    const UseSetUser = useSetUser();
 
-
-    const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            console.log('mudouuuuu')
-
-            const formData = new FormData();
-            formData.append('file', file);
-
-            const response = await Api.post<{ fileName: string }>(
-                '/user/photo',
-                formData,
-                {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                }
-            ).then((data: any) => {
-                setPhoto(data.data.fileName);
-                setFileName(data.data.fileName);
-            })
-        }
-        setSelectedFile(file || null);
-
-    };
-
-    const handleUpload = async () => {
-        if (selectedFile) {
-
+    const handleFileChange = (files: FileList | null) => {
+        if (files && files.length > 0) {
+            const file = files[0];
+            UseUploadPhoto(file)
+                .then((data) => {
+                    setFileName(data.data.result);
+                    UseSetUser({ ...UseGetUser, photo: data.data.result });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     };
-
-    useEffect(() => {
-        if (fileName) {
-            setPhoto(fileName);
-            console.log('mudou')
-        }
-    }, [fileName])
 
     return (
         <div
-            style={{ backgroundImage: `url(${BASE_URL}imagens/user/${fileName || photo || 'default.jpeg'})` }}
-            className='photo-update-component'
-        >
-            <img src="./../../../../../icons/imagem.svg" alt="" />
-            <input type="file" accept="image/jpeg, image/png" onChange={handleFileChange} />
-
+            style={{ backgroundImage: `url(${BASE_URL}imagens/user/${fileName || UseGetUser.photo || "default.jpeg"})` }}
+            className="photo-update-component">
+            <img
+                src="./../../../../../icons/imagem.svg"
+                alt=""
+            />
+            <input
+                type="file"
+                accept="image/jpeg, image/png"
+                onChange={(e) => handleFileChange(e.target.files)}
+            />
         </div>
-    )
-}
+    );
+};
 
 export default PhotoUpdate;
-

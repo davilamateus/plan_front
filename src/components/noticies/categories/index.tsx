@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react';
 
 import './style.scss';
 
@@ -27,4 +27,4 @@ const NoticiesCategories = ({ category, setCategory }: type) => {
     )
 }
 
-export default NoticiesCategories
+export default NoticiesCategories;

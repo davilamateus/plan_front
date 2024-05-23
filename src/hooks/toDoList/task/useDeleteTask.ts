@@ -1,7 +1,7 @@
 import Api from "../../../axios";
-import useGetToDoListApi from "../useGetToDoList";
+import { useGetToDoListApi } from "../useGetToDoList";
 
-const useDeleteTask = () => {
+export const useDeleteToDoListTask = () => {
 
     const UseGetToDoList = useGetToDoListApi();
     return async (id: number) => {
@@ -10,14 +10,9 @@ const useDeleteTask = () => {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-
-        Api.delete(`/todolist/task?id=${id}`, config)
-            .then(() => {
-                UseGetToDoList()
-
-            })
+        Api.delete(`/todolist/tasks?id=${id}`, config)
+            .then(() => UseGetToDoList())
             .catch((error) => console.log(error))
     }
 }
 
-export default useDeleteTask;

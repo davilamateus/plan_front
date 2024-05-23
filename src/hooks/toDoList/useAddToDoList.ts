@@ -1,6 +1,6 @@
 import Api from "../../axios";
 import { IToDoListAdd } from "../../types/toDoList/IToDoList";
-import useGetToDoListApi from "./useGetToDoList";
+import { useGetToDoListApi } from "./useGetToDoList";
 
 
 

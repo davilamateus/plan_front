@@ -1,10 +1,10 @@
 
 import { useDispatch } from 'react-redux';
-import { IFinancesGoalsList } from '../../../types/finances/IGoals';
+import { IFinancesGoal } from '../../../types/finances/IGoals';
 
 function useSetTripGoals() {
     const dispatch = useDispatch();
-    return (tripGoals: IFinancesGoalsList[]) => {
+    return (tripGoals: IFinancesGoal[]) => {
         dispatch({
             type: '@tripGoals/SET_TRIP_GOALS', tripGoals
         });

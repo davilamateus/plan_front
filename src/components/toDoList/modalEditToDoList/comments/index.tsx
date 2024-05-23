@@ -1,53 +1,46 @@
-import React, { useEffect, useState } from 'react'
-import { IToDoListComments } from '../../../../types/toDoList/IToDoList'
-import './style.scss';
+import { useState } from 'react';
+import { IToDoListComments } from '../../../../types/toDoList/IToDoList';
+import { dateTimeAgo } from '../../../../functions/date/dateTimeAgo';
+import { useAddComments } from '../../../../hooks/toDoList/comments/useAddComments';
+import { useDeleteComments } from '../../../../hooks/toDoList/comments/useDeleteComments';
 import BtnActionSmall from '../../comuns/btnActionSmall';
 import InputSimple from '../../../communs/inputs/simples';
 import ButtonSimple from '../../../communs/buttons/simple/simple';
-import InputUploadFile from '../../../communs/inputs/uploadFile';
 import ButtonDeleteSmall from '../../../communs/buttons/deleteSmall';
-import DateTimeAgo from '../../../../functions/date/DateTimeAgo';
 import InputDescription from '../../../communs/inputs/description';
-import useAddComments from '../../../../hooks/toDoList/comments/useAddComments';
-import useDeleteComments from '../../../../hooks/toDoList/comments/useDeleteComments';
+import './style.scss';
 
 interface type {
     comments: IToDoListComments[],
-    todolistId: number
+    toDoListId: number
 }
 
-const TodolistComments = ({ comments, todolistId }: type) => {
+const TodolistComments = ({ comments, toDoListId }: type) => {
 
 
     const UseToDoListComment = useAddComments();
     const UseDeleteComments = useDeleteComments()
     const [inputOpened, setInputOpened] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [active, setActive] = useState(false);
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [comment, setComment] = useState({ title: '', description: '', toDoListId })
 
 
 
 
-    useEffect(() => {
-        if (title !== '' && description !== '') {
-            setActive(true);
-        } else {
-            setActive(false);
-        }
-    }, [title, description])
 
 
-    function AddComment() {
+
+    const handleSubmit = () => {
         setLoading(true);
-        UseToDoListComment({ title: title, description: description, toDoListId: todolistId })
-        setInputOpened(false)
-    }
+        UseToDoListComment(comment).
+            then(() => {
+                setLoading(false);
+                setInputOpened(false);
+                setComment({ title: '', description: '', toDoListId });
+            });
+    };
 
-    function deleteComment(id: number) {
-        UseDeleteComments(id)
-    }
+
 
     return (
 
@@ -55,13 +48,28 @@ const TodolistComments = ({ comments, todolistId }: type) => {
             <label>
                 <div className='todolist-head'>
                     <h4>Comments</h4>
-                    <BtnActionSmall inputOpened={inputOpened} setInputOpened={setInputOpened} />
+                    <BtnActionSmall
+                        inputOpened={inputOpened}
+                        setInputOpened={setInputOpened} />
                 </div>
                 {inputOpened ?
                     <label className='todolist-comments-input'>
-                        <InputSimple title={'Comment title'} input={title} setInput={setTitle} placeholder='Type a title of the comments..' />
-                        <InputDescription title='Description' setDescription={setDescription} description={description} />
-                        <ButtonSimple type='success' loading={loading} status={active} title={'Add comments'} action={AddComment} />
+                        <InputSimple
+                            title={'Comment title'}
+                            input={comment.title}
+                            setInput={e => setComment({ ...comment, title: e })}
+                            placeholder='Type a title of the comments..' />
+                        <InputDescription
+                            title='Description'
+                            description={comment.description}
+                            setDescription={e => setComment({ ...comment, description: e })}
+                        />
+                        <ButtonSimple
+                            type='success'
+                            title={'Add comments'}
+                            loading={loading}
+                            status={comment.title !== '' && comment.description !== ''}
+                            action={handleSubmit} />
                     </label> : ''}
                 {comments.length > 0 ?
                     comments.map((comments: IToDoListComments) => (
@@ -69,10 +77,10 @@ const TodolistComments = ({ comments, todolistId }: type) => {
                             <div className='todolist-comments-left'>
                                 <div className="todolist-comments-title">{comments.title}</div>
                                 <div className='todolist-comments-description'>{comments.description}</div>
-                                <div className='todolist-comments-date'>{DateTimeAgo(new Date(comments.createdAt))}</div>
+                                <div className='todolist-comments-date'>{dateTimeAgo(new Date(comments.createdAt))}</div>
                             </div>
                             <div className='todolist-comments-right'>
-                                <ButtonDeleteSmall action={() => deleteComment(comments.id)} />
+                                <ButtonDeleteSmall action={() => UseDeleteComments(comments.id)} />
                             </div>
                         </div>
                     ))

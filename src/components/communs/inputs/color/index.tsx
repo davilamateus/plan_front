@@ -1,11 +1,9 @@
-import React, { Dispatch, SetStateAction } from 'react'
 import './style.scss';
-
 
 interface type {
     title: string;
     color: string;
-    setColor: Dispatch<SetStateAction<string>>;
+    setColor: (e: string) => void;
 }
 const InputColor = ({ title, color, setColor }: type) => {
 
@@ -55,4 +53,4 @@ const InputColor = ({ title, color, setColor }: type) => {
         </div>)
 }
 
-export default InputColor
+export default InputColor;

@@ -1,42 +1,37 @@
-@import './../../../styles/color';
+@import "./../../../styles/color";
 
-.principal-article{
+.principal-article {
     display: grid;
     width: 100%;
     grid-template-columns: 4fr 5fr;
-    .principal-article-img{
+    .principal-article-img {
         height: 100%;
         width: 100%;
         background-size: cover;
         background-position: center;
     }
-    .principal-article-content{
+    .principal-article-content {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding:  32px;
+        padding: 32px;
         gap: 16px;
-        .principal-article-content-title{
+        .principal-article-content-title {
             padding: 0;
             margin: 0;
-            font-size: 22pt;
+            font-size: 26pt;
         }
-        .princpal-article-content-category{
-            span{
+        .princpal-article-content-category {
+            span {
                 font-size: 11pt;
                 font-weight: 600;
                 color: $primary-color;
                 text-transform: capitalize;
-
             }
         }
-        .princpal-article-content-description{
-            text-indent: 20px;
-            font-size: 12pt;
-            line-height: 18pt;
-        }
-        .principal-article-content-creator{
-            span{
+
+        .principal-article-content-creator {
+            span {
                 font-size: 11pt;
                 font-style: italic;
             }
@@ -45,11 +40,10 @@
 }
 
 @media only screen and (max-width: 720px) {
-    .principal-article{
+    .principal-article {
         display: contents;
     }
-     .principal-article-img{
-        height: 300px!important;
-     }
-
+    .principal-article-img {
+        height: 300px !important;
+    }
 }

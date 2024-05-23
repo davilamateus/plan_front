@@ -1,0 +1,97 @@
+.home-main {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: 5fr 5fr 5fr 2fr;
+    justify-content: center;
+    .home-column-1,
+    .home-column-2,
+    .home-column-3 {
+        min-width: 360px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    .finances-resume {
+        .title-of-component {
+            display: none;
+        }
+    }
+}
+
+.home-weather-dayToTrip {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.finance-resume-dashboard-content {
+    padding: 8px;
+}
+.advice-categorie-scroll-dashboard {
+    height: 700px;
+    overflow: scroll;
+}
+
+@media only screen and (max-width: 1500px) {
+    .home-main {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .home-column-4 {
+        grid-column-start: 1;
+        grid-column-end: 4;
+        .advice-categorie-scroll-dashboard {
+            flex-direction: row;
+            height: max-content;
+        }
+    }
+}
+
+@media only screen and (max-width: 1280px) and (min-width: 913px) {
+    .home-main {
+        grid-template-columns: 1fr 1fr;
+    }
+    .home-column-3 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 16px;
+        .exchange-dashboard {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 0;
+            grid-row-start: 1;
+        }
+        .finance-dashboard {
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-end: 3;
+            grid-row-start: 1;
+            .finance-resume-components {
+                min-height: 363px;
+            }
+        }
+        .ads {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-start: 2;
+        }
+    }
+}
+
+@media only screen and (max-width: 912px) {
+    .home-main {
+        padding-bottom: 132px;
+        display: flex;
+        flex-direction: column;
+        .home-column-1,
+        .home-column-2,
+        .home-column-3 {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            display: contents !important;
+        }
+    }
+}

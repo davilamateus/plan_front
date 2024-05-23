@@ -1,90 +1,69 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputEmail from "../../../communs/inputs/email";
 import InputPassword from "../../../communs/inputs/password";
 import InputRadio from "../../../communs/inputs/radio";
-import './style.scss';
 import ButtonSimple from "../../../communs/buttons/simple/simple";
 import SocialLogin from "../social";
-import isEmail from "../../../../functions/isEmail";
-import useLogin from "../../../../hooks/user/useLogin";
+import { isEmail } from "../../../../functions/isEmail";
+import { useLogin } from "../../../../hooks/user/useLogin";
 import BoxFullpage from "../../../communs/boxFullpage";
 import ForgetPassword from "../forgetPassword";
-import useSetMessage from "../../../../store/hooks/messages/useSetMessage";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { ILogin } from "../../../../types/login/ILogin";
+import { IMessage } from "../../../../types/messages/IMenssage";
+import Message from "../../../messages";
+import './style.scss';
+
 
 const LoginFormLogin = () => {
 
-
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [remember, setRemember] = useState<boolean>(false);
-    const [btnStatus, setBtnStatus] = useState<boolean>(false);
+    const [user, setUser] = useState<ILogin>({ email: '', password: '', remember: false })
     const [btnLoading, setBtnLoading] = useState<boolean>(false);
-
     const [modalForgetOpened, setModalForgetOpened] = useState<boolean>(false);
+    const [message, setMessage] = useState<IMessage>({ status: false })
 
-    const UseLoginHook = useLogin();
-    const setMessage = useSetMessage();
-    const navegation = useNavigate();
+    const UseLogin = useLogin();
+    const Navegation = useNavigate();
 
-    function login() {
-        setBtnLoading(true)
-        UseLoginHook(email, password, remember).then((data) => {
-            if (data.status === 200) {
-                if (remember) {
-                    sessionStorage.clear();
-                    localStorage.clear();
-                    localStorage.setItem('token', data.data.token);
-                    sessionStorage.setItem('token', data.data.token);
-                    //set();
-                    navegation('/');
-
-                } else {
-                    localStorage.clear();
-                    sessionStorage.setItem('token', data.data.token);
-                    //set();
-                    navegation('/');
+    const handleSubmit = () => {
+        setBtnLoading(true);
+        UseLogin(user)
+            .then((data) => {
+                sessionStorage.clear();
+                localStorage.clear();
+                if (data.status === 200 || data.status === 201) {
+                    if (user.remember) {
+                        localStorage.setItem('token', data.data.result);
+                        sessionStorage.setItem('token', data.data.result);
+                    } else {
+                        sessionStorage.setItem('token', data.data.result);
+                    }
+                    if (data.status === 200) {
+                        Navegation('/');
+                    } else if (data.status === 201) {
+                        Navegation('/createtripdetails');
+                    }
                 }
-                setMessage('', '', '');
-
-
-            } else if (data.status === 201) {
-                if (remember) {
-                    sessionStorage.clear();
-                    localStorage.clear();
-                    localStorage.setItem('token', data.data.token);
-                    sessionStorage.setItem('token', data.data.token);
-                    //set();
-                    navegation('/');
-
+                else if (data.status === 203) {
+                    setMessage({
+                        title: 'Email not confirmed!',
+                        description: 'You don’t confirmed your email, we emailagain, please check your box and span emails.',
+                        type: 'atention',
+                        status: true
+                    })
                 } else {
-                    localStorage.clear();
-                    sessionStorage.setItem('token', data.data.token);
-                    //set();
-                    navegation('/');
-                }
-                console.log('aqui')
-                navegation('/createuserdetails');
-            }
+                    setMessage({
+                        title: 'Email or password incorrect!',
+                        description: 'You type your email or your password incorrectly.Please check your informations and try again.',
+                        type: 'error',
+                        status: true
+                    })
 
-            else if (data.status === 203) {
-                setMessage('Email not confirmed!', 'You don’t confirmed your email, we emailagain, please check your box and span emails.', 'atention');
-            } else {
-                setMessage('Email or password incorrect!', 'You type your email or your password incorrectly.Please check your informations and try again.', 'error');
-            };
-
-            setBtnLoading(false);
-        })
+                };
+                setBtnLoading(false);
+            })
     }
 
-
-    useEffect(() => {
-        if (isEmail(email) && password !== '') {
-            setBtnStatus(true);
-        } else {
-            setBtnStatus(false);
-        }
-    }, [email, password]);
 
     return (
         <>
@@ -92,27 +71,27 @@ const LoginFormLogin = () => {
             <InputEmail
                 title='Email:'
                 placeholder='exemplo@email.com'
-                setInput={setEmail}
-                input={email}
+                setInput={(e: string) => setUser({ ...user, email: e })}
+                input={user.email}
             />
             <InputPassword
                 title='Password:'
                 placeholder='********'
-                setInput={setPassword}
-                input={password}
+                setInput={(e: string) => setUser({ ...user, password: e })}
+                input={user.password}
             />
             <div className="remember">
                 <InputRadio
-                    select={remember}
-                    setSelect={setRemember}
+                    select={user.remember}
+                    setSelect={(e: boolean) => setUser({ ...user, remember: e })}
                 />
                 Remember-me
             </div>
             <ButtonSimple
                 title='Enter'
                 type='success'
-                status={btnStatus}
-                action={() => { login() }}
+                status={isEmail(user.email) && user.password !== ''}
+                action={handleSubmit}
                 loading={btnLoading}
             />
             <div className="login-social">
@@ -124,15 +103,17 @@ const LoginFormLogin = () => {
                 className="forget-password-btn">
                 Do you forget your password?
             </button>
-            {modalForgetOpened ?
+            {modalForgetOpened &&
                 <BoxFullpage
                     title='Forget Password'
                     setOpened={setModalForgetOpened}
-                    content={
-                        <ForgetPassword />
-                    }
+                    content={<ForgetPassword />}
                 />
-                : ''}
+            }
+            <Message
+                message={message}
+                setMessage={setMessage}
+            />
         </>
 
     )

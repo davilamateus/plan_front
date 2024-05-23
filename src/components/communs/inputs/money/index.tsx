@@ -11,7 +11,7 @@ import {
 
 interface type {
     title: string;
-    setInput: Dispatch<SetStateAction<number>>;
+    setInput: (e:number)=>void;
     input: number;
 }
 

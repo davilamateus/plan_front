@@ -6,7 +6,7 @@ function useSetPageTitle() {
     return (title: string) => {
         const pageTitle = title
         dispatch({
-            type: '@pageTitle/SET_PAGE-TITLE', pageTitle
+            type: '@pageTitle/SET_PAGE_TITLE', pageTitle
         });
 
     }

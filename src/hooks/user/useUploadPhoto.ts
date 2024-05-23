@@ -1,14 +1,14 @@
 import Api from "../../axios";
 
-const userUploadPhoto = () => {
-    return async (formData: File,) => {
-        const res = await Api.post('/user/photo', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
+export const userUploadPhoto = () => {
+    const config = {
+        headers: { Authorization: `Bearer ${sessionStorage.getItem('token') ?? localStorage.getItem('token')}` }
+    };
+    return async (file: File) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        const res = await Api.post('/user/photo', formData, config);
         return res;
     }
-}
+};
 
-export default userUploadPhoto;

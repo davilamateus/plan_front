@@ -1,19 +1,8 @@
-export default function DateToInput(date: number) {
-
-    let year = new Date(Number(date) * 1).getFullYear()
-    let month = ''
-    let day = ''
-    if (new Date(Number(date) * 1).getMonth() < 9) {
-        month = `0${new Date((Number(date) * 1)).getMonth() + 1}`
-    } else {
-        month = `${new Date((Number(date) * 1)).getMonth() + 1}`
-    }
-    if (new Date(Number(date) * 1).getDate() < 10) {
-        day = `0${new Date(Number(date) * 1).getDate()}`
-    } else {
-        day = `${new Date(Number(date) * 1).getDate()}`
-    }
-
-
-    return `${year}-${month}-${day}`
+export const dateToInput = (date: number) => {
+    const formattedDate = new Date(date * 1).toLocaleDateString('en-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    return formattedDate;
 }

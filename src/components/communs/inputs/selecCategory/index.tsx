@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 import './style.scss';
-import { IFinancesGoalsList } from "../../../../types/finances/IGoals";
+import { IFinancesGoal } from "../../../../types/finances/IGoals";
 
 
 interface type {
     title: string;
-    goals: IFinancesGoalsList[];
+    goals: IFinancesGoal[];
     selectOption: number | undefined;
-    setSelectOptions: Dispatch<SetStateAction<number | undefined>>;
+    setSelectOptions: (e:number | undefined)=>void;
 }
 
 const InputSelectCategory = ({ title, goals, setSelectOptions, selectOption }: type) => {

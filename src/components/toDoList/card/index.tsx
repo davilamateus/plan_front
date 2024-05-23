@@ -1,15 +1,12 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { IToDoListMain } from '../../../types/toDoList/IToDoList'
-import DateTimeAgo from '../../../functions/date/DateTimeAgo';
-import './style.scss';
+import { dateTimeAgo } from '../../../functions/date/dateTimeAgo';
 import ModalEditToDoList from '../modalEditToDoList/main';
 import BoxFullpage from '../../communs/boxFullpage';
+import './style.scss';
 
-interface type {
-    toDoList: IToDoListMain;
-}
 
-const ToDoListCard = ({ toDoList }: type) => {
+const ToDoListCard = ({ toDoList }: { toDoList: IToDoListMain }) => {
 
     const [opened, setOpened] = useState(false);
     return (
@@ -32,12 +29,12 @@ const ToDoListCard = ({ toDoList }: type) => {
                     <div className={`todolist-date ${(+toDoList.date) < new Date().getTime() ? 'date-late' : ''}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="13.637" height="13.637" viewBox="0 0 13.637 13.637">
                             <g id="ic-contact-time" transform="translate(0.5 0.5)">
-                                <circle id="Elipse_26" data-name="Elipse 26" cx="6.319" cy="6.319" r="6.319" fill="none" stroke="#2b3136" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
-                                <path id="Caminho_90" data-name="Caminho 90" d="M11.93,5.36V9.654h3.031" transform="translate(-5.655 -3.191)" fill="none" stroke="#2b3136" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" />
+                                <circle id="Elipse_26" data-name="Elipse 26" cx="6.319" cy="6.319" r="6.319" fill="none" stroke="#2b3136" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" />
+                                <path id="Caminho_90" data-name="Caminho 90" d="M11.93,5.36V9.654h3.031" transform="translate(-5.655 -3.191)" fill="none" stroke="#2b3136" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" />
                             </g>
                         </svg>
                         <span className='span-small'>
-                            {DateTimeAgo(new Date(toDoList.date))}
+                            {dateTimeAgo(new Date(toDoList.date))}
                         </span>
                     </div>
                     {toDoList.toDoListTasks.length > 0 ?
@@ -55,9 +52,17 @@ const ToDoListCard = ({ toDoList }: type) => {
 
                 </div>
             </div>
-            {opened ? <BoxFullpage title='Edit to do list' content={<ModalEditToDoList todolist={toDoList} setOpened={setOpened} />} setOpened={setOpened} /> : ''}
+            {opened ?
+                <BoxFullpage
+                    title='Edit to do list'
+                    content={<ModalEditToDoList
+                        todolist={toDoList}
+                        setOpened={setOpened}
+                    />}
+                    setOpened={setOpened}
+                /> : ''}
         </>
     )
-}
+};
 
-export default ToDoListCard
+export default ToDoListCard;

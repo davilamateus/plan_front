@@ -15,9 +15,7 @@ const useDeleteEntraces = () => {
         };
 
         const res = await Api.delete(`/finances/entraces?id=${id}`, config)
-            .then(() => {
-                UseGetEntraces(0, 100000000000000000, true);
-            })
+            .then(() => UseGetEntraces())
             .catch((error) => console.log(error))
         return res;
     }

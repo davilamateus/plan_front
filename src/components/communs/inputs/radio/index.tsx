@@ -4,7 +4,7 @@ import './stype.scss';
 
 interface type {
     select: boolean;
-    setSelect: Dispatch<SetStateAction<boolean>>;
+    setSelect: (e: boolean) => void;
 }
 const InputRadio = ({ select, setSelect }: type) => {
     return (

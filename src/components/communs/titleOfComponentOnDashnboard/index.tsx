@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router';
-import './style.scss';
 import ButtonOptions from '../buttons/options';
+import './style.scss';
+
 
 interface type {
     title: string;
@@ -8,22 +9,16 @@ interface type {
 }
 const TitleOfComponentOnDashnboard = ({ title, link }: type) => {
 
-    const nav = useNavigate()
-
-    function click(link: string) {
-        nav(link);
-    }
-
+    const UserNavigate = useNavigate();
 
     return (
         <div className='title-of-session-dashboard'>
             <h4>{title}</h4>
             {
-                link ?
-                    <div onClick={() => click(link)}>
-                        <ButtonOptions />
-                    </div>
-                    : ''
+                link &&
+                <div onClick={() => UserNavigate(link)}>
+                    <ButtonOptions />
+                </div>
             }
         </div>
     )

@@ -1,102 +1,95 @@
-import { useEffect, useState } from 'react'
-import { Line } from 'react-chartjs-2'
-import './stype.scss';
-import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar';
-import Axios from 'axios'
-import Skeleton from 'react-loading-skeleton';
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
+import { useGetExchangeApi } from "../../../hooks/exchange/useGetExange";
+import Skeleton from "react-loading-skeleton";
+import "./stype.scss";
+import TitleOfComponentOnDashnboard from "../../communs/titleOfComponentOnDashnboard";
 
 const ExchangeDashboard = () => {
-
-    const UseGetAvatar = useGetAvatar();
     const [dataValue, setDataValue] = useState<number[]>([]);
     const [loaded, setLoaded] = useState(false);
 
+    const UseGetTrip = useGetTrip();
+    const UseGetExchange = useGetExchangeApi();
+
     useEffect(() => {
-        if (UseGetAvatar.currency_local) {
-            getCurrency()
+        if (UseGetTrip.currentCurrency) {
+            UseGetExchange(UseGetTrip.tripCurrency, UseGetTrip.currentCurrency)
+                .then((data) => {
+                    setDataValue(data.data);
+                    setLoaded(true);
+                })
+                .catch((error) => console.log(error));
         }
-
-    }, [UseGetAvatar])
-
-    function getCurrency() {
-        Axios.get(`https://economia.awesomeapi.com.br/json/daily/${UseGetAvatar.currency_trip}-${UseGetAvatar.currency_local}/7`).then((data: any) => {
-            let array: number[] = []
-
-            data.data.map((item: any) => {
-                array.push((+item.high))
-            })
-            setDataValue(array.reverse())
-            setLoaded(true)
-
-        })
-    }
-
-
+    }, [UseGetTrip]);
 
     const data = {
-        labels: ["-6d", "-5d", "-4d", "-3d", "-2d", '-1d', 'Today'],
+        labels: ["-6d", "-5d", "-4d", "-3d", "-2d", "-1d", "Today"],
         datasets: [
             {
-                data: dataValue.length > 0 ? dataValue : [3.2, 3.5, 3.2, 3.5, 3.5, 3.2, 3.4],
+                data: dataValue.length > 0 ? dataValue : [1, 1, 1, 1, 1, 1, 1],
                 fill: false,
-                borderColor: dataValue.length > 0 ? dataValue[5] < dataValue[6] ? ' #FA385F' : '#6AD9A8' : '#dfdfdf',
+                borderColor: dataValue.length > 0 ? (dataValue[5] < dataValue[6] ? " #FA385F" : "#6AD9A8") : "#dfdfdf",
                 pointRadius: 1.3,
                 borderWidth: 3,
-                tension: 0.4,
-            },
-
+                tension: 0.4
+            }
         ]
     };
 
     const options = {
-
         plugins: {
             labels: {
-                display: false,
+                display: false
             },
             legend: {
-                display: false,
-            },
-
+                display: false
+            }
         },
         scales: {
             y: {
-                display: false,
-
-
+                display: false
             },
             x: {
-                display: false,
-
+                display: false
             }
-
-
         },
         responsive: true
-    }
-
-
-
-
-
-
+    };
 
     return (
-        <div className='box'>
-            <div style={{ width: '100%', height: '130px' }}>
-                <Line style={{ position: 'absolute', marginTop: '3%' }} height={60} data={data} options={options} />
-            </div>
-            <div className="exchange-dashboard-texts">
-                {loaded ?
-                    <div>{UseGetAvatar.currency_trip} <h4 className='exchange-value' style={{ color: dataValue.length > 0 ? dataValue[5] < dataValue[6] ? ' #FA385F' : '#6AD9A8' : '#dfdfdf' }}>{dataValue[0]}</h4></div>
-                    :
-                    <Skeleton style={{ width: '124px', height: '18pt', }} />
-
-                }
+        <div className="exchange-dashboard">
+            <TitleOfComponentOnDashnboard
+                title="Exchange"
+                link="/exchange"
+            />
+            <div className="box">
+                <div style={{ width: "100%", height: "130px" }}>
+                    <Line
+                        style={{ position: "absolute", marginTop: "3%" }}
+                        height={60}
+                        data={data}
+                        options={options}
+                    />
+                </div>
+                <div className="exchange-dashboard-texts">
+                    {loaded ? (
+                        <div>
+                            {UseGetTrip.tripCurrency}{" "}
+                            <h4
+                                className="exchange-value"
+                                style={{ color: dataValue.length > 0 ? (dataValue[5] < dataValue[6] ? " #FA385F" : "#6AD9A8") : "#dfdfdf" }}>
+                                {dataValue[0]}
+                            </h4>
+                        </div>
+                    ) : (
+                        <Skeleton style={{ width: "124px", height: "18pt" }} />
+                    )}
+                </div>
             </div>
         </div>
     );
-}
+};
 
-
-export default ExchangeDashboard
+export default ExchangeDashboard;

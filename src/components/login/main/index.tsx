@@ -11,4 +11,4 @@ const LoginMainComponent = () => {
     )
 }
 
-export default LoginMainComponent
+export default LoginMainComponent;

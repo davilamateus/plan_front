@@ -1,26 +1,21 @@
+import {useGetGoalsApi} from "../goals/useGetGoals";
 import Api from "../../../axios";
-import { IFinancesExpenseAdd } from "../../../types/finances/IExpense";
-import useGetGoalsApi from "../goals/useGetGoals";
-import GetTimestampInfomartions from "../../../functions/date/GetTimestampInfomartions";
+import { IFinancesExpense } from "../../../types/finances/IExpense";
 
 
 const useAddExpense = () => {
     const UseGetGoalsApi = useGetGoalsApi();
 
 
-    return async (finances: IFinancesExpenseAdd) => {
+    return async (finances: IFinancesExpense) => {
         let token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        const res = await Api.post('/finances/expense', finances, config)
-            .then(() => {
-
-                UseGetGoalsApi(GetTimestampInfomartions(new Date().getTime(), 0).firstDay, GetTimestampInfomartions(new Date().getTime(), 0).lastDay, finances.type, true);
-
-            })
+        const res = await Api.post('/finances/expenses', finances, config)
+            .then(() => UseGetGoalsApi(finances.type))
             .catch((error) => console.log(error))
         return res;
     }

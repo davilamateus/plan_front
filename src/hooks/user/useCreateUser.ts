@@ -1,14 +1,12 @@
 import Api from "../../axios";
+import { IRegister } from "../../types/login/IRegister";
 
-const useCreateUser = () => {
-    return async (email: string, password: string, name: string) => {
-        const res = await Api.post('user/', { email: email, password: password, name: name })
-            .then((data) => {
-                return data;
-            })
-            .catch((error) => console.log(error))
+export const useCreateUser = () => {
+    return async (user: IRegister) => {
+        const res = await Api.post('user/', user)
+            .then((data) => { return data; })
+            .catch((error) => { return error })
         return res;
     }
 }
 
-export default useCreateUser;

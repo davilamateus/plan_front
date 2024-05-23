@@ -1,4 +1,4 @@
-export default function FormartMoney(value: number) {
+export const formartMoney = (value: number) => {
 
     const numberSplit = (value.toString()).split('');
     const numberAddPoint = ((numberSplit.slice(0, numberSplit.length - 2).join('')) + '.' + (numberSplit.slice(numberSplit.length - 2, numberSplit.length)).join(''));
@@ -6,8 +6,8 @@ export default function FormartMoney(value: number) {
     const numberMoreSig = `$ ${numberFormat}`;
 
 
-    if (value == 0) {
-        return 'R$ 0.00';
+    if (value === 0) {
+        return '$ 0.00';
     } else {
         if (numberSplit.length < 3) {
             return `$ 0${numberFormat}`

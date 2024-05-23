@@ -1,20 +1,18 @@
 import Api from "../../axios";
+import { ILogin } from "../../types/login/ILogin";
 
 
-function useLogin() {
-
-
-    return async (email: string, password: string, remember: boolean) => {
-        const body = { email: email, password: password }
-        const res = await Api.post('/login', body)
+export const useLogin = () => {
+    return async (user: ILogin) => {
+        const res = await Api.post('/login', user)
             .then((data) => {
+                console.log(data)
                 return data;
+
             })
             .catch((error) => { return error });
         return res;
     }
+};
 
-}
-
-export default useLogin;
 

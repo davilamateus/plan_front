@@ -1,18 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import useGetEntracesApi from '../../../hooks/finances/entraces/useGetEntraces';
 
 
-const useGetEntraces = () => {
+export const useGetEntraces = () => {
 
     const getEntraces = useSelector((state: any) => state.entraces);
-    const [entraces, setEntraces] = useState(getEntraces);
+    const [entraces, setEntraces] = useState(getEntraces.entraces);
+    const UseGetEntracesApi = useGetEntracesApi();
     useEffect(() => {
-        setEntraces(getEntraces.entraces)
-    }, [getEntraces])
+        if (getEntraces.entraces) {
+            setEntraces(getEntraces.entraces);
+        } else {
+            UseGetEntracesApi();
+        }
+    }, [getEntraces]);
 
     return entraces;
 
-}
+};
 
-export default useGetEntraces;
 

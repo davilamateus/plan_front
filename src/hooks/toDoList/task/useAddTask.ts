@@ -1,10 +1,9 @@
 import Api from "../../../axios";
 import { IToDoListTasksAdd } from "../../../types/toDoList/IToDoList";
-import useGetToDoListApi from "../useGetToDoList";
+import { useGetToDoListApi } from "../useGetToDoList";
 
 
-
-const useAddTask = () => {
+export const useAddToDoListTask = () => {
 
     const UseGetToDoListApi = useGetToDoListApi();
 
@@ -15,13 +14,10 @@ const useAddTask = () => {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        const res = await Api.post('/todolist/task', todolistTask, config)
-            .then(() => {
-                UseGetToDoListApi()
-            })
+        const res = await Api.post('/todolist/tasks', todolistTask, config)
+            .then(() => { UseGetToDoListApi() })
             .catch((error) => console.log(error));
         return res;
     }
-}
+};
 
-export default useAddTask;

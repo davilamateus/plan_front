@@ -1,7 +1,7 @@
 import produce from 'immer';
-import { IFinancesExpenseList } from '../../../types/finances/IExpense';
+import { IFinancesExpense } from '../../../types/finances/IExpense';
 
-const entraces: IFinancesExpenseList[] | boolean = false
+const entraces: IFinancesExpense[] | boolean = false
 const INITIAL_STATE = {
     entraces
 };

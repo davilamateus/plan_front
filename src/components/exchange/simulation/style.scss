@@ -1,38 +1,40 @@
-@import './../../../styles/color';
+@import "./../../../styles/color";
 
-
-.simulation{
+.simulation {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 16px;
-    .simulation-input{
+    .simulation-input {
         width: 100%;
         padding: 16px;
         height: max-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-height: 320px;
-        .simulation-type{
-            h4{
+        .simulation-type {
+            h4 {
                 font-weight: 600;
                 font-size: 11pt;
+                margin-bottom: 8px;
             }
             margin-bottom: 32px;
-            div{
+            div {
                 display: flex;
                 gap: 16px;
-                .selected{
+                .selected {
                     background-color: $primary-color;
                     border-color: $primary-color;
                     color: $title-color;
-                    &:hover{
+                    &:hover {
                         background-color: $primary-color;
                         border-color: $primary-color;
-                        color: $title-color; 
+                        color: $title-color;
                     }
                 }
-                button{
+                button {
+                    img {
+                        width: 28px;
+                    }
                     width: 50%;
                     background: none;
                     border: 1px solid $input-border-color;
@@ -40,7 +42,7 @@
                     padding: 8px 32px;
                     color: $paragraph-dark-color;
                     transition: 0.2s;
-                    &:hover{
+                    &:hover {
                         background-color: $input-border-color;
                         color: $title-color;
                         border-color: $input-border-color;
@@ -49,37 +51,10 @@
             }
         }
     }
-    .simulation-cards{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 16px;
-        .simulation-card{
-
-            padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            .value{
-                font-size: 15pt;
-                font-weight: 600;
-                color: $primary-color;
-            }
-            img{
-                width: 172px;
-            }
-        }
-    }
 }
 
 @media only screen and (max-width: 990px) {
-  .simulation {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media only screen and (max-width: 720px) {
-  .simulation-cards {
-    grid-template-columns: 1fr!important;
-  }
+    .simulation {
+        grid-template-columns: 1fr;
+    }
 }

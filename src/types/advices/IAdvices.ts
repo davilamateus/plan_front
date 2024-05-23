@@ -22,12 +22,7 @@ export interface IAdvicesMain {
         formatted_address: string,
     },
     name: string,
-
-}
-
-export interface IAdvicesMainImg {
-    id: string;
-    img: {
+    images: {
         created_at: string
         height: number
         id: string;
@@ -35,6 +30,14 @@ export interface IAdvicesMainImg {
         suffix: string;
         width: number
     }[]
+
+}
+
+export interface IAdvicesMainImg {
+
+
+
+
 
 }
 

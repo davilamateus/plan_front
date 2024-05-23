@@ -1,0 +1,32 @@
+@import "./../../../../styles/color";
+
+.simulation-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    .simulation-card {
+        span {
+            margin-bottom: 16px;
+        }
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .value {
+            margin-top: 8px;
+            font-size: 15pt;
+            font-weight: 600;
+            color: $primary-color;
+        }
+        img {
+            width: 122px;
+            margin-bottom: 16px;
+        }
+    }
+}
+@media only screen and (max-width: 720px) {
+    .simulation-cards {
+        grid-template-columns: 1fr !important;
+    }
+}

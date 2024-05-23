@@ -1,0 +1,25 @@
+@import "./../../../../styles/color";
+
+.finance-resume-grafic {
+    flex: 1;
+    .box {
+        display: flex;
+        width: 100%;
+        max-width: 100vw;
+        min-height: 272px;
+        padding: 32px;
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        .finance-resume-results {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+}

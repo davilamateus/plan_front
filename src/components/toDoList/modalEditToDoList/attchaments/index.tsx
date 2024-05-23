@@ -1,58 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import { IToDoListAttchament, IToDoListTasks } from '../../../../types/toDoList/IToDoList'
-import './style.scss';
-import useEditToDoListTask from '../../../../hooks/toDoList/task/useEditTask';
+import { useState } from 'react';
+import { IToDoListAttchament, IToDoListAttchamentsAdd } from '../../../../types/toDoList/IToDoList';
+import { useDeleteAttchament } from '../../../../hooks/toDoList/attchament/useDeleteAttchament';
+import { useAddAttchament } from '../../../../hooks/toDoList/attchament/useAddAttchament';
+import { BASE_URL } from '../../../../axios';
 import BtnActionSmall from '../../comuns/btnActionSmall';
 import InputSimple from '../../../communs/inputs/simples';
 import ButtonSimple from '../../../communs/buttons/simple/simple';
-import useAddTask from '../../../../hooks/toDoList/task/useAddTask';
 import InputUploadFile from '../../../communs/inputs/uploadFile';
-import useAddAttchament from '../../../../hooks/toDoList/attchament/useAddAttchament';
 import ButtonDeleteSmall from '../../../communs/buttons/deleteSmall';
-import useDeleteAttchament from '../../../../hooks/toDoList/attchament/useDeleteAttchament';
+import './style.scss';
 
 interface type {
     attchaments: IToDoListAttchament[],
-    todolistId: number
+    toDoListId: number
 }
 
-const TodoListAttchaments = ({ attchaments, todolistId }: type) => {
+const TodoListAttchaments = ({ attchaments, toDoListId }: type) => {
 
 
     const UseAddToDoListAttchament = useAddAttchament();
     const UseDeleteToDoListAttchament = useDeleteAttchament();
     const [inputOpened, setInputOpened] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [active, setActive] = useState(false);
-    const [title, setTitle] = useState('');
-    const [link, setLink] = useState('');
+    const [attchament, setAttchament] = useState<IToDoListAttchamentsAdd>({ title: '', link: '', toDoListId })
 
 
 
-
-    useEffect(() => {
-        if (title !== '' && link !== '') {
-            setActive(true);
-        } else {
-            setActive(false);
-        }
-    }, [title, link])
-
-
-    function addAttchament() {
+    const handleSubmit = () => {
         setLoading(true);
-        UseAddToDoListAttchament({ title: title, link: link, toDoListId: todolistId }).then(() => {
-            setLoading(false)
-            setTitle('')
-            setLink('');
-            setInputOpened(false)
-        })
+        UseAddToDoListAttchament(attchament).then(() => {
+            setLoading(false);
+            setAttchament({ title: '', link: '', toDoListId });
+            setInputOpened(false);
+        });
+    };
 
-    }
 
-    function deleteAttchament(id: number) {
-        UseDeleteToDoListAttchament(id);
-    }
 
     return (
 
@@ -64,14 +47,25 @@ const TodoListAttchaments = ({ attchaments, todolistId }: type) => {
                 </div>
                 {inputOpened ?
                     <label className='todolist-attchament-input'>
-                        <InputSimple title={'Attchament title'} input={title} setInput={setTitle} placeholder='Type a title of the attchament..' />
-                        <InputUploadFile setLink={setLink} />
-                        <ButtonSimple type='success' loading={loading} status={active} title={'Add attchament'} action={addAttchament} />
+                        <InputSimple
+                            title={'Attchament title'}
+                            input={attchament.title}
+                            setInput={(e) => setAttchament({ ...attchament, title: e })}
+                            placeholder='Type a title of the attchament..' />
+                        <InputUploadFile
+                            setLink={(e) => setAttchament({ ...attchament, link: e })}
+                        />
+                        <ButtonSimple
+                            title={'Add attchament'}
+                            type='success'
+                            loading={loading}
+                            status={attchament.title !== '' && attchament.link !== ''}
+                            action={handleSubmit} />
                     </label> : ''}
                 {attchaments.length > 0 ?
                     attchaments.map((attchament: IToDoListAttchament) => (
                         <div key={attchament.id} className='todolist-attchament-list'>
-                            <div className='todolist-attchament-left'>
+                            <a target='_blank' href={BASE_URL + 'todolist/attchaments/' + attchament.link} className='todolist-attchament-left'>
                                 <svg xmlns="http://www.w3.org/2000/svg" id="fi-rr-link" width="24" height="24.003" viewBox="0 0 24 24.003">
                                     <rect id="fi-rr-link-2" data-name="fi-rr-link" width="24" height="24" fill="none" />
                                     <path id="Vector" d="M13.847,8.819a1,1,0,0,1,1.414,1.414L12,13.5A7.028,7.028,0,1,1,2.057,3.558L5.318.293A1,1,0,1,1,6.733,1.707L3.471,4.972a5.028,5.028,0,0,0,7.111,7.109l3.262-3.262Z" transform="translate(0.001 8.448)" fill="#374957" />
@@ -79,9 +73,9 @@ const TodoListAttchaments = ({ attchaments, todolistId }: type) => {
                                     <path id="Vector-3" data-name="Vector" d="M7.009,0a1,1,0,0,1,.711,1.695l-6,6A1,1,0,1,1,.305,6.281l6-6A1,1,0,0,1,7.009,0Z" transform="translate(7.988 8.012)" fill="#374957" />
                                 </svg>
                                 <div className="task-title">{attchament.title}</div>
-                            </div>
+                            </a>
                             <div className='todolist-attchament-right'>
-                                <ButtonDeleteSmall action={() => deleteAttchament(attchament.id)} />
+                                <ButtonDeleteSmall action={() => UseDeleteToDoListAttchament(attchament.id)} />
                             </div>
                         </div>
                     ))
@@ -92,4 +86,4 @@ const TodoListAttchaments = ({ attchaments, todolistId }: type) => {
     )
 }
 
-export default TodoListAttchaments
+export default TodoListAttchaments;

@@ -9,7 +9,7 @@ const SloganComponent = () => {
                     <h1>
                         You can
                         <br />
-                        <h1 className='slogan-text-green'>fulfill</h1> your
+                        <span className='slogan-text-green'>fulfill</span> your
                         <br />
                         dream.
                         <br />
@@ -21,9 +21,8 @@ const SloganComponent = () => {
                 </div>
             </div>
             <LogoBottom />
-
         </div>
     )
 }
 
-export default SloganComponent
+export default SloganComponent;

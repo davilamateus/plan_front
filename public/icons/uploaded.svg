@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="189.69" height="131.918" viewBox="0 0 189.69 131.918">
-  <g id="cloud-upload-svgrepo-com" transform="translate(4.5 -5.076)">
-    <g id="Grupo_3989" data-name="Grupo 3989" transform="translate(-2)">
-      <g id="Grupo_3987" data-name="Grupo 3987">
-        <path id="Caminho_2960" data-name="Caminho 2960" d="M149.968,50.186a39.21,39.21,0,0,0-40.717-19.813A40.1,40.1,0,0,0,32.975,47.691c0,.913.036,1.854.118,2.834a42.513,42.513,0,0,0,9.445,83.969H93.93v-7.025H42.538a35.487,35.487,0,0,1-5.067-70.614,3.514,3.514,0,0,0,2.97-4.022A32.829,32.829,0,0,1,73.088,14.6a32.912,32.912,0,0,1,30.8,21.04,3.5,3.5,0,0,0,4.058,2.14,32.276,32.276,0,0,1,36.6,17.168,3.492,3.492,0,0,0,2.641,1.9,35.488,35.488,0,0,1-5.039,70.621H97.391v7.025h44.761a42.512,42.512,0,0,0,7.816-84.3Z" stroke="#000" stroke-width="5"/>
-      </g>
-      <line id="Linha_14" data-name="Linha 14" x2="12" y2="12" transform="translate(69.5 86.076)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="11"/>
-      <line id="Linha_15" data-name="Linha 15" y1="33" x2="25" transform="translate(81.5 65.076)" fill="none" stroke="#000" stroke-linecap="round" stroke-width="11"/>
-    </g>
-  </g>
+	<g id="cloud-upload-svgrepo-com" transform="translate(4.5 -5.076)">
+		<g id="Grupo_3989" data-name="Grupo 3989" transform="translate(-2)">
+			<g id="Grupo_3987" data-name="Grupo 3987">
+				<path id="Caminho_2960" data-name="Caminho 2960" d="M149.968,50.186a39.21,39.21,0,0,0-40.717-19.813A40.1,40.1,0,0,0,32.975,47.691c0,.913.036,1.854.118,2.834a42.513,42.513,0,0,0,9.445,83.969H93.93v-7.025H42.538a35.487,35.487,0,0,1-5.067-70.614,3.514,3.514,0,0,0,2.97-4.022A32.829,32.829,0,0,1,73.088,14.6a32.912,32.912,0,0,1,30.8,21.04,3.5,3.5,0,0,0,4.058,2.14,32.276,32.276,0,0,1,36.6,17.168,3.492,3.492,0,0,0,2.641,1.9,35.488,35.488,0,0,1-5.039,70.621H97.391v7.025h44.761a42.512,42.512,0,0,0,7.816-84.3Z" stroke="#000" strokeWidth="5" />
+			</g>
+			<line id="Linha_14" data-name="Linha 14" x2="12" y2="12" transform="translate(69.5 86.076)" fill="none" stroke="#000" strokeLinecap="round" strokeWidth="11" />
+			<line id="Linha_15" data-name="Linha 15" y1="33" x2="25" transform="translate(81.5 65.076)" fill="none" stroke="#000" strokeLinecap="round" strokeWidth="11" />
+		</g>
+	</g>
 </svg>

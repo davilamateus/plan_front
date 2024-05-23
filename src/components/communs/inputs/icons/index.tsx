@@ -5,7 +5,7 @@ import './style.scss';
 interface type {
     title: string;
     icon: number;
-    setIcon: Dispatch<SetStateAction<number>>;
+    setIcon: (e:number)=>void;
 }
 const InputIcons = ({ title, icon, setIcon }: type) => {
 

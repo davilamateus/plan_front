@@ -21,7 +21,7 @@ const BoxFullpage = ({ setOpened, content, title, button }: type) => {
             >
                 {title ?
                     <div className="box-fullpage-head">
-                        <h3 className="title-box">{title}</h3>
+                        <h4 className="title-box">{title}</h4>
                         <button
                             className="btn-close"
                             onClick={() => { setOpened(false) }}>

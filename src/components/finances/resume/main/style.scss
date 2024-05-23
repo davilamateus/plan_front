@@ -1,0 +1,12 @@
+.finance-resume-main {
+    display: flex;
+
+    height: max-content;
+    gap: 16px;
+}
+
+@media (max-width: 1088px) {
+    .finance-resume-main {
+        flex-direction: column;
+    }
+}

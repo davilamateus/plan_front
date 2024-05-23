@@ -1,70 +1,84 @@
-@import './../../styles/color';
+@import "./../../styles/color";
 
-.message-box{
+.message-box {
     min-width: 300px;
     max-width: 460px;
     display: flex;
     position: fixed;
     top: 32px;
     z-index: 1000;
+    animation-name: moviment;
+    animation-duration: 10s;
     height: max-content;
     justify-content: center;
     align-items: center;
+    margin-right: 0;
     right: 0;
-    margin-right: -300px;
-    transition: 0.2s;
     border-radius: 8px;
-    .text{
+    .text {
         height: 100%;
         max-width: 50vw;
-        p{
+        p {
             font-size: 14px;
             margin: 8px 0;
         }
     }
-    .close{
+    .close {
         height: 100%;
-        img{
+        img {
             width: 20px;
         }
     }
 }
-
-.message-box-white{
+@keyframes moviment {
+    0% {
+        margin-right: -500px;
+    }
+    5% {
+        margin-right: 0;
+    }
+    95% {
+        margin-right: 0;
+    }
+    100% {
+        margin-right: -500px;
+    }
+}
+.message-box-white {
     background-color: rgb(255, 255, 255);
-    display: flex;        
+    display: flex;
     height: 100%;
     min-height: 80px;
     padding: 16px;
     min-width: 170px;
+    button {
+        background: none;
+        border: none;
+    }
     h3 {
         padding: 0;
         margin: 0;
     }
-    .text{
+    .text {
         min-width: 130px;
     }
-    .close{
-        img{
+    .close {
+        img {
             width: 16px;
         }
     }
-    .message-time-box{
+    .message-time-box {
         width: 0%;
         height: 4px;
         margin-bottom: -16px;
         border-radius: 8px;
         transition: 10s linear;
     }
-        .message-time-box-animation{
+    .message-time-box-animation {
         width: 100%;
-
     }
-
-
-
 }
-.message-box-img{
+.message-box-img {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -72,16 +86,12 @@
     padding: 16px;
 }
 
-.message-box-animation{
-    margin-right: 0px;
-}
-
-.color-atention{
+.color-atention {
     background-color: $quartenary-color;
 }
-.color-success{
+.color-success {
     background-color: $primary-color;
 }
-.color-error{
+.color-error {
     background-color: $terciary-color;
 }

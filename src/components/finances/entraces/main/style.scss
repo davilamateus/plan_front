@@ -1,37 +1,3 @@
-.entrace-main{
+.finances-entraces-grafic{
     width: 100%;
-
-        .entraces-components-botton{
-            display: grid;
-            grid-template-columns:3fr 5fr;           
-            gap: 16px;
-            justify-content: space-between;
- 
-        }
-    
-}
-
-@media only screen and (max-width: 1140px) {
-        .entraces-components{
-            display: contents!important;
-            .entraces-components-botton{
-                
-                margin-top: 62px!important;
-            }
-        }
-
-
-}
-
-@media only screen and (max-width: 980px) {
- 
-            .entraces-components-botton{
-                display: contents!important;
-                .finances-entraces-grafic{
-                    margin-top: 32px;
-                }
-            
-        }
-
-
 }

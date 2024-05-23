@@ -2,18 +2,12 @@
 import { useDispatch } from 'react-redux';
 import { IToDoListMain } from '../../../types/toDoList/IToDoList';
 
-function useSetToDoList() {
+export const useSetToDoList = () => {
     const dispatch = useDispatch();
-    return (toDoListMain: IToDoListMain[]
-    ) => {
-        const toDoList =
-            toDoListMain
-
+    return (toDoList: IToDoListMain[]) => {
         dispatch({
             type: '@toDoList/SET_TODOLIST', toDoList
         });
-
     }
-}
+};
 
-export default useSetToDoList;

@@ -9,5 +9,5 @@ export default function TimestampToDate(timestamp: number): string {
     const month = months[date.getMonth()];
     const year = date.getFullYear().toString().slice(-2);
 
-    return `${day} ${month} ${year}`;
+    return `${day} - ${month} - 20${year}`;
 }

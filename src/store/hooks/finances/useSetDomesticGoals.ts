@@ -1,14 +1,13 @@
-
-import { useDispatch } from 'react-redux';
-import { IFinancesGoalsList } from '../../../types/finances/IGoals';
+import { useDispatch } from "react-redux";
+import { IFinancesGoal } from "../../../types/finances/IGoals";
 
 function useSetDomesticGoals() {
     const dispatch = useDispatch();
-    return (domesticGoals: IFinancesGoalsList[]) => {
+    return (domesticGoals: IFinancesGoal[]) => {
         dispatch({
-            type: '@domesticGoals/SET_DOMESTIC_GOALS', domesticGoals
+            type: "@domesticGoals/SET_DOMESTIC_GOALS",
+            domesticGoals
         });
-
-    }
+    };
 }
 export default useSetDomesticGoals;

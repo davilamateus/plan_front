@@ -1,6 +1,6 @@
 import Api from "../../axios";
 
-const useForgetPasswordCreate = () => {
+export const useForgetPasswordCreate = () => {
     return async (email: string) => {
         const res = await Api.post(`/forgetpassword`, { email: email })
             .then((data) => {
@@ -11,4 +11,3 @@ const useForgetPasswordCreate = () => {
     }
 }
 
-export default useForgetPasswordCreate;

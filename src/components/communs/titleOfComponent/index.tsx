@@ -5,7 +5,7 @@ interface type {
 }
 const TitleOfComponent = ({ title }: type) => {
     return (
-        <h4 className='title-of-component'>{title}</h4>
+        <h4 className='title-of-component'>{title}:</h4>
     )
 }
 

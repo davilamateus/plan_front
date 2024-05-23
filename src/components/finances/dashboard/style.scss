@@ -1,0 +1,10 @@
+.finances-resume {
+    padding: 8px;
+    width: 100%;
+    .finance-resume-components {
+        display: flex;
+        min-height: 230px;
+        align-items: center;
+        justify-content: space-around;
+    }
+}

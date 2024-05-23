@@ -1,14 +1,7 @@
-export interface IFinancesExpenseList {
-    id: number;
-    type: number;
-    title: string;
-    value: number;
-    date: number;
-    color: string | null;
-    financesGoalId: number | undefined;
-}
 
-export interface IFinancesExpenseAdd {
+
+export interface IFinancesExpense {
+    id?:number;
     type: number;
     title: string;
     value: number;

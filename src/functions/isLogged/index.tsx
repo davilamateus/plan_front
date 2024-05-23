@@ -1,56 +1,47 @@
 import { useEffect } from "react";
-import useGetUserDetails from "../../hooks/user/useGetUserDetails";
 import { useNavigate } from "react-router";
-import useSetAvatar from "../../store/hooks/avatar/useSetAvatar";
+import { useGetUserApi } from "../../hooks/user/useGetUserApi";
+import { useGetTripApi } from "../../hooks/trip/useGetTripApi";
 
-const IsLogged = () => {
+export const IsLogged = () => {
 
-  const nav = useNavigate();
-  const UserGetUserDetails = useGetUserDetails();
-  const UseSetAvatar = useSetAvatar();
+  const UseNavigate = useNavigate();
+  const UseGetUserApi = useGetUserApi();
+  const UseGetTripApi = useGetTripApi();
 
   let token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
   useEffect(() => {
     if (token) {
-      UserGetUserDetails(token).then((data) => {
-        if (data.status === 200) {
-          UseSetAvatar(
-            data.data.name,
-            data.data.email,
-            data.data.city_local,
-            data.data.state_local,
-            data.data.country_local,
-            data.data.currency_local,
-            data.data.city_trip,
-            data.data.state_trip,
-            data.data.country_trip,
-            data.data.currency_trip,
-            data.data.country_code,
-            data.data.country_lon,
-            data.data.country_lat,
-            data.data.when,
-            data.data.photo,
+      UseGetUserApi(token)
+        .then((data) => {
+          if (data.status !== 200) {
+            UseNavigate('/login');
 
-          )
-        }
-        else if (data.status === 401) {
-          nav('/login');
-        } else if (data.status === 204) {
-          nav('/login');
-        }
-      }).catch(() => {
-        nav('/login')
-      });
+          }
+        })
+        .catch(() => {
+          UseNavigate('/login')
+        });
+
+      UseGetTripApi()
+        .then((data: any) => {
+          if (data.status === 210) {
+            UseNavigate('/createtripdetails');
+          }
+          else if (data.status !== 200) {
+            UseNavigate('/createtripdetails');
+          }
+        })
+        .catch(() => {
+          UseNavigate('/login');
+        })
 
     } else {
-      nav('/login')
-
+      UseNavigate('/login')
     }
 
   }, [token]);
 
+};
 
-}
-
-export default IsLogged;

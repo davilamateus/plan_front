@@ -1,138 +1,112 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { isPassword } from "../../../functions/isPassword";
+import { IMessage } from "../../../types/messages/IMenssage";
+import { useForgetPasswordNewPassword } from "../../../hooks/user/useForgetPasswordNewPassword";
 import LogoBottom from "../../communs/logoBottom";
-import './style.scss';
 import ButtonSimple from "../../communs/buttons/simple/simple";
-import { useEffect, useState } from "react";
 import InputPassword from "../../communs/inputs/password";
-import useForgetPasswordNewPassword from "../../../hooks/user/useForgetPasswordNewPassword";
-import useSetMessage from "../../../store/hooks/messages/useSetMessage";
+import PasswordRequirments from "../../communs/PasswordRequirments";
+import Message from "../../messages";
+import './style.scss';
 
 
 const ForgetPasswordComponent = () => {
-
+    const [password, setPassword] = useState({ password: '', confirmPassword: '' })
     const [btnLoading, setBtnLoading] = useState<boolean>(false);
-    const [btnStatus, setBtnStatus] = useState<boolean>(false);
-    const [password, setPassword] = useState<string>('');
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
+    const [message, setMessage] = useState<IMessage>({ status: false })
 
-    const params = useParams();
-    const navigate = useNavigate();
+    const UseParams = useParams();
+    const UserNavigate = useNavigate();
     const UseForgetNewPassword = useForgetPasswordNewPassword();
-    const setMessage = useSetMessage();
 
 
-    // useStates Requirements 
-    const [min, setMin] = useState(false);
-    const [upper, setUpper] = useState(false);
-    const [lower, setLower] = useState(false);
-    const [number, setNumber] = useState(false);
-
-
-    useEffect(() => {
-        passwordCreateChange(password);
-    }, [lower, min, number, password, upper]);
-
-
-
-    function passwordCreateChange(value: string) {
-        if (value.search(/[a-z]/) >= 0) { setLower(true) } else { setLower(false) };
-        if (value.search(/[A-Z]/) >= 0) { setUpper(true) } else { setUpper(false) };
-        if (value.search(/[0-9]/) >= 0) { setNumber(true) } else { setNumber(false) };
-        if (value.length >= 8) { setMin(true) } else { setMin(false) };
-    }
-
-    useEffect(() => {
-        if (upper && lower && min && number && password == confirmPassword) {
-            setBtnStatus(true);
-        } else {
-            setBtnStatus(false);
-        }
-    }, [password, confirmPassword]);
-
-    function newPassword() {
+    const handleSubmit = () => {
         setBtnLoading(true);
-        if (params.token) {
-            UseForgetNewPassword(params.token, password)
+        if (UseParams.token) {
+            UseForgetNewPassword(UseParams.token, password.password)
                 .then((data: any) => {
                     if (data.status == 200) {
-                        setMessage('Password changed successfully!', 'We changed your password and now we will redirect you to the login page', 'success');
+                        setMessage({
+                            title: 'Password changed successfully!',
+                            description: 'We changed your password and now we will redirect you to the login paget.',
+                            type: 'success',
+                            status: true
+                        });
                         setTimeout(() => {
-                            navigate('/login');
+                            UserNavigate('/login');
                         }, 5000);
                     } else {
-                        setMessage('An error occurred!', 'Unable to request a new password. Please try again later.', 'error');
-
+                        setMessage({
+                            title: 'An error occurred!',
+                            description: 'Unable to request a new password. Please try again later.',
+                            type: 'error',
+                            status: true
+                        });
                     }
-                }).catch((error) => {
-                    setMessage('An error occurred!', 'Unable to request a new password. Please try again later.', 'error');
+                }).catch(() => {
+                    setMessage({
+                        title: 'An error occurred!',
+                        description: 'Unable to request a new password. Please try again later.',
+                        type: 'error',
+                        status: true
+                    });
                 })
         }
     }
 
     return (
-        <div className='new-password-main'>
-            <div className="new-password-content">
-                <img className='person' src="./../../../../img/person2.png" />
-                <div className="new-password-text box">
-                    <h2>New Password</h2>
-                    <p>Enter a new password.</p>
-                    <InputPassword
-                        title='Password:'
-                        placeholder='********'
-                        setInput={setPassword}
-                        input={password}
-                    />
-                    {password == '' || password !== '' && (number && min && upper && lower) ? '' :
-                        <div className="req-password">
-                            <div className={upper ? 'success' : ''} >
-                                <div></div>
-                                Upper case
-                            </div>
-                            <div className={lower ? 'success' : ''} >
-                                <div></div>
-                                Lower case
-                            </div>
-                            <div className={number ? 'success' : ''} >
-                                <div></div>
-                                Number
-                            </div>
+        <>
+            <div className='new-password-main'>
+                <div className="new-password-content">
+                    <img className='person' src="./../../../../img/person2.png" />
+                    <div className="new-password-text box">
+                        <h3>New Password</h3>
+                        <p>Enter a new password.</p>
+                        <InputPassword
+                            title='Password:'
+                            placeholder='********'
+                            setInput={(e) => setPassword({ ...password, password: e })}
+                            input={password.password}
+                        />
+                        <PasswordRequirments password={password.password} />
 
-                            <div className={min ? 'success' : ''} >
-                                <div></div>
-                                Min 8 Caracters
+                        <InputPassword
+                            title='Confirm Password:'
+                            placeholder='********'
+                            setInput={(e) => setPassword({ ...password, confirmPassword: e })}
+                            input={password.confirmPassword}
+                        />
+                        {password.confirmPassword == '' || password.password == password.confirmPassword ? '' :
+                            <div className="req-password">
+                                <div >
+                                    <div></div>
+                                    Passwords must be the same.
+                                </div>
                             </div>
-                        </div>
-                    }
-                    <InputPassword
-                        title='Confirm Password:'
-                        placeholder='********'
-                        setInput={setConfirmPassword}
-                        input={confirmPassword}
-                    />
-                    {confirmPassword == '' || password == confirmPassword ? '' :
-                        <div className="req-password">
-                            <div >
-                                <div></div>
-                                Passwords must be the same.
-                            </div>
-                        </div>
-                    }
-                    <ButtonSimple
-                        title='Save'
-                        type='success'
-                        status={btnStatus}
-                        action={() => { newPassword() }}
-                        loading={btnLoading}
-                    />
+                        }
+                        <ButtonSimple
+                            title='Save'
+                            type='success'
+                            status={isPassword(password.password) && (password.password === password.confirmPassword)}
+                            action={handleSubmit}
+                            loading={btnLoading}
+                        />
+                    </div>
                 </div>
-            </div>
-            <footer>
-                <Link to='/'>
-                    <LogoBottom />
-                </Link>
-            </footer>
+                <footer>
+                    <Link to='/'>
+                        <LogoBottom />
+                    </Link>
+                </footer>
 
-        </div>)
-}
+            </div>
+            <Message
+                message={message}
+                setMessage={setMessage}
+            />
+        </>
+    )
+};
 
 export default ForgetPasswordComponent;

@@ -1,0 +1,33 @@
+@import "./../../../../../styles/color";
+
+.goals-itens {
+    h4 {
+        font-size: 12pt;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    table {
+        width: 100%;
+        .goals-table-value {
+            padding: 4px 0px;
+            border-bottom: 1px solid $input-border-color;
+            border-radius: 4px;
+            font-weight: 400;
+            transition: 0.3s;
+            cursor: pointer;
+            &:hover {
+                background-color: $input-border-color;
+                padding: 4px 2px;
+            }
+        }
+        gap: 16px;
+        tr {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        th {
+            color: $title-color;
+        }
+    }
+}

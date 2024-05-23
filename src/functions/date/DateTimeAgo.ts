@@ -1,4 +1,4 @@
-const DateTimeAgo = (date: Date): string => {
+export const dateTimeAgo = (date: Date): string => {
     const now = new Date();
 
     const isFuture = date.getTime() > now.getTime();
@@ -39,4 +39,3 @@ const DateTimeAgo = (date: Date): string => {
     }
 };
 
-export default DateTimeAgo;

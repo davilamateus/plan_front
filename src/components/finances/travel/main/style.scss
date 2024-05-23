@@ -1,25 +1,7 @@
-.trip-components{
-
-        .trip-components-top{
-                display: grid;
-                width: 100%;
-                grid-template-columns:3fr 5fr;
-                gap: 16px;
-                
-        }
+.trip-main {
+    padding-bottom: 128px;
+    .trip-goals {
+        display: flex;
+        gap: 16px;
+    }
 }
-
-@media only screen and (max-width: 990px) {
-
-.trip-components{
-        display: contents!important;
-   
-}
-            }
-@media only screen and (max-width: 900px) {
-
-.trip-components-top{
-        display: contents!important;
-   
-}
-            }

@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
-import IsLogged from '../../functions/isLogged'
+import { IsLogged } from '../../functions/isLogged'
 import useSetPageTitle from '../../store/hooks/pageTitle/useSetPageTitle';
-import HomeMain from '../../components/home/main';
+import HomeMain from '../../components/home';
 
 const HomePage = () => {
     IsLogged();

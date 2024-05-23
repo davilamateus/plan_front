@@ -1,4 +1,4 @@
-export default interface IArticle {
+export type IArticle = {
 
     title: string;
     content: string;

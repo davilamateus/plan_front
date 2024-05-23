@@ -1,43 +1,37 @@
-import { useState, useEffect } from 'react';
-import useGetEntraces from '../../../../store/hooks/finances/useGetEntraces';
-import { IFinancesExpenseList } from '../../../../types/finances/IExpense';
-import TitleOfSession from '../../../communs/titleOfSession';
-import FinanceActives from '../../comuns/actives/table';
-import FinancesEntracesGrafic from '../grafic/main';
-import FinancesResume from '../resume';
-import './style.scss';
-import useGetEntracesApi from '../../../../hooks/finances/entraces/useGetEntraces';
+import { useEffect, useState } from "react";
+import { useGetEntraces } from "../../../../store/hooks/finances/useGetEntraces";
+import { IFinancesEntracesMain } from "../../../../types/finances/IEntraces";
+import GraficOfBar from "../grafic/grafic";
+import "./style.scss";
+import TitleOfSession from "../../../communs/titleOfSession";
 
-const EntracesMain = () => {
-
-    const [entraces, setEntraces] = useState<IFinancesExpenseList[]>([]);
-
-
+const FinancesEntraces = () => {
+    const [barData, setBarData] = useState<{ title: string[]; value: number[] }>({ title: [], value: [] });
 
     const UseGetEntraces = useGetEntraces();
-    const UseGetEntracesApi = useGetEntracesApi();
-
-
-    // Getting Entraces
     useEffect(() => {
-        if (UseGetEntraces.entraces === false) {
-            UseGetEntracesApi(0, 1000000000000000000, true);
-        } else {
-            setEntraces(UseGetEntraces);
+        if (UseGetEntraces) {
+            const newData = UseGetEntraces.reduce(
+                (acc: { title: string[]; value: number[] }, item: IFinancesEntracesMain) => {
+                    acc.title.push(`${item.month.slice(0, 3)} ${item.year.toString().slice(2, 4)}`);
+                    acc.value.push(item.totalValue);
+                    return acc;
+                },
+                { title: [], value: [] }
+            );
+            setBarData(newData);
         }
     }, [UseGetEntraces]);
 
-
     return (
-        <div className='entrace-main'>
-            <TitleOfSession title='Entraces' />
-            <FinancesEntracesGrafic entraces={entraces} />
-            <div className="entraces-components-botton">
-                <FinancesResume />
-                <FinanceActives actives={entraces} />
-            </div>
-        </div>
-    )
-}
+        <>
+            <TitleOfSession title="Entraces" />
 
-export default EntracesMain;
+            <div className="finances-entraces-grafic">
+                <GraficOfBar barData={barData} />
+            </div>
+        </>
+    );
+};
+
+export default FinancesEntraces;

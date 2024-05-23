@@ -1,14 +1,13 @@
-@import './../../../../styles/color';
+@import "./../../../../styles/color";
 
-.finance-simple-result{
+.finance-simple-result {
     margin-bottom: 16px;
     width: max-content;
-    min-width: 160px;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
 
-     .finance-simple-result-value{
+    .finance-simple-result-value {
         padding: 0;
         padding-top: 4px;
         margin: 0;

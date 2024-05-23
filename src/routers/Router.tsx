@@ -6,7 +6,7 @@ import Store from '../store';
 import Message from '../components/messages';
 import ConfirmEmail from '../pages/confirmEmail';
 import ForgetPassword from '../pages/forgetPassword';
-import CreateUserDetails from '../pages/createUserDetails';
+import CreateTripDetailsComponent from '../pages/createTripDetails';
 import Menu from '../components/menu';
 import HeaderMain from '../components/header/main';
 import PageFinances from '../pages/finances';
@@ -14,6 +14,7 @@ import NoticesPage from '../pages/noticies';
 import PageExchange from '../pages/exchange';
 import PageToDoList from '../pages/todolist';
 import PageAdvices from '../pages/advices';
+import PageMyAccoount from '../pages/myaccount';
 
 
 
@@ -24,12 +25,11 @@ function AppRouter() {
     return (
         <BrowserRouter>
             <Provider store={Store} >
-                <Message />
                 <Routes>
                     <Route path='/login' element={<Login />} />
                     <Route path='/confirmemail/:token' element={<ConfirmEmail />} />
                     <Route path='/forgetpassword/:token' element={<ForgetPassword />} />
-                    <Route path='/createuserdetails' element={<CreateUserDetails />} />
+                    <Route path='/createtripdetails' element={<CreateTripDetailsComponent />} />
                     <Route path='/' element={<><HeaderMain /> <Menu /> </>}>
                         <Route path='/' element={<HomePage />} />
                         <Route path='/finances' element={<PageFinances />} />
@@ -37,6 +37,7 @@ function AppRouter() {
                         <Route path='/exchange' element={<PageExchange />} />
                         <Route path='/todolist' element={<PageToDoList />} />
                         <Route path='/advices' element={<PageAdvices />} />
+                        <Route path='/myaccount' element={<PageMyAccoount />} />
                     </Route>
                 </Routes>
             </Provider>

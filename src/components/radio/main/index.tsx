@@ -1,94 +1,60 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
+import { useGetRadio } from '../../../hooks/radio/useGetCountry';
+import { useGetTrip } from '../../../store/hooks/trip/useGetTrip';
+import { IRadio } from '../../../types/city/IRadio';
+import Skeleton from 'react-loading-skeleton';
+import './style.scss';
 
-import { RadioBrowserApi } from 'radio-browser-api'
-import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar'
-import './style.scss'
-import Skeleton from 'react-loading-skeleton'
+
 const RadioComponent = () => {
-
-
-    const api = new RadioBrowserApi('My Radio App')
-
-    const UseGetAvatar = useGetAvatar();
-    const [listRadio, setListRadio] = useState<any[]>([])
+    const UseGetTrip = useGetTrip();
+    const [listRadio, setListRadio] = useState<IRadio[]>([])
     const [page, setPage] = useState(0)
     const [radioStatus, setRadioStatus] = useState('play')
-    const audioRef = useRef<any>()
     const [volume, setVolume] = useState('50')
-    const [audioKey, setAudioKey] = useState(0);
+    const audioRef = useRef<any>();
+
+    const UseGetRadio = useGetRadio();
 
 
     useEffect(() => {
-        if (UseGetAvatar.country_code) {
-            stations()
+        if (UseGetTrip.tripCountrySlug) {
+            UseGetRadio(UseGetTrip.tripCountrySlug).then((radio) => {
+                setListRadio(radio);
+            });
         }
-    }, [UseGetAvatar])
+    }, [UseGetTrip]);
 
 
-    async function stations() {
-        await api.searchStations({
-            countryCode: UseGetAvatar.country_code,
-            limit: 30,
-            offset: 0
-        }).then((result: any) => {
-            console.log('radio', result)
-            result.map((item: any) => {
-                if (item.favicon !== '') {
-                    setListRadio(oldArray => [...oldArray, item])
-                }
-            })
-        }).catch((error: any) => {
-            console.log('Radio Erro ', error)
-
-        })
-
-    }
-
-
-
-
-    function backRadioChange(value: number) {
-        if (page - 1 === -1) {
-            setPage(listRadio.length - 1)
-        } else {
-            setPage(page + (value))
-            setAudioKey(audioKey - 1);
-            audioRef.current.play()
-            playStatus('pause')
-            setTimeout(() => {
-                playStatus('play')
-
-            }, 1);
-
+    const handleSwitchRadio = (direction: number) => {
+        if (listRadio.length > 0) {
+            let nextPage = page + direction;
+            if (nextPage < 0) nextPage = listRadio.length - 1;
+            if (nextPage >= listRadio.length) nextPage = 0;
+            setPage(nextPage);
+            audioRef.current.src = listRadio[page].url;
+            handlePlayStatus('pause');
+            handlePlayStatus('play');
         }
+    };
 
-    }
-    function nextRadioChange(value: number) {
-        if (page + 1 === listRadio.length) {
-            setPage(0);
-        } else {
-            setPage(page + (value));
-        }
-        setAudioKey(audioKey + 1);
-        audioRef.current.play()
-        playStatus('pause')
-        setTimeout(() => {
-            playStatus('play')
 
-        }, 1);
-
-    }
-
-    function playStatus(value: string) {
+    const handlePlayStatus = (value: string) => {
         if (value == 'play') {
             setRadioStatus('pause')
-            audioRef.current.play()
+            if (audioRef.current.readyState >= audioRef.current.HAVE_ENOUGH_DATA) {
+                audioRef.current.play();
+            } else {
+                audioRef.current.oncanplay = () => {
+                    audioRef.current.play();
+                };
+            }
+
         } else {
             setRadioStatus('play')
             audioRef.current.pause()
-
         }
-    }
+    };
 
 
 
@@ -96,7 +62,7 @@ const RadioComponent = () => {
         if (audioRef.current) {
             audioRef.current.volume = Number(volume) / 100
         }
-    }, [volume])
+    }, [volume]);
 
 
 
@@ -114,7 +80,7 @@ const RadioComponent = () => {
                         <div className="radios-btns-controler">
 
                             <div className="radios-bts">
-                                <svg onClick={() => { backRadioChange(-1) }} xmlns="http://www.w3.org/2000/svg" width="15.552" height="12.387" viewBox="0 0 15.552 12.387">
+                                <svg onClick={() => { handleSwitchRadio(-1) }} xmlns="http://www.w3.org/2000/svg" width="15.552" height="12.387" viewBox="0 0 15.552 12.387">
                                     <g id="vuesax_outline_next" data-name="vuesax/outline/next" transform="translate(0 0)">
                                         <g id="next" transform="translate(0 0)">
                                             <path id="Vector" d="M6.645,8.356a2.041,2.041,0,0,0,.946-.232,1.656,1.656,0,0,0,.946-1.476V1.708A1.672,1.672,0,0,0,7.591.232,2.043,2.043,0,0,0,5.7.232L.946,2.7A1.672,1.672,0,0,0,0,4.175,1.672,1.672,0,0,0,.946,5.651L5.7,8.118A1.986,1.986,0,0,0,6.645,8.356Zm0-7.577A1.129,1.129,0,0,1,7.161.9a.915.915,0,0,1,.516.805V6.648a.915.915,0,0,1-.516.805,1.121,1.121,0,0,1-1.032,0L1.376,4.986a.886.886,0,0,1,0-1.61L6.129.908A1.135,1.135,0,0,1,6.645.779Z" transform="translate(5.289 2.013)" fill="#292d32" />
@@ -124,11 +90,11 @@ const RadioComponent = () => {
                                     </g>
                                 </svg>
                                 {radioStatus !== 'play' ?
-                                    <svg onClick={() => { playStatus('pause') }} xmlns="http://www.w3.org/2000/svg" width="53" height="53" viewBox="0 0 53 53">
+                                    <svg onClick={() => { handlePlayStatus('pause') }} xmlns="http://www.w3.org/2000/svg" width="53" height="53" viewBox="0 0 53 53">
                                         <defs>
                                             <filter id="Retângulo_501" x="0" y="0" width="53" height="53" filterUnits="userSpaceOnUse">
                                                 <feGaussianBlur stdDeviation="3" result="blur" />
-                                                <feFlood flood-color="#6cd9aa" flood-opacity="0.271" />
+                                                <feFlood floodColor="#6cd9aa" floodOpacity="0.271" />
                                                 <feComposite operator="in" in2="blur" />
                                                 <feComposite in="SourceGraphic" />
                                             </filter>
@@ -148,11 +114,11 @@ const RadioComponent = () => {
                                     </svg>
 
                                     :
-                                    <svg onClick={() => { playStatus('play') }} xmlns="http://www.w3.org/2000/svg" width="53" height="53" viewBox="0 0 53 53">
+                                    <svg onClick={() => { handlePlayStatus('play') }} xmlns="http://www.w3.org/2000/svg" width="53" height="53" viewBox="0 0 53 53">
                                         <defs>
                                             <filter id="Retângulo_501" x="0" y="0" width="53" height="53" filterUnits="userSpaceOnUse">
                                                 <feGaussianBlur stdDeviation="3" result="blur" />
-                                                <feFlood flood-color="#6cd9aa" flood-opacity="0.271" />
+                                                <feFlood floodColor="#6cd9aa" floodOpacity="0.271" />
                                                 <feComposite operator="in" in2="blur" />
                                                 <feComposite in="SourceGraphic" />
                                             </filter>
@@ -171,7 +137,7 @@ const RadioComponent = () => {
                                     </svg>
                                 }
 
-                                <svg onClick={() => { nextRadioChange(1) }} id="vuesax_outline_next" data-name="vuesax/outline/next" xmlns="http://www.w3.org/2000/svg" width="14" height="12.387" viewBox="0 0 14 12.387">
+                                <svg onClick={() => { handleSwitchRadio(1) }} id="vuesax_outline_next" data-name="vuesax/outline/next" xmlns="http://www.w3.org/2000/svg" width="14" height="12.387" viewBox="0 0 14 12.387">
                                     <g id="next" transform="translate(0 0)">
                                         <path id="Vector" d="M1.7,8.356a1.692,1.692,0,0,1-.852-.232A1.678,1.678,0,0,1,0,6.648V1.708A1.7,1.7,0,0,1,.852.232a1.677,1.677,0,0,1,1.7,0L6.833,2.7a1.705,1.705,0,0,1,0,2.952L2.555,8.118A1.647,1.647,0,0,1,1.7,8.356ZM1.7.779a.928.928,0,0,0-.929.929V6.648a.929.929,0,0,0,1.393.805L6.446,4.986a.93.93,0,0,0,0-1.61L2.168.908A.941.941,0,0,0,1.7.779Z" transform="translate(1.553 2.013)" fill="#292d32" />
                                         <path id="Vector-2" data-name="Vector" d="M.387,7.153A.39.39,0,0,1,0,6.766V.387A.39.39,0,0,1,.387,0,.39.39,0,0,1,.774.387V6.766A.387.387,0,0,1,.387,7.153Z" transform="translate(11.672 2.617)" fill="#292d32" />
@@ -181,9 +147,10 @@ const RadioComponent = () => {
 
                             </div>
                             <div className="radio-volume">
-                                <audio key={audioKey} ref={audioRef} autoPlay={false}>
+                                <audio ref={audioRef} autoPlay={false}>
                                     <source src={listRadio[page].url} />
                                 </audio>
+
                                 <div className='radio-volume-bg'>
                                     <div style={{ width: volume + '%' }} className="radio-volume-bar"></div>
                                     <input className='radio-volume' type="range" min="1" max="100" onChange={(e) => { setVolume(e.target.value) }} />
@@ -193,7 +160,7 @@ const RadioComponent = () => {
                     </div>
                 </>
                 :
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                <div className='radio' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                     <div>
                         <Skeleton style={{ width: '64px', height: '64px', }} />
 
@@ -212,7 +179,7 @@ const RadioComponent = () => {
             }
         </div>
     )
-}
+};
 
 
-export default RadioComponent
+export default RadioComponent;

@@ -1,14 +1,17 @@
 import Api from "../../../axios";
 
-const useUploadAttchament = () => {
-    return async (formData: File,) => {
-        const res = await Api.post('/todolist/attchament/upload', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
+export const useUploadAttchament = () => {
+
+    const config = {
+        headers: { Authorization: `Bearer ${sessionStorage.getItem('token') ?? localStorage.getItem('token')}` }
+    };
+    return async (file: File) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        const res = await Api.post('/todolist/attchaments/upload', formData, config);
         return res;
     }
+
 }
 
-export default useUploadAttchament;
+

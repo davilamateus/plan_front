@@ -1,5 +1,5 @@
 import Api from "../../axios";
-import useGetEntracesApi from "./useGetToDoList";
+import useGetEntracesApi from "../finances/entraces/useGetEntraces";
 
 
 const useDeleteEntraces = () => {

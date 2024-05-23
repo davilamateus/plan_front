@@ -46,7 +46,7 @@ const ConfirmEmailComponent = () => {
             <div className="confirm-email-content">
                 <img className='person' src="./../../../../img/person2.png" />
                 <div className="confirm-email-text box">
-                    <h2>{title}</h2>
+                    <h3>{title}</h3>
                     <p>{text}</p>
                     <ButtonSimple
                         title='Go to login page'

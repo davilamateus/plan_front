@@ -1,48 +1,51 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { useGetNoticies } from '../../../hooks/city/useGetNoticies';
+import { useGetTrip } from '../../../store/hooks/trip/useGetTrip';
+import { IArticle } from '../../../types/noticies/IArticle';
 import NoticiesCategories from '../categories'
-import './style.scss';
-import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar';
 import NoticiePrincipalCard from '../principalCard';
 import NoticieList from '../list/main';
-import Api from '../../../axios';
+import './style.scss';
+import { error } from 'console';
 
 
 const NoticiesMain = () => {
 
-
   const [category, setCategory] = useState('');
-  const [articles, setArticles] = useState<any>([]);
-  const [nextPage, setNextPage] = useState('');
+  const [articles, setArticles] = useState<IArticle[]>([]);
+  const [nextPage, setNextPage] = useState();
   const [loading, setLoading] = useState(false)
 
+  const UseGetTrip = useGetTrip();
+  const UseGetNoticies = useGetNoticies();
 
-  const UseGetAvatar = useGetAvatar();
-
-
-
-
-
-
-  function fetchNews(page: string) {
+  const handleGetNews = (page?: string) => {
     setLoading(true);
-    Api.get(`/noticies/articles?country=${UseGetAvatar.country_code}&image=1&${category !== '' ? 'category=' + category : ''}${page !== '' ? 'page=' + page : ''}`)
-      .then((data: any) => {
-        setArticles((articles: any) => [...articles].concat(data.data.results));
+    UseGetNoticies(UseGetTrip.tripCountrySlug, category !== '' ? category : undefined, page !== '' ? page : undefined)
+      .then((data) => {
+        setArticles(oldArticles => [...oldArticles, ...data.data.results]);
+        setArticles(oldArticles => {
+          const uniqueArticles = oldArticles.filter((article, index, self) =>
+            index === self.findIndex((a) => (
+              a.title.toLowerCase().trim() === article.title.toLowerCase().trim()
+            ))
+          );
+          return uniqueArticles;
+        });
         setNextPage(data.data.nextPage);
-        setLoading(false)
-
       })
-      .catch(error => {
-        setLoading(false)
-      });
-  }
+      .catch((error) => console.log(error))
+    setLoading(false);
+
+  };
+
 
   useEffect(() => {
-    if (UseGetAvatar.country_code !== '') {
-      fetchNews('');
+    if (UseGetTrip.tripCountrySlug) {
+      setArticles([])
+      handleGetNews()
     }
-  }, [category, UseGetAvatar]);
-
+  }, [category, UseGetTrip]);
 
 
   return (
@@ -50,16 +53,15 @@ const NoticiesMain = () => {
       <NoticiesCategories category={category} setCategory={setCategory} />
       <NoticiePrincipalCard article={articles[0]} />
       <NoticieList articles={articles.slice(0)} />
-      {articles.length > 0 ?
-        <button className='notices-view-more' onClick={() => fetchNews(nextPage)}>
+      {articles.length > 0 &&
+        <button className='notices-view-more' onClick={() => handleGetNews(nextPage)}>
           {loading ?
             <img src="./../../../../gifs/btnloadin.gif" alt="loading" />
             : 'View more'}
-
         </button>
-        : ''}
+      }
     </div>
   )
 }
 
-export default NoticiesMain
+export default NoticiesMain;

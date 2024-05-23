@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
 
 
 interface type {
     title: string;
-    setInput: Dispatch<SetStateAction<string>>;
+    setInput: (e: string) => void;
     input: string;
     placeholder: string;
 }

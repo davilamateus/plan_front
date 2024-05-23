@@ -1,10 +1,10 @@
 
 import { useDispatch } from 'react-redux';
-import { IFinancesExpenseList } from '../../../types/finances/IExpense';
+import { IFinancesExpense } from '../../../types/finances/IExpense';
 
 function useSetEntraces() {
     const dispatch = useDispatch();
-    return (entraces: IFinancesExpenseList) => {
+    return (entraces: IFinancesExpense) => {
         dispatch({
             type: '@entraces/SET_ENTRACES', entraces
         });

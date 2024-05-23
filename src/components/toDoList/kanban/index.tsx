@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable, DropResult } from "react-beautiful-dnd";
 import { IToDoListMain, ITodolistPosition } from "../../../types/toDoList/IToDoList";
-import ToDoListCard from "../card";
-import './style.scss';
-import useEditToDoListPostion from "../../../hooks/toDoList/useEditToDoListPostion";
 import TitleOfComponent from "../../communs/titleOfComponent";
+import { useEditToDoList } from "../../../hooks/toDoList/useEditToDoList";
+import ToDoListCard from "../card";
 import Skeleton from "react-loading-skeleton";
+import './style.scss';
 
 interface Column {
     id: number;
@@ -21,8 +21,10 @@ interface type {
 }
 
 const Kanban = ({ toDo, inProgress, done, loaded }: type) => {
-    const [movedItems, setMovedItems] = useState<{ items: IToDoListMain[], columnId: number }>({ items: [], columnId: -1 });
 
+    const UseEditToDoList = useEditToDoList();
+
+    const [movedItems, setMovedItems] = useState<{ items: IToDoListMain[], columnId: number }>({ items: [], columnId: -1 });
     const [taskStatus, setTaskStatus] = useState<Record<string, Column>>({
         toDo: {
             id: 1,
@@ -68,7 +70,7 @@ const Kanban = ({ toDo, inProgress, done, loaded }: type) => {
 
     const onDragEnd = (result: DropResult) => {
         if (!result.destination) return;
-        const { source, destination, draggableId } = result;
+        const { source, destination } = result;
 
         if (source.droppableId !== destination.droppableId) {
             const sourceColumn = columns[source.droppableId];
@@ -105,19 +107,10 @@ const Kanban = ({ toDo, inProgress, done, loaded }: type) => {
         }
     }
 
-    const UseEditToDoListPosition = useEditToDoListPostion();
     useEffect(() => {
-        let array: ITodolistPosition[] = []
-        movedItems.items.map((item, index) => {
-            array.push({
-                id: item.id,
-                status: movedItems.columnId,
-                position: index
-            })
-
-        })
-
-        UseEditToDoListPosition(array)
+        movedItems.items.map((item) => {
+            UseEditToDoList({ ...item, status: movedItems.columnId })
+        });
     }, [movedItems])
 
     return (

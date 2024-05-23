@@ -1,0 +1,30 @@
+@import  './../../../styles/color';
+
+.req-password{
+    display: flex;
+    font-size: 10pt;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: -16px;
+    width: 100%;
+    div{
+        font-size: 8pt;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        div{
+        width: 6px;
+        height: 6px;
+        background-color: $paragraph-color;
+        border-radius: 8px;
+    }
+    &.success{
+        color: $primary-color;
+        div{
+         background-color:  $primary-color;
+        }
+    }
+    }
+
+}

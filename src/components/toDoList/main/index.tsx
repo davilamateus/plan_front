@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import useGetToDoListApi from '../../../hooks/toDoList/useGetToDoList'
-import useGetToDoList from '../../../store/hooks/toDoList/useGetToDoList';
-import Kanban from '../kanban';
+import { useEffect, useState } from 'react';
+import { useGetToDoListApi } from '../../../hooks/toDoList/useGetToDoList';
+import { useGetToDoList } from '../../../store/hooks/toDoList/useGetToDoList';
 import { IToDoListMain } from '../../../types/toDoList/IToDoList';
+import Kanban from '../kanban';
 import ButtonAdd from '../../communs/buttons/add';
 import ModalAddToDoList from '../modalAddToDoList';
 import BoxFullpage from '../../communs/boxFullpage';
@@ -12,7 +12,6 @@ const ToDoListMain = () => {
 
     const UseGetToListApi = useGetToDoListApi();
     const UseGetToDoList = useGetToDoList();
-
     const [toDo, setToDo] = useState<IToDoListMain[]>([]);
     const [inProgress, setInProgress] = useState<IToDoListMain[]>([]);
     const [done, setDone] = useState<IToDoListMain[]>([]);
@@ -55,4 +54,4 @@ const ToDoListMain = () => {
     )
 }
 
-export default ToDoListMain
+export default ToDoListMain;

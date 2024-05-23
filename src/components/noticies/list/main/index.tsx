@@ -1,39 +1,36 @@
-import React from 'react'
-import IArticle from '../../../../types/noticies/IArticle'
-import NoticieCard from '../card'
-import './style.scss'
-import TitleOfSession from '../../../communs/titleOfSession'
+import { IArticle } from '../../../../types/noticies/IArticle';
+import TitleOfSession from '../../../communs/titleOfSession';
+import NoticieCard from '../card';
+import './style.scss';
 
 interface type {
-    articles: IArticle[]
+    articles: IArticle[];
 }
 
 const NoticieList = ({ articles }: type) => {
     return (
-        articles.length > 0 ?
-            <div>
-                <TitleOfSession title='Others News' />
-                <div className='noticies-list' >
-                    {articles.slice(1).map((article: any, index: number) => (
+        <div>
+            <TitleOfSession title='Others News' />
+            <div className='noticies-list' >
+                {articles.length > 0 ?
+                    articles.slice(1).map((article: any, index: number) => (
                         <NoticieCard key={index} article={article} />
-                    ))}
-                </div>
+                    ))
+                    :
+                    < >
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                        <NoticieCard />
+                    </>
+                }
             </div>
-            :
-            <>
-                <TitleOfSession title='Others News' />
-                <div className='noticies-list' >
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                    <NoticieCard article={false} />
-                </div>
-            </>
+        </div>
     )
 }
 

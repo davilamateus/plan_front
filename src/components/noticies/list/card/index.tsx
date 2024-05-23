@@ -1,24 +1,24 @@
 import React from 'react'
 import './style.scss'
-import IArticle from '../../../../types/noticies/IArticle'
+import { IArticle } from '../../../../types/noticies/IArticle'
 import Skeleton from 'react-loading-skeleton'
 
 interface type {
-    article: IArticle | boolean
+    article?: IArticle
 }
 const NoticieCard = ({ article }: type) => {
 
     return (
-        article && article !== true ?
+        article ?
             <a className='box noticie-card' href={article.link} target="_blank">
                 <div className="noticie-card-img" style={{ backgroundImage: `url(${article.image_url})` }}></div>
                 <div className="notice-card-content">
                     <h4 className='notice-card-title'>{article.title}</h4>
                     <div className="notice-card-category">{article.category}</div>
-                    <div>{article?.creator ? article.creator.map((item) => (
-                        <>
+                    <div>{article?.creator ? article.creator.map((item, index) => (
+                        <div key={index}>
                             <span>{item}</span> <br />
-                        </>
+                        </div>
                     )) : ''}</div>
                 </div>
             </a> :

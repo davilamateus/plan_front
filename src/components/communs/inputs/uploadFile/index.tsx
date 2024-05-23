@@ -1,35 +1,26 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import { useUploadAttchament } from '../../../../hooks/toDoList/attchament/useUploadAttchament';
 import './style.scss';
-import useUploadAttchament from '../../../../hooks/toDoList/attchament/useUploadAttchament';
-import Api from '../../../../axios';
 
 interface type {
-    setLink: Dispatch<SetStateAction<string>>;
-}
+    setLink: (e: string) => void;
+};
 
-function InputUploadFile({ setLink }: type) {
+const InputUploadFile = ({ setLink }: type) => {
+
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [fileName, setFileName] = useState<string | undefined>(undefined);
 
-    let token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const UseUploadAttchament = useUploadAttchament();
 
-    const config = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
+
     const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
 
-            const formData = new FormData();
-            formData.append('file', file);
-
-            await Api.post<{ fileName: string }>(
-                '/todolist/attchament/upload',
-                formData,
-                config
-            ).then((data: any) => {
-                setFileName(data.data.fileName);
-            })
+            UseUploadAttchament(file)
+                .then((data) => {
+                    setLink(data.data.fileName);
+                });
 
         }
         setSelectedFile(file || null);
@@ -38,11 +29,6 @@ function InputUploadFile({ setLink }: type) {
 
 
 
-    useEffect(() => {
-        if (fileName) {
-            setLink(fileName)
-        }
-    }, [fileName])
 
     return (
         <div className='input-upload'>

@@ -1,56 +1,64 @@
-import React, { useEffect, useState } from 'react'
-import './style.scss';
-import useGetAvatar from '../../../../store/hooks/avatar/useGetAvatar';
-import Api from '../../../../axios';
-import NoticieDashboardPrincipal from '../principal';
-
-
+import { useEffect, useState } from "react";
+import { useGetTrip } from "../../../../store/hooks/trip/useGetTrip";
+import { useGetNoticies } from "../../../../hooks/city/useGetNoticies";
+import NoticieDashboardCard from "../card";
+import { IArticle } from "../../../../types/noticies/IArticle";
+import "./style.scss";
+import TitleOfComponentOnDashnboard from "../../../communs/titleOfComponentOnDashnboard";
 
 const NoticiesDashboard = () => {
-
-    const [articles, setArticles] = useState<any>([]);
+    const [articles, setArticles] = useState<IArticle[]>([]);
     const [page, setPage] = useState(0);
 
+    const UseGetTrip = useGetTrip();
+    const UseGetNoticies = useGetNoticies();
 
-    const UseGetAvatar = useGetAvatar();
-
-
-    function fetchNews(page: string) {
-        Api.get(`/noticies/articles?country=${UseGetAvatar.country_code}&image=1`)
-            .then((data: any) => {
-                setArticles((articles: any) => [...articles].concat(data.data.results));
-
-
-            })
-            .catch(error => {
-            });
-    }
     useEffect(() => {
-        if (UseGetAvatar.country_code !== '') {
-            fetchNews('');
+        if (UseGetTrip.tripCountrySlug) {
+            UseGetNoticies(UseGetTrip.tripCountrySlug)
+                .then((data) => setArticles(data.data.results))
+                .catch((error) => console.log(error));
         }
-    }, [UseGetAvatar]);
+    }, [UseGetTrip]);
 
-    function changePage(pageChange: number) {
-        setPage(page + (pageChange))
-    }
-
-
+    const handleChangePage = (pageChange: number) => {
+        setPage(page + pageChange);
+    };
 
     return (
-        <div className='noticies-dashboard-main'>
-            <NoticieDashboardPrincipal article={articles[page]} />
-            <div className="noticies-dashboard-btn">
-                {page !== 0 ?
-                    <button onClick={() => { changePage(-1) }}>back</button>
-                    : ''}
-                {page !== articles.length ?
-                    <button onClick={() => { changePage(1) }}>next</button>
-                    : ''}
+        <>
+            <TitleOfComponentOnDashnboard
+                title="Noticies"
+                link="/noticies"
+            />
+
+            <div className="noticies-dashboard-main">
+                <NoticieDashboardCard article={articles[page]} />
+                <div className="noticies-dashboard-btn">
+                    {page !== 0 ? (
+                        <button
+                            onClick={() => {
+                                handleChangePage(-1);
+                            }}>
+                            back
+                        </button>
+                    ) : (
+                        ""
+                    )}
+                    {page !== articles.length - 1 ? (
+                        <button
+                            onClick={() => {
+                                handleChangePage(1);
+                            }}>
+                            next
+                        </button>
+                    ) : (
+                        ""
+                    )}
+                </div>
             </div>
+        </>
+    );
+};
 
-        </div>
-    )
-}
-
-export default NoticiesDashboard
+export default NoticiesDashboard;

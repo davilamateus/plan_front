@@ -1,74 +1,55 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useGetCityAutocomplete } from '../../../../hooks/city/useGetCityAutocomplete';
+import { ILocation } from '../../../../types/city/ILocation';
 import './style.scss';
-import Api from '../../../../axios';
 
-interface Location {
-    place_id: string;
-    display_name: string;
-    lat: string;
-    lon: string;
-    address: any
-}
+
 
 interface Types {
     title: string;
-    setCity: Dispatch<SetStateAction<string>>;
-    setState: Dispatch<SetStateAction<string>>;
-    setCountry: Dispatch<SetStateAction<string>>;
-    setCountryCode?: Dispatch<SetStateAction<string>>;
-    setCountryLon?: Dispatch<SetStateAction<string>>;
-    setCountryLat?: Dispatch<SetStateAction<string>>;
+    inicialValue?: string;
+    result: (e: ILocation) => void;
 
 }
-const InputCity = ({ setCity, setState, setCountry, title, setCountryCode, setCountryLat, setCountryLon }: Types) => {
+const InputCity = ({ title, inicialValue, result }: Types) => {
 
 
     const [query, setQuery] = useState<string>('');
-    const [suggestions, setSuggestions] = useState<Location[]>([]);
+    const [suggestions, setSuggestions] = useState<ILocation[]>([]);
+    const [selected, setSelected] = useState(false);
 
-    console.log(suggestions)
 
+    const UseGetTripAutocomplete = useGetCityAutocomplete();
 
-    function getCitiesAutocomplete() {
-        setSuggestions([]);
-        Api.get(`/cities/autocomplete?query=${query}`)
-            .then((data: any) => {
-                if (data.state == 429) {
-                    getCitiesAutocomplete()
+    const handleSubmit = () => {
+        UseGetTripAutocomplete(query)
+            .then((data) => {
+                if (data.status === 200) {
+                    setSuggestions(data.data.result)
                 } else {
-                    return setSuggestions(data.data);
+                    handleSubmit()
                 }
             })
-
+            .catch(() => {
+                handleSubmit()
+            })
     }
 
     useEffect(() => {
-        if (query !== '') {
-            getCitiesAutocomplete()
-        } else {
-            setSuggestions([])
-        }
+        if (query.length > 3) handleSubmit()
+    }, [query])
 
-    }, [query]);
+
 
 
     const handleInputChange = (text: string) => {
         setQuery(text);
     };
 
-    const handleSelectLocation = (location: Location) => {
+    const handleSelectLocation = (location: ILocation) => {
+        setSelected(true)
         setQuery(location.address.name + (location.address.state ? ' - ' + location.address.state : "") + ' - ' + location.address.country);
-        setCity(location.address.name);
-        setState(location.address.state);
-        setCountry(location.address.country);
-        if (setCountryCode) {
-            setCountryCode(location.address.country_code);
-        }
-        if (setCountryLat && setCountryLon) {
-            setCountryLat(location.lat);
-            setCountryLon(location.lon);
-
-        }
+        result(location)
         setSuggestions([]);
     };
 
@@ -78,17 +59,20 @@ const InputCity = ({ setCity, setState, setCountry, title, setCountryCode, setCo
                 <h4>{title}</h4>
                 <input
                     type="text"
-                    placeholder="Type a city..."
+                    placeholder={inicialValue || "Type a city..."}
                     value={query}
-                    onChange={(e) => { setQuery(e.target.value) }}
+                    onChange={(e) => {
+                        setSelected(false)
+                        setQuery(e.target.value)
+                    }}
                     onKeyUp={(e) => {
                         handleInputChange(query);
                     }}
                 />
-                {suggestions.length > 0 ?
+                {suggestions.length > 0 && !selected ?
                     <ul className='city-result'>
-                        {suggestions.map((location) => (
-                            <li key={location.place_id} onClick={() => handleSelectLocation(location)}>
+                        {suggestions.map((location, index) => (
+                            <li key={index} onClick={() => handleSelectLocation(location)}>
                                 {location.address.name}
                                 {location.address.state ? ' - ' + location.address.state + ' ' : ' '}
                                 - {location.address.country}

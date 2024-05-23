@@ -1,5 +1,5 @@
 import Api from "../../../axios";
-import useSetCashInHand from "../../../store/hooks/finances/useSetCashInHand";
+import useSetCashInHand from "../../../store/hooks/finances/useSetFinanceResume";
 
 
 

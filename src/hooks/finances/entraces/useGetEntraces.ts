@@ -15,17 +15,9 @@ const useGetEntracesApi = () => {
         headers: { Authorization: `Bearer ${token}` }
     };
 
-    return async (fromDate: Number, toDate: number, save: boolean) => {
-        const res = await Api.get(`/finances/entraces?fromDate=${fromDate}&toDate=${toDate}`, config)
-            .then((data) => {
-                if (save) {
-                    UseSetEntrace(data.data);
-                }
-                else {
-                    return data;
-
-                }
-            })
+    return async () => {
+        const res = await Api.get(`/finances/entraces`, config)
+            .then((data) => UseSetEntrace(data.data))
             .catch((error) => console.log(error))
         return res;
     }

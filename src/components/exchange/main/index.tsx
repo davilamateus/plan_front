@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import ExchangeHistoric from '../historic'
-import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar'
-import Axios from 'axios'
-import ExchangeSimulation from '../simulation'
+import React, { useEffect, useState } from "react";
+import ExchangeHistoric from "../historic";
+import ExchangeSimulation from "../simulation";
+import "./style.scss";
+import { useGetExchangeApi } from "../../../hooks/exchange/useGetExange";
+import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
 
 const ExchangeMain = () => {
+    const [data, setData] = useState<number[]>([]);
 
-    const [data, setData] = useState<number>(0);
-
-
+    const UseGetTrip = useGetTrip();
+    const UseGetExchange = useGetExchangeApi();
+    useEffect(() => {
+        if (UseGetTrip.tripCurrency) {
+            UseGetExchange(UseGetTrip.tripCurrency, UseGetTrip.currentCurrency).then((data) => {
+                setData(data.data);
+            });
+        }
+    }, [UseGetTrip]);
 
     return (
-        <div>
-            <ExchangeHistoric setValue={setData} />
-            <ExchangeSimulation exchangeToday={data} />
+        <div className="exchange-page">
+            <ExchangeHistoric data={data} />
+            <ExchangeSimulation exchangeToday={data[data.length - 1]} />
         </div>
-    )
-}
+    );
+};
 
-export default ExchangeMain
+export default ExchangeMain;

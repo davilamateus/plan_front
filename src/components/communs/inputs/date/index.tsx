@@ -1,17 +1,12 @@
-import React, { Dispatch, SetStateAction } from 'react'
-import DateToInput from '../../../../functions/date/dateToInput';
+import { dateToInput } from '../../../../functions/date/dateToInput';
 
 interface type {
     title: string;
     date: number;
-    setDate: Dispatch<SetStateAction<number>>;
+    setDate: (e: number) => void;
 }
 
 const InputDate = ({ title, date, setDate }: type) => {
-    console.log('Aqui', DateToInput(date))
-
-
-
     return (
         <div>
             <label>
@@ -19,11 +14,11 @@ const InputDate = ({ title, date, setDate }: type) => {
             </label>
             <input
                 type="date"
-                defaultValue={DateToInput(date)}
+                value={dateToInput(date)}
                 onChange={(e) => { setDate(new Date(e.target.value).getTime()) }}
             />
         </div>
     )
 }
 
-export default InputDate
+export default InputDate;

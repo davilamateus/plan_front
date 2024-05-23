@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import './style.scss'
-import LogoBottom from '../communs/logoBottom'
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import LogoBottom from '../communs/logoBottom';
+import './style.scss';
 
 const Menu = () => {
 
-    const [pageActived, setPageActive] = useState('')
+    const [pageActived, setPageActive] = useState('');
+    const UseLocation = useLocation();
+
     useEffect(() => {
         setPageActive(window.location.pathname.split('/')[1]);
-    }, [useNavigate()])
+    }, [UseLocation]);
+
+
+    const Logout = () => {
+        sessionStorage.clear();
+        localStorage.clear();
+        window.location.href = '/login';
+    };
+
     return (
         <main>
             <div className='menu-box box'>
@@ -22,7 +32,7 @@ const Menu = () => {
                         <li>
                             <Link className={pageActived === '' ? 'active' : ''} to={'/'}>
                                 <div >
-                                    <img src="./../../..//icons/home.svg" alt="" />
+                                    <img src="./../../../icons/home.svg" alt="" />
                                 </div>
                                 <p>Home</p>
                             </Link>
@@ -78,7 +88,7 @@ const Menu = () => {
                         </li>
                     </ul>
                 </nav>
-                <div className="exit">
+                <div onClick={() => { Logout() }} className="exit">
                     <img src="./../../../icons/exit.svg" alt="" />
                     <p>Exit</p>
                 </div>
@@ -86,6 +96,6 @@ const Menu = () => {
         </main>
 
     )
-}
+};
 
-export default Menu
+export default Menu;

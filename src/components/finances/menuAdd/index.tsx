@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import ModalAddEntrances from '../modalAdd/entraces';
 import BoxFullpage from '../../communs/boxFullpage';
-import ModalAddGoals from '../modalAdd/goals';
-import ModalAddExpenses from '../modalAdd/expenses';
+import ModalAddGoals from '../modal/goals';
 import './style.scss';
+import ModalEntrances from '../modal/entraces';
+import ModalExpenses from '../modal/expenses';
 
 interface type {
     setOpened: Dispatch<SetStateAction<boolean>>;
@@ -15,7 +15,7 @@ const FinancesMenuAdd = ({ setOpened }: type) => {
     const [title, setTitle] = useState('');
 
     //Animation Buttons
-    function addAnimation(time: number, div: { classList: { add: (arg0: string) => void; }; }) {
+    const addAnimation = (time: number, div: { classList: { add: (arg0: string) => void; }; }) =>{
         setTimeout(() => {
             div.classList.add('option-animation')
         }, time);
@@ -23,10 +23,9 @@ const FinancesMenuAdd = ({ setOpened }: type) => {
     useEffect(() => {
         for (let i = 4; i >= 0; i--) {
             addAnimation((document.querySelectorAll('.page-container .button-add-finance-options li').length - i) * 50,
-                document.querySelectorAll('.page-container .button-add-finance-options li')[i])
+                document.querySelectorAll('.page-container .button-add-finance-options li')[i]);
         }
-    }
-        , []);
+    } , []);
 
 
     return (
@@ -35,7 +34,7 @@ const FinancesMenuAdd = ({ setOpened }: type) => {
                 <ul className={`button-add-finance-options`}>
                     <li onClick={() => {
                         setTitle('Entrace')
-                        setElement(<ModalAddEntrances />)
+                        setElement(<ModalEntrances  setOpened={setOpened} />)
                     }} >
                         <img src="../../../../icons/entraces.svg" alt="" />
                         Entraces
@@ -49,7 +48,7 @@ const FinancesMenuAdd = ({ setOpened }: type) => {
                     </li>
                     <li onClick={() => {
                         setTitle('Domestic Cost')
-                        setElement(<ModalAddExpenses type={1} setOpened={setOpened} />)
+                        setElement(<ModalExpenses type={1} setOpened={setOpened} />)
                     }}>
                         <img src="../../../../icons/homecost.svg" alt="" />
                         Domestic Cost
@@ -63,7 +62,7 @@ const FinancesMenuAdd = ({ setOpened }: type) => {
                     </li>
                     <li onClick={() => {
                         setTitle('Travel Cost')
-                        setElement(<ModalAddExpenses type={2} setOpened={setOpened} />)
+                        setElement(<ModalExpenses type={2} setOpened={setOpened} />)
                     }} >
                         <img src="../../../../icons/planer.svg" alt="" />
                         Travel Cost
@@ -71,15 +70,13 @@ const FinancesMenuAdd = ({ setOpened }: type) => {
                 </ul>
 
 
-
-
-                {element ?
+                {element &&
                     <BoxFullpage
                         setOpened={setOpened}
                         content={element}
                         title={title}
                     />
-                    : ''}
+                    }
             </div>
         </div>
     )

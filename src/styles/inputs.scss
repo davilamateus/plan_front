@@ -1,95 +1,55 @@
-@import './color';
+@import "./color";
 
-
-.clean-input{
-
+.clean-input {
     border: 2px solid $input-border-color;
     border-radius: 8px;
     padding: 12px;
-  
-    input ,textarea{
-        background-color: $box-background!important;
+
+    input,
+    textarea {
+        background-color: $box-background !important;
         z-index: 4;
-        border: none!important;
+        border: none !important;
         padding: 0;
-        background:none;
+        background: none;
         margin-top: -28px;
         transition: 0.1s;
-        &:not([value=""]){
+        &:not([value=""]) {
             margin-top: 0px;
         }
-        &:focus{
+        &:focus {
             margin-top: 0px;
-
         }
-
     }
 }
 
- 
-
-label{
+label {
     margin: 0 auto;
     width: 100%;
-    h4{
+    h4 {
         margin: 0;
         margin-bottom: 8px;
         font-size: 14px;
     }
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-    
+    display: flex;
+    width: 100%;
+    flex-direction: column;
 }
-input, select,textarea{
+input,
+select,
+textarea {
     border-radius: 8px;
-    border:1px solid $input-border-color;
+    border: 1px solid $input-border-color;
     padding: 12px;
     margin: 0;
     width: -webkit-fill-available;
     color: $paragraph-dark-color;
     background-color: rgba(255, 0, 0, 0);
 }
-input::placeholder , textarea::placeholder{
+input::placeholder,
+textarea::placeholder {
     opacity: 0.6;
 }
-input:focus{
-        outline: none !important;
-
+input:focus {
+    outline: none !important;
 }
-
-table{
-    width: 100%;
-    text-align: left;
-    font-size: 11pt;
-    .bord{
-        font-weight: 600;
-        color: $title-color;
-    }
-    .options{
-        width: 10px;
-        display: flex;
-        
-    }
-    tr{
-
-        overflow: hidden;
-        &:hover{
-            background-color: $input-border-color;
-            
-        }
-        
-        vertical-align: middle;
-        
-    }
-}
-    th{
-    color: $title-color;
-    padding: 8px 16px;
-}
-    td{
-        padding: 12px 32px;
-        border-bottom: 1px solid $input-border-color;
-    }
-
-  

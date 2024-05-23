@@ -1,0 +1,15 @@
+.my-account-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 16px;
+    .password {
+        button {
+            max-width: max-content;
+            font-size: 8pt;
+            img {
+                width: 28px;
+            }
+        }
+    }
+}

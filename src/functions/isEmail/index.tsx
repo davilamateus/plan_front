@@ -1,17 +1,6 @@
 
-function isEmail(email: string) {
-
-    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (email.match(validRegex)) {
-
-        return true;
-
-    } else {
-
-        return false;
-
-    }
+export const isEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 };
 
-export default isEmail

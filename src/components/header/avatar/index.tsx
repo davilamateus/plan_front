@@ -1,29 +1,25 @@
-import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar';
-import './style.scss';
+import { useGetUser } from '../../../store/hooks/user/useGetUser';
+import { useGetTrip } from '../../../store/hooks/trip/useGetTrip';
 import { BASE_URL } from '../../../axios';
 import ButtonOptions from '../../communs/buttons/options';
 import Skeleton from 'react-loading-skeleton';
+import './style.scss';
 
 const AvatarComponent = () => {
-    const UseGetAvatar = useGetAvatar();
-
-    console.log(UseGetAvatar)
+    const UseGetUser = useGetUser();
+    const UseGetTrip = useGetTrip();
 
     return (
-        <div >
-            {UseGetAvatar.name ?
+        < >
+            {UseGetUser && UseGetTrip ?
                 <div className='avatar-box'>
                     <div className="avatar-text">
-                        <span className='avatar-name'>{UseGetAvatar.name}</span>
-                        <span className='avatar-country'> {UseGetAvatar.country_trip} - {UseGetAvatar.country_trip}</span>
+                        <span className='avatar-name'>{UseGetUser.name}</span>
+                        <span className='avatar-country'> {UseGetTrip.tripCity} - {UseGetTrip.tripCountry}</span>
                     </div>
                     <div className="avatar-photo-box">
-                        <div
-                            style={{
-                                backgroundImage: `url(${BASE_URL}imagens/user/${UseGetAvatar.photo !== null ? UseGetAvatar.photo : 'default.jpeg    '}`
-                            }}
-                            className="avatar-photo"
-                        >
+                        <div style={{ backgroundImage: `url(${BASE_URL}imagens/user/${UseGetUser.photo !== null ? UseGetUser.photo : 'default.jpeg    '}` }}
+                            className="avatar-photo">
                         </div>
                         <ButtonOptions />
                     </div>
@@ -39,8 +35,8 @@ const AvatarComponent = () => {
                         <ButtonOptions />
                     </div>
                 </div>}
-        </div>
+        </>
     )
-}
+};
 
 export default AvatarComponent;

@@ -1,154 +1,98 @@
-import React, { useEffect, useState } from 'react'
-import useGetAvatar from '../../../store/hooks/avatar/useGetAvatar';
-import Api from '../../../axios';
-import { IAdvicesMain, IAdvicesMainImg } from '../../../types/advices/IAdvices';
-
-import './style.scss';
-import BoxFullpage from '../../communs/boxFullpage';
-import AdviceOpened from '../opened';
-import TitleOfSession from '../../communs/titleOfSession';
-import Skeleton from 'react-loading-skeleton';
+import { useEffect, useState } from "react";
+import { IAdvicesMain } from "../../../types/advices/IAdvices";
+import { useGetAdvices } from "../../../hooks/city/useGetAdvices";
+import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
+import BoxFullpage from "../../communs/boxFullpage";
+import AdviceOpened from "../opened";
+import TitleOfSession from "../../communs/titleOfSession";
+import Skeleton from "react-loading-skeleton";
+import "./style.scss";
 
 const AdvicesPrincipal = () => {
-
-
     const [advices, setAdvices] = useState<IAdvicesMain[]>([]);
-    const [advicesImg, setAdvicesImg] = useState<IAdvicesMainImg[]>([]);
-    const [count, setCount] = useState(0)
-    const [loaded, setLoaded] = useState(false)
-    const [slideStoped, setSlideStoped] = useState(false)
-    const [opened, setOpened] = useState(false)
+    const [count, setCount] = useState(0);
+    const [slideStoped, setSlideStoped] = useState(false);
+    const [opened, setOpened] = useState(false);
+    const [effect, setEffect] = useState(true);
 
-    const UseGetAvatar = useGetAvatar();
-
-    function fetchAdvices() {
-        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
-
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        Api.get(`/cities/advices?local=${UseGetAvatar.country_lat},${UseGetAvatar.country_lon}&category=10000`, config)
-            .then((data: any) => {
-                setAdvices((data.data));
-
-            })
-            .catch(error => {
-                console.error('erro:', error);
-            });
-    }
-
-    function fetchAdvicesImgs(id: string) {
-        let token = localStorage.getItem('token') || sessionStorage.getItem('token');
-
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        Api.get(`/cities/advices/img?id=${id}`, config)
-            .then((data: any) => {
-                setAdvicesImg((advicesImg: any) => [...advicesImg].concat({ id: id, img: data.data }));
-                setLoaded(true)
-
-            })
-            .catch(error => {
-                setLoaded(true)
-                console.error('erro:', error);
-            });
-    }
+    const UseGetTrip = useGetTrip();
+    const UseGetAdvices = useGetAdvices();
 
     useEffect(() => {
-        if (UseGetAvatar.country_lat !== '') {
-            fetchAdvices();
+        if (UseGetTrip.tripLat) {
+            UseGetAdvices(UseGetTrip.tripLat, UseGetTrip.tripLon).then((data) => setAdvices(data.data));
         }
-    }, [UseGetAvatar]);
+    }, [UseGetTrip]);
 
-
-    useEffect(() => {
-        if (advices.length > 0) {
-            advices.map((item: any) => {
-                fetchAdvicesImgs(item.fsq_id)
-            })
-        }
-    }, [advices])
-
-
+    // SlideChange
 
     useEffect(() => {
         const interval = setInterval(() => {
             if (slideStoped !== true) {
                 if (count < advices.length - 1) {
-                    setCount(count + 1)
-                } else setCount(0)
+                    setCount(count + 1);
+                } else setCount(0);
             }
         }, 5000);
         return () => clearInterval(interval);
-    }, [count, advicesImg, slideStoped]);
+    }, [count, slideStoped, advices]);
 
     useEffect(() => {
-        setSlideStoped(opened ? true : false)
-    }, [opened])
+        setSlideStoped(opened ? true : false);
+    }, [opened]);
 
-
-    function witchImg(id: string) {
-        return advicesImg.find(img => img.id == id);
-    }
+    // SlideEffect Zoom
+    useEffect(() => {
+        setEffect(count % 2 !== 0);
+    }, [count]);
 
     return (
-        loaded ?
-            <div>
-                <TitleOfSession title={'Discovery'} />
-                {advices.length > 0 ?
-                    <div onClick={() => {
-                        setOpened(true)
-
-                    }} className='principal-advices-background box'
-                        style={{ backgroundImage: `url(${witchImg(advices[count].fsq_id)?.img[0].prefix}original${witchImg(advices[count].fsq_id)?.img[0].suffix})` }}>
-                        <div className="principal-advices-bottons">
-                            <div className="principal-advices-others-photos">
-                                {advicesImg.map((item, index) => (
-                                    advices[index]?.geocodes.main.latitude ?
-                                        item.img[0] ?
-                                            <div
-                                                onClick={() => {
-                                                    setCount(index)
-                                                    console.log('o index é ', index)
-                                                }}
-                                                className="principal-advices-others-photo"
-                                                key={index}
-                                                style={{ backgroundImage: `url(${item.img[0]?.prefix}original${item.img[0]?.suffix})` }}>
-                                            </div>
-                                            : ''
-                                        : ''
-                                ))}
-
+        <div>
+            <TitleOfSession title={"Discovery"} />
+            {advices.length > 0 ? (
+                <div
+                    onClick={() => setOpened(true)}
+                    className={`principal-advices-background  box ${effect ?? "principal-advices-background-zoom"}`}
+                    style={{ backgroundImage: `url(${advices[count].images[0].prefix}original${advices[count].images[0].suffix})` }}>
+                    <div className="principal-advices-bottons">
+                        <div className="principal-advices-others-photos">
+                            {advices[count].images.map(
+                                (item, index) =>
+                                    advices[index]?.geocodes.main.latitude && (
+                                        <div
+                                            onClick={() => setCount(index)}
+                                            className="principal-advices-others-photo"
+                                            key={index}
+                                            style={{ backgroundImage: `url(${item.prefix}original${item.suffix})` }}></div>
+                                    )
+                            )}
+                        </div>
+                        <div
+                            className="principal-advices-text"
+                            onClick={() => setOpened(true)}>
+                            <div className="principal-advices-categorie">
+                                <div
+                                    className="principal-advices-categorie-icon"
+                                    style={{ backgroundImage: `url(${advices[count]?.categories[0]?.icon.prefix + "64" + advices[count]?.categories[0]?.icon.suffix})` }}></div>
+                                <span>{advices[count]?.categories[0]?.plural_name}</span>
                             </div>
-                            <div className='principal-advices-text' onClick={() => {
-                                setOpened(true)
-                            }}>
-                                <div className="principal-advices-categorie">
-                                    <div className="principal-advices-categorie-icon" style={{ backgroundImage: `url(${advices[count]?.categories[0]?.icon.prefix + '64' + advices[count]?.categories[0]?.icon.suffix})` }}></div>
-                                    <span>{advices[count]?.categories[0]?.plural_name}</span>
-                                </div>
-                                <div className="principal-advices-title">{advices[count]?.name}</div>
-                                <div className="principal-advices-adress">
-                                    {advices[count]?.location.formatted_address}
-                                </div>
-                            </div>
+                            <div className="principal-advices-title">{advices[count]?.name}</div>
+                            <div className="principal-advices-adress">{advices[count]?.location.formatted_address}</div>
                         </div>
                     </div>
+                </div>
+            ) : (
+                <Skeleton style={{ width: "100%", height: "600px" }} />
+            )}
 
-                    : ''}
+            {opened ?? (
+                <BoxFullpage
+                    content={<AdviceOpened advice={advices[count]} />}
+                    setOpened={setOpened}
+                />
+            )}
+        </div>
+    );
+};
 
-                {opened ? <BoxFullpage content={<AdviceOpened advice={advices[count]} adviceImg={witchImg(advices[count].fsq_id)} />} setOpened={setOpened} /> : ''}
-            </div >
-            :
-            <div>
-                <TitleOfSession title={'Discovery '} />
-
-                <Skeleton style={{ width: '100%', height: '600px', }} />
-            </div>
-    )
-}
-
-export default AdvicesPrincipal
+export default AdvicesPrincipal;

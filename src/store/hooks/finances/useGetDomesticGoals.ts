@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import useGetGoalsApi from '../../../hooks/finances/goals/useGetGoals';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useGetGoalsApi } from "../../../hooks/finances/goals/useGetGoals";
 
-
-const useGetDomesticGoals = () => {
-
+export const useGetDomesticGoals = () => {
     const getDomesticGoals = useSelector((state: any) => state.domesticGoals);
     const [domesticGoals, setDomesticGoals] = useState(getDomesticGoals);
+    const UseGetGoalsApi = useGetGoalsApi();
     useEffect(() => {
-
-        setDomesticGoals(getDomesticGoals.domesticGoals)
-    }, [getDomesticGoals])
+        if (getDomesticGoals.domesticGoals) {
+            setDomesticGoals(getDomesticGoals.domesticGoals);
+        } else {
+            UseGetGoalsApi(1);
+        }
+    }, [getDomesticGoals]);
 
     return domesticGoals;
-
-}
-
-export default useGetDomesticGoals;
-
+};

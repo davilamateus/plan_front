@@ -11,7 +11,7 @@
     overflow: hidden;
     position: fixed;
     top: 0;
-    transition: 0.4s;
+    transition: 0.2s;
     &:hover{
         width: 146px;
     }
@@ -39,7 +39,7 @@
                 justify-content: left;
                 overflow: hidden;
                 opacity: 0.6;
-                transition: 0.4s;
+                transition: 0.2s;
                 &:hover{
                     opacity: 1;
                 }
@@ -81,7 +81,7 @@
         overflow: hidden;
         gap: 22px;
         opacity: 0.5;
-        transition: 0.4s;
+        transition: 0.2s;
         &:hover{
             opacity: 1
             ;

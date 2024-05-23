@@ -1,12 +1,9 @@
-import React, { Dispatch, SetStateAction } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import './style.scss';
-
-
 interface types {
     description: string,
     title: string,
-    setDescription: Dispatch<SetStateAction<string>>;
+    setDescription: (e: string) => void;
 }
 
 const InputDescription = ({ description, setDescription, title }: types) => {
@@ -24,4 +21,4 @@ const InputDescription = ({ description, setDescription, title }: types) => {
         </label>)
 }
 
-export default InputDescription
+export default InputDescription;
