@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-import './stype.scss';
-
+import "./stype.scss";
 
 interface type {
     select: boolean;
@@ -9,11 +7,11 @@ interface type {
 const InputRadio = ({ select, setSelect }: type) => {
     return (
         <div
-            className={`radio-box ${select === true ? 'select-radio' : ''}`}
-            onClick={() => select ? setSelect(false) : setSelect(true)}
-        >
+            className={`radio-box ${select === true ? "select-radio" : ""}`}
+            onClick={() => (select ? setSelect(false) : setSelect(true))}>
             <div className={`radio-cicle`}></div>
-        </div>)
-}
+        </div>
+    );
+};
 
-export default InputRadio
+export default InputRadio;

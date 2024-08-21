@@ -1,43 +1,36 @@
-import { Dispatch, SetStateAction } from "react";
-import './style.scss';
-import { IFinancesGoal } from "../../../../types/finances/IGoals";
+import { IFinancesGoal } from "../../../../types/IFinances";
+import "./style.scss";
 
-
-interface type {
+interface Type {
     title: string;
     goals: IFinancesGoal[];
-    selectOption: number | undefined;
-    setSelectOptions: (e:number | undefined)=>void;
+    selectOption: number | null;
+    setSelectOptions: (e: number | null) => void;
 }
 
-const InputSelectCategory = ({ title, goals, setSelectOptions, selectOption }: type) => {
-    console.log(goals);
+const InputSelectCategory = ({ title, goals, setSelectOptions, selectOption }: Type) => {
     return (
         <label className="select-input">
             <h4>{title}</h4>
             <div>
-                <select onChange={(e) => { setSelectOptions(+(e.target.value)) }}>
-                    {goals.length > 0 ? goals.map((item) => (
-                        item.id == selectOption ?
-                            <option selected={true} value={item.id == 0 ? undefined : item.id}>
-                                {item.title}
-                            </option>
-                            :
-
-                            <option value={item.id == 0 ? undefined : item.id}>
-                                {item.title}
-                            </option>
-                    )) :
-                        <option value={undefined}>
-                            Others
+                <select
+                    value={selectOption !== null ? selectOption : ""}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setSelectOptions(value === "" ? null : +value);
+                    }}>
+                    {goals.map((item) => (
+                        <option
+                            key={item.id}
+                            value={item.id}>
+                            {item.title}
                         </option>
-                    }
+                    ))}
+                    <option value="">Others</option>
                 </select>
-
             </div>
         </label>
-    )
-
-}
+    );
+};
 
 export default InputSelectCategory;

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { IAdvicesMain } from "../../../types/advices/IAdvices";
-import { useGetAdvices } from "../../../hooks/city/useGetAdvices";
-import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
+import { useContext, useEffect, useState } from "react";
+import { IAdvicesMain } from "../../../types/IAdvices";
+import { useGetAdvices } from "../../../requests/useCityRequest";
+import { UseTripContext } from "../../../context/useTripContext";
 import BoxFullpage from "../../communs/boxFullpage";
 import AdviceOpened from "../opened";
 import TitleOfSession from "../../communs/titleOfSession";
@@ -15,14 +15,14 @@ const AdvicesPrincipal = () => {
     const [opened, setOpened] = useState(false);
     const [effect, setEffect] = useState(true);
 
-    const UseGetTrip = useGetTrip();
-    const UseGetAdvices = useGetAdvices();
+    const trip = useContext(UseTripContext);
+    const fetchAdvices = useGetAdvices();
 
     useEffect(() => {
-        if (UseGetTrip.tripLat) {
-            UseGetAdvices(UseGetTrip.tripLat, UseGetTrip.tripLon).then((data) => setAdvices(data.data));
+        if (trip?.state.tripLat) {
+            fetchAdvices(trip.state.tripLat, trip.state.tripLon, "10000").then((data) => setAdvices(data));
         }
-    }, [UseGetTrip]);
+    }, [trip]);
 
     // SlideChange
 
@@ -53,7 +53,9 @@ const AdvicesPrincipal = () => {
                 <div
                     onClick={() => setOpened(true)}
                     className={`principal-advices-background  box ${effect ?? "principal-advices-background-zoom"}`}
-                    style={{ backgroundImage: `url(${advices[count].images[0].prefix}original${advices[count].images[0].suffix})` }}>
+                    style={{
+                        backgroundImage: `url(${advices[count].images[0].prefix}original${advices[count].images[0].suffix})`
+                    }}>
                     <div className="principal-advices-bottons">
                         <div className="principal-advices-others-photos">
                             {advices[count].images.map(
@@ -73,7 +75,13 @@ const AdvicesPrincipal = () => {
                             <div className="principal-advices-categorie">
                                 <div
                                     className="principal-advices-categorie-icon"
-                                    style={{ backgroundImage: `url(${advices[count]?.categories[0]?.icon.prefix + "64" + advices[count]?.categories[0]?.icon.suffix})` }}></div>
+                                    style={{
+                                        backgroundImage: `url(${
+                                            advices[count]?.categories[0]?.icon.prefix +
+                                            "64" +
+                                            advices[count]?.categories[0]?.icon.suffix
+                                        })`
+                                    }}></div>
                                 <span>{advices[count]?.categories[0]?.plural_name}</span>
                             </div>
                             <div className="principal-advices-title">{advices[count]?.name}</div>

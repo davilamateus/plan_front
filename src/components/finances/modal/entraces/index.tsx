@@ -1,12 +1,10 @@
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { IFinancesEntrace } from "../../../../types/IFinances";
+import { UseFinanceContext } from "../../../../context/useFinanceContext";
 import InputSimple from "../../../communs/inputs/simples";
 import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
-import useAddEntraces from "../../../../hooks/finances/entraces/useAddEntraces";
-import { IFinancesEntrace } from "../../../../types/finances/IEntraces";
-import useEditEntraces from "../../../../hooks/finances/entraces/useEditEntraces";
-import useDeleteEntraces from "../../../../hooks/finances/entraces/useDeleteEntraces";
 import "./../style.scss";
 
 interface type {
@@ -18,34 +16,39 @@ const ModalEntrances = ({ setOpened, entraceEdit }: type) => {
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
     const [entrace, setEntrace] = useState<IFinancesEntrace>(
         entraceEdit || {
+            id: 0,
             title: "",
+            color: "",
             value: 0,
             date: new Date().getTime()
         }
     );
-    const UseAddEntraces = useAddEntraces();
-    const UseEditEntrace = useEditEntraces();
-    const UseDeleteEntrace = useDeleteEntraces();
+    const finances = useContext(UseFinanceContext);
 
     const handleEntrace = () => {
         setBtnLoading(true);
 
         if (entraceEdit) {
-            UseEditEntrace({ ...entrace, id: entraceEdit.id }).then(() => {
-                setBtnLoading(false);
+            setBtnLoading(true);
+            finances?.editEntrace(entrace);
+            setTimeout(() => {
                 setOpened(false);
-            });
+            }, 2000);
         } else {
-            UseAddEntraces(entrace).then(() => {
-                setBtnLoading(false);
+            setBtnLoading(true);
+            finances?.addEntrace(entrace);
+            setTimeout(() => {
                 setOpened(false);
-            });
+            }, 2000);
         }
     };
 
     const handleDelete = () => {
         setBtnLoadingDelete(true);
-        if (entraceEdit?.id) UseDeleteEntrace(entraceEdit.id).then(() => setOpened(false));
+        finances?.deleteEntrace(entrace);
+        setTimeout(() => {
+            setOpened(false);
+        }, 2000);
     };
 
     return (

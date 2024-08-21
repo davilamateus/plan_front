@@ -1,9 +1,14 @@
-import LoginMainComponent from "../../components/login/main"
+import FormLoginComponent from "../../components/login/form/main";
+import SloganComponent from "../../components/login/slogan";
+import "./style.scss";
 
 const Login = () => {
     return (
-        <LoginMainComponent />
-    )
-}
+        <div className="login-main-component">
+            <SloganComponent />
+            <FormLoginComponent />
+        </div>
+    );
+};
 
-export default Login
+export default Login;

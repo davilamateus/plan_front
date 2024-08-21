@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useForgetPasswordCreate } from "../../../requests/user/useForgetPasswordCreate";
+import { useEditTrip } from "../../../requests/trip/useEditTrip";
+import { ITrip } from "../../../types/ITrip";
+import { getCurrency } from "../../../functions/cities/getCurrency";
 import PhotoUpdate from "../../communs/inputs/photoUpdate";
-import { useGetUser } from "../../../store/hooks/user/useGetUser";
-import useEditUserDetails from "../../../hooks/user/useEditUserDetails";
-import { useSetUser } from "../../../store/hooks/user/useSetUser";
 import InputCity from "../../communs/inputs/city";
 import InputDate from "../../communs/inputs/date";
 import ButtonSimple from "../../communs/buttons/simple/simple";
-import "./style.scss";
-import { useForgetPasswordCreate } from "../../../hooks/user/useForgetPasswordCreate";
 import Skeleton from "react-loading-skeleton";
-import Message from "../../messages";
-import { IMessage } from "../../../types/messages/IMenssage";
-import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
-import { useEditTrip } from "../../../hooks/trip/useEditTrip";
-import { ITrip } from "../../../types/trip";
-import { getCurrency } from "../../../functions/cities/getCurrency";
-import { useSetTrip } from "../../../store/hooks/trip/useSetTrip";
+import "./style.scss";
+import { UseTripContext } from "../../../context/useTripContext";
+import { UseUserContext } from "../../../context/useUserContext";
 
 const MyAccountMain = () => {
     const [trip, setTrip] = useState<ITrip>({
@@ -33,75 +28,49 @@ const MyAccountMain = () => {
         tripLon: "",
         tripLat: "",
 
-        when: 0
+        when: 0,
+        loaded: true
     });
 
     const [loading, setLoading] = useState(false);
 
     const [loadingPassword, setLoadingPassword] = useState(false);
-    const [message, setMessage] = useState<IMessage>({ status: false });
 
-    const UseGetUser = useGetUser();
     const UseEditTrip = useEditTrip();
-    const UseGetTrip = useGetTrip();
-    const UseSetTrip = useSetTrip();
+    const tripContext = useContext(UseTripContext);
+    const userContext = useContext(UseUserContext);
 
     const UseForgetPasswordCreate = useForgetPasswordCreate();
     useEffect(() => {
-        if (UseGetTrip.currentCity) {
-            setTrip(UseGetTrip);
+        if (tripContext?.state.currentCity) {
+            setTrip(tripContext.state);
         }
-    }, [UseGetTrip]);
+    }, [tripContext]);
 
     const handleEditTrip = () => {
         setLoading(true);
         UseEditTrip(trip).then(() => {
-            UseSetTrip(trip);
             setLoading(false);
         });
     };
 
     const handleNewPassword = () => {
-        setLoadingPassword(true);
-        UseForgetPasswordCreate(UseGetUser.email)
-            .then((data: any) => {
+        if (userContext) {
+            setLoadingPassword(true);
+            UseForgetPasswordCreate(userContext.state.email).then((data: any) => {
                 setLoadingPassword(false);
-                if (data.status === 200) {
-                    setMessage({
-                        title: "New email required!",
-                        description: "We emailed instructions for creating a new password.",
-                        type: "success",
-                        status: true
-                    });
-                } else {
-                    setMessage({
-                        title: "An error occurred!",
-                        description: "Unable to request a new password. Please try again later.",
-                        type: "error",
-                        status: true
-                    });
-                }
-            })
-            .catch((error) => {
-                setLoadingPassword(false);
-                setMessage({
-                    title: "An error occurred!",
-                    description: "Unable to request a new password. Please try again later.",
-                    type: "error",
-                    status: true
-                });
-                console.log(error);
             });
+        }
     };
 
     return (
         <>
             <div className="box my-account-main">
                 <PhotoUpdate />
-                {UseGetUser.name ? (
+                {userContext?.state.loaded && tripContext?.state.loaded ? (
                     <>
-                        <h3>{UseGetUser.name}</h3>
-                        <span>{UseGetUser.email}</span>
+                        <h3>{userContext.state.name}</h3>
+                        <span>{userContext.state.email}</span>
                         <div className="password">
                             <ButtonSimple
                                 type="simple"
@@ -115,7 +84,7 @@ const MyAccountMain = () => {
                         </div>
                         <InputCity
                             title="Where do live now?"
-                            inicialValue={`${UseGetTrip.currentCity} - ${UseGetTrip.currentCountry}`}
+                            inicialValue={`${tripContext?.state.currentCity} - ${tripContext?.state.currentCountry}`}
                             result={(e) => {
                                 setTrip({
                                     ...trip,
@@ -129,7 +98,7 @@ const MyAccountMain = () => {
                         />
                         <InputCity
                             title="Where do intend to go trip?"
-                            inicialValue={`${UseGetTrip.tripCity} - ${UseGetTrip.tripCountry}`}
+                            inicialValue={`${tripContext?.state.tripCity} - ${tripContext?.state.tripCountry}`}
                             result={(e) => {
                                 setTrip({
                                     ...trip,
@@ -144,7 +113,7 @@ const MyAccountMain = () => {
                             }}
                         />
                         <InputDate
-                            date={trip.when > 0 ? trip.when : UseGetTrip.when}
+                            date={trip.when > 0 ? trip.when : tripContext?.state.when}
                             setDate={(e) => setTrip({ ...trip, when: e })}
                             title="When do you intend to go?"
                         />
@@ -178,12 +147,9 @@ const MyAccountMain = () => {
                     }}
                 />
             </div>
-            <Message
-                message={message}
-                setMessage={setMessage}
-            />
         </>
     );
 };
 
+// <Messag message={message}setMessage={setMessage}/>
 export default MyAccountMain;

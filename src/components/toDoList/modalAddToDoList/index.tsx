@@ -1,52 +1,67 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import InputSimple from '../../communs/inputs/simples'
-import InputDescription from '../../communs/inputs/description'
-import InputColor from '../../communs/inputs/color'
-import InputDate from '../../communs/inputs/date'
-import './style.scss';
-import ButtonSimple from '../../communs/buttons/simple/simple'
-import useAddToDoList from '../../../hooks/toDoList/useAddToDoList'
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { IToDoListAdd } from "../../../types/IToDoList";
+import { UseToDoListContext } from "../../../context/useToDoListContext";
+import ButtonSimple from "../../communs/buttons/simple/simple";
+import InputSimple from "../../communs/inputs/simples";
+import InputDescription from "../../communs/inputs/description";
+import InputColor from "../../communs/inputs/color";
+import InputDate from "../../communs/inputs/date";
+import "./style.scss";
 
-interface type {
+type prop = {
     setOpened: Dispatch<SetStateAction<boolean>>;
-}
+};
 
-const ModalAddToDoList = ({ setOpened }: type) => {
-
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [color, setColor] = useState('')
-    const [date, setDate] = useState(new Date().getTime());
-    const [btnStatus, setBtnStatus] = useState(false);
+const ModalAddToDoList = ({ setOpened }: prop) => {
+    const [toDo, setToDo] = useState<IToDoListAdd>({
+        title: "",
+        description: "",
+        color: "",
+        date: new Date().getTime()
+    });
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (title !== '' && description !== '' && color !== '' && date > 0) {
-            setBtnStatus(true)
-        }
-    }, [title, description, color, date])
-
-    const UseAddToDoList = useAddToDoList();
-    function addTodoList() {
+    const toDoList = useContext(UseToDoListContext);
+    const handleAddTodoList = () => {
         setLoading(true);
-        UseAddToDoList({ title: title, description: description, color: color, date: date })
-        setOpened(false)
-
-
-
-    }
-
-
+        toDoList?.addToDoList(toDo);
+        setTimeout(() => {
+            setOpened(false);
+        }, 2000);
+    };
 
     return (
-        <div className='modal-add-todolist'>
-            <InputSimple title='Title' input={title} setInput={setTitle} placeholder='Type a title for your to do list...' />
-            <InputDescription description={description} setDescription={setDescription} title='Description' />
-            <InputColor title='Color' color={color} setColor={setColor} />
-            <InputDate title='Date' setDate={setDate} date={date} />
-            <ButtonSimple title={'Add'} type='success' status={btnStatus} loading={loading} action={addTodoList} />
+        <div className="modal-add-todolist">
+            <InputSimple
+                title="Title"
+                input={toDo.title}
+                setInput={(e) => setToDo((prev) => ({ ...prev, title: e }))}
+                placeholder="Type a title for your to do list..."
+            />
+            <InputDescription
+                title="Description"
+                description={toDo.description}
+                setDescription={(e) => setToDo((prev) => ({ ...prev, description: e }))}
+            />
+            <InputColor
+                title="Color"
+                color={toDo.color}
+                setColor={(e) => setToDo((prev) => ({ ...prev, color: e }))}
+            />
+            <InputDate
+                title="Date"
+                date={toDo.date}
+                setDate={(e) => setToDo((prev) => ({ ...prev, date: e }))}
+            />
+            <ButtonSimple
+                title={"Add"}
+                type="success"
+                status={toDo.title !== "" && toDo.description !== "" && toDo.color !== "" && toDo.date > 0}
+                loading={loading}
+                action={handleAddTodoList}
+            />
         </div>
-    )
-}
+    );
+};
 
-export default ModalAddToDoList
+export default ModalAddToDoList;

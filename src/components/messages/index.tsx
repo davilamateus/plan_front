@@ -1,30 +1,36 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { IMessage } from "../../types/messages/IMenssage";
+import { useReducer, useEffect } from "react";
+import { useMessageReducer, useMessageInitialValue } from "../../reducers/useMessageReducer";
+import { IMessageActions } from "../../types/IMenssage";
 import "./style.scss";
 
-interface MessageProps {
-    message: IMessage;
-    setMessage: Dispatch<SetStateAction<IMessage>>;
-}
+type IMessage = {
+    message: IMessageActions;
+};
+const Message = ({ message }: IMessage) => {
+    const [state, dispatch] = useReducer(useMessageReducer, useMessageInitialValue);
+    useEffect(() => {
+        if (message) {
+            dispatch(message);
+        }
+    }, [message]);
 
-const Message = ({ message, setMessage }: MessageProps) => {
-    return message.status ? (
-        <div className={`message-box  color-${message.type} `}>
+    return state.status ? (
+        <div className={`message-box color-${state.type} `}>
             <div className={` message-box-img `}>
                 <img
-                    src={`./../../../icons/message-${message.type}.svg`}
-                    alt={message.type}
+                    src={`./../../../icons/message-${state.type}.svg`}
+                    alt={state.type}
                 />
             </div>
             <div className="message-box-white">
                 <div className="text">
-                    <h4>{message.title}</h4>
-                    <p>{message.description}</p>
-                    <div className={`message-time-box color-${message.type} `}></div>
+                    <h4>{state.title}</h4>
+                    <p>{state.description}</p>
+                    <div className={`message-time-box color-${state.type} `}></div>
                 </div>
                 <button
                     onClick={() => {
-                        setMessage({ ...message, status: false });
+                        dispatch({ type: false });
                     }}
                     className="close">
                     <img

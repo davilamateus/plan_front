@@ -1,28 +1,27 @@
-import { Outlet } from 'react-router-dom';
-import { useGetPageTitle } from '../../../store/hooks/pageTitle/useGetPageTitle';
-import { SkeletonTheme } from 'react-loading-skeleton'
-import { IsLogged } from '../../../functions/isLogged';
-import AvatarComponent from '../avatar';
-import './style.scss';
-import 'react-loading-skeleton/dist/skeleton.css'
-
+import { Outlet } from "react-router-dom";
+import { SkeletonTheme } from "react-loading-skeleton";
+import { useContext } from "react";
+import { UseTitleContext } from "../../../context/useTitleContext";
+import AvatarComponent from "../avatar";
+import "./style.scss";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const HeaderMain = () => {
-
-    const UseGetPageTitle = useGetPageTitle();
-    IsLogged();
+    const title = useContext(UseTitleContext);
 
     return (
-        <SkeletonTheme baseColor="var(--background)" highlightColor="var(--higher)">
-            <div className='page-container'>
+        <SkeletonTheme
+            baseColor="var(--background)"
+            highlightColor="var(--higher)">
+            <div className="page-container">
                 <div className="header">
-                    <h3>{UseGetPageTitle}</h3>
+                    <h3>{title.state}</h3>
                     <AvatarComponent />
                 </div>
                 <Outlet />
             </div>
         </SkeletonTheme>
-    )
+    );
 };
 
 export default HeaderMain;

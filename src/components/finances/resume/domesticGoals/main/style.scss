@@ -1,0 +1,12 @@
+.finances-goals-main {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    .finances-goals-cards {
+        flex-direction: row;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+        gap: 16px;
+    }
+}

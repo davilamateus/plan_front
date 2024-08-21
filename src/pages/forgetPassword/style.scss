@@ -1,0 +1,43 @@
+@import "./../../styles/color";
+
+.new-password-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    .new-password-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        margin-top: -128px;
+        padding: 8px;
+        width: 600px;
+        max-width: 100vw;
+        img {
+            max-height: 30vh;
+        }
+        label {
+            margin-bottom: 16px;
+        }
+        .req-password {
+            margin-top: -2px;
+            margin-bottom: 28px;
+        }
+        .new-password-text {
+            padding: 16px;
+            min-width: 360px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    footer {
+        bottom: 16px;
+        position: absolute;
+    }
+}

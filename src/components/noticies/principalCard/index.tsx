@@ -1,8 +1,8 @@
-import { IArticle } from "../../../types/noticies/IArticle";
 import { dateTimeAgo } from "../../../functions/date/dateTimeAgo";
 import Skeleton from "react-loading-skeleton";
 import TitleOfSession from "../../communs/titleOfSession";
 import "./style.scss";
+import { IArticle } from "../../../types/ICity";
 
 interface type {
     article: IArticle;

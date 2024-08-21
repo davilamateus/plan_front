@@ -1,32 +1,33 @@
-@import './../../../styles/color';
-.avatar-box{
+@import "./../../../styles/color";
+.avatar-box {
     display: flex;
     justify-content: end;
     align-items: center;
     gap: 8px;
-    .avatar-text{
+    .avatar-text {
         text-align: right;
         display: flex;
         flex-direction: column;
-        .avatar-name{
+        .avatar-name {
             font-size: 15px;
             font-weight: 700;
             text-align: right;
             color: $title-color;
         }
-        .avatar-country{
+        .avatar-country {
             font-size: 12px;
         }
 
-        img{
+        img {
             width: 16px;
         }
-        
     }
-    .avatar-photo-box{
+    .avatar-photo-box {
+        cursor: pointer;
+
         display: flex;
         flex-direction: row;
-        .avatar-photo{
+        .avatar-photo {
             box-shadow: 1px 1px 3px #00000026;
             width: 48px;
             height: 48px;
@@ -34,7 +35,7 @@
             background-size: cover;
             background-position: center;
         }
-        .button-options{
+        .button-options {
             margin-left: -16px;
         }
     }

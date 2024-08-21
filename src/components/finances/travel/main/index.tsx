@@ -1,42 +1,55 @@
-import Skeleton from "react-loading-skeleton"
-import TitleOfSession from "../../../communs/titleOfSession"
-import { useGetTripGoals } from "../../../../store/hooks/finances/useGetTripGoals"
-import TripGoalsCard from "../goals/card/main"
-import "./style.scss"
-import TripResume from "../resume"
-import TitleOfComponent from "../../../communs/titleOfComponent"
-import { IFinancesGoal } from "../../../../types/finances/IGoals"
+import TitleOfSession from "../../../communs/titleOfSession";
+import TripGoalsCard from "../goals/card/main";
+import "./style.scss";
+import TripResume from "../resume";
+import TitleOfComponent from "../../../communs/titleOfComponent";
+import { IFinancesGoal } from "../../../../types/IFinances";
+import { useContext } from "react";
+import { UseFinanceContext } from "../../../../context/useFinanceContext";
+import Skeleton from "react-loading-skeleton";
 
 const TravelFinanceMain = () => {
-    const UseGetTripGoals = useGetTripGoals()
+    const finance = useContext(UseFinanceContext);
 
     return (
         <div className="trip-main">
             <TitleOfSession title="Trip" />
             <TitleOfComponent title="Goals" />
             <div className="trip-goals">
-                {UseGetTripGoals.length == 1 ? (
-                    "No goals added yet."
-                ) : UseGetTripGoals.length > 0 ? (
-                    <>
-                        {UseGetTripGoals.map((item: IFinancesGoal) =>
-                            item.title === "Others" && item.valueItens === 0 ? (
-                                ""
-                            ) : (
-                                <TripGoalsCard
-                                    key={item.id}
-                                    goal={item}
-                                />
-                            )
-                        )}
-                    </>
+                {finance?.state.loaded ? (
+                    finance.state.trip.goals.length > 0 ? (
+                        finance.state.trip.goals.map((item: IFinancesGoal) => (
+                            <TripGoalsCard
+                                key={item.id}
+                                goal={item}
+                            />
+                        ))
+                    ) : (
+                        " No goals added yet."
+                    )
                 ) : (
-                    <></>
+                    <>
+                        <div className="trip-box box">
+                            <Skeleton style={{ width: "210px", height: "248px" }} />
+                        </div>
+                        <div className="trip-box box">
+                            <Skeleton style={{ width: "210px", height: "248px" }} />
+                        </div>
+                        <div className="trip-box box">
+                            <Skeleton style={{ width: "210px", height: "248px" }} />
+                        </div>
+                        <div className="trip-box box">
+                            <Skeleton style={{ width: "210px", height: "248px" }} />
+                        </div>
+                        <div className="trip-box box">
+                            <Skeleton style={{ width: "210px", height: "248px" }} />
+                        </div>
+                    </>
                 )}
             </div>
             <TripResume />
         </div>
-    )
-}
+    );
+};
 
-export default TravelFinanceMain
+export default TravelFinanceMain;

@@ -1,31 +1,16 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import './style.scss';
-import {
-    CurrencyInput,
-    Currencies,
-    Locales
-} from 'input-currency-react';
-
-
-
+import { CurrencyInput, Currencies, Locales } from "input-currency-react";
+import "./style.scss";
 
 interface type {
     title: string;
-    setInput: (e:number)=>void;
+    setInput: (e: number) => void;
     input: number;
 }
 
 const InputMoney = ({ title, setInput, input }: type) => {
-
-
-
-
     const handleOnChange = (inputElement: any, maskedValue: any, value: any) => {
-        setInput(value.replace('.', ''))
+        setInput(Number(value.replace(".", "")));
     };
-
-    ;
-
 
     return (
         <label>
@@ -47,11 +32,9 @@ const InputMoney = ({ title, setInput, input }: type) => {
                         onChangeEvent={handleOnChange}
                     />
                 </div>
-
             </div>
         </label>
-    )
-
-}
+    );
+};
 
 export default InputMoney;

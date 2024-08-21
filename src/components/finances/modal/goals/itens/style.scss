@@ -8,6 +8,19 @@
     }
     table {
         width: 100%;
+        th,
+        td {
+            flex: 1;
+            text-align: center;
+        }
+        .goals-table-title-title,
+        .goals-table-value-title {
+            text-align: left;
+        }
+        .goals-table-title-value,
+        .goals-table-value-value {
+            text-align: right;
+        }
         .goals-table-value {
             padding: 4px 0px;
             border-bottom: 1px solid $input-border-color;
@@ -24,6 +37,8 @@
         tr {
             display: flex;
             justify-content: space-between;
+            border-bottom: 1px solid $input-border-color;
+            padding-bottom: 8px;
             gap: 8px;
         }
         th {

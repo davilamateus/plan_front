@@ -7,8 +7,8 @@ interface type {
     type: number;
     input: number;
     exchangeToday: number;
-    currencyLocal: string;
-    currencyTrip: string;
+    currencyLocal?: string;
+    currencyTrip?: string;
 }
 
 const ExchangeCard = ({ img, tax, fixedTax, type, currencyLocal, currencyTrip, input, exchangeToday }: type) => {

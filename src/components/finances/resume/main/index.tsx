@@ -1,13 +1,29 @@
 import { useState } from "react";
 import { getTimestampInfomartions } from "../../../../functions/date/getTimestampInfomartions";
 import Actives from "../actives";
-import ResumeGoals from "../goals/main";
+
 import ResumeGrafic from "../resume";
 import InputDateRange from "../dateRange";
 import "./style.scss";
+import ResumeGoals from "../domesticGoals/main";
+import FinancesDashboard from "../../dashboard";
+import TitleOfComponent from "../../../communs/titleOfComponent";
 
 const ResumeFinances = () => {
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ];
 
     const [date, setDate] = useState({
         month: months[new Date().getMonth()],
@@ -24,7 +40,15 @@ const ResumeFinances = () => {
             />
             <ResumeGoals date={date} />
             <div className="finance-resume-main">
-                <ResumeGrafic date={date} />
+                <div className="finances-resume-box">
+                    <TitleOfComponent title={`Resume ${date.month}`} />
+                    <FinancesDashboard
+                        month={date.month}
+                        year={date.year}
+                        from={date.from}
+                        to={date.to}
+                    />
+                </div>
                 <Actives date={date} />
             </div>
         </>

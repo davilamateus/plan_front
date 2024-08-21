@@ -1,29 +1,33 @@
-
-import './style.scss';
+import "./style.scss";
 
 interface type {
     title: string;
     type: string;
     status: boolean;
-    action: any;
+    action: () => void;
     loading: boolean;
 }
 
 const ButtonSimple = ({ title, type, status, action, loading }: type) => {
     return (
         <button
-            className={`button-simple button-${type} ${!status ? 'button-inactive' : ''}`}
+            className={`button-simple button-${type} ${!status ? "button-inactive" : ""}`}
             onClick={() => {
                 if (status) {
-                    action()
+                    action();
                 }
-            }}
-        >
-            {loading ?
-                <img className='btn-loading' src="./../../../../../gifs/btnloadin.gif" alt="Loading" />
-                : title}
+            }}>
+            {loading ? (
+                <img
+                    className="btn-loading"
+                    src="./../../../../../gifs/btnloadin.gif"
+                    alt="Loading"
+                />
+            ) : (
+                title
+            )}
         </button>
-    )
-}
+    );
+};
 
 export default ButtonSimple;

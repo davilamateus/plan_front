@@ -1,61 +1,71 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { IFinancesGoal } from "../../../../types/finances/IGoals";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { IFinancesExpense, IFinancesGoal } from "../../../../types/IFinances";
+import { UseFinanceContext } from "../../../../context/useFinanceContext";
 import InputMoney from "../../../communs/inputs/money";
 import InputSimple from "../../../communs/inputs/simples";
 import InputColor from "../../../communs/inputs/color";
 import InputIcons from "../../../communs/inputs/icons";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
-import useAddGoals from "../../../../hooks/finances/goals/useAddGoals";
-import useEditGoal from "../../../../hooks/finances/goals/useEditGoal";
-import useDeleteGoal from "../../../../hooks/finances/goals/useDeleteGoals";
-import "./../style.scss";
 import ModalExpenses from "../expenses";
-import { IFinancesExpense } from "../../../../types/finances/IExpense";
 import GoalsItens from "./itens";
+import "./../style.scss";
 
 interface type {
-    type: number;
     setOpened: Dispatch<SetStateAction<boolean>>;
     goalEdit?: IFinancesGoal;
+    addType?: number;
 }
 
-const ModalGoals = ({ type, setOpened, goalEdit }: type) => {
+const ModalGoals = ({ setOpened, goalEdit, addType }: type) => {
     const [btnLoading, setBtnLoading] = useState(false);
     const [btnLoadingDelete, setBtnLoadingDelete] = useState(false);
-    const [itemOpened, setItemOpened] = useState<{ opened: boolean; item: IFinancesExpense | undefined }>({ opened: false, item: undefined });
+    const [itemOpened, setItemOpened] = useState<{ opened: boolean; item: IFinancesExpense | undefined }>({
+        opened: false,
+        item: undefined
+    });
+    const [expenses, setExpenses] = useState<IFinancesExpense[]>([]);
     const [goal, setGoal] = useState<IFinancesGoal>(
         goalEdit || {
             title: "",
             value: 0,
+            id: 0,
             color: "",
             icon: 0,
-            valueItens: 0,
-            itens: [],
-            type
+            type: addType || 0
         }
     );
 
-    const UseAddGoals = useAddGoals();
-    const UseEditGoals = useEditGoal();
-    const UseDeleteGoals = useDeleteGoal();
+    const finance = useContext(UseFinanceContext);
 
     const handleSubmitGoal = () => {
         setBtnLoading(true);
         if (goalEdit) {
-            UseEditGoals(goal).then(() => {
-                setOpened(false);
-            });
+            finance?.editGoal(goal);
         } else {
-            UseAddGoals(goal).then(() => {
-                setOpened(false);
-            });
+            finance?.addGoal(goal);
         }
+        setTimeout(() => {
+            setOpened(false);
+        }, 2000);
     };
 
     const handleDelete = () => {
         setBtnLoadingDelete(true);
-        if (goalEdit?.id) UseDeleteGoals(goalEdit).then(() => setOpened(false));
+        finance?.deleteGoal(goal);
+        setTimeout(() => {
+            setOpened(false);
+        }, 2000);
     };
+
+    useEffect(() => {
+        if (finance) {
+            if (goal.type == 1) {
+                setExpenses(finance?.state.domestic.expenses.filter((expense) => expense.financesGoalId === goal.id) || []);
+            } else {
+                setExpenses(finance?.state.trip.expenses.filter((expense) => expense.financesGoalId === goal.id) || []);
+            }
+        }
+    }, [finance]);
 
     return (
         <div className="modal-box-opened modal">
@@ -90,12 +100,7 @@ const ModalGoals = ({ type, setOpened, goalEdit }: type) => {
                         setInput={(e) => setGoal({ ...goal, value: e })}
                         input={goal.value}
                     />
-                    {goalEdit && goalEdit.itens.length > 0 && (
-                        <GoalsItens
-                            setItemOpened={setItemOpened}
-                            itens={goal.itens}
-                        />
-                    )}
+
                     <ButtonSimple
                         title={goalEdit ? "Save" : "Add"}
                         type="success"
@@ -106,6 +111,12 @@ const ModalGoals = ({ type, setOpened, goalEdit }: type) => {
                         }}
                     />
 
+                    {goalEdit && expenses.length > 0 && (
+                        <GoalsItens
+                            setItemOpened={setItemOpened}
+                            itens={expenses}
+                        />
+                    )}
                     {goalEdit && (
                         <ButtonSimple
                             title="Delete"

@@ -1,5 +1,3 @@
-
-
 interface type {
     title: string;
     setInput: (e: string) => void;
@@ -20,8 +18,7 @@ const InputEmail = ({ title, setInput, input, placeholder }: type) => {
                 />
             </div>
         </label>
+    );
+};
 
-    )
-}
-
-export default InputEmail
+export default InputEmail;

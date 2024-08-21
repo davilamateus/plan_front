@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { formartMoney } from "../../../../functions/formartMoney/formartMoney";
-import { useGetDomesticGoals } from "../../../../store/hooks/finances/useGetDomesticGoals";
-import { useGetTripGoals } from "../../../../store/hooks/finances/useGetTripGoals";
-import { IFinancesExpense } from "../../../../types/finances/IExpense";
-import { IFinancesGoal } from "../../../../types/finances/IGoals";
-import { useGetEntraces } from "../../../../store/hooks/finances/useGetEntraces";
-import { dateTimeAgo } from "../../../../functions/date/dateTimeAgo";
+import { IFinancesEntrace, IFinancesExpense, IFinancesGoal } from "../../../../types/IFinances";
+import { UseFinanceContext } from "../../../../context/useFinanceContext";
 import BoxFullpage from "../../../communs/boxFullpage";
 import TitleOfSession from "../../../communs/titleOfComponent";
 import ModalExpenses from "../../modal/expenses";
@@ -22,29 +18,28 @@ interface type {
 }
 
 const Actives = ({ date }: type) => {
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
-    const [finances, setFinances] = useState<IFinancesExpense[]>([]);
+    const [finances, setFinances] = useState<IFinancesEntrace[] | IFinancesExpense[]>([]);
 
-    const UseGetDomesticGoals = useGetDomesticGoals();
-    const UseGetTripGoals = useGetTripGoals();
-    const UseGetEntraces = useGetEntraces();
-
+    const context = useContext(UseFinanceContext);
     useEffect(() => {
-        if (UseGetTripGoals.length > 0 && UseGetDomesticGoals.length > 0 && UseGetEntraces.length > 0) {
-            const get = UseGetTripGoals.concat(UseGetDomesticGoals).concat(UseGetEntraces);
-            if (get.length > 0) {
-                const filteredItems = get.flatMap((goal: IFinancesGoal) => {
-                    if (goal.itens.length > 0) {
-                        return goal.itens.filter((item) => item.date >= date.from && item.date <= date.to);
-                    } else {
-                        return [];
-                    }
-                });
-                setFinances(filteredItems);
-            }
+        if (context?.state.trip.expenses) {
+            const newArray = context?.state.entraces
+                .concat(context?.state.domestic.expenses.concat(context.state.trip.expenses))
+                .filter((item) => item.date > date.from && item.date <= date.to);
+
+            // Ordenar por data (assumindo que item.date é um timestamp ou data em milissegundos)
+            newArray.sort((a, b) => (a.date < b.date ? 1 : -1));
+
+            setFinances(newArray);
+            console.log(newArray);
         }
-    }, [UseGetDomesticGoals, UseGetEntraces, UseGetTripGoals, date]);
+    }, [context, date]);
+
+    const isExpense = (item: IFinancesEntrace | IFinancesExpense): item is IFinancesExpense => {
+        return (item as IFinancesExpense).type !== undefined;
+    };
 
     return (
         <div className="finances-actives">
@@ -73,14 +68,20 @@ const Actives = ({ date }: type) => {
                                             <div
                                                 className="item-color"
                                                 style={{
-                                                    backgroundColor: !item.type ? "#6AD9A8" : item.type == 1 ? "#FA385F" : "#F1F180"
+                                                    backgroundColor: isExpense(item)
+                                                        ? item.type == 1
+                                                            ? "#FA385F"
+                                                            : "#F1F180"
+                                                        : "#6AD9A8"
                                                 }}></div>
                                             {item.title}
                                         </div>
                                     </td>
-                                    <td className="date">{`${String(new Date(item.date).getDate()).padStart(2, "0")}/ ${String(new Date(item.date).getMonth() + 1).padStart(2, "0")}`}</td>
+                                    <td className="date">{`${String(new Date(item.date).getDate()).padStart(2, "0")}/ ${String(
+                                        new Date(item.date).getMonth() + 1
+                                    ).padStart(2, "0")}`}</td>
                                     <td
-                                        style={{ color: !item.type ? "#6AD9A8" : item.type == 1 ? "#FA385F" : "#F1F180" }}
+                                        style={{ color: item.color }}
                                         className="value">
                                         {formartMoney(item.value)}
                                     </td>
@@ -96,18 +97,20 @@ const Actives = ({ date }: type) => {
                     <BoxFullpage
                         title="Edit"
                         content={
-                            finances[index].type >= 1 ? (
-                                <ModalExpenses
-                                    setOpened={setOpened}
-                                    expenseEdit={finances[index]}
-                                    type={finances[index].type}
-                                />
-                            ) : (
-                                <ModalEntrances
-                                    setOpened={setOpened}
-                                    entraceEdit={finances[index]}
-                                />
-                            )
+                            <>
+                                {isExpense(finances[index]) ? (
+                                    <ModalExpenses
+                                        setOpened={setOpened}
+                                        expenseEdit={finances[index] as IFinancesExpense}
+                                        type={(finances[index] as IFinancesExpense).type}
+                                    />
+                                ) : (
+                                    <ModalEntrances
+                                        setOpened={setOpened}
+                                        entraceEdit={finances[index] as IFinancesEntrace}
+                                    />
+                                )}
+                            </>
                         }
                         setOpened={setOpened}
                     />

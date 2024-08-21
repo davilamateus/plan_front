@@ -1,27 +1,25 @@
-import { useEffect, useState } from "react";
-import { OpenWeatherMapResponse } from "../../types/weather/IWeather";
-import { useGetTrip } from "../../store/hooks/trip/useGetTrip";
-import { useGetWeather } from "../../hooks/city/useGetWeather";
+import { useContext, useEffect, useState } from "react";
 import { getTimestampInfomartions } from "../../functions/date/getTimestampInfomartions";
+import { useGetWeather } from "../../requests/useCityRequest";
 import Skeleton from "react-loading-skeleton";
 import "./style.scss";
+import { OpenWeatherMapResponse } from "../../types/ICity";
+import { UseTripContext } from "../../context/useTripContext";
 
 const Weather = () => {
     const [weather, setWeather] = useState<OpenWeatherMapResponse>();
-    const UseGetWeather = useGetWeather();
-    const UseGetTrip = useGetTrip();
+    const trip = useContext(UseTripContext);
     const days = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
     const dateNow = new Date();
+    const UseGetWeather = useGetWeather();
 
     useEffect(() => {
-        if (UseGetTrip.tripCity) {
-            UseGetWeather(UseGetTrip.tripCity, UseGetTrip.tripCountry)
-                .then((data: OpenWeatherMapResponse) => setWeather(data))
-                .catch((error) => {
-                    console.log(error);
-                });
+        if (trip?.state.tripCity) {
+            UseGetWeather(trip?.state.tripCity, trip?.state.tripCountrySlug).then((data) => {
+                setWeather(data);
+            });
         }
-    }, [UseGetTrip]);
+    }, [trip]);
 
     return weather ? (
         <div className="weather-main box">
@@ -29,9 +27,12 @@ const Weather = () => {
                 <div className="weather-date">
                     <span>{days[new Date(dateNow.getTime() + weather.timezone * 1000).getDay()]},</span>
                     <span>{new Date(dateNow.getTime() + weather.timezone * 1000).getDate()}</span>
-                    <span>{getTimestampInfomartions(new Date(dateNow.getTime() + weather.timezone * 1000), 0).nameOfMonthShort},</span>
                     <span>
-                        {new Date(dateNow.getTime() + weather.timezone * 1000).getHours()}:{new Date(dateNow.getTime() + weather.timezone * 1000).getMinutes() < 10 ? "0" : ""}
+                        {getTimestampInfomartions(new Date(dateNow.getTime() + weather.timezone * 1000), 0).nameOfMonthShort},
+                    </span>
+                    <span>
+                        {new Date(dateNow.getTime() + weather.timezone * 1000).getHours()}:
+                        {new Date(dateNow.getTime() + weather.timezone * 1000).getMinutes() < 10 ? "0" : ""}
                         {new Date(dateNow.getTime() + weather.timezone * 1000).getMinutes()}
                     </span>
                 </div>

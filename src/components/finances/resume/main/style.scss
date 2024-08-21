@@ -4,7 +4,9 @@
     height: max-content;
     gap: 16px;
 }
-
+.finances-resume-box {
+    flex: 1;
+}
 @media (max-width: 1088px) {
     .finance-resume-main {
         flex-direction: column;

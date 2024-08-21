@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ExchangeHistoric from "../historic";
 import ExchangeSimulation from "../simulation";
 import "./style.scss";
-import { useGetExchangeApi } from "../../../hooks/exchange/useGetExange";
-import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
+import { useGetExchange } from "../../../requests/useCityRequest";
+import { UseTripContext } from "../../../context/useTripContext";
 
 const ExchangeMain = () => {
     const [data, setData] = useState<number[]>([]);
+    const trip = useContext(UseTripContext);
 
-    const UseGetTrip = useGetTrip();
-    const UseGetExchange = useGetExchangeApi();
+    const UseGetExchange = useGetExchange();
     useEffect(() => {
-        if (UseGetTrip.tripCurrency) {
-            UseGetExchange(UseGetTrip.tripCurrency, UseGetTrip.currentCurrency).then((data) => {
+        if (trip?.state.loaded) {
+            UseGetExchange(trip.state.tripCurrency, trip.state.currentCurrency).then((data: any) => {
                 setData(data.data);
             });
         }
-    }, [UseGetTrip]);
+    }, [trip]);
 
     return (
         <div className="exchange-page">

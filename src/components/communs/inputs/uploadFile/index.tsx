@@ -1,57 +1,55 @@
-import { ChangeEvent, useState } from 'react';
-import { useUploadAttchament } from '../../../../hooks/toDoList/attchament/useUploadAttchament';
-import './style.scss';
+import { ChangeEvent, useState } from "react";
+import Api from "../../../../axios";
+import "./style.scss";
 
 interface type {
     setLink: (e: string) => void;
-};
+}
 
 const InputUploadFile = ({ setLink }: type) => {
-
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-    const UseUploadAttchament = useUploadAttchament();
-
 
     const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-
-            UseUploadAttchament(file)
+            const formData = new FormData();
+            formData.append("file", file);
+            return await Api.post("/todolist/attchaments/upload", formData)
                 .then((data) => {
                     setLink(data.data.fileName);
-                });
-
+                    setSelectedFile(file || null);
+                })
+                .catch((error) => console.log(error));
         }
-        setSelectedFile(file || null);
-
     };
 
-
-
-
     return (
-        <div className='input-upload'>
+        <div className="input-upload">
             <div>
                 <input
                     type="file"
-                    name='file'
+                    name="file"
                     accept=".pdf, .jpg, .png, doc, jpeg"
                     onChange={handleFileChange}
                 />
-
             </div>
-            {selectedFile == null ?
+            {selectedFile == null ? (
                 <>
-                    <img src="./../../../../../icons/upload.svg" alt="" />
+                    <img
+                        src="./../../../../../icons/upload.svg"
+                        alt=""
+                    />
                     <span>Add a file type: pdf, doc, jpeg, jpg or png. </span>
                 </>
-                :
+            ) : (
                 <>
-                    <img src="./../../../../../icons/uploaded.svg" alt="" />
+                    <img
+                        src="./../../../../../icons/uploaded.svg"
+                        alt=""
+                    />
                     <span>File Added.</span>
                 </>
-            }
+            )}
         </div>
     );
 };

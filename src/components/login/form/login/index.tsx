@@ -1,122 +1,96 @@
+import { ILogin } from "../../../../types/ILogin";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLoginApi } from "../../../../requests/login/useLogin";
+import { IMessageActions } from "../../../../types/IMenssage";
+import { isEmail } from "../../../../functions/isEmail";
 import InputEmail from "../../../communs/inputs/email";
 import InputPassword from "../../../communs/inputs/password";
 import InputRadio from "../../../communs/inputs/radio";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
 import SocialLogin from "../social";
-import { isEmail } from "../../../../functions/isEmail";
-import { useLogin } from "../../../../hooks/user/useLogin";
 import BoxFullpage from "../../../communs/boxFullpage";
-import ForgetPassword from "../forgetPassword";
-import { useNavigate } from "react-router-dom";
-import { ILogin } from "../../../../types/login/ILogin";
-import { IMessage } from "../../../../types/messages/IMenssage";
 import Message from "../../../messages";
-import './style.scss';
-
+import ForgetPassword from "../forgetPassword";
+import "./style.scss";
 
 const LoginFormLogin = () => {
-
-    const [user, setUser] = useState<ILogin>({ email: '', password: '', remember: false })
-    const [btnLoading, setBtnLoading] = useState<boolean>(false);
     const [modalForgetOpened, setModalForgetOpened] = useState<boolean>(false);
-    const [message, setMessage] = useState<IMessage>({ status: false })
+    const [message, setMessage] = useState<IMessageActions>({ type: false });
+    const [form, setForm] = useState<ILogin>({ email: "", password: "", remember: false, loading: false });
 
-    const UseLogin = useLogin();
-    const Navegation = useNavigate();
+    const UseLoginApi = useLoginApi();
+    const UseNavigate = useNavigate();
 
-    const handleSubmit = () => {
-        setBtnLoading(true);
-        UseLogin(user)
-            .then((data) => {
-                sessionStorage.clear();
-                localStorage.clear();
-                if (data.status === 200 || data.status === 201) {
-                    if (user.remember) {
-                        localStorage.setItem('token', data.data.result);
-                        sessionStorage.setItem('token', data.data.result);
-                    } else {
-                        sessionStorage.setItem('token', data.data.result);
-                    }
-                    if (data.status === 200) {
-                        Navegation('/');
-                    } else if (data.status === 201) {
-                        Navegation('/createtripdetails');
-                    }
-                }
-                else if (data.status === 203) {
-                    setMessage({
-                        title: 'Email not confirmed!',
-                        description: 'You don’t confirmed your email, we emailagain, please check your box and span emails.',
-                        type: 'atention',
-                        status: true
-                    })
-                } else {
-                    setMessage({
-                        title: 'Email or password incorrect!',
-                        description: 'You type your email or your password incorrectly.Please check your informations and try again.',
-                        type: 'error',
-                        status: true
-                    })
-
-                };
-                setBtnLoading(false);
-            })
-    }
-
+    const handleSubmit = async () => {
+        try {
+            setForm((prev) => ({ ...prev, loading: true }));
+            const data = await UseLoginApi(form);
+            if (data.status === 200) {
+                window.location.href = "/";
+            } else if (data.status === 201) {
+                UseNavigate("/createtripdetails");
+            } else if (data.status === 203) {
+                setMessage({ type: "login_error_unconfirm" });
+            } else {
+                setMessage({ type: "login_error_wrong" });
+            }
+        } catch (error) {
+            setMessage({ type: "server_error" });
+        } finally {
+            setForm((prev) => ({ ...prev, loading: false }));
+        }
+    };
 
     return (
         <>
             <span>Enter with your login details.</span>
             <InputEmail
-                title='Email:'
-                placeholder='exemplo@email.com'
-                setInput={(e: string) => setUser({ ...user, email: e })}
-                input={user.email}
+                title="Email:"
+                placeholder="exemplo@email.com"
+                setInput={(e) => setForm((prev) => ({ ...prev, email: e }))}
+                input={form.email}
             />
             <InputPassword
-                title='Password:'
-                placeholder='********'
-                setInput={(e: string) => setUser({ ...user, password: e })}
-                input={user.password}
+                title="Password:"
+                setInput={(e) => setForm((prev) => ({ ...prev, password: e }))}
+                input={form.password}
             />
             <div className="remember">
                 <InputRadio
-                    select={user.remember}
-                    setSelect={(e: boolean) => setUser({ ...user, remember: e })}
+                    select={form.remember}
+                    setSelect={(e) => setForm((prev) => ({ ...prev, remember: e }))}
                 />
                 Remember-me
             </div>
             <ButtonSimple
-                title='Enter'
-                type='success'
-                status={isEmail(user.email) && user.password !== ''}
+                title="Enter"
+                type="success"
+                status={isEmail(form.email) && form.password !== ""}
+                loading={form.loading}
                 action={handleSubmit}
-                loading={btnLoading}
             />
             <div className="login-social">
                 <p>Or enter with your account:</p>
                 <SocialLogin />
             </div>
             <button
-                onClick={() => { setModalForgetOpened(true) }}
+                onClick={() => {
+                    setModalForgetOpened(true);
+                }}
                 className="forget-password-btn">
                 Do you forget your password?
             </button>
-            {modalForgetOpened &&
+            {modalForgetOpened && (
                 <BoxFullpage
-                    title='Forget Password'
+                    title="Forget Password"
                     setOpened={setModalForgetOpened}
                     content={<ForgetPassword />}
                 />
-            }
-            <Message
-                message={message}
-                setMessage={setMessage}
-            />
+            )}
+            <Message message={message} />
         </>
-
-    )
-}
+    );
+};
 
 export default LoginFormLogin;

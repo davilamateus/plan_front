@@ -1,15 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useGetDomesticGoals } from "../../../../store/hooks/finances/useGetDomesticGoals";
+import { useContext, useState } from "react";
+import { IFinancesExpense } from "../../../../types/IFinances";
+import { UseFinanceContext } from "../../../../context/useFinanceContext";
 import InputSimple from "../../../communs/inputs/simples";
 import InputMoney from "../../../communs/inputs/money";
 import InputDate from "../../../communs/inputs/date";
 import ButtonSimple from "../../../communs/buttons/simple/simple";
 import InputSelectCategory from "../../../communs/inputs/selecCategory";
-import { useGetTripGoals } from "../../../../store/hooks/finances/useGetTripGoals";
-import useAddExpense from "../../../../hooks/finances/expenses/useAddExpense";
-import useEditExpense from "../../../../hooks/finances/expenses/useEditExpense";
-import { IFinancesExpense } from "../../../../types/finances/IExpense";
-import useDeleteExpense from "../../../../hooks/finances/expenses/useDeleteExpense";
 import "./../style.scss";
 
 interface type {
@@ -24,33 +20,49 @@ const ModalExpenses = ({ type, setOpened, expenseEdit }: type) => {
 
     const [expense, setExpense] = useState<IFinancesExpense>(
         expenseEdit || {
+            id: 0,
             type,
             title: "",
+            color: "",
             value: 0,
             date: new Date().getTime(),
-            financesGoalId: undefined
+            financesGoalId: null
         }
     );
 
-    const UseGetDomesticGoals = useGetDomesticGoals();
-    const UseGetTripGoals = useGetTripGoals();
-    const UseAddExpenses = useAddExpense();
-    const UseEditExpense = useEditExpense();
-    const UseDeleteExpense = useDeleteExpense();
+    const finance = useContext(UseFinanceContext);
 
     const handleSubmitExpense = () => {
         setBtnLoading(true);
         if (expenseEdit) {
-            UseEditExpense({ ...expense, id: expenseEdit.id }).then(() => setOpened(false));
+            finance?.editExpense(expense);
         } else {
-            UseAddExpenses(expense).then(() => setOpened(false));
+            finance?.addExpense(expense);
         }
+        setTimeout(() => {
+            setOpened(false);
+        }, 2000);
     };
 
     const handleDelete = () => {
         setBtnLoadingDelete(true);
-        if (expenseEdit?.id) UseDeleteExpense(expenseEdit).then(() => setOpened(false));
+        finance?.deleteExpense(expense);
+        setTimeout(() => {
+            setOpened(false);
+        }, 2000);
     };
+
+    /**
+     * 
+     *        {finance && (
+                    <InputSelectCategory
+                        title="Select a category:"
+                        goals={type === 1 ? finance?.state.domesticGoals : finance?.state.tripGoals}
+                        selectOption={expense.financesGoalId}
+                        setSelectOptions={(e) => setExpense({ ...expense, financesGoalId: e })}
+                    />
+                )}
+     */
 
     return (
         <div className="modal">
@@ -64,17 +76,20 @@ const ModalExpenses = ({ type, setOpened, expenseEdit }: type) => {
                     input={expense.title}
                     placeholder="Type a title..."
                 />
-                <InputSelectCategory
-                    title="Select a category:"
-                    goals={type === 1 ? UseGetDomesticGoals : UseGetTripGoals}
-                    selectOption={expense.financesGoalId}
-                    setSelectOptions={(e) => setExpense({ ...expense, financesGoalId: e })}
-                />
+                {finance && (
+                    <InputSelectCategory
+                        title="Select a category:"
+                        goals={type === 1 ? finance?.state.domestic.goals : finance?.state.trip.goals}
+                        selectOption={expense.financesGoalId}
+                        setSelectOptions={(e) => setExpense({ ...expense, financesGoalId: e })}
+                    />
+                )}
                 <InputDate
                     title="Date:"
                     date={expense.date}
                     setDate={(e) => setExpense({ ...expense, date: e })}
                 />
+
                 <InputMoney
                     title="Valor:"
                     setInput={(e) => setExpense({ ...expense, value: e })}
@@ -89,6 +104,7 @@ const ModalExpenses = ({ type, setOpened, expenseEdit }: type) => {
                     status={expense.title !== "" && expense.value > 0}
                     loading={btnLoading}
                 />
+
                 {expenseEdit && (
                     <ButtonSimple
                         title="Delete"

@@ -1,12 +1,11 @@
-import React from 'react'
-import './style.scss';
+import "./style.scss";
 
 const ButtonOptions = () => {
     return (
-        <div className='button-options'>
-            <img src="./../../../../../icons/options.svg" alt="" />
+        <div className="button-options">
+            <img src="./../../../../../icons/options.svg" />
         </div>
-    )
-}
+    );
+};
 
-export default ButtonOptions
+export default ButtonOptions;

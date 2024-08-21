@@ -14,10 +14,10 @@ const DoughnutHalf = ({ labels, values, colors, porcent }: types) => {
             {
                 data: values && values.length > 0 ? values : [2000, 1000, 3000],
                 backgroundColor: colors && colors.length > 0 ? colors : ["#dfdfdf", "#c1c1c1", "#edf0eeed"],
-                borderWidth: 0, // Espessura das barras
+                borderWidth: 2,
                 borderRadius: 2,
                 spacing: 2,
-                weight: 1 // Espessura das barras
+                weight: 1
             }
         ]
     };
@@ -32,6 +32,12 @@ const DoughnutHalf = ({ labels, values, colors, porcent }: types) => {
             }
         }
     };
+    const formatPercentage = (value: number) => {
+        if (isNaN(value) || !isFinite(value)) {
+            return "0%";
+        }
+        return `${value}%`;
+    };
 
     return (
         <div
@@ -44,21 +50,7 @@ const DoughnutHalf = ({ labels, values, colors, porcent }: types) => {
                 options={options}
             />
             <div className="porcents">
-                {porcent >= 0 || porcent < 0 ? (
-                    <h4>
-                        {" "}
-                        {+porcent.toFixed(2) == -Infinity ? (
-                            <img
-                                src="./../../../../../icons/infinity.svg"
-                                alt=""
-                            />
-                        ) : (
-                            porcent.toFixed(2) + "" + "%"
-                        )}
-                    </h4>
-                ) : (
-                    <h4>0%</h4>
-                )}
+                <h4>{formatPercentage(porcent)}</h4>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { dateToInput } from '../../../../functions/date/dateToInput';
+import { dateToInput } from "../../../../functions/date/dateToInput";
 
 interface type {
     title: string;
@@ -15,10 +15,12 @@ const InputDate = ({ title, date, setDate }: type) => {
             <input
                 type="date"
                 value={dateToInput(date)}
-                onChange={(e) => { setDate(new Date(e.target.value).getTime()) }}
+                onChange={(e) => {
+                    setDate(new Date(e.target.value).getTime());
+                }}
             />
         </div>
-    )
-}
+    );
+};
 
 export default InputDate;

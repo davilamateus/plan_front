@@ -12,8 +12,7 @@
     height: max-content;
     justify-content: center;
     align-items: center;
-    margin-right: 0;
-    right: 0;
+    right: -500px;
     border-radius: 8px;
     .text {
         height: 100%;
@@ -32,16 +31,16 @@
 }
 @keyframes moviment {
     0% {
-        margin-right: -500px;
+        right: -500px;
     }
     5% {
-        margin-right: 0;
+        right: 0;
     }
     95% {
-        margin-right: 0;
+        right: 0;
     }
     100% {
-        margin-right: -500px;
+        right: -500px;
     }
 }
 .message-box-white {

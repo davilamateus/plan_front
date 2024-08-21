@@ -1,19 +1,16 @@
 import { useState } from "react";
 import TitleOfSession from "../../communs/titleOfSession";
 import InputMoney from "../../communs/inputs/money";
-import "./style.scss";
-import { useGetTrip } from "../../../store/hooks/trip/useGetTrip";
 import ExchangeCard from "./card";
+import "./style.scss";
 
 interface types {
     exchangeToday?: number;
-    currency_local?: string;
-    currency_trip?: string;
+    tripCurrency?: string;
+    currentCurrency?: string;
 }
 
-const ExchangeSimulation = ({ exchangeToday = 1 }: types) => {
-    const UseGetTrip = useGetTrip();
-
+const ExchangeSimulation = ({ exchangeToday = 1, tripCurrency, currentCurrency }: types) => {
     const [input, setInput] = useState(100000);
     const [type, setType] = useState(1);
     return (
@@ -29,9 +26,9 @@ const ExchangeSimulation = ({ exchangeToday = 1 }: types) => {
                                     setType(1);
                                 }}
                                 className={type === 1 ? "selected" : ""}>
-                                {UseGetTrip.currentCurrency ? (
+                                {currentCurrency ? (
                                     <>
-                                        {UseGetTrip.currentCurrency} to {UseGetTrip.tripCurrency}
+                                        {currentCurrency} to {tripCurrency}
                                     </>
                                 ) : (
                                     <img src="./../../../../gifs/btnloadin.gif" />
@@ -42,9 +39,9 @@ const ExchangeSimulation = ({ exchangeToday = 1 }: types) => {
                                     setType(2);
                                 }}
                                 className={type === 2 ? "selected" : ""}>
-                                {UseGetTrip.currentCurrency ? (
+                                {currentCurrency ? (
                                     <>
-                                        {UseGetTrip.tripCurrency} to {UseGetTrip.currentCurrency}
+                                        {tripCurrency} to {currentCurrency}
                                     </>
                                 ) : (
                                     <img src="./../../../../gifs/btnloadin.gif" />
@@ -66,8 +63,8 @@ const ExchangeSimulation = ({ exchangeToday = 1 }: types) => {
                         type={type}
                         input={input}
                         exchangeToday={exchangeToday}
-                        currencyLocal={UseGetTrip.currentCurrency}
-                        currencyTrip={UseGetTrip.tripCurrency}
+                        currencyLocal={currentCurrency}
+                        currencyTrip={tripCurrency}
                     />
                     <ExchangeCard
                         img={"remessa"}
@@ -76,8 +73,8 @@ const ExchangeSimulation = ({ exchangeToday = 1 }: types) => {
                         type={type}
                         input={input}
                         exchangeToday={exchangeToday}
-                        currencyLocal={UseGetTrip.currentCurrency}
-                        currencyTrip={UseGetTrip.tripCurrency}
+                        currencyLocal={currentCurrency}
+                        currencyTrip={tripCurrency}
                     />
                     <ExchangeCard
                         img={"wise"}
@@ -86,8 +83,8 @@ const ExchangeSimulation = ({ exchangeToday = 1 }: types) => {
                         type={type}
                         input={input}
                         exchangeToday={exchangeToday}
-                        currencyLocal={UseGetTrip.currentCurrency}
-                        currencyTrip={UseGetTrip.tripCurrency}
+                        currencyLocal={currentCurrency}
+                        currencyTrip={tripCurrency}
                     />
                 </div>
             </div>

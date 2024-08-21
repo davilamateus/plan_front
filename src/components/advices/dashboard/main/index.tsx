@@ -1,27 +1,32 @@
-import { useEffect, useState } from "react";
-import { IAdvicesMain } from "../../../../types/advices/IAdvices";
-import { useGetTrip } from "../../../../store/hooks/trip/useGetTrip";
-import { useGetAdvices } from "../../../../hooks/city/useGetAdvices";
+import { useContext, useEffect, useState } from "react";
+import { IAdvicesMain } from "../../../../types/IAdvices";
+import { useGetAdvices } from "../../../../requests/useCityRequest";
+import { UseTripContext } from "../../../../context/useTripContext";
 import AdviceCategorieCard from "../card";
 import BoxFullpage from "../../../communs/boxFullpage";
 import AdviceOpened from "../../opened";
 import Skeleton from "react-loading-skeleton";
-import "./style.scss";
 import TitleOfComponentOnDashnboard from "../../../communs/titleOfComponentOnDashnboard";
+import "./style.scss";
 
 const AdvicesDashboard = () => {
     const [advices, setAdvices] = useState<IAdvicesMain[]>([]);
     const [opened, setOpened] = useState(false);
     const [selectAdvice, setSelectAdvice] = useState<IAdvicesMain>();
 
-    const UseGetTrip = useGetTrip();
+    const trip = useContext(UseTripContext);
     const UseGetAdvices = useGetAdvices();
 
     useEffect(() => {
-        if (UseGetTrip.tripLat) {
-            UseGetAdvices(UseGetTrip.tripLat, UseGetTrip.tripLon).then((data) => setAdvices(data.data));
+        if (trip?.state) {
+            UseGetAdvices(trip.state.tripLat, trip.state.tripLon, "10000").then((data) => {
+                if (data) {
+                    setAdvices(data);
+                }
+                console.log("a data e aqui", data);
+            });
         }
-    }, [UseGetTrip]);
+    }, [trip]);
 
     return (
         <div>

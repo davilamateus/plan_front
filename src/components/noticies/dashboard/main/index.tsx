@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
-import { useGetTrip } from "../../../../store/hooks/trip/useGetTrip";
-import { useGetNoticies } from "../../../../hooks/city/useGetNoticies";
+import { useContext, useEffect, useState } from "react";
+import { useGetNoticies } from "../../../../requests/useCityRequest";
+import { UseTripContext } from "../../../../context/useTripContext";
 import NoticieDashboardCard from "../card";
-import { IArticle } from "../../../../types/noticies/IArticle";
-import "./style.scss";
 import TitleOfComponentOnDashnboard from "../../../communs/titleOfComponentOnDashnboard";
+import "./style.scss";
+import { IArticle } from "../../../../types/ICity";
 
 const NoticiesDashboard = () => {
     const [articles, setArticles] = useState<IArticle[]>([]);
     const [page, setPage] = useState(0);
 
-    const UseGetTrip = useGetTrip();
+    const trip = useContext(UseTripContext);
     const UseGetNoticies = useGetNoticies();
 
     useEffect(() => {
-        if (UseGetTrip.tripCountrySlug) {
-            UseGetNoticies(UseGetTrip.tripCountrySlug)
-                .then((data) => setArticles(data.data.results))
-                .catch((error) => console.log(error));
+        if (trip?.state) {
+            UseGetNoticies(trip.state.tripCountrySlug).then((data) => {
+                if (data) {
+                    setArticles(data);
+                }
+            });
         }
-    }, [UseGetTrip]);
+    }, [trip]);
 
     const handleChangePage = (pageChange: number) => {
         setPage(page + pageChange);

@@ -1,7 +1,7 @@
 import { dateTimeAgo } from "../../../../functions/date/dateTimeAgo";
 import Skeleton from "react-loading-skeleton";
-import { IArticle } from "../../../../types/noticies/IArticle";
 import "./style.scss";
+import { IArticle } from "../../../../types/ICity";
 
 interface type {
     article: IArticle | undefined;

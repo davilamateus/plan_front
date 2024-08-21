@@ -1,4 +1,4 @@
-import { IFinancesExpense } from "../../../../../types/finances/IExpense";
+import { IFinancesExpense } from "../../../../../types/IFinances";
 import "./style.scss";
 
 interface type {
@@ -13,6 +13,7 @@ const GoalsItens = ({ itens, setItemOpened }: type) => {
             <table className="goals-itens">
                 <tr className="goals-table-title">
                     <th className="goals-table-title-title">Title</th>
+                    <th className="goals-table-title-Date">Date</th>
                     <th className="goals-table-title-value">Value</th>
                 </tr>
                 {itens.map((item) => (
@@ -22,6 +23,9 @@ const GoalsItens = ({ itens, setItemOpened }: type) => {
                         }}
                         className="goals-table-value">
                         <td className="goals-table-value-title">{item.title}</td>
+                        <td className="date">{`${String(new Date(item.date).getDate()).padStart(2, "0")}/ ${String(
+                            new Date(item.date).getMonth() + 1
+                        ).padStart(2, "0")}`}</td>
                         <td className="goals-table-value-value">{item.value}</td>
                     </tr>
                 ))}

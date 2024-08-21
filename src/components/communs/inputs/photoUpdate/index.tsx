@@ -1,15 +1,14 @@
 import { BASE_URL } from "../../../../axios";
-import { useState } from "react";
-import { useGetUser } from "../../../../store/hooks/user/useGetUser";
-import { userUploadPhoto } from "../../../../hooks/user/useUploadPhoto";
+import { useContext, useState } from "react";
+import { userUploadPhoto } from "../../../../requests/user/useUploadPhoto";
 import "./style.scss";
-import { useSetUser } from "../../../../store/hooks/user/useSetUser";
+import { UseUserContext } from "../../../../context/useUserContext";
 
 const PhotoUpdate = () => {
     const [fileName, setFileName] = useState<string | undefined>(undefined);
-    const UseGetUser = useGetUser();
     const UseUploadPhoto = userUploadPhoto();
-    const UseSetUser = useSetUser();
+
+    const user = useContext(UseUserContext);
 
     const handleFileChange = (files: FileList | null) => {
         if (files && files.length > 0) {
@@ -17,7 +16,7 @@ const PhotoUpdate = () => {
             UseUploadPhoto(file)
                 .then((data) => {
                     setFileName(data.data.result);
-                    UseSetUser({ ...UseGetUser, photo: data.data.result });
+                    user?.editUser({ ...user.state, photo: data.data.result });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -27,7 +26,7 @@ const PhotoUpdate = () => {
 
     return (
         <div
-            style={{ backgroundImage: `url(${BASE_URL}imagens/user/${fileName || UseGetUser.photo || "default.jpeg"})` }}
+            style={{ backgroundImage: `url(${BASE_URL}imagens/user/${fileName || user?.state.photo || "default.jpeg"})` }}
             className="photo-update-component">
             <img
                 src="./../../../../../icons/imagem.svg"

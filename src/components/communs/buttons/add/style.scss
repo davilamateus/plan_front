@@ -1,18 +1,16 @@
-@import './../../../../styles/color';
+@import "./../../../../styles/color";
 
-.button-add-page{
+.button-add-page {
     position: fixed;
-    bottom:12px;
+    bottom: 12px;
     display: flex;
-    justify-content: end!important;
+    justify-content: end !important;
     width: 100%;
     left: -18px;
     height: max-content;
     z-index: 3;
-    
-    
 
-    .button-add{
+    .button-add {
         position: fixed;
         bottom: 68px;
         background-color: $primary-color;
@@ -28,30 +26,30 @@
         padding: 0;
         cursor: pointer;
         float: right;
-        &:hover{
+        &:hover {
             opacity: 1;
         }
-        img{
+        img {
             width: 18px;
         }
     }
 
-    .page-backgroud{
+    .page-backgroud {
         animation: backgroundAnimation 0.4s linear forwards;
         width: 100vw;
         height: 100vh;
         position: fixed;
-        display:flex;
+        display: flex;
         top: 0;
         left: 0;
         z-index: 2;
     }
 
-    .button-add-content{
+    .button-add-content {
         width: max-content;
         height: 100vh;
         position: fixed;
-        display:flex;
+        display: flex;
         top: 0;
         left: 0;
         overflow: scroll;

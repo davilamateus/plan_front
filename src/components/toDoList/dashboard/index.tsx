@@ -1,23 +1,12 @@
-import { useEffect, useState } from "react";
-import { IToDoListMain } from "../../../types/toDoList/IToDoList";
-import { useGetToDoList } from "../../../store/hooks/toDoList/useGetToDoList";
+import { useContext } from "react";
+import { UseToDoListContext } from "../../../context/useToDoListContext";
 import ToDoListCard from "../card";
+import TitleOfComponentOnDashnboard from "../../communs/titleOfComponentOnDashnboard";
 import Skeleton from "react-loading-skeleton";
 import "./style.scss";
-import TitleOfComponentOnDashnboard from "../../communs/titleOfComponentOnDashnboard";
 
 const ToDoListDashboard = () => {
-    const [toDoList, setToDoList] = useState<IToDoListMain[]>([]);
-    const UseGetToDoList = useGetToDoList();
-
-    useEffect(() => {
-        if (UseGetToDoList.length > 0) {
-            const filteredToDoList = UseGetToDoList.filter((todolist: IToDoListMain) => {
-                return todolist.status !== 3;
-            });
-            setToDoList(filteredToDoList);
-        }
-    }, [UseGetToDoList]);
+    const toDoList = useContext(UseToDoListContext);
 
     return (
         <div>
@@ -27,8 +16,8 @@ const ToDoListDashboard = () => {
             />
             <div className=" toDoList-dashboard">
                 <div className=" list-todolist">
-                    {toDoList.length > 0 ? (
-                        toDoList.map((item) => (
+                    {toDoList !== null ? (
+                        toDoList?.state?.map((item) => (
                             <ToDoListCard
                                 toDoList={item}
                                 key={item.id}

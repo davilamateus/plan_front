@@ -1,21 +1,47 @@
-import React from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart, Tooltip, registerables } from "chart.js";
-import IBarData from "../../../../types/finances/entraces/IBarData";
+import { Chart, registerables } from "chart.js";
 import { formartMoney } from "../../../../functions/formartMoney/formartMoney";
+import { IBarData } from "../../../../types/IFinances";
+import { UseFinanceContext } from "../../../../context/useFinanceContext";
+import { getTimestampInfomartions } from "../../../../functions/date/getTimestampInfomartions";
 Chart.register(...registerables);
 
-interface type {
-    barData: IBarData;
-}
+const GraficOfBar = () => {
+    const chartContainerRef = useRef<HTMLDivElement>(null);
+    const finances = useContext(UseFinanceContext);
 
-const GraficOfBar = ({ barData }: type) => {
-    console.log(barData);
+    const [barData, setBarData] = useState<IBarData>({
+        title: [
+            getTimestampInfomartions(new Date().getTime(), -11).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -10).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -9).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -8).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -7).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -6).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -5).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -4).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -3).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -2).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), -1).nameOfMonthShort,
+            getTimestampInfomartions(new Date().getTime(), 0).nameOfMonthShort
+        ],
+        value: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    });
 
-    const chartContainerRef = React.useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (finances && finances?.state?.entraces?.length > 0) {
+            let newValue = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            finances.state.entraces.map((item) => {
+                const calc = new Date().getMonth() - new Date(item.date).getMonth();
+                newValue[calc + 1] = newValue[calc + 1] + item.value;
+            });
+            setBarData((prev) => ({ ...prev, value: newValue }));
+        }
+    }, [finances]);
 
     const data = {
-        labels: barData.title.length > 0 ? barData.title.reverse() : ["", "", "", "", "", "", "", "", "", ""],
+        labels: finances ? barData.title : ["", "", "", "", "", "", "", "", "", "", "", "", ""],
         datasets: [
             {
                 label: "Value",
@@ -25,7 +51,10 @@ const GraficOfBar = ({ barData }: type) => {
                 borderRadius: 8,
                 hoverBackgroundColor: "#6Ae9A8",
                 hoverBorderColor: "rgba(75,192,192,1)",
-                data: barData.value.length > 0 ? barData.value.reverse() : [100000, 200000, 300000, 100000, 400000, 200000, 10000, 400000, 400000, 200000, 100000, 40000, 20000]
+                data:
+                    barData.value.length > 0
+                        ? barData.value.reverse()
+                        : [100000, 200000, 300000, 100000, 400000, 330000, 10000, 400000, 400000, 200000, 100000, 40000, 20000]
             }
         ]
     };
@@ -68,7 +97,7 @@ const GraficOfBar = ({ barData }: type) => {
                 display: false
             },
             tooltip: {
-                enabled: true, // Ativa os tooltips
+                enabled: true,
                 callbacks: {
                     label: function (context: any) {
                         let label = context.dataset.label || "";
