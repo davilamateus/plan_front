@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { IFinancesGoal } from "../../../../types/IFinances";
+import { useContext, useState } from "react";
 import { UseFinanceContext } from "../../../../context/useFinanceContext";
 import FinanceSimpleResult from "../../comuns/resume";
 import TitleOfSession from "../../../communs/titleOfComponent";
 import DoughnutHalf from "../../comuns/doughnutHalf";
 import "./style.scss";
-import { getTimestampInfomartions } from "../../../../functions/date/getTimestampInfomartions";
 
 interface type {
     date: {
@@ -39,6 +37,7 @@ const FinanceResume = ({ date }: type) => {
                     ]}
                     colors={["#FA385F", "#F1F180", "#6AD9A8", "#000"]}
                     porcent={Number((((data.totalDomestic + data.totalTrip) * 100) / data.totalEntraces).toFixed(2))}
+                    loaded={finances?.state.loaded ? true : false}
                 />
                 <div className="finance-resume-results">
                     <FinanceSimpleResult

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRegisterApi } from "../../../../requests/login/useRegister";
 import { isEmail } from "../../../../functions/isEmail";
 import { isPassword } from "../../../../functions/isPassword";
@@ -75,7 +75,9 @@ const RegisterFormLogin = () => {
             <ButtonSimple
                 title="Register"
                 type="success"
-                status={form.name !== "" && isEmail(form.email) && isPassword(form.password) && form.password === form.confirmPassword}
+                status={
+                    form.name !== "" && isEmail(form.email) && isPassword(form.password) && form.password === form.confirmPassword
+                }
                 action={handleRegister}
                 loading={form.loading}
             />

@@ -23,6 +23,7 @@ const Message = ({ message }: IMessage) => {
                 />
             </div>
             <div className="message-box-white">
+                \
                 <div className="text">
                     <h4>{state.title}</h4>
                     <p>{state.description}</p>

@@ -3,7 +3,7 @@ import { IFinancesEntrace, IFinancesEntracesAdd, IFinancesExpense, IFinancesGoal
 
 export const useGetFinancesRequest = () => {
     return async () => {
-        return await Api.get(`/finances`)
+        return await Api.get("/finances")
             .then((data) => {
                 return data.data;
             })

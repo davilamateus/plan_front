@@ -23,7 +23,6 @@ const AdvicesDashboard = () => {
                 if (data) {
                     setAdvices(data);
                 }
-                console.log("a data e aqui", data);
             });
         }
     }, [trip]);

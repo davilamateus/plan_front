@@ -1,19 +1,17 @@
-@import './../../../../styles/color';
+@import "./../../../../styles/color";
 
-.btn-action{
-
-    div{
+.btn-action {
+    div {
         background-color: $primary-color;
         align-items: center;
         justify-content: center;
         display: flex;
         height: 18px;
-        width:  18px;
+        width: 18px;
         border-radius: 4px;
-        img{
+        img {
             width: 12px;
             padding: 2px;
         }
-
     }
 }

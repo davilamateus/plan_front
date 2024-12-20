@@ -11,6 +11,7 @@ import InputCity from "../../components/communs/inputs/city";
 import InputDate from "../../components/communs/inputs/date";
 import PhotoUpdate from "../../components/communs/inputs/photoUpdate";
 import { UseTitleContext } from "../../context/useTitleContext";
+import "./style.scss";
 
 const PageMyAccoount = () => {
     const [formTrip, setFormTrip] = useState<ITrip>({

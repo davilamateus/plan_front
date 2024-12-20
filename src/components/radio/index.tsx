@@ -23,8 +23,6 @@ const RadioComponent = () => {
         }
     }, [trip]);
 
-    console.log("lista de radios", listRadio);
-
     const handleSwitchRadio = (direction: number) => {
         if (listRadio.length > 0) {
             let nextPage = page + direction;

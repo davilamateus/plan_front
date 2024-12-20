@@ -7,4 +7,10 @@
         align-items: center;
         justify-content: space-around;
     }
+    .finances-resume-cards {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 16px;
+    }
 }

@@ -19,7 +19,7 @@ const DaysToTravel = () => {
 
     return (
         <div className="daysToTravel-box box">
-            {trip?.state ? (
+            {trip?.state.loaded ? (
                 daysToTravel >= 0 ? (
                     <>
                         <div>

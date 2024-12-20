@@ -33,15 +33,21 @@ const AdsDashboard = () => {
                 <div className="planner-ticket-bottom">
                     <div className="planner-ticket-bottom-left">
                         <span>Passenger</span>
-                        {user?.state.loaded ? <h5>{user.state.name}</h5> : <Skeleton style={{ width: "98px", height: "10pt" }} />}
+                        {user?.state.loaded ? (
+                            <h5>{user.state.name}</h5>
+                        ) : (
+                            <Skeleton style={{ width: "98px", height: "10pt", marginBottom: "4px" }} />
+                        )}
                         <span>Date</span>
 
                         <h5>
-                            {trip
-                                ? `${new Date(trip.state.when).getDate()} /${
-                                      getTimestampInfomartions(new Date(trip.state.when).getTime(), 0).nameOfMonthShort
-                                  }/ ${new Date(trip.state.when).getFullYear()}`
-                                : "xx/xxx/xxxx"}
+                            {trip?.state.loaded ? (
+                                `${new Date(trip.state.when).getDate()} /${
+                                    getTimestampInfomartions(new Date(trip.state.when).getTime(), 0).nameOfMonthShort
+                                }/ ${new Date(trip.state.when).getFullYear()}`
+                            ) : (
+                                <Skeleton style={{ width: "98px", height: "10pt", marginBottom: "4px" }} />
+                            )}
                         </h5>
                     </div>
                     <div className="planner-ticket-bottom-right">
