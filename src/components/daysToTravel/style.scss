@@ -1,12 +1,10 @@
-@import './../../styles/color';
+@import "./../../styles/color";
 
-.daysToTravel-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-    width: 48%;
-
-
+.DashboardDaysToTravel-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 8px;
+	width: 48%;
 }

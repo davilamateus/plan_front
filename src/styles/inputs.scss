@@ -20,6 +20,7 @@
         &:focus {
             margin-top: 0px;
         }
+    
     }
 }
 
@@ -35,11 +36,20 @@ label {
     width: 100%;
     flex-direction: column;
 }
-input,
+
+input{
+    border: none;
+    border-bottom: 1px solid $border;
+    padding: 12px;
+    margin: 0;
+    width: -webkit-fill-available;
+    color: $paragraph-dark-color;
+    background-color: rgba(255, 0, 0, 0);
+}
 select,
 textarea {
     border-radius: 8px;
-    border: 1px solid $input-border-color;
+    border: 1px solid $border;
     padding: 12px;
     margin: 0;
     width: -webkit-fill-available;
@@ -48,7 +58,7 @@ textarea {
 }
 input::placeholder,
 textarea::placeholder {
-    opacity: 0.6;
+    opacity: 0.4;
 }
 input:focus {
     outline: none !important;

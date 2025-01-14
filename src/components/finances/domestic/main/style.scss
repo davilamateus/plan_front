@@ -1,0 +1,15 @@
+.finances-resume-main {
+	margin-top: 32px;
+	.finances-resume-dashboard {
+		flex: 2;
+	}
+	.finances-resume-box {
+		padding: 8px;
+	}
+	.finances-resume-dashboard-actives {
+		display: flex;
+		gap: 8px;
+		flex-grow: inherit;
+		flex-wrap: wrap;
+	}
+}

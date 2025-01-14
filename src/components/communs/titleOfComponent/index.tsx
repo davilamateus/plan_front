@@ -1,12 +1,10 @@
-import './style.scss';
+import "./style.scss";
 
 interface type {
-    title: string;
+	title: string;
 }
 const TitleOfComponent = ({ title }: type) => {
-    return (
-        <h4 className='title-of-component'>{title}:</h4>
-    )
-}
+	return <h5 className="title-of-component">{title}:</h5>;
+};
 
 export default TitleOfComponent;

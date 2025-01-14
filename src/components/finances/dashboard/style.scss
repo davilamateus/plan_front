@@ -1,16 +1,21 @@
+.finance-dashboard {
+	flex: 1;
+}
+
 .finances-resume {
-    padding: 8px;
-    width: 100%;
-    .finance-resume-components {
-        display: flex;
-        min-height: 252px;
-        align-items: center;
-        justify-content: space-around;
-    }
-    .finances-resume-cards {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        gap: 16px;
-    }
+	padding: 8px;
+	width: 100%;
+
+	.finance-resume-components {
+		display: flex;
+		min-height: 252px;
+		align-items: center;
+		justify-content: space-around;
+	}
+	.finances-resume-cards {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		gap: 16px;
+	}
 }

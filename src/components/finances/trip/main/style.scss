@@ -1,0 +1,14 @@
+.trip-main {
+	padding-bottom: 128px;
+	width: 100%;
+	padding-top: 32px;
+	.trip-main-box {
+		padding: 8px;
+		width: 100%;
+	}
+	.trip-goals {
+		display: flex;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+}

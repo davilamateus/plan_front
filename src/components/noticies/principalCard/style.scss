@@ -1,49 +1,59 @@
 @import "./../../../styles/color";
 
 .principal-article {
-    display: grid;
-    width: 100%;
-    grid-template-columns: 4fr 5fr;
-    .principal-article-img {
-        height: 100%;
-        width: 100%;
-        background-size: cover;
-        background-position: center;
-    }
-    .principal-article-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 32px;
-        gap: 16px;
-        .principal-article-content-title {
-            padding: 0;
-            margin: 0;
-            font-size: 26pt;
-        }
-        .princpal-article-content-category {
-            span {
-                font-size: 11pt;
-                font-weight: 600;
-                color: $primary-color;
-                text-transform: capitalize;
-            }
-        }
-
-        .principal-article-content-creator {
-            span {
-                font-size: 11pt;
-                font-style: italic;
-            }
-        }
-    }
+	display: flex;
+	width: 100%;
+	height: 560px;
+	background-size: cover;
+	background-position: center;
+	align-items: flex-end;
+	.principal-article-content {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		padding: 32px;
+		padding-top: 74px;
+		gap: 16px;
+		height: max-content;
+		background: rgb(1, 0, 20);
+		background: linear-gradient(
+			180deg,
+			rgba(1, 0, 20, 0) 0%,
+			rgba(0, 0, 0, 0.93) 100%
+		);
+		.principal-article-content-title {
+			padding: 0;
+			margin: 0;
+			font-size: 26pt;
+			color: $background;
+		}
+		.princpal-article-content-info {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			align-items: end;
+			justify-content: flex-end;
+			gap: 4px;
+			.princpal-article-content-category {
+				span {
+					font-size: 14pt;
+					font-weight: 600;
+					color: $terciary-color;
+					text-transform: capitalize;
+				}
+			}
+			.principal-article-content-data {
+				display: flex;
+				gap: 4px;
+				align-items: center;
+				font-size: 9pt;
+			}
+		}
+	}
 }
 
 @media only screen and (max-width: 720px) {
-    .principal-article {
-        display: contents;
-    }
-    .principal-article-img {
-        height: 300px !important;
-    }
+	.principal-article-img {
+		height: 300px !important;
+	}
 }

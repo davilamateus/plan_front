@@ -8,7 +8,7 @@ interface type {
 const InputEmail = ({ title, setInput, input, placeholder }: type) => {
     return (
         <label>
-            <h4>{title}</h4>
+            <h5>{title}</h5>
             <div>
                 <input
                     type="email"

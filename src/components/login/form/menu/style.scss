@@ -3,12 +3,18 @@
 .login-menu{
     display: flex;
     gap: 32px;
-    button{
+    margin-bottom: -18px;
+    h2{
         background: none;
         border: none;
-        font-size: 22pt;
-        opacity: 0.3;
+        opacity: 0.18;
         padding-bottom: 8px;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover{
+            opacity: 1;
+        }
+        
     }
     .selection{
         opacity: 1;

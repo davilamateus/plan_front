@@ -1,44 +1,45 @@
-@import './../../../styles/color';
+@import "./../../../styles/color";
 
-.slogan-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 32px;
-    h1{
-        padding: 0;
-        margin: 0;
-    }
-}
-.slogan-component{
-    display: flex;
-    align-items: center;
-    .slogan-text{
-            h1{
-                margin-bottom: -12px;
-            }
-        .slogan-text-green{
-            color: $primary-color;
-            font-family: 'Helvetica';
-            font-size: 36pt;
-        }
-        .slogan-text-handwriting{
-            font-size: 28pt;
-            font-family: 'Alessandria', sans-serif;
-            margin-top: -86px;
-        }
-    }
-        @keyframes slogan-img {
-            0% { transform: translateX(0%) translateY(0%)  }
-            50% { transform: translateX(-10%)  translateY(-5%); }
-            0% { transform: translateX(0%) translateY(0%)  }
-    }
-    .slogan-img{
-        margin-left: -258px;
-        margin-bottom: 48px;
-        animation: slogan-img 10s  ease-in-out infinite;
-    }
- 
-
-
+.slogan {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 16px;
+	.slogan-content {
+		display: flex;
+		align-items: center;
+		.slogan-text {
+			h1 {
+				margin-bottom: -22px;
+			}
+			.slogan-text-green {
+				color: $primary-color;
+				font-family: "Lato";
+				font-size: 36pt;
+				line-height: 10px;
+			}
+			.slogan-text-handwriting {
+				font-size: 28pt;
+				font-family: "Alessandria", sans-serif;
+				margin-top: -86px;
+				color: $title-color;
+			}
+		}
+	}
+	@keyframes slogan-img {
+		0% {
+			transform: translateX(0%) translateY(0%);
+		}
+		50% {
+			transform: translateX(-10%) translateY(-5%);
+		}
+		0% {
+			transform: translateX(0%) translateY(0%);
+		}
+	}
+	.slogan-img {
+		margin-left: -258px;
+		margin-bottom: 48px;
+		animation: slogan-img 10s ease-in-out infinite;
+	}
 }

@@ -1,11 +1,9 @@
-@import './../../../styles/color';
+@import "./../../../styles/color";
 
-.title-of-component{
-    border-bottom: 1px solid transparent; 
-    padding-bottom: 4px;
-    width: max-content;
-    margin-bottom: 16px!important;
-    font-size: 12pt;
-    color: $secondary-color;
-
+.title-of-component {
+	padding-bottom: 4px;
+	width: max-content;
+	font-size: 12pt;
+	font-weight: 400;
+	margin: 16px 0 8px 0;
 }

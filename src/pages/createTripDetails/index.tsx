@@ -1,9 +1,7 @@
 import CreateTripDetailsComponent from "../../components/createTripDetails";
 
-const CreateTripDetails = () => {
-    return (
-        <CreateTripDetailsComponent />
-    )
-}
+const PageTripDetails = () => {
+	return <CreateTripDetailsComponent />;
+};
 
-export default CreateTripDetails;
+export default PageTripDetails;

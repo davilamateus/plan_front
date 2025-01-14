@@ -1,29 +1,33 @@
-
-@import './../../../../styles/color';
-.todolist-attchament-list{
-    display: flex;
-    padding: 4px 16px;
-    justify-content: space-between;
-    .todolist-attchament-left{
-        width: 100%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        svg{
-            width: 12px;
-            opacity: 0.4;
-        }
-        div{
-            
-            font-weight: 400;
-            color: $paragraph-dark-color!important;
-        }
-    }
+@import "./../../../../styles/color";
+.todolist-attchament-list {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 8px !important;
+	justify-content: space-between;
+	cursor: pointer;
+	&:hover {
+		background-color: $quintenary-color;
+	}
+	.todolist-attchament-left {
+		width: 100%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		svg {
+			width: 12px;
+			opacity: 0.4;
+		}
+		div {
+			font-weight: 400;
+			color: $paragraph-dark-color !important;
+		}
+	}
 }
 
-.todolist-attchament-input{
-    gap: 16px;
-    display: flex;
-    padding: 8px;
+.todolist-attchament-input {
+	gap: 16px;
+	display: flex;
+	padding: 8px;
 }

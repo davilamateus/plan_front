@@ -1,0 +1,16 @@
+@import "./../../../../styles/color";
+
+.trip-finances-resume {
+	.trip-finances-resume-bar {
+		width: 100%;
+		height: 16px;
+		border: 1px solid $border;
+		border-radius: 16px;
+		display: flex;
+		overflow: hidden;
+		margin-top: 16px;
+		.trip-finance-resume-bar-item {
+			height: 32px;
+		}
+	}
+}

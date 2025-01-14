@@ -1,8 +1,14 @@
-   .logo-bottom{
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        img{
-            width: 48px;
-        }
-    }
+@import "./../../../styles/color";
+
+.logo-bottom {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	svg {
+		width: 48px;
+	}
+	p {
+		color: $title-color;
+		font-size: 10pt;
+	}
+}

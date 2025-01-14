@@ -1,69 +1,75 @@
-@import './../../../styles/color';
+@import "./../../../styles/color";
 
-.todolist-card{
-    padding: 8px;
-    height: max-content;
-    display: flex;
-    gap: 8px;
-    flex-direction: column;
-    cursor: pointer;
-    .todolist-card-top{
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
-        .todolist-card-top-left{
-            display: flex;
-            gap: 8px;
-            .todolist-color{
-                width: 4px;
-                height: 100;
-                border-radius: 2px;
-            }
-            .todolist-text{
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
+.todolist-card {
+	padding: 8px;
+	height: max-content;
+	display: flex;
+	gap: 8px;
+	flex-direction: column;
+	background-color: $background;
+	cursor: pointer;
+	.todolist-card-top {
+		display: flex;
+		justify-content: space-between;
+		gap: 8px;
+		.todolist-card-top-left {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			.todolist-color {
+				width: 6px;
+				height: 32px;
+				border-radius: 6px;
+			}
+			.todolist-text {
+				display: flex;
+				flex-direction: column;
+				h4 {
+					font-weight: 400;
+				}
+				p {
+					padding: 0;
+					margin: 0;
+					margin-top: 2px;
+					font-size: 10pt;
+				}
+			}
+		}
+		.todolist-card-top-right {
+			img {
+				opacity: 0.4;
+			}
+		}
+	}
+	.todolist-botton {
+		display: flex;
+		gap: 4px;
 
-            }
-        }
-        .todolist-card-top-right{
-            img{
-                opacity: 0.4;
-            }
-        }
-
-    }
-    .todolist-botton{
-        display: flex;
-        gap: 4px;
-        .date-late{
-            border: 1px solid $terciary-color;
-            span{
-                color: $terciary-color;
-            }
-            svg , g, circle, path{
-                stroke:$terciary-color!important;
-                opacity: 1;
-            }
-        }
-        div{
-            border: 1px solid $input-border-color;
-            width: max-content;
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            svg{
-                width: 10px;
-                opacity: 0.4;
-            }
-            img{
-                    width: 10px;
-                opacity: 0.4;
-            }
-        }
-
-
-    }
+		.date-late {
+			svg,
+			g,
+			circle,
+			path {
+				stroke: $terciary-color !important;
+				opacity: 1;
+			}
+		}
+		div {
+			border: 1px solid $input-border-color;
+			width: max-content;
+			padding: 2px 6px;
+			border-radius: 4px;
+			display: flex;
+			align-items: center;
+			gap: 4px;
+			svg {
+				width: 10px;
+				opacity: 0.4;
+			}
+			img {
+				width: 10px;
+				opacity: 0.4;
+			}
+		}
+	}
 }

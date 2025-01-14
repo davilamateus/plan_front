@@ -1,0 +1,12 @@
+@import "./../../../styles/color";
+
+.title-of-session-dashboard {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	height: max-content;
+	align-items: center;
+	h5 {
+		height: max-content;
+	}
+}

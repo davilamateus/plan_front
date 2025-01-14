@@ -1,9 +1,17 @@
+.noticies-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	width: 100%;
+	gap: 16px;
+}
+@media only screen and (max-width: 1280px) and (min-width: 803px) {
+	.noticies-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
 
-
-    .noticies-list{
-        display: flex;
-        width: 100%;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 16px;
-    }
+@media only screen and (max-width: 1075px) {
+	.noticies-list {
+		grid-template-columns: 1fr;
+	}
+}

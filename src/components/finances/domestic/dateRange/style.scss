@@ -1,0 +1,58 @@
+@import "./../../../../styles/color";
+
+.date-range-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.data-range-title {
+		display: flex;
+		gap: 32px;
+		align-items: center;
+		div {
+			display: flex;
+			align-self: center;
+			gap: 16px;
+			align-items: center;
+			height: 100%;
+			svg {
+				cursor: pointer;
+			}
+		}
+	}
+	.date-range {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		height: max-content;
+		gap: 8px;
+		button {
+			background: none;
+			border: 1px solid $input-border-color;
+			font-weight: 400;
+			color: $title-color;
+			font-size: 8pt;
+		}
+
+		h4 {
+			font-size: 11pt;
+			padding: 0;
+		}
+		select {
+			margin: 0;
+			padding: 0;
+			text-align: center;
+			cursor: pointer;
+			appearance: none;
+			background: none;
+			color: $paragraph-color;
+			font-size: 12px;
+			border: none;
+			border-radius: 0;
+			width: max-content;
+			&:focus {
+				outline: none;
+			}
+		}
+	}
+}

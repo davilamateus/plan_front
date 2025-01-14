@@ -9,20 +9,20 @@ interface type {
 const LoginMenu = ({ setMenuSelect, menuSelect }: type) => {
     return (
         <div className="login-menu">
-            <button
+            <h2
                 onClick={() => {
                     setMenuSelect("login");
                 }}
                 className={menuSelect === "login" ? "selection" : ""}>
-                Login
-            </button>
-            <button
+                Entrar
+            </h2>
+            <h2
                 onClick={() => {
                     setMenuSelect("register");
                 }}
                 className={menuSelect === "register" ? "selection" : ""}>
-                Register
-            </button>
+                Cadastrar
+            </h2>
         </div>
     );
 };

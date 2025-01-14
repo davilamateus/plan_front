@@ -1,14 +1,14 @@
-import FormLoginComponent from "../../components/login/form/main";
-import SloganComponent from "../../components/login/slogan";
+import LoginForm from "../../components/login/form/main";
+import Slogan from "../../components/login/slogan";
 import "./style.scss";
 
-const Login = () => {
-    return (
-        <div className="login-main-component">
-            <SloganComponent />
-            <FormLoginComponent />
-        </div>
-    );
+const PageLogin = () => {
+	return (
+		<div className="page-login">
+			<Slogan />
+			<LoginForm />
+		</div>
+	);
 };
 
-export default Login;
+export default PageLogin;

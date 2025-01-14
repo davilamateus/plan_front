@@ -1,0 +1,81 @@
+@import "./../../../../styles/color";
+.finances-actives {
+	flex: 3;
+	.finances-actives-table {
+		min-height: 272px;
+		overflow-y: auto;
+		tbody {
+			max-height: 200px;
+			display: block;
+		}
+		table {
+			width: 100%;
+			text-align: left;
+			font-size: 11pt;
+			.bord {
+				font-weight: 600;
+				color: $title-color;
+			}
+			.options {
+				width: 10px;
+				display: flex;
+			}
+			tr {
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				&:hover {
+					background-color: $input-border-color;
+				}
+
+				vertical-align: middle;
+			}
+		}
+		th {
+			color: $title-color;
+			padding: 16px;
+			flex: 1;
+		}
+		td {
+			cursor: pointer;
+			padding: 10px 16px;
+			flex: 1;
+			border-bottom: 1px solid $input-border-color;
+			font-size: 10pt;
+			font-weight: 400;
+		}
+		div {
+			font-size: 10pt;
+			font-weight: 400;
+		}
+		.date {
+			text-align: center;
+		}
+		.value {
+			text-align: right;
+			color: $title-color;
+		}
+		.finances-actives-item {
+			td {
+				min-width: 100px;
+				div {
+					display: flex;
+					align-items: center;
+					gap: 8px;
+				}
+			}
+			.item-color {
+				width: 6px;
+				height: 12px;
+				border-radius: 8px;
+			}
+		}
+	}
+}
+.no-activities {
+	padding: 32px;
+
+	height: 100px;
+	font-style: italic;
+	font-size: 14px;
+}

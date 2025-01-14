@@ -1,7 +1,7 @@
 import ConfirmEmailComponent from "../../components/confirmEmail";
 
-const ConfirmEmail = () => {
-    return <ConfirmEmailComponent />;
+const PageConfirmEmail = () => {
+	return <ConfirmEmailComponent />;
 };
 
-export default ConfirmEmail;
+export default PageConfirmEmail;

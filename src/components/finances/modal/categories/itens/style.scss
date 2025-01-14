@@ -1,0 +1,54 @@
+@import "./../../../../../styles/color";
+
+.goals-itens {
+	h5 {
+		font-size: 11pt;
+		font-weight: 600;
+		margin-bottom: 8px;
+	}
+	table {
+		width: 100%;
+		padding: 8px 0;
+		th,
+		td {
+			flex: 1;
+			text-align: center;
+		}
+		.goals-table-title-title,
+		.goals-table-value-title {
+			text-align: left;
+		}
+		.goals-table-title-value,
+		.goals-table-value-value {
+			text-align: right;
+		}
+		.goals-table-value {
+			padding: 8px;
+			width: 98%;
+			margin: 0 auto;
+			border-bottom: 1px solid $input-border-color;
+			font-weight: 400;
+			transition: 0.3s;
+			cursor: pointer;
+			&:hover {
+				background-color: $border;
+				border-radius: 8px;
+			}
+		}
+		gap: 16px;
+		tr {
+			width: 98%;
+			margin: 0 auto;
+			padding: 8px;
+			display: flex;
+			justify-content: space-between;
+			padding-bottom: 12px;
+			gap: 8px;
+			font-size: 11pt;
+		}
+		th {
+			color: $title-color;
+			font-size: 11pt;
+		}
+	}
+}

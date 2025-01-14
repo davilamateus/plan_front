@@ -1,0 +1,14 @@
+@import "./../../../../styles/color";
+
+.input-date {
+	border-bottom: 1px solid $border;
+	input[type="date"]::-webkit-inner-spin-button,
+	input[type="date"]::-webkit-calendar-picker-indicator {
+		display: none;
+		-webkit-appearance: none;
+	}
+	input {
+		border: none;
+		width: calc(100% - 32px);
+	}
+}

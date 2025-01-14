@@ -1,16 +1,15 @@
-
-.login-main-component{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 100vw;
-    min-height: 100vh;
-    gap: 68px;
-    flex-wrap: wrap-reverse;
+.page-login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 100vw;
+	min-height: 100vh;
+	gap: 68px;
+	flex-wrap: wrap-reverse;
 }
 
-@media only screen and (max-width: 990px) {
-    .login-main-page{
-            flex-direction: column;
-    }
+@media only screen and (max-width: 1075px) {
+	.page-login {
+		flex-direction: column-reverse;
+	}
 }

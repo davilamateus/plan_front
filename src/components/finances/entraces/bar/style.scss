@@ -1,0 +1,60 @@
+@import "./../../../../styles/color";
+
+.finances-bar {
+	display: flex;
+	padding: 8px;
+	height: 202px;
+	.finances-bar-values {
+		min-width: 68px;
+		p {
+			width: max-content;
+			font-size: 9pt;
+		}
+	}
+	.finances-bar-content {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		.finances-bar-bar {
+			width: 100%;
+			display: flex;
+			gap: 8px;
+			padding: 8px;
+			height: 165px;
+			.finances-bar-item {
+				width: calc(8.33333%);
+				align-items: center;
+				display: flex;
+				flex-direction: column;
+				.finances-bar-border {
+					height: 100%;
+					width: 100%;
+					border-radius: 16px;
+					margin-bottom: 8px;
+					overflow: hidden;
+					display: flex;
+					align-items: flex-end;
+					.finances-bar-item-fill {
+						background-color: $primary-color;
+						width: 100%;
+						border-radius: 16px;
+						height: 0;
+						transition: 0.9s;
+					}
+				}
+			}
+		}
+		.finances-bar-months {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
+
+@media only screen and (max-width: 638px) {
+	.finance-bar-item-0,
+	.finance-bar-item-1,
+	.finance-bar-item-2 {
+		display: none !important;
+	}
+}

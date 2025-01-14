@@ -11,7 +11,7 @@ const InputPassword = ({ title, setInput, input }: type) => {
     const [showPassword, setShowPassword] = useState<string>("password");
     return (
         <label>
-            <h4>{title}</h4>
+            <h5>{title}</h5>
             <div className="input-password">
                 <input
                     type={showPassword}

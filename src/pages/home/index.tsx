@@ -1,61 +1,56 @@
 import { IsLogged } from "../../functions/isLogged";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UseTitleContext } from "../../context/useTitleContext";
 import { getTimestampInfomartions } from "../../functions/date/getTimestampInfomartions";
-import AdsDashboard from "../../components/ads";
-import AdvicesDashboard from "../../components/advices/dashboard/main";
-import DaysToTravel from "../../components/daysToTravel";
-import ExchangeDashboard from "../../components/exchange/dashboard";
-import FinancesDashboard from "../../components/finances/dashboard";
-import NoticiesDashboard from "../../components/noticies/dashboard/main";
-import RadioComponent from "../../components/radio";
-import ToDoListDashboard from "../../components/toDoList/dashboard";
-import Weather from "../../components/weather";
-import TitleOfComponentOnDashnboard from "../../components/communs/titleOfComponentOnDashnboard";
+import TitleSession from "../../components/communs/titleSession";
+import DashboardAds from "../../components/ads";
+import DashboardExchange from "../../components/exchange/dashboard";
+import DashboardFinances from "../../components/finances/dashboard";
+import DashboardNoticies from "../../components/noticies/dashboard/main";
+import DashboardDaysToTravel from "../../components/daysToTravel";
+import DashboardRadio from "../../components/radio";
+import DashboardToDoList from "../../components/toDoList/dashboard";
+import DashboardWeather from "../../components/weather";
 import "./style.scss";
 
-const HomePage = () => {
-    IsLogged();
+const PageHome = () => {
+	const title = useContext(UseTitleContext);
+	useEffect(() => {
+		title.setTitle("Dashboard");
+	}, []);
+	return (
+		<div className="home ">
+			<div className="home-column-1">
+				<div className="home-weather-dayToTrip">
+					<DashboardWeather />
+					<DashboardDaysToTravel />
+				</div>
+				<div>
+					<DashboardNoticies />
+				</div>
+				<DashboardRadio />
+			</div>
+			<div className="home-column-2">
+				<DashboardToDoList />
+			</div>
+			<div className="home-column-3">
+				<DashboardExchange />
+				<div className="home-dashboard-finances">
+					<TitleSession title="Gestão de Gastos" link="/financeiro" />
 
-    const title = useContext(UseTitleContext);
-    title.setTitle("Dashboard");
-
-    return (
-        <div className="home-main ">
-            <div className="home-column-1">
-                <div className="home-weather-dayToTrip">
-                    <Weather />
-                    <DaysToTravel />
-                </div>
-                <div>
-                    <NoticiesDashboard />
-                </div>
-                <RadioComponent />
-            </div>
-            <div className="home-column-2">
-                <ToDoListDashboard />
-            </div>
-            <div className="home-column-3">
-                <ExchangeDashboard />
-                <div>
-                    <TitleOfComponentOnDashnboard
-                        title="Finances Resume"
-                        link="/finances"
-                    />
-                    <FinancesDashboard
-                        month={getTimestampInfomartions(new Date().getTime(), 0).nameOfMonth}
-                        year={new Date().getFullYear()}
-                        from={getTimestampInfomartions(new Date().getTime(), 0).firstDay}
-                        to={getTimestampInfomartions(new Date().getTime(), 0).lastDay}
-                    />
-                </div>
-                <AdsDashboard />
-            </div>
-            <div className="home-column-4">
-                <AdvicesDashboard />
-            </div>
-        </div>
-    );
+					<DashboardFinances
+						month={
+							getTimestampInfomartions(new Date().getTime(), 0).nameOfMonth
+						}
+						year={new Date().getFullYear()}
+						from={getTimestampInfomartions(new Date().getTime(), 0).firstDay}
+						to={getTimestampInfomartions(new Date().getTime(), 0).lastDay}
+					/>
+				</div>
+				<DashboardAds />
+			</div>
+		</div>
+	);
 };
 
-export default HomePage;
+export default PageHome;
