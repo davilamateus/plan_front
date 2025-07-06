@@ -1,85 +1,192 @@
-🧠 Plan Front
-Plan Front is a task management web application built with React, TypeScript, and Vite. It provides a simple and efficient interface to create, view, and manage tasks or plans.
+🧠 Plan Front
 
-🚀 Getting Started
-Follow these steps to set up and run the project locally.
 
-✅ Prerequisites
-Node.js (version 16 or later recommended)
 
-npm or Yarn
 
-🛠 Installation
-Clone the repository and install dependencies:
 
-bash
-Copiar
-Editar
+
+Plan Front is a lightweight task‑planning web application built with React 18, TypeScript, and Vite.It lets you create, view, and organize tasks with a clean and responsive UI.
+
+✨ Demo
+
+Try it out on Netlify 👉 https://plan-front.netlify.app(Demo link is a placeholder – change it to your deployment URL.)
+
+📜 Table of Contents
+
+Features
+
+Tech Stack
+
+Getting Started
+
+Project Structure
+
+Scripts
+
+Roadmap
+
+Contributing
+
+License
+
+Acknowledgments
+
+🚀 Features
+
+✍️ Create new tasks with title & description
+
+🗂️ Organize tasks by status (todo, doing, done)
+
+🔍 Instant search & filtering
+
+📱 Fully responsive (mobile‑first)
+
+⚡ Fast dev server & HMR via Vite
+
+♿ Accessibility‑first design
+
+🌗 Dark / light theme toggle (planned)
+
+🧰 Tech Stack
+
+Category
+
+Tech
+
+Core
+
+React 18 · TypeScript 5 · Vite 5
+
+Styling
+
+Tailwind CSS · PostCSS
+
+Icons
+
+Heroicons · Custom SVG
+
+Linting / Formatting
+
+ESLint · Prettier
+
+Testing
+
+Vitest (planned)
+
+CI / CD
+
+GitHub Actions · Netlify
+
+⚙️ Getting Started
+
+Prerequisites
+
+Node.js ≥16 (LTS recommended)
+
+npm (bundled with Node) or Yarn / pnpm
+
+Installation
+
+# Clone the repository
 git clone https://github.com/your-username/plan_front.git
 cd plan_front
-npm install
-# or
-yarn
-▶️ Running the App
-Start the development server:
 
-bash
-Copiar
-Editar
+# Install dependencies
+npm install          # or: yarn / pnpm install
+
+Running in Development
+
 npm run dev
-# or
-yarn dev
-Then open http://localhost:5173 in your browser.
 
-📁 Project Structure
-graphql
-Copiar
-Editar
+Open http://localhost:5173 to view the app.
+
+Building for Production
+
+npm run build        # Generates static assets in ./dist
+npm run preview      # Preview the production build locally
+
+🗂 Project Structure
+
 plan_front/
 │
-├── public/                # Static files (favicon, manifest, etc.)
-│   └── icons/             # SVG icons
+├─ public/              # Static assets (favicon, icons, manifest, GIFs…)
 │
-├── src/                   # Source code
-│   ├── assets/            # Static assets like images or logos
-│   ├── components/        # Reusable React components (e.g. Header, TaskForm, TaskList)
-│   ├── types/             # TypeScript types and interfaces
-│   ├── App.tsx            # Main application component
-│   ├── main.tsx           # Entry point
-│   └── index.css          # Global styles
+├─ src/
+│   ├─ assets/          # Images & logos
+│   ├─ components/      # Reusable React components
+│   ├─ hooks/           # Custom React hooks            (future)
+│   ├─ pages/           # Routed page components        (future)
+│   ├─ types/           # TypeScript typings
+│   ├─ utils/           # Helper functions              (future)
+│   ├─ App.tsx          # Root component
+│   └─ main.tsx         # Application entry
 │
-├── .gitignore             # Files and directories ignored by Git
-├── package.json           # Project metadata and dependencies
-├── tsconfig.json          # TypeScript configuration
-└── vite.config.ts         # Vite configuration (if applicable)
-🔧 Scripts
-You can run the following scripts:
+├─ .github/             # GitHub config (workflows, issue templates…)
+├─ .vscode/             # Editor config (optional)
+├─ .eslintrc.cjs
+├─ .prettierrc
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
 
-npm run dev – Run the app in development mode
+🏃‍♂️ Scripts
 
-npm run build – Create an optimized production build
+Script
 
-npm run preview – Preview the production build locally
+Description
 
-🧰 Tech Stack
-React – Front-end library
+dev
 
-TypeScript – Type-safe JavaScript
+Start Vite dev server with HMR
 
-Vite – Lightning-fast dev server and build tool
+build
 
-Tailwind CSS (inferred) – Utility-first CSS framework
+Create an optimized production build
 
-PostCSS – CSS transformations
+preview
 
-🚧 Future Improvements
-Add user authentication
+Preview the production build locally
 
-Persistent storage (e.g., localStorage, Firebase, or backend integration)
+lint
 
-Due dates and reminders for tasks
+Lint all .ts/tsx files with ESLint
 
-Better accessibility and mobile responsiveness
+format
 
-📝 License
-This project is licensed under the MIT License.
+Format code with Prettier
+
+🛤 Roadmap
+
+
+
+Have an idea? Open an issue 💡
+
+🤝 Contributing
+
+Fork the project
+
+Create your feature branch: git checkout -b feat/amazing-feature
+
+Commit your changes: git commit -m "feat: add amazing feature"
+
+Push to the branch: git push origin feat/amazing-feature
+
+Open a Pull Request 📝
+
+Please follow the Conventional Commits specification and make sure npm run lint passes before submitting.
+
+📄 License
+
+Distributed under the MIT License.See LICENSE for more information.
+
+🙏 Acknowledgments
+
+React
+
+Vite
+
+Tailwind CSS
+
+Heroicons
+
+shields.io for the badges
