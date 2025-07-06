@@ -1,47 +1,85 @@
-# Getting Started with Create React App
+🧠 Plan Front
+Plan Front is a task management web application built with React, TypeScript, and Vite. It provides a simple and efficient interface to create, view, and manage tasks or plans.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🚀 Getting Started
+Follow these steps to set up and run the project locally.
 
-## Available Scripts
+✅ Prerequisites
+Node.js (version 16 or later recommended)
 
-In the project directory, you can run:
+npm or Yarn
 
-### `npm start`
+🛠 Installation
+Clone the repository and install dependencies:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+bash
+Copiar
+Editar
+git clone https://github.com/your-username/plan_front.git
+cd plan_front
+npm install
+# or
+yarn
+▶️ Running the App
+Start the development server:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+bash
+Copiar
+Editar
+npm run dev
+# or
+yarn dev
+Then open http://localhost:5173 in your browser.
 
-### `npm test`
+📁 Project Structure
+graphql
+Copiar
+Editar
+plan_front/
+│
+├── public/                # Static files (favicon, manifest, etc.)
+│   └── icons/             # SVG icons
+│
+├── src/                   # Source code
+│   ├── assets/            # Static assets like images or logos
+│   ├── components/        # Reusable React components (e.g. Header, TaskForm, TaskList)
+│   ├── types/             # TypeScript types and interfaces
+│   ├── App.tsx            # Main application component
+│   ├── main.tsx           # Entry point
+│   └── index.css          # Global styles
+│
+├── .gitignore             # Files and directories ignored by Git
+├── package.json           # Project metadata and dependencies
+├── tsconfig.json          # TypeScript configuration
+└── vite.config.ts         # Vite configuration (if applicable)
+🔧 Scripts
+You can run the following scripts:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+npm run dev – Run the app in development mode
 
-### `npm run build`
+npm run build – Create an optimized production build
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm run preview – Preview the production build locally
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🧰 Tech Stack
+React – Front-end library
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+TypeScript – Type-safe JavaScript
 
-### `npm run eject`
+Vite – Lightning-fast dev server and build tool
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Tailwind CSS (inferred) – Utility-first CSS framework
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+PostCSS – CSS transformations
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+🚧 Future Improvements
+Add user authentication
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Persistent storage (e.g., localStorage, Firebase, or backend integration)
 
-## Learn More
+Due dates and reminders for tasks
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Better accessibility and mobile responsiveness
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-# plan_front
+📝 License
+This project is licensed under the MIT License.
